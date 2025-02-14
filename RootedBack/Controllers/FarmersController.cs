@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RootedBackend.Models;
+using RootedBack.Models;
 
-namespace RootedBackend.Controllers
+namespace RootedBack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class FarmersController : ControllerBase
     {
-        private readonly RootedDbContext _context;
+        private readonly RootedDBContext _context;
 
-        public FarmersController(RootedDbContext context)
+        public FarmersController(RootedDBContext context)
         {
             _context = context;
         }

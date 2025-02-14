@@ -3,15 +3,15 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RootedBackend.Models;
+using RootedBack.Models;
 using System.Security.Claims;
 
-namespace RootedBackend.Controllers
+namespace RootedBack.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly RootedDbContext _context;
-        public AccountController(RootedDbContext context)
+        private readonly RootedDBContext _context;
+        public AccountController(RootedDBContext context)
         {
             _context = context;
         }
