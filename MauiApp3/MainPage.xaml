@@ -47,7 +47,7 @@
             CornerRadius="15"
             WidthRequest="150"
             HeightRequest="300"
-        
+            Clicked="ConsumerClicked"        
             ContentLayout="Top,30 " />
 
 

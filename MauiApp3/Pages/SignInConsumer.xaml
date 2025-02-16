@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.SignInConsumer"
+             Title="SignInConsumer"
+             BackgroundColor="#E7E9E4"
+              Shell.NavBarIsVisible="False"
+             FlowDirection="RightToLeft"
+             >
+    <VerticalStackLayout Padding="10"
+                         Spacing="10">
+        <Image
+          Source="rooted_logo.png" 
+           WidthRequest="250"
+        HeightRequest="200"
+        />
+        <Label 
+Text=" أهلاً بك في أرض الحزم والكرم"
+TextColor="#6D3D24"
+ 
+ VerticalOptions="CenterAndExpand"
+ HorizontalOptions="CenterAndExpand" 
+ FontSize="20"
+ FontAttributes="Bold"
+ FontFamily="FontArabic" />
+
+        <VerticalStackLayout Spacing="15">
+            <Label Text="البريد الإلكتروني" TextColor="#0E3230" FontAttributes="Bold" />
+            <Border Stroke="#71873F" 
+            StrokeThickness="1.5"     
+            Background="White" 
+            HeightRequest="50">
+
+                <Grid ColumnDefinitions="*, Auto">
+               
+                    <Entry Grid.Column="0"
+               Placeholder="Example@gmail.com"
+               Keyboard="Email"
+               HorizontalTextAlignment="Start"
+               TextColor="Black"
+               PlaceholderColor="Gray"
+               FontSize="14"
+               Margin="10,0"/>
+
+                   
+                    <Image Grid.Column="1"
+               Source="envelope.png"
+               WidthRequest="20" 
+               HeightRequest="20"
+               VerticalOptions="Center"
+               Margin="10"/>
+                </Grid>
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+
+            </Border>
+
+
+
+            <Label Text="كلمةالسر " TextColor="#0E3230" FontAttributes="Bold"/>
+            <Border Stroke="#71873F" 
+            StrokeThickness="1.5"
+            Background="White" 
+            HeightRequest="50">
+
+                <Grid ColumnDefinitions="*, Auto">
+
+                    <Entry Grid.Column="0"
+                       x:Name="passwordEntry"
+                       Placeholder="********"
+                       IsPassword="True" 
+                       Keyboard="Text"
+                       HorizontalTextAlignment="Start"
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       FontSize="14"
+                       Margin="10,0"/>
+
+
+   
+                    <ImageButton 
+                 Grid.Column="1"
+                 x:Name="eyeButton"
+                 Source="eyec.png"
+                   
+                 Aspect="AspectFit"
+                 WidthRequest="20" 
+                 HeightRequest="20"
+                 Clicked="eyeClicked"
+                 VerticalOptions="Center"
+                 Margin="0"/>
+                </Grid>
+                
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+            </Border>
+
+
+            <Label Text="نسيت كلمة السر؟"  
+    TextColor="#6D3D24"
+    TextDecorations="Underline"
+    FontSize="14"
+    FontFamily="FontArabic"
+    FontAttributes="Bold">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ForgotTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+                   
+
+
+            <Button 
+      Text="التالي"
+      BackgroundColor="#3E6F41"
+      TextColor="White"
+      FontSize="15"
+      FontFamily="FontArabic"
+      FontAttributes="Bold"
+      CornerRadius="15"
+          
+       />
+
+                    <Label Text="مستهلك جديد؟ سجل الأن !"  
+        TextColor="#6D3D24"
+        TextDecorations="Underline"
+              
+        FontSize="14"
+        HorizontalTextAlignment="Center"
+        FontFamily="FontArabic"
+        FontAttributes="Bold"
+        />
+
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

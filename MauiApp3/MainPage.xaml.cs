@@ -16,6 +16,12 @@
             await Navigation.PushAsync(new SplashFarmer());
 
         }
+        private async void ConsumerClicked(object sender, EventArgs e)
+        {
+            
+            await Navigation.PushAsync(new SplashConsumer());
+
+        }
     }
 
 }
