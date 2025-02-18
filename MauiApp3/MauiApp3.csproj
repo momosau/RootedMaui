@@ -72,13 +72,27 @@
 	  <MauiXaml Update="Pages\Chatbot.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+=======
+	  <Compile Update="Pages\SignInConsumer.xaml.cs">
+	    <DependentUpon>SignInConsumer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\SplashConsumer.xaml.cs">
+	    <DependentUpon>SplashConsumer.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+>>>>>>> ac5755688e7209153a3423ad1798d05ee707c8cf
 	  <MauiXaml Update="Pages\ForgotPasswordEmail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ResetPasswordPage.xaml">
+	  <MauiXaml Update="Pages\SignInConsumer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SignInFarmer.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\SplashConsumer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SplashFarmer.xaml">
