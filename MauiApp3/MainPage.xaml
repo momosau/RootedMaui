@@ -10,69 +10,51 @@
         <Label 
             Text=" مرحبًا بك في رووتد!"
             TextColor="#6D3D24"
-   
-             VerticalOptions="CenterAndExpand"
-             HorizontalOptions="CenterAndExpand" 
-             FontSize="25"
-             FontAttributes="Bold"
-              FontFamily="FontArabic" />
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand" 
+            FontSize="25"
+            FontAttributes="Bold"
+            FontFamily="FontArabic" />
 
         <Label 
-          Text="حدد دورك لتسجيل الدخول:"
-          TextColor="#6D3D24"
-          VerticalOptions="CenterAndExpand"
-          HorizontalOptions="CenterAndExpand" 
-          FontSize="20"
-          FontAttributes="Bold"
-          FontFamily="FontArabic" 
-            ></Label>
-
-        <Grid ColumnDefinitions="*,*"
-             Margin="5"         >
-
-            <Label>
-
-
-            </Label>
-
-            <Button 
-            ImageSource="scythe.png"
-            Text="مستهلك"
-            Grid.Column="0"
-            BackgroundColor="#CCD3C4"
+            Text="حدد دورك لتسجيل الدخول:"
             TextColor="#6D3D24"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand" 
             FontSize="20"
-            FontFamily="FontArabic"
             FontAttributes="Bold"
-            CornerRadius="15"
-            WidthRequest="150"
-            HeightRequest="300"
-        
-            ContentLayout="Top,30 " />
+            FontFamily="FontArabic" />
 
-
+        <Grid ColumnDefinitions="*,*" Margin="5">
+            <Button 
+                ImageSource="scythe.png"
+                Text="مستهلك"
+                Grid.Column="0"
+                BackgroundColor="#CCD3C4"
+                TextColor="#6D3D24"
+                FontSize="20"
+                FontFamily="FontArabic"
+                FontAttributes="Bold"
+                CornerRadius="15"
+                WidthRequest="150"
+                HeightRequest="300"
+                ContentLayout="Top,30" />
 
             <Button 
-            ImageSource="vegetable.png"
-            Text="مزارع"
-            Grid.Column="1"
-            BackgroundColor="#CCD3C4"
-           TextColor="#6D3D24"
-            FontSize="20"
-            FontFamily="FontArabic"
-            FontAttributes="Bold"
-            CornerRadius="10"
-            WidthRequest="150"
-            HeightRequest="300"
-            Clicked="FarmerClicked"
-            ContentLayout="Top,10"
-                
-                ></Button>
-
-
+                ImageSource="vegetable.png"
+                Text="مزارع"
+                Grid.Column="1"
+                BackgroundColor="#CCD3C4"
+                TextColor="#6D3D24"
+                FontSize="20"
+                FontFamily="FontArabic"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                WidthRequest="150"
+                HeightRequest="300"
+                Clicked="FarmerClicked"
+                ContentLayout="Top,10" />
         </Grid>
 
     </VerticalStackLayout>
-
 </ContentPage>
-               

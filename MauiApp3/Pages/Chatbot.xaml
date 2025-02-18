@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp3"
+             x:Class="MauiApp3.Chatbot"
+             Title="Chatbot"
+             BackgroundColor="#F4F1E9"
+             Shell.NavBarIsVisible="False">
+
+    <StackLayout Padding="20" Spacing="10">
+
+        <Label Text="سند مرشدك الزراعي" 
+               FontSize="24" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center"
+               TextColor="#0E3230"/>
+
+        <Frame BackgroundColor="White" CornerRadius="10" Padding="5" HasShadow="True">
+            <ListView x:Name="ChatList" HasUnevenRows="True"
+                      BackgroundColor="Transparent"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <local:MessageTemplateSelector>
+                        <local:MessageTemplateSelector.UserMessageTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame BackgroundColor="#DCF8C6" CornerRadius="10" Padding="10" Margin="5" HorizontalOptions="End">
+                                        <Label Text="{Binding Text}" TextColor="#3A5F0B" FontSize="16" HorizontalOptions="End" />
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </local:MessageTemplateSelector.UserMessageTemplate>
+                        <local:MessageTemplateSelector.ChatMessageTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame BackgroundColor="#E8F5E9" CornerRadius="10" Padding="10" Margin="5" HorizontalOptions="Start">
+                                        <Label Text="{Binding Text}" TextColor="#3A5F0B" FontSize="16" HorizontalOptions="Start" />
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </local:MessageTemplateSelector.ChatMessageTemplate>
+                    </local:MessageTemplateSelector>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
+
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Entry x:Name="MessageEntry" Placeholder="اكتب رسالتك هنا..." 
+                   BackgroundColor="#FFFFFF" 
+                   TextColor="Black"
+                   PlaceholderColor="#8E8E8E"
+                   HeightRequest="50"
+                   HorizontalOptions="FillAndExpand"
+                   Margin="10"/>
+
+            <Button Text="إرسال" 
+                    Clicked="OnSendButtonClicked" 
+                    BackgroundColor="#3E6F41" 
+                    TextColor="White" 
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
