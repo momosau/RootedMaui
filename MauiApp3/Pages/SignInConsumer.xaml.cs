@@ -14,12 +14,14 @@ public partial class SignInConsumer: ContentPage
        
     }
 
-  
-
     private void eyeClicked(object sender, EventArgs e)
     {
         PasswordVisible = !PasswordVisible;
         passwordEntry.IsPassword = !PasswordVisible;
         eyeButton.Source = PasswordVisible ? "eyeo.png" : "eyec.png";
+    }
+    private void SignInClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new ConsumerMainPage());
     }
 }

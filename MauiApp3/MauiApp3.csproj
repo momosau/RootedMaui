@@ -56,6 +56,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.13">
@@ -73,6 +74,9 @@
 	  </Compile>
 	  <Compile Update="Pages\SplashConsumer.xaml.cs">
 	    <DependentUpon>SplashConsumer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\ConsumerMainPage.xaml.cs">
+	    <DependentUpon>ConsumerMainPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -92,7 +96,7 @@
 	  <MauiXaml Update="Pages\SplashFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\testpagexaml.xaml">
+	  <MauiXaml Update="Pages\ConsumerMainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\VerificationCodePage.xaml">
