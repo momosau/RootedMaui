@@ -12,8 +12,8 @@ namespace MauiApp3
         private async void FarmerClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SplashFarmer());
-        }
 
-  
+        }
     }
+
 }
