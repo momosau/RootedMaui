@@ -22,4 +22,8 @@ public partial class SignInFarmer : ContentPage
         passwordEntry.IsPassword = !PasswordVisible;
         eyeButton.Source = PasswordVisible ? "eyeo.png" : "eyec.png";
     }
+    private void SignInClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Chatbot());
+    }
 }

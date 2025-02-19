@@ -121,7 +121,7 @@ TextColor="#6D3D24"
       FontFamily="FontArabic"
       FontAttributes="Bold"
       CornerRadius="15"
-          
+       Clicked="SignInClicked"   
        />
 
                     <Label Text="مزارع جديد؟ سجل الأن !"  
