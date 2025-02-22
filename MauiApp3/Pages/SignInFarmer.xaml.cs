@@ -10,13 +10,17 @@ public partial class SignInFarmer : ContentPage
 
     private async void ForgotTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ForgotPasswordEmail());
+        await Navigation.PushAsync(new Pages.ForgotPasswordEmail());
        
     }
 
-  
+    private async void RegisterNew(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Pages.SignUpFarmer());
 
-    private void eyeClicked(object sender, EventArgs e)
+    }
+
+    private void EyeClicked(object sender, EventArgs e)
     {
         PasswordVisible = !PasswordVisible;
         passwordEntry.IsPassword = !PasswordVisible;

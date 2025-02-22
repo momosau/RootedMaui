@@ -1,6 +1,6 @@
 using System.Reflection.Metadata;
 
-namespace MauiApp3;
+namespace MauiApp3.Pages;
 
 public partial class VerificationCodePage : ContentPage
 {
@@ -25,15 +25,7 @@ public partial class VerificationCodePage : ContentPage
         }
 
     }
-    private string PIN()
-    {
-        return pin1.Text + pin2.Text + pin3.Text + pin4.Text;
-    }
-    private void SubmitPin(object sender, EventArgs e)
-    {
-        string fullPin = PIN();
-        DisplayAlert("Entered PIN", "Your PIN is: " + fullPin, "OK");
-    }
+   
 
 
 }

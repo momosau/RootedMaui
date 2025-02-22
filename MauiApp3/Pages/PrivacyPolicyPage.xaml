@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.PrivacyPolicyPage"
+             BackgroundColor="#E7E9E4" 
+             FlowDirection="RightToLeft" 
+             Shell.NavBarIsVisible="False">
+
+    <Grid Padding="20">
+        <VerticalStackLayout Spacing="20" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center">
+
+            <Image Source="rooted_logo.png" 
+                            HeightRequest="120" 
+                            Aspect="AspectFit" 
+                            HorizontalOptions="Center"/>
+
+            <Label Text="سياسة الخصوصية" 
+                            FontSize="22" 
+                           TextColor="#0E3230" 
+                            FontFamily="FontArabic" 
+                            FontAttributes="Bold" 
+                            HorizontalTextAlignment="Center"/>
+
+            <Label Text="نحن ملتزمون بحماية خصوصية بياناتك. نقوم بجمع البيانات لتحسين خدماتنا وضمان تجربة مستخدم مميزة. نشارك بياناتك فقط مع شركائنا الموثوقين وفقًا للضرورات، وتلتزم جميع الأطراف بسياسات أمان صارمة. يمكنك التواصل معنا في أي وقت لطلب معلومات حول بياناتك أو طلب تعديلها." 
+                            FontSize="16" 
+                           TextColor="#0E3230" 
+                            FontFamily="FontArabic" 
+                            HorizontalTextAlignment="Center" 
+                            LineBreakMode="WordWrap" 
+                            WidthRequest="320"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

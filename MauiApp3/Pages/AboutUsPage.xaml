@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.AboutUsPage"
+              Title="من نحن" 
+             BackgroundColor="#E7E9E4" 
+             FlowDirection="RightToLeft" 
+             Shell.NavBarIsVisible="False">
+
+    <Grid Padding="20">
+        <VerticalStackLayout Spacing="20" 
+                             HorizontalOptions="Center" 
+                             VerticalOptions="Center">
+
+            <Image Source="rooted_logo.png" 
+                   HeightRequest="120" 
+                   Aspect="AspectFit" 
+                   HorizontalOptions="Center"/>
+
+            <Label Text=" من نحن " 
+                   FontSize="22" 
+                   TextColor="#0E3230" 
+                   FontFamily="FontArabic" 
+                   FontAttributes="Bold" 
+                   HorizontalTextAlignment="Center"/>
+
+            <Label Text="رووتد هو تطبيق يوفر سوقًا افتراضيًا للمزارعين يساعد المزارعين الصغار على الترويج لمنتجاتهم المحلية أو المنتجات العضوية التي تم التحقق منها وعرضها مباشرة للمستهلكين المهتمين بالبيئة، مما يوفر للمزارعين فرص عمل وفرص دخل إضافية. "
+                  TextColor="#0E3230" 
+                   FontFamily="FontArabic" 
+                   HorizontalTextAlignment="Center" 
+                   LineBreakMode="WordWrap" 
+                   WidthRequest="320"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

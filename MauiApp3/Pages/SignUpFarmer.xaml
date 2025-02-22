@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.SignUpFarmer"
+             Title=""
+           
+          
+             BackgroundColor="#E7E9E4"
+             
+             FlowDirection="RightToLeft">
+
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto,Auto,Auto" Padding="20" RowSpacing="12">
+
+       
+            <Image Grid.Row="0" 
+          Source="rooted_logo.png" 
+          WidthRequest="200" 
+          HeightRequest="100" 
+          HorizontalOptions="Center" />
+
+            <Label Grid.Row="1" Text="الاسم الثلاثي" 
+          TextColor="#0E3230" 
+          FontAttributes="Bold" />
+            
+            <Border Grid.Row="2" 
+          Stroke="#71873F" 
+          StrokeThickness="1.5" 
+                     StrokeShape="RoundRectangle 15"
+          Background="White" 
+          HeightRequest="50">
+                <Grid ColumnDefinitions="*, Auto">
+                <Entry Grid.Column="0" 
+                
+                            FontFamily="FontArabic" 
+                           Placeholder="علي محمد سعد" 
+                              TextColor="Black" 
+                              PlaceholderColor="Gray" 
+                              FontSize="14" 
+                              Margin="10,0"/>           
+
+                <Image Grid.Column="1" 
+                  Source="user_icon.png" 
+                  WidthRequest="20" 
+                  HeightRequest="20" 
+                  VerticalOptions="Center" 
+                  Margin="10"/>
+                </Grid>
+            </Border>
+
+            <!-- Phone Number Field -->
+            <Label Grid.Row="3"
+          Text="رقم الجوال" 
+          FontFamily="FontArabic"          
+          TextColor="#0E3230" 
+          FontAttributes="Bold" />
+            <Border Grid.Row="4" 
+          Stroke="#71873F" 
+         StrokeShape="RoundRectangle 15"
+          StrokeThickness="1.5" 
+          Background="White" 
+          HeightRequest="50">
+                <Grid ColumnDefinitions="Auto, * , Auto">
+                    <Label Grid.Column="0" 
+                  Text="+966" 
+                  TextColor="Black"
+                  BackgroundColor="#E7E9E4" 
+                  Padding="10"/>
+
+                    <Entry Grid.Column="1" 
+                  Placeholder="500000000" 
+                  Keyboard="Telephone" 
+                  TextColor="Black" 
+                  PlaceholderColor="Gray" 
+                  FontSize="14" 
+                  Margin="10,0"/>
+
+                    <Image Grid.Column="2" 
+                  Source="phone_icon.png"
+                  WidthRequest="20" 
+                  HeightRequest="20" 
+                  VerticalOptions="Center" 
+                  Margin="10"/>
+                </Grid>
+            </Border>
+
+            <Label Grid.Row="5" 
+          Text="البريد الإلكتروني" 
+          TextColor="#0E3230"
+          FontFamily="FontArabic" 
+          FontAttributes="Bold" />
+
+            <Border Grid.Row="6" 
+           StrokeShape="RoundRectangle 15"
+          Stroke="#71873F" 
+          StrokeThickness="1.5" 
+          Background="White" 
+          HeightRequest="50">
+
+                <Grid ColumnDefinitions="*, Auto">
+                    <Entry Grid.Column="0" 
+                  Placeholder="Example@gmail.com" 
+                  Keyboard="Email" TextColor="Black" 
+                  PlaceholderColor="Gray" 
+                  FontSize="14" 
+                  Margin="10,0"/>
+
+                    <Image Grid.Column="1" 
+                  Source="envelope.png" 
+                  WidthRequest="20" 
+                  HeightRequest="20" 
+                  VerticalOptions="Center" 
+                  Margin="10"/>
+                </Grid>
+            </Border>
+
+            <Label Grid.Row="7" 
+          Text="كلمة السر" 
+          FontFamily="FontArabic" 
+          TextColor="#0E3230"
+          FontAttributes="Bold" />
+            <Border 
+              StrokeShape="RoundRectangle 15"
+          Grid.Row="8" 
+          Stroke="#71873F" 
+          StrokeThickness="1.5" 
+          Background="White" 
+          HeightRequest="50">
+                <Grid 
+                    Grid.Row="9"
+              ColumnDefinitions="*, Auto">
+                    <Entry 
+                  Grid.Column="0" 
+                  x:Name="passwordEntry1" 
+                  Placeholder="********" 
+                  IsPassword="True" 
+                  TextColor="Black" 
+                        
+                  PlaceholderColor="Gray" 
+                  FontSize="14" 
+                  Margin="10,0"/>
+
+                    <ImageButton Grid.Column="1" 
+                  x:Name="eyeButton1" 
+                  Source="eyec.png" 
+                  Aspect="AspectFit" 
+                  WidthRequest="20" 
+                  HeightRequest="20" 
+                  Clicked="EyeClicked1"
+                  VerticalOptions="Center" 
+                  Margin="0"/>
+                </Grid>
+            </Border>
+
+            <Button Grid.Row="10" 
+                
+          Text="التالي" 
+          BackgroundColor="#3E6F41" 
+          TextColor="White" 
+          FontFamily="FontArabic" 
+          FontSize="15" 
+          FontAttributes="Bold" 
+     
+          
+          />
+        </Grid>
+    </ContentPage>

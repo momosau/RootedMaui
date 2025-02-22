@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.ContactUsPage"
+              Title="تواصل معنا" 
+              BackgroundColor="#E7E9E4"
+              FlowDirection="RightToLeft" 
+            >
+    <ScrollView>
+        <Grid Padding="20">
+        <VerticalStackLayout Spacing="20" 
+                             HorizontalOptions="Center" 
+                             VerticalOptions="Center">
+
+            <Image Source="rooted_logo.png" 
+                   HeightRequest="120" 
+                   Aspect="AspectFit" 
+                   HorizontalOptions="Center"/>
+
+            <Label Text=" تواصل معنا " 
+                   FontSize="22" 
+                   TextColor="#0E3230" 
+                   FontFamily="FontArabic" 
+                   FontAttributes="Bold" 
+                   HorizontalTextAlignment="Center"/>
+
+            <HorizontalStackLayout Spacing="5" 
+                                   HorizontalOptions="Center">
+                <Label Text="+966 530000000" 
+                       FontSize="16" 
+                      TextColor="#0E3230" 
+                       FontFamily="FontArabic" 
+                        FlowDirection="LeftToRight" 
+                       
+                       HorizontalTextAlignment="Start"/>
+                <Image Source="phone_icon.png" 
+                       WidthRequest="20" 
+                       HeightRequest="20" 
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="5" 
+                                   HorizontalOptions="Center">
+                <Label Text="RootedApp@gmail.com" 
+                       FontSize="16" 
+                      TextColor="#0E3230" 
+                       FontFamily="FontArabic" 
+                       HorizontalTextAlignment="Start"/>
+                <Image Source="email_icon.png" 
+                       WidthRequest="20" 
+                       HeightRequest="20" 
+                       VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <Label Text="اطرح اسنفسارك أو سؤالك:" 
+                   FontSize="16" 
+                 TextColor="#0E3230" 
+                   FontFamily="FontArabic" 
+                   HorizontalTextAlignment="Center"/>
+
+            <Label Text="البريد الإلكتروني" 
+                   FontSize="14" 
+                  TextColor="#0E3230" 
+                   FontFamily="FontArabic" 
+                   HorizontalTextAlignment="Start" 
+                   WidthRequest="300"/>
+
+            <Border StrokeThickness="1"  BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 15" Stroke="#71873F">
+            
+
+            <Entry BackgroundColor="White" 
+                   TextColor="#0E3230" 
+                   FontFamily="FontArabic" 
+                   WidthRequest="300"
+                   HeightRequest="50" 
+                  Keyboard="Email"
+                  
+                   HorizontalTextAlignment="Start"/>
+            </Border>
+            <Label Text="العنوان" 
+                   FontSize="14" 
+                  TextColor="#0E3230" 
+                   FontFamily="FontArabic" 
+                   HorizontalTextAlignment="Start" 
+                   WidthRequest="300"/>
+            <Border StrokeThickness="1"  BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 15" Stroke="#71873F">
+                <Entry BackgroundColor="White" 
+                  TextColor="#0E3230" 
+                   FontFamily="FontArabic" 
+                   WidthRequest="300" 
+                   HeightRequest="50" 
+                   HorizontalTextAlignment="Start"/>
+</Border>
+            <Label Text="الموضوع" 
+                   FontSize="14" 
+                  TextColor="#0E3230" 
+                   FontFamily="FontArabic" 
+                   HorizontalTextAlignment="Start" 
+                   WidthRequest="300"/>
+                <Border StrokeThickness="1"  BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 15" Stroke="#71873F">
+
+                    <Editor BackgroundColor="White" 
+TextColor="#0E3230" 
+FontFamily="FontArabic" 
+WidthRequest="300" 
+HeightRequest="100" 
+
+HorizontalTextAlignment="Start"/>
+                    </Border>
+            <Button Text="إرسال"
+BackgroundColor="#3E6F41" 
+TextColor="White" 
+FontFamily="FontArabic" 
+FontSize="16" 
+CornerRadius="10" 
+WidthRequest="300" 
+Padding="10" 
+HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+    </Grid>
+    </ScrollView>
+</ContentPage> 
+
+            
