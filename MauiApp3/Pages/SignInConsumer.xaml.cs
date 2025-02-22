@@ -1,26 +1,20 @@
 namespace MauiApp3;
 
-public partial class SignInFarmer : ContentPage
+public partial class SignInConsumer: ContentPage
 {
     private bool PasswordVisible = false;
-    public SignInFarmer()
+    public SignInConsumer()
 	{
 		InitializeComponent();
 	}
 
     private async void ForgotTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Pages.ForgotPasswordEmail());
+        await Navigation.PushAsync(new ForgotPasswordEmail());
        
     }
 
-    private async void RegisterNew(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new Pages.SignUpFarmer());
-
-    }
-
-    private void EyeClicked(object sender, EventArgs e)
+    private void eyeClicked(object sender, EventArgs e)
     {
         PasswordVisible = !PasswordVisible;
         passwordEntry.IsPassword = !PasswordVisible;
@@ -28,6 +22,6 @@ public partial class SignInFarmer : ContentPage
     }
     private void SignInClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Chatbot());
+        Navigation.PushAsync(new ConsumerMainPage());
     }
 }
