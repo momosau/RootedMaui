@@ -36,8 +36,9 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
+
       "ConnectionStrings": {
-        "DefaultConnection": "LAPTOP-JAJ6P55J\\SQLEXPRESS01;Database=RootedDB;Trusted_Connection=True;TrustServerCertificate=True;"
+        "DefaultConnection": "Server=LAPTOP-JAJ6P55J\\SQLEXPRESS01;Database=RootedDB;Trusted_Connection=True;TrustServerCertificate=True;"
       }
 
     }
