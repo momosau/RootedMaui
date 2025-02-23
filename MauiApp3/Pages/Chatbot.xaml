@@ -6,8 +6,8 @@
              Title="Chatbot"
              BackgroundColor="#F4F1E9"
              Shell.NavBarIsVisible="False">
-
-    <StackLayout Padding="20" Spacing="10">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
 
         <Label Text="سند مرشدك الزراعي" 
                FontSize="24" 
@@ -63,4 +63,5 @@
                     />
         </StackLayout>
     </StackLayout>
+    </ScrollView>
 </ContentPage>

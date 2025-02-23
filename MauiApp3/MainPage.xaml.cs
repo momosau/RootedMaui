@@ -11,9 +11,16 @@ namespace MauiApp3
 
         private async void FarmerClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SplashFarmer());
+            await Navigation.PushAsync(new Pages.SplashFarmer());
+
+        }
+
+        private async void Test1(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Chatbot());
 
         }
     }
+
 
 }

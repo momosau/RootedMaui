@@ -10,7 +10,7 @@ public partial class SignInConsumer: ContentPage
 
     private async void ForgotTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ForgotPasswordEmail());
+        await Navigation.PushAsync(new Pages.ForgotPasswordEmail());
        
     }
 
