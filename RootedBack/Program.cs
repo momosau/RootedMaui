@@ -8,20 +8,12 @@ builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())  // Ensure the correct base path
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
-Console.WriteLine("Checking Configuration Loading...");
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine($"Connection String: {connectionString}");
 
-if (string.IsNullOrEmpty(connectionString))
-{
-    Console.WriteLine("❌ Connection string is EMPTY! Check appsettings.json.");
-}
-else
-{
-    Console.WriteLine($"✅ Connection String Loaded: {connectionString}");
-}
+// 3. Configure DbContext with the validated connection string
 builder.Services.AddDbContext<RootedDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+    options.UseSqlServer("Server=LAPTOP-JAJ6P55J\\SQLEXPRESS;Database=RootedDB;Trusted_Connection=True;TrustServerCertificate=True"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
