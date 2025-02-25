@@ -36,7 +36,12 @@ public partial class RootedDBContext : DbContext
     public virtual DbSet<Specification> Specifications { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("DefaultConnection");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=LAPTOP-JAJ6P55J\\\\SQLEXPRESS;Database=RootedDB;Trusted_Connection=True;TrustServerCertificate=True");
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
