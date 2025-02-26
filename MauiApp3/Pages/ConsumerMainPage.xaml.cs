@@ -1,4 +1,4 @@
-namespace MauiApp3;
+namespace MauiApp3.Pages;
 
 public partial class ConsumerMainPage : ContentPage
 {

@@ -13,4 +13,11 @@ public partial class SignUpFarmer : ContentPage
         passwordEntry1.IsPassword = !PasswordVisible1;
         eyeButton1.Source = PasswordVisible1 ? "eyeo.png" : "eyec.png";
     }
+
+    private async void NextSignUp(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Pages.SignUpFarmer2());
+
+    }
+  
 }

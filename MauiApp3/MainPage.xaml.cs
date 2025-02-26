@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls;
+﻿using MauiApp3.Pages;
+using Microsoft.Maui.Controls;
 
 namespace MauiApp3
 {
@@ -17,7 +18,7 @@ namespace MauiApp3
 
         private async void Test1(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Chatbot());
+            await Navigation.PushAsync(new SignUpFarmer2());
 
         }
     }

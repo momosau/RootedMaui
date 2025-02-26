@@ -1,14 +1,13 @@
-using System;
-using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+ï»¿using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
+using System.Text;
 
 namespace MauiApp3
-{ 
-public partial class Chatbot : ContentPage { 
+{
+    public partial class Chatbot : ContentPage
+    {
 
         private const string GeminiApiKey = "AIzaSyBkQcWqNr7uh8bnf57t6HkwfgW1IIr0DPw";
         private const string GeminiApiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + GeminiApiKey;
@@ -25,13 +24,13 @@ public partial class Chatbot : ContentPage {
         private async void OnSendButtonClicked(object sender, EventArgs e)
         {
             string userMessage1 = MessageEntry.Text;
-            string userMessage = "ÃäÇ ãÓÇÚÏ ĞßÇÁ ÇÕØäÇÚí ãÊÎÕÕ İí ãÌÇá ÇáÒÑÇÚÉ. " +
-                                 "íãßäß ØÑÍ Ãí ÃÓÆáÉ ÊÊÚáŞ ÈÇáÒÑÇÚÉ¡ æÓÃŞÏã áß ÇáÅÌÇÈÇÊ ÇáãäÇÓÈÉ áãÓÇÚÏÊß. " +
-"ÅĞÇ ßÇä ÓÄÇáß ÎÇÑÌ äØÇŞ ÇáÒÑÇÚÉ¡ İÓÃÌíÈß ÈÚÈÇÑÉ: " +
-"ÃäÇ ĞßÇÁ ÇÕØäÇÚí ãÎÕÕ áãÓÇÚÏÊß İí ãÇ íÎÕ ÇáÒÑÇÚÉ İŞØ. " +
-"ÃÑíÏ ÇáÅÌÇÈÉ Úä ÌãíÚ ÇáÃÓÆáÉ ÇáÊí ÊÊÚáŞ ÈÇáÒÑÇÚÉ æãÓÇÚÏÉ ÇáãÒÇÑÚíä İŞØ. " +
-"ãáÇÍÙÉ: íõÑÌì ÇáŞíÇã ÈãÇ åæ ãØáæÈ ãäß İŞØ. " +
-"åĞÇ åæ äÕ ÇáÑÓÇáÉ: " + MessageEntry.Text;
+            string userMessage = "Ø§Ù”Ù†Ø§ Ù…Ø³Ø§Ø¹Ø¯ Ø°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù…ØªØ®ØµØµ ÙÙŠ Ù…Ø¬Ø§Ù„ Ø§Ù„Ø²Ø±Ø§Ø¹Ø©. " +
+                                 "ÙŠÙ…ÙƒÙ†Ùƒ Ø·Ø±Ø­ Ø§Ù”ÙŠ Ø§Ù”Ø³ÙŠÙ”Ù„Ø© ØªØªØ¹Ù„Ù‚ Ø¨Ø§Ù„Ø²Ø±Ø§Ø¹Ø©ØŒ ÙˆØ³Ø§Ù”Ù‚Ø¯Ù… Ù„Ùƒ Ø§Ù„Ø§Ù•Ø¬Ø§Ø¨Ø§Øª Ø§Ù„Ù…Ù†Ø§Ø³Ø¨Ø© Ù„Ù…Ø³Ø§Ø¹Ø¯ØªÙƒ. " +
+"Ø§Ù•Ø°Ø§ ÙƒØ§Ù† Ø³ÙˆÙ”Ø§Ù„Ùƒ Ø®Ø§Ø±Ø¬ Ù†Ø·Ø§Ù‚ Ø§Ù„Ø²Ø±Ø§Ø¹Ø©ØŒ ÙØ³Ø§Ù”Ø¬ÙŠØ¨Ùƒ Ø¨Ø¹Ø¨Ø§Ø±Ø©: " +
+"Ø§Ù”Ù†Ø§ Ø°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù…Ø®ØµØµ Ù„Ù…Ø³Ø§Ø¹Ø¯ØªÙƒ ÙÙŠ Ù…Ø§ ÙŠØ®Øµ Ø§Ù„Ø²Ø±Ø§Ø¹Ø© ÙÙ‚Ø·. " +
+"Ø§Ù”Ø±ÙŠØ¯ Ø§Ù„Ø§Ù•Ø¬Ø§Ø¨Ø© Ø¹Ù† Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø§Ù”Ø³ÙŠÙ”Ù„Ø© Ø§Ù„ØªÙŠ ØªØªØ¹Ù„Ù‚ Ø¨Ø§Ù„Ø²Ø±Ø§Ø¹Ø© ÙˆÙ…Ø³Ø§Ø¹Ø¯Ø© Ø§Ù„Ù…Ø²Ø§Ø±Ø¹ÙŠÙ† ÙÙ‚Ø·. " +
+"Ù…Ù„Ø§Ø­Ø¸Ø©: ÙŠÙØ±Ø¬Ù‰ Ø§Ù„Ù‚ÙŠØ§Ù… Ø¨Ù…Ø§ Ù‡Ùˆ Ù…Ø·Ù„ÙˆØ¨ Ù…Ù†Ùƒ ÙÙ‚Ø·. " +
+"Ù‡Ø°Ø§ Ù‡Ùˆ Ù†Øµ Ø§Ù„Ø±Ø³Ø§Ù„Ø©: " + MessageEntry.Text;
 
             if (string.IsNullOrWhiteSpace(userMessage1))
                 return;
@@ -76,12 +75,12 @@ public partial class Chatbot : ContentPage {
                 }
                 else
                 {
-                    return "ÍÏË ÎØÃ ÃËäÇÁ ÇáÇÊÕÇá ÈÇáĞßÇÁ ÇáÇÕØäÇÚí.";
+                    return "Ø­Ø¯Ø« Ø®Ø·Ø§Ù” Ø§Ù”Ø«Ù†Ø§Ø¡ Ø§Ù„Ø§ØªØµØ§Ù„ Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ.";
                 }
             }
             catch (Exception ex)
             {
-                return "ÍÏË ÎØÃ: " + ex.Message;
+                return "Ø­Ø¯Ø« Ø®Ø·Ø§Ù”: " + ex.Message;
             }
         }
     }
