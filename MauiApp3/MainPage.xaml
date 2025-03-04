@@ -9,7 +9,12 @@
              Title="الصفحة الرئيسية"
              >
     <VerticalStackLayout Margin="20" Spacing="60" >
- 
+
+        <Button
+    Text="Get Data from API"
+    Clicked="GetDataFromApi"/>
+
+        <Label x:Name="label" />
         <Image Aspect="Center" Source="rooted_logo.png"/>
 
         <Label 
@@ -45,13 +50,6 @@
             HeightRequest="300"
                Clicked="Test1"
             ContentLayout="Top,30 " />
-         
-                
-               
-            
-            
-
-
 
 
 
@@ -70,6 +68,8 @@
                 Clicked="FarmerClicked"
                 ContentLayout="Top,10" />
         </Grid>
+
+
 
     </VerticalStackLayout>
 </ContentPage>

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using SharedLibraryy.Models;
 
-namespace RootedBack.Models;
+namespace RootedBack.Data;
 
 public partial class RootedDBContext : DbContext
 {

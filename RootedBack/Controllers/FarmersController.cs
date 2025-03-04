@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using RootedBack.Models;
+using RootedBack.Data;
+using SharedLibraryy.Models;
 
 namespace RootedBack.Controllers
 {
@@ -103,5 +105,39 @@ namespace RootedBack.Controllers
         {
             return _context.Farmers.Any(e => e.FarmerId == id);
         }
+        [HttpPost("upload-certificate")]
+        public async Task<IActionResult> UploadCertificate(IFormFile file, int farmerId)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("File is empty.");
+
+            string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/certificates");
+            Directory.CreateDirectory(uploadsFolder); 
+
+            string fileName = $"farmer_{farmerId}.pdf";
+            string filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            string relativePath = $"/certificates/{fileName}";
+
+            using (var connection = new SqlConnection("DefaultConnection"))
+            {
+                string query = "UPDATE Farmer SET CertificatePath = @FilePath WHERE FarmerID = @FarmerID";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@FilePath", relativePath);
+                    command.Parameters.AddWithValue("@FarmerID", farmerId);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            return Ok(new { Message = "File uploaded successfully!", Path = relativePath });
+        }
+
     }
 }
