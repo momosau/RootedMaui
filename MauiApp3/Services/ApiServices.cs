@@ -12,7 +12,7 @@ namespace MauiApp3.Services
     public class  ApiServices :IApiServices
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "https://localhost:7168/api";
+        private readonly string _baseUrl = "'https://localhost:7168/api";
 
         public ApiServices(HttpClient httpClient)
         {
