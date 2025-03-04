@@ -24,11 +24,21 @@ builder.Services.Configure<FormOptions>(options =>
     options.MultipartBodyLengthLimit = 10 * 1024 * 1024; 
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin() // Allow any origin
+              .AllowAnyMethod() // Allow any method (GET, POST, etc.)
+              .AllowAnyHeader(); // Allow any header
+    });
+});
 
-//builder.Services.AddHttpClient<ProductService>();
 
 
 var app = builder.Build();
+
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

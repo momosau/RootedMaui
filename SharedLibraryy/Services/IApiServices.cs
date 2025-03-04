@@ -6,8 +6,8 @@ namespace SharedLibraryy.Services
     public interface  IApiServices
     {
 
-        Task<List<Product>> GetProductsAsync();
-        Task<Product> GetProductByIdAsync(int id);
-        Task<bool> CreateProductAsync(Product product);
+        Task<List<Admin>> GetAdminsAsync();
+        Task<Admin> GetAdminByIdAsync(int id);
+        Task<bool> CreateAdminAsync(Admin admin);
     }
 }

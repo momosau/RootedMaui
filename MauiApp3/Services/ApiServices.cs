@@ -18,19 +18,19 @@ namespace MauiApp3.Services
         {
             _httpClient = httpClient;
         }
-        public async Task<List<Product>> GetProductsAsync()
+        public async Task<List<Admin>> GetAdminsAsync()
         {
-            return await _httpClient.GetFromJsonAsync<List<Product>>($"{_baseUrl}/products");
+            return await _httpClient.GetFromJsonAsync<List<Admin>>($"{_baseUrl}/Admins");
         }
 
-        public async Task<Product> GetProductByIdAsync(int id)
+        public async Task<Admin> GetAdminByIdAsync(int id)
         {
-            return await _httpClient.GetFromJsonAsync<Product>($"{_baseUrl}/products/{id}");
+            return await _httpClient.GetFromJsonAsync<Admin>($"{_baseUrl}/Admins/{id}");
         }
 
-        public async Task<bool> CreateProductAsync(Product product)
+        public async Task<bool> CreateAdminAsync(Admin admin)
         {
-            var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/products", product);
+            var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/Admins", admin);
             return response.IsSuccessStatusCode;
         }
     }
