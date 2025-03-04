@@ -22,6 +22,6 @@ public partial class SignInConsumer: ContentPage
     }
     private void SignInClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ConsumerMainPage());
+        Navigation.PushAsync(new Pages.ConsumerMainPage());
     }
 }
