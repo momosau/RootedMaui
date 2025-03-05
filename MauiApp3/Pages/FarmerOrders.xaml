@@ -2,18 +2,65 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp3.Pages.FarmerOrders"
-             Title="FarmerOrders"             BackgroundColor="#EAE9E2"
-             >
+             Title="الطلبات" 
+             FlowDirection="RightToLeft"
+             BackgroundColor="#EAE9E2">
 
     <VerticalStackLayout Padding="20">
 
-        <Label 
-          Text="الطلبات" 
-          FontSize="24" 
-          FontAttributes="Bold" 
-          HorizontalOptions="Center" />
+     
+        <Label Text="الطلبات" 
+               FontSize="24" 
+               TextColor="#0E3230"
+               FontAttributes="Bold" 
+               FontFamily="FontArabic"
+               HorizontalOptions="Center" />
 
-       
+        
+        <CollectionView ItemsSource="{Binding Orders}">
+            <CollectionView.ItemTemplate >
+                <DataTemplate >
+                    <Frame Padding="10" 
+                           
+                           CornerRadius="10" 
+                           
+                           Margin="10"
+                           BackgroundColor="#CCD3C4">
+
+                        <VerticalStackLayout Spacing="5">
+                           
+                            <Label Text="{Binding OrderNumber}" 
+                                   FontAttributes="Bold" 
+                                   FontSize="16"
+                                   TextColor="#0E3230"/>
+
+                            
+                            <Label Text="{Binding OrderDate}" 
+                                   FontSize="14" 
+                                 
+                                   TextColor="#0E3230"/>
+
+                            
+                            <Label Text="{Binding TotalAmount}" 
+                                   FontSize="14"
+                                    TextColor="#0E3230"/>
+
+                            <!-- Order Status with Background Color -->
+                            <Frame CornerRadius="10" 
+                                   BackgroundColor="{Binding StatusColor}" 
+                                   Padding="5" 
+                                   HorizontalOptions="Start">
+                                <Label Text="{Binding Status}" 
+                                       FontSize="12"
+                                         TextColor="#0E3230"/>
+                            </Frame>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Bottom Grid (for buttons or other controls) -->
+        
     </VerticalStackLayout>
 </ContentPage>
-

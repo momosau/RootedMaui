@@ -8,6 +8,8 @@ namespace MauiApp3
         public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+
         }
 
         private async void FarmerClicked(object sender, EventArgs e)
@@ -16,9 +18,9 @@ namespace MauiApp3
 
         }
 
-        private async void Test1(object sender, EventArgs e)
+        private async void Consumerclicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SignUpFarmer2());
+            await Navigation.PushAsync(new SplashConsumer());
 
         }
     }

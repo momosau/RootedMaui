@@ -6,7 +6,19 @@ public partial class FarmerHome : ContentPage
 	{
 		InitializeComponent();
 	}
+    private async void GoToHome(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new FarmerHome());
+    }
 
+    private async void GoToChatbot(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Chatbot());
+    }
+    private async void GoToProfile(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new AccountPageFarmer());
+    }
 
 
     /*  private async void PickImageAsync(object sender, EventArgs e)
@@ -81,6 +93,16 @@ public partial class FarmerHome : ContentPage
         await stream.CopyToAsync(fs);
 
         return localPath;
+    }
+
+    private void ContactUsClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Pages.ContactUsPage());
+    }
+
+    private void FarmersOrdersClicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new Pages.FarmerOrders());
     }
 
 }

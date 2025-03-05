@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.FarmerProfilePage"
+                        FlowDirection="RightToLeft"
+              BackgroundColor="#E7E9E4" 
+             Title="حسابي">
+
+    
+
+    <ScrollView>
+        <VerticalStackLayout 
+          Padding="20" 
+          Spacing="15">
+
+            <Border Stroke="Gray" 
+        
+       
+        WidthRequest="100" 
+        HeightRequest="100" 
+        StrokeShape="RoundRectangle 50,50,50,50">
+                <Image Source="profile.png"
+        x:Name="ProfileImage" WidthRequest="96" HeightRequest="96" Aspect="AspectFill" />
+</Border>
+               
+            <Label 
+                   Text="تعديل صورة البروفايل"
+                   FontSize="14"
+                 FontFamily="FontArabic"
+                   TextColor="Brown"
+                  FontAttributes="Bold"
+                   HorizontalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="EditProfilePicture"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label 
+                   Text="التفاصيل الشخصية :" 
+                   FontSize="18"
+                TextColor="#0E3230"
+                 FontFamily="FontArabic"
+                   FontAttributes="Bold"
+                  />
+
+            <Label 
+              Text="اسم المستخدم" 
+                TextColor="#0E3230"
+                 FontFamily="FontArabic"
+                  FontAttributes="Bold"
+              FontSize="14"/>
+            <Entry 
+                   x:Name="NameEntry"
+                   FontSize="16"
+                   BackgroundColor="White"
+                   Placeholder="جاري التحميل..."/>
+   
+
+            <Label 
+              Text="البريد الإلكتروني" 
+                TextColor="#0E3230"
+                  FontAttributes="Bold"
+                 FontFamily="FontArabic"
+              FontSize="14"/>
+            <Entry 
+                   x:Name="Email"
+                   FontSize="16"
+                   BackgroundColor="White"
+                   Placeholder="جاري التحميل..." 
+                   Keyboard="Email"/>
+
+            <Label 
+                  FontAttributes="Bold"
+              Text="رقم الهاتف" 
+                TextColor="#0E3230"
+                 FontFamily="FontArabic"
+              FontSize="14"/>
+            <Grid 
+              ColumnDefinitions="Auto, *">
+                <Label 
+                       Text="+966 |" 
+                       FontSize="16" 
+                       VerticalTextAlignment="Center"/>
+                <Entry 
+                       x:Name="PhoneEntry"
+                       FontSize="16"
+                       BackgroundColor="White"
+                       Placeholder="جاري التحميل..."
+                       Keyboard="Telephone"/>
+            </Grid>
+
+            <Button 
+                    Text="تعديل البيانات"
+                     BackgroundColor="#3E6F41"
+                    TextColor="White"
+                 FontFamily="FontArabic"
+                    FontSize="18"
+                    CornerRadius="10"
+                  FontAttributes="Bold"
+                  />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

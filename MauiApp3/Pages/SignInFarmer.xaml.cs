@@ -1,4 +1,4 @@
-namespace MauiApp3;
+namespace MauiApp3.Pages;
 
 public partial class SignInFarmer : ContentPage
 {
@@ -28,6 +28,6 @@ public partial class SignInFarmer : ContentPage
     }
     private void SignInClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Chatbot());
+        Navigation.PushAsync(new Pages.FarmerHome());
     }
 }

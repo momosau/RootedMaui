@@ -5,6 +5,7 @@
               Title="تواصل معنا" 
               BackgroundColor="#E7E9E4"
               FlowDirection="RightToLeft" 
+             Shell.ForegroundColor="Aqua"
             >
     <ScrollView>
         <Grid Padding="20">
@@ -26,13 +27,16 @@
 
             <HorizontalStackLayout Spacing="5" 
                                    HorizontalOptions="Center">
-                <Label Text="+966 530000000" 
+                <Label Text="+966530000000" 
                        FontSize="16" 
                       TextColor="#0E3230" 
                        FontFamily="FontArabic" 
-                        FlowDirection="LeftToRight" 
-                       
-                       HorizontalTextAlignment="Start"/>
+                       FontAttributes="Bold" 
+                       FlowDirection="LeftToRight" 
+                      
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                      />
                 <Image Source="phone_icon.png" 
                        WidthRequest="20" 
                        HeightRequest="20" 
@@ -45,6 +49,7 @@
                        FontSize="16" 
                       TextColor="#0E3230" 
                        FontFamily="FontArabic" 
+                        FontAttributes="Bold" 
                        HorizontalTextAlignment="Start"/>
                 <Image Source="email_icon.png" 
                        WidthRequest="20" 
@@ -52,16 +57,18 @@
                        VerticalOptions="Center"/>
             </HorizontalStackLayout>
 
-            <Label Text="اطرح اسنفسارك أو سؤالك:" 
+            <Label Text="اطرح استفسارك أو سؤالك:" 
                    FontSize="16" 
                  TextColor="#0E3230" 
                    FontFamily="FontArabic" 
+                    FontAttributes="Bold" 
                    HorizontalTextAlignment="Center"/>
 
             <Label Text="البريد الإلكتروني" 
                    FontSize="14" 
                   TextColor="#0E3230" 
                    FontFamily="FontArabic" 
+                    FontAttributes="Bold" 
                    HorizontalTextAlignment="Start" 
                    WidthRequest="300"/>
 
@@ -78,6 +85,7 @@
                    HorizontalTextAlignment="Start"/>
             </Border>
             <Label Text="العنوان" 
+                    FontAttributes="Bold" 
                    FontSize="14" 
                   TextColor="#0E3230" 
                    FontFamily="FontArabic" 
@@ -92,6 +100,7 @@
                    HorizontalTextAlignment="Start"/>
 </Border>
             <Label Text="الموضوع" 
+                    FontAttributes="Bold" 
                    FontSize="14" 
                   TextColor="#0E3230" 
                    FontFamily="FontArabic" 
