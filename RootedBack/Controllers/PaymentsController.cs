@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RootedBack.Models;
+using RootedBack.Data;
+using SharedLibraryy.Models;
 
 namespace RootedBack.Controllers
 {

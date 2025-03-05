@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RootedBack.Models;
+using RootedBack.Data;
+using SharedLibraryy.Models;
 using System.Security.Claims;
 
 namespace RootedBack.Controllers

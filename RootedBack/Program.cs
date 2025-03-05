@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RootedBack.Models;
+﻿using Microsoft.AspNetCore.Http.Features;
+using Microsoft.EntityFrameworkCore;
+using RootedBack.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,12 +19,26 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 10 * 1024 * 1024; 
+});
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin() // Allow any origin
+              .AllowAnyMethod() // Allow any method (GET, POST, etc.)
+              .AllowAnyHeader(); // Allow any header
+    });
+});
 
-//builder.Services.AddHttpClient<ProductService>();
 
 
 var app = builder.Build();
+
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
