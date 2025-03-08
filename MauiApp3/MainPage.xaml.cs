@@ -9,6 +9,7 @@ namespace MauiApp3
         public MainPage()
         {
             InitializeComponent();
+            _httpClient = new HttpClient();
             NavigationPage.SetHasNavigationBar(this, false);
         }
 

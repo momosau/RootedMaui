@@ -85,8 +85,8 @@ TextColor="#6D3D24"
                  Source="eyec.png"
                    
                  Aspect="AspectFit"
-                 WidthRequest="20" 
-                 HeightRequest="20"
+                 WidthRequest="30" 
+                 HeightRequest="30"
                  Clicked="eyeClicked"
                  VerticalOptions="Center"
                  Margin="0"/>

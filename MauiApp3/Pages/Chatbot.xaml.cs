@@ -9,9 +9,8 @@ namespace MauiApp3
     public partial class Chatbot : ContentPage
     {
 
-        private const string GeminiApiKey = "AIzaSyBkQcWqNr7uh8bnf57t6HkwfgW1IIr0DPw";
-        private const string GeminiApiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + GeminiApiKey;
-
+        private const string GeminiApiKey = "AIzaSyAmc3k6VheGY_hzuduAai-iHcP0gHdqKGk";
+        private const string GeminiApiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GeminiApiKey;
         private HttpClient _httpClient = new HttpClient();
         private ObservableCollection<Message> _chatMessages = new ObservableCollection<Message>();
 
@@ -19,6 +18,7 @@ namespace MauiApp3
         {
             InitializeComponent();
             ChatList.ItemsSource = _chatMessages;
+
         }
 
         private async void OnSendButtonClicked(object sender, EventArgs e)

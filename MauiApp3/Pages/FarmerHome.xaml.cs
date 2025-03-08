@@ -5,7 +5,8 @@ public partial class FarmerHome : ContentPage
 	public FarmerHome()
 	{
 		InitializeComponent();
-	}
+        NavigationPage.SetHasNavigationBar(this, false);
+    }
     private async void GoToHome(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new FarmerHome());
