@@ -9,7 +9,8 @@ public partial class PhoneVerification : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new SplashFarmerFinal());
+        await Shell.Current.GoToAsync("SplashFarmerFinal");
+
 
     }
     private void MoveText(object sender, TextChangedEventArgs e)

@@ -16,8 +16,8 @@ public partial class SignUpFarmer : ContentPage
 
     private async void NextSignUp(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Pages.SignUpFarmer2());
 
+        await Shell.Current.GoToAsync("SignUpFarmer2");
     }
   
 }

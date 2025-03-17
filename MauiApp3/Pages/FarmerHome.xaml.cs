@@ -9,16 +9,19 @@ public partial class FarmerHome : ContentPage
     }
     private async void GoToHome(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new FarmerHome());
+        await Shell.Current.GoToAsync("FarmerHome");
     }
 
     private async void GoToChatbot(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Chatbot());
+    
+        await Shell.Current.GoToAsync("Chatbot");
+
     }
     private async void GoToProfile(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AccountPageFarmer());
+    
+        await Shell.Current.GoToAsync("AccountPageFarmer");
     }
 
 
@@ -96,14 +99,21 @@ public partial class FarmerHome : ContentPage
         return localPath;
     }
 
-    private void ContactUsClicked(object sender, EventArgs e)
+    private async void ContactUsClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Pages.ContactUsPage());
+      
+        await Shell.Current.GoToAsync("ContactUsPage");
     }
 
-    private void FarmersOrdersClicked(object sender, EventArgs e)
+    private async void FarmersOrdersClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Pages.FarmerOrders());
+
+        await Shell.Current.GoToAsync("FarmerOrders");
+    }
+    private async void EditProductsButton(object sender, EventArgs e)
+    {
+    
+        await Shell.Current.GoToAsync("AddProductsFarmer");
     }
 
 }

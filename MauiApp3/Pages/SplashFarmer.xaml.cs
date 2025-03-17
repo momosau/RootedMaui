@@ -6,13 +6,14 @@ public partial class SplashFarmer : ContentPage
 	{
         InitializeComponent();
         NavigationPage.SetHasNavigationBar(this, false);
-        
+
         Task.Delay(4000).ContinueWith(async _ =>
         {
-            
-            await MainThread.InvokeOnMainThreadAsync(() =>
+
+            await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                Navigation.PushAsync(new SignInFarmer());
+
+                await Shell.Current.GoToAsync("SignInFarmer");
             });
         });
     }

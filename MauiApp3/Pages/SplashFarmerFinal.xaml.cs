@@ -2,17 +2,18 @@ namespace MauiApp3.Pages;
 
 public partial class SplashFarmerFinal : ContentPage
 {
-	public SplashFarmerFinal()
-	{
-		InitializeComponent();
+    public SplashFarmerFinal()
+    {
+        InitializeComponent();
         NavigationPage.SetHasNavigationBar(this, false);
 
         Task.Delay(4000).ContinueWith(async _ =>
         {
 
-            await MainThread.InvokeOnMainThreadAsync(() =>
+            await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                Navigation.PushAsync(new MainPage());
+
+                await Shell.Current.GoToAsync("MainPage");
             });
         });
     }

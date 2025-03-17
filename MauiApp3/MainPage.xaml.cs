@@ -1,4 +1,5 @@
-﻿using MauiApp3.Pages;
+﻿using MauiApp3.ModelView;
+using MauiApp3.Pages;
 using Microsoft.Maui.Controls;
 
 namespace MauiApp3
@@ -29,13 +30,19 @@ namespace MauiApp3
         }
         private async void FarmerClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Pages.SplashFarmer());
+          
+
+
+            await Shell.Current.GoToAsync("SplashFarmer");
+
 
         }
 
         private async void Consumerclicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SplashConsumer());
+
+            await Shell.Current.GoToAsync("PaymentMethodPage");
+           
 
         }
     }

@@ -48,6 +48,7 @@ namespace MauiApp3.ModelView;
     // Order model
     public class Order
     {
+   
         public string OrderNumber { get; set; }
         public string OrderDate { get; set; }
         public string TotalAmount { get; set; }
