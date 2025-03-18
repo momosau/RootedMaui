@@ -1,12 +1,14 @@
 using MauiApp3.ModelView;
 
-namespace MauiApp3.Pages;
-
-public partial class ProductPage : ContentPage
+namespace MauiApp3.Pages
 {
-	public ProductPage(ProductPageViewModel productPageViewModel)
+
+	public partial class ProductPage : ContentPage
 	{
-		InitializeComponent();
-		BindingContext=productPageViewModel;
+		public ProductPage(ProductPageViewModel productPageViewModel)
+		{
+			InitializeComponent();
+			BindingContext = productPageViewModel;
+		}
 	}
 }

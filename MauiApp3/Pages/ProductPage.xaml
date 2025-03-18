@@ -6,20 +6,25 @@
              xmlns:ModelView="clr-namespace:MauiApp3.ModelView"
              x:DataType="ModelView:ProductPageViewModel"
              Title="{Binding Title}"
-             xmlns:Models="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
+             xmlns:Models="clr-namespace:MauiApp3.Models"
              FlowDirection="RightToLeft" 
              Shell.NavBarIsVisible="False">
+
     <Grid ColumnDefinitions=".50*,.50*" RowDefinitions="*">
-        <CollectionView ItemsSource="{Binding Products}">
+        <CollectionView ItemsSource="{Binding products}">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="Models:Product">
+                <DataTemplate x:DataType="Models:Productemp">
                     <Frame CornerRadius="8">
                         <VerticalStackLayout>
-                        <Image WidthRequest="250" HeightRequest="250" Source="{Binding ImageUrl}"/>
-                        <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" />
+                            <Image WidthRequest="250" HeightRequest="250" Source="{Binding ImageUrl}"/>
+                            <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" />
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
+</ContentPage>
+  
+    
+   
