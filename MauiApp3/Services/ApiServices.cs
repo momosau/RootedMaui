@@ -9,10 +9,15 @@ using SharedLibraryy.Models;
 
 namespace MauiApp3.Services
 {
-    public class  ApiServices :IApiServices
+    public class  ApiServices 
     {
         private readonly HttpClient _httpClient;
-        private readonly string _baseUrl = "'https://localhost:7168/api";
+        private static readonly string _baseUrl =
+#if ANDROID
+       "http://10.0.2.2:7168/api"; 
+#else
+        "http://localhost:7168/api"; 
+#endif
 
         public ApiServices(HttpClient httpClient)
         {

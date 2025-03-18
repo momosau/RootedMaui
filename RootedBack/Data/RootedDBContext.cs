@@ -35,6 +35,7 @@ public partial class RootedDBContext : DbContext
     public virtual DbSet<Shipping> Shippings { get; set; }
 
     public virtual DbSet<Specification> Specifications { get; set; }
+    public DbSet<Category> Categories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -146,9 +147,16 @@ public partial class RootedDBContext : DbContext
         {
             entity.Property(e => e.SpecificationId).ValueGeneratedNever();
         });
+        modelBuilder.Entity<Product>()
+          .HasOne(p => p.Category)
+          .WithMany()
+          .HasForeignKey(p => p.CategoryId);
+
 
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-}
+    
+      
+    }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.ProductPage"
+             BackgroundColor="#E7E9E4" 
+             xmlns:ModelView="clr-namespace:MauiApp3.ModelView"
+             x:DataType="ModelView:ProductPageViewModel"
+             Title="{Binding Title}"
+             xmlns:Models="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
+             FlowDirection="RightToLeft" 
+             Shell.NavBarIsVisible="False">
+    <Grid ColumnDefinitions=".50*,.50*" RowDefinitions="*">
+        <CollectionView ItemsSource="{Binding Products}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="Models:Product">
+                    <Frame CornerRadius="8">
+                        <VerticalStackLayout>
+                        <Image WidthRequest="250" HeightRequest="250" Source="{Binding ImageUrl}"/>
+                        <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>

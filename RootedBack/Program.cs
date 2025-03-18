@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using RootedBack.Data;
+using RootedBack.Services;
+using SharedLibraryy.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +36,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-
+builder.Services.AddScoped<IApiServices, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

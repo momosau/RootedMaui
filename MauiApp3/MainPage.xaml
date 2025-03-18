@@ -11,9 +11,11 @@
 
         <Button
     Text="Get Data from API"
+            
     Clicked="GetDataFromApi"/>
 
-        <Label x:Name="label" />
+        <Label x:Name="labelApi"
+        TextColor="#6D3D24"/>
         <Image Aspect="Center" Source="rooted_logo.png"/>
 
         <Label 

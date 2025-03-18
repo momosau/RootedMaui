@@ -21,7 +21,9 @@ public partial class Product
 
     [StringLength(250)]
     [Unicode(false)]
-    public string Category { get; set; } = null!;
+    [ForeignKey("CategoryId")]
+    public Category Category { get; set; } = null!;
+    public int CategoryId { get; set; }
 
     public int Quantity { get; set; }
 

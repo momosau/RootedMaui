@@ -5,6 +5,9 @@ using Microsoft.Extensions.Logging;
 using Refit;
 using SharedLibraryy.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Syncfusion.Maui.Core.Hosting;
+using MauiApp3.ModelView;
+using MauiApp3.Pages;
 
 namespace MauiApp3
 {
@@ -16,6 +19,7 @@ namespace MauiApp3
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .ConfigureSyncfusionCore()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -24,8 +28,9 @@ namespace MauiApp3
                 })
                   .UseMauiCommunityToolkit();
 
-            builder.Services.AddSingleton<HttpClient>();
-            builder.Services.AddSingleton<IApiServices, ApiServices>();
+            builder.Services.AddSingleton<ProductPageViewModel>();
+            builder.Services.AddSingleton<ProductPage>();
+            builder.Services.AddHttpClient<IProductService, ProductService>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
