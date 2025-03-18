@@ -6,7 +6,10 @@
         {
             InitializeComponent();
 
+
             MainPage = new AppShell();
+
         }
+
     }
 }

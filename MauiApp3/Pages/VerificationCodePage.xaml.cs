@@ -10,7 +10,8 @@ public partial class VerificationCodePage : ContentPage
 	}
    private async void CheckE(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ResetPasswordPage());
+
+        await Shell.Current.GoToAsync("ResetPasswordPage");
 
     }
     private void MoveText(object sender, TextChangedEventArgs e)

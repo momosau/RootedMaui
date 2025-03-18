@@ -7,15 +7,15 @@
            
              Padding="10"
             >
-    <VerticalStackLayout Margin="20" Spacing="60" >
+    <ScrollView>
+        <VerticalStackLayout Margin="20" Spacing="60" >
 
         <Button
     Text="Get Data from API"
-            
     Clicked="GetDataFromApi"/>
 
-        <Label x:Name="labelApi"
-        TextColor="#6D3D24"/>
+        <Label x:Name="label" 
+               TextColor="Black"/>
         <Image Aspect="Center" Source="rooted_logo.png"/>
 
         <Label 
@@ -73,4 +73,5 @@
 
 
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

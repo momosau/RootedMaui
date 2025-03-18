@@ -50,7 +50,9 @@ public partial class SignUpFarmer2 : ContentPage
         // Save checkbox states before navigating to the next page
         CheckboxStates();
 
-        await Navigation.PushAsync(new Pages.PhoneVerification());
+        await Shell.Current.GoToAsync("PhoneVerification");
+
+
     }
 
 

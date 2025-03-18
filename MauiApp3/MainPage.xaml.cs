@@ -1,7 +1,7 @@
-﻿using MauiApp3.Pages;
+﻿using MauiApp3.ModelView;
+using MauiApp3.Pages;
 using Microsoft.Maui.Controls;
-using SharedLibraryy.Models;
-using MauiApp3.Services;
+
 namespace MauiApp3
 {
     public partial class MainPage : ContentPage
@@ -10,7 +10,6 @@ namespace MauiApp3
         public MainPage()
         {
             InitializeComponent();
-
             _httpClient = new HttpClient();
             NavigationPage.SetHasNavigationBar(this, false);
         }
@@ -20,29 +19,30 @@ namespace MauiApp3
 
             try
             {
-                string apiUrl =
-#if ANDROID
-                "http://10.0.2.2:7168/api/Admins"; // Android Emulator
-#else
-                "https://localhost:7168/api/Admins"; // Windows, iOS, macOS
-#endif
+                string apiUrl = "https://localhost:7168/api/Admins"; 
                 string response = await _httpClient.GetStringAsync(apiUrl);
-                labelApi.Text = "API Response: " + response;
+                label.Text = "API Response: " + response;
             }
             catch (Exception ex)
             {
-                labelApi.Text = "Error: " + ex.Message;
+                label.Text = "Error: " + ex.Message;
             }
         }
         private async void FarmerClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Pages.SplashFarmer());
+          
+
+
+            await Shell.Current.GoToAsync("SplashFarmer");
+
 
         }
 
         private async void Consumerclicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SplashConsumer());
+
+            await Shell.Current.GoToAsync("PaymentMethodPage");
+           
 
         }
     }

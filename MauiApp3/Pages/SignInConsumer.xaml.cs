@@ -10,8 +10,9 @@ public partial class SignInConsumer: ContentPage
 
     private async void ForgotTapped(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Pages.ForgotPasswordEmail());
-       
+
+        await Shell.Current.GoToAsync("ForgotPasswordEmail");
+
     }
 
     private void eyeClicked(object sender, EventArgs e)
@@ -20,8 +21,10 @@ public partial class SignInConsumer: ContentPage
         passwordEntry.IsPassword = !PasswordVisible;
         eyeButton.Source = PasswordVisible ? "eyeo.png" : "eyec.png";
     }
-    private void SignInClicked(object sender, EventArgs e)
+    private async void SignInClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Pages.ConsumerMainPage());
+        
+        await Shell.Current.GoToAsync("ConsumerMainPage");
+
     }
 }

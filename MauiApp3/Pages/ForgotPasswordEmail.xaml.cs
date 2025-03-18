@@ -9,7 +9,8 @@ public partial class ForgotPasswordEmail : ContentPage
 
     private async void SendV(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Pages.VerificationCodePage());
+       
+        await Shell.Current.GoToAsync("VerificationCodePage");
 
     }
 }

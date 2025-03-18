@@ -10,9 +10,10 @@ public partial class SplashConsumer : ContentPage
         Task.Delay(4000).ContinueWith(async _ =>
         {
             
-            await MainThread.InvokeOnMainThreadAsync(() =>
+            await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                Navigation.PushAsync(new SignInConsumer());
+               
+                await Shell.Current.GoToAsync("SignInConsumer");
             });
         });
     }

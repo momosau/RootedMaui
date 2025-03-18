@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.EditProductsFarmer"
+             Title="EditProductsFarmer">
+    <StackLayout Padding="10">
+        <Entry x:Name="ProductName" Placeholder="Product Name" />
+        <Entry x:Name="ProductCategory" Placeholder="Category" />
+        <Entry x:Name="ProductWeight" Placeholder="Weight" Keyboard="Numeric" />
+        <Entry x:Name="ProductQuantity" Placeholder="Quantity" Keyboard="Numeric" />
+        <Entry x:Name="ProductPrice" Placeholder="Price" Keyboard="Numeric" />
+        <Editor x:Name="ProductDescription" Placeholder="Description" />
+        <Button Text="Save Changes" Command="{Binding SaveProductCommand}" />
+    </StackLayout>
+</ContentPage>

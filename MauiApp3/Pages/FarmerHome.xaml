@@ -128,6 +128,7 @@ FontSize="14"
 FontFamily="FontArabic"
 FontAttributes="Bold"
 CornerRadius="15"
+                    Clicked="EditProductsButton"
     
  />
                 <Button 

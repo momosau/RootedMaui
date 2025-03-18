@@ -4,6 +4,7 @@
              x:Class="MauiApp3.Pages.FarmerOrders"
              Title="الطلبات" 
              FlowDirection="RightToLeft"
+         
              BackgroundColor="#EAE9E2">
 
     <VerticalStackLayout Padding="20">
@@ -60,7 +61,6 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Bottom Grid (for buttons or other controls) -->
         
     </VerticalStackLayout>
 </ContentPage>

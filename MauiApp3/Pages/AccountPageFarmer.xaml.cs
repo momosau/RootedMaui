@@ -10,33 +10,41 @@ public partial class AccountPageFarmer : ContentPage
 	}
     private async void GoToProfile(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new FarmerProfilePage());
+ 
+        await Shell.Current.GoToAsync("FarmerProfilePage");
     }
    
 
     private async void GoToContactUs(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ContactUsPage());
+     
+        await Shell.Current.GoToAsync("ContactUsPage");
     }
 
     private async void GoToAboutRooted(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new AboutUsPage());
+      
+        await Shell.Current.GoToAsync("AboutUsPage");
     }
+
+    
 
     private async void GoToPrivacyPolicy(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new PrivacyPolicyPage());
+      
+        await Shell.Current.GoToAsync("PrivacyPolicyPage");
     }
 
     private async void GoToHome(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new FarmerHome());
+     
+        await Shell.Current.GoToAsync("FarmerHome");
     }
 
     private async void GoToChatbot(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Chatbot());
+
+        await Shell.Current.GoToAsync("Chatbot");
     }
 
     private async void SignOut(object sender, EventArgs e)
@@ -45,7 +53,8 @@ public partial class AccountPageFarmer : ContentPage
         if (confirm)
         {
             //object value = await AuthenticationService.SignOutAsync();
-            Application.Current.MainPage = new NavigationPage(new MainPage());
+            await Shell.Current.GoToAsync("MainPage");
+
         }
     }
 }
