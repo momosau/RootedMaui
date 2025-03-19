@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace SharedLibraryy.Models;
+namespace   SharedLibraryy.Models;
 
 [Table("Review")]
 public partial class Review
@@ -18,7 +18,7 @@ public partial class Review
     [Column(TypeName = "decimal(18, 0)")]
     public decimal Rating { get; set; }
 
-    [StringLength(10)]
+    [StringLength(50)]
     public string Comment { get; set; } = null!;
 
     [Key]
@@ -28,8 +28,4 @@ public partial class Review
     [ForeignKey("ConsumerId")]
     [InverseProperty("Reviews")]
     public virtual Consumer Consumer { get; set; } = null!;
-
-    [ForeignKey("ProductId")]
-    [InverseProperty("Reviews")]
-    public virtual Product Product { get; set; } = null!;
 }

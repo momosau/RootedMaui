@@ -26,10 +26,6 @@ public partial class Payment
     [Column(TypeName = "datetime")]
     public DateTime PaymentDate { get; set; }
 
-    [Column("OrderID")]
-    public int OrderId { get; set; }
-
-    [ForeignKey("OrderId")]
-    [InverseProperty("Payments")]
-    public virtual Order Order { get; set; } = null!;
+    [Column("ConsumerID")]
+    public int ConsumerId { get; set; }
 }

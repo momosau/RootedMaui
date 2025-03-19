@@ -35,7 +35,7 @@ public partial class Consumer
 
     [StringLength(250)]
     [Unicode(false)]
-    public string UserNamer { get; set; } = null!;
+    public string UserName { get; set; } = null!;
 
     [InverseProperty("Consumer")]
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();

@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace SharedLibraryy.Models
+namespace SharedLibraryy.Models;
+
+public partial class Category
 {
-    [Table("Category")]
-    public partial class Category
-    {
-        [Key]
-        public int CategoryID { get; set; }
-        [Required]
-        [StringLength(100)]
-        public string Name { get; set; }
-        public List<Product> Products { get; set; } = new();
+    [Key]
+    [Column("CategoryID")]
+    public int CategoryId { get; set; }
 
-    }
+    [StringLength(250)]
+    public string CategoryName { get; set; } = null!;
+
+    [Column("imagesURL")]
+    [StringLength(50)]
+    public string? ImagesUrl { get; set; }
+
+    [InverseProperty("CategoryNavigation")]
+    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

@@ -21,9 +21,7 @@ public partial class Product
 
     [StringLength(250)]
     [Unicode(false)]
-    [ForeignKey("CategoryId")]
-    public Category Category { get; set; } = null!;
-    public int CategoryId { get; set; }
+    public string Category { get; set; } = null!;
 
     public int Quantity { get; set; }
 
@@ -41,12 +39,19 @@ public partial class Product
     [Column("FarmerID")]
     public int FarmerId { get; set; }
 
+    [Column("CategoryID")]
+    public int CategoryId { get; set; }
+
+    [ForeignKey("CategoryId")]
+    [InverseProperty("Products")]
+    public virtual Category CategoryNavigation { get; set; } = null!;
+
     [ForeignKey("FarmerId")]
     [InverseProperty("Products")]
     public virtual Farmer Farmer { get; set; } = null!;
 
     [InverseProperty("Product")]
-    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     [ForeignKey("ProductId")]
     [InverseProperty("Products")]
