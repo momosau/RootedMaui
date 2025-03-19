@@ -10,6 +10,8 @@ using System.Collections.ObjectModel;
 using MauiApp3.Pages;
 using System.Windows.Input;
 using System.ComponentModel;
+using SharedLibraryy.Models;
+using MauiApp3.Services;
 
 
 namespace MauiApp3.ModelView
@@ -17,117 +19,53 @@ namespace MauiApp3.ModelView
 
     public partial class ProductViewModel : ObservableObject
     {
-        public ObservableCollection<Product> Products { get; set; }
-        public Product SelectedProduct { get; set; }
-        private bool _isEditing;
-
-        public bool IsEditing
-        {
-            get => _isEditing;
-            set
-            {
-                _isEditing = value;
-                OnPropertyChanged();
-            }
-        }
+        private readonly ProductService1 _productService;
+        public ObservableCollection<Product> Products { get; set; } = new();
 
         public ICommand AddProductCommand { get; }
-        public ICommand EditProductCommand { get; }
         public ICommand DeleteProductCommand { get; }
-        public ICommand SaveChangesCommand { get; }
-        public ICommand PickImageCommand { get; }
+        public ICommand UpdateProductCommand { get; }
 
         public ProductViewModel()
         {
-            Products = new ObservableCollection<Product>();
-
-            AddProductCommand = new Command(AddProduct);
-            EditProductCommand = new Command<Product>(EditProduct);
-            DeleteProductCommand = new Command<Product>(DeleteProduct);
-            SaveChangesCommand = new Command(SaveChanges);
-            PickImageCommand = new Command(async () => await PickImage());
+            _productService = new ProductService1();
+            AddProductCommand = new Command(OnAddProduct);
+            DeleteProductCommand = new Command<Product>(OnDeleteProduct);
+            UpdateProductCommand = new Command<Product>(OnUpdateProduct);
+            LoadProducts();
         }
 
-        private void AddProduct()
+        private async void LoadProducts()
         {
-            var newProduct = new Product { };
-            Products.Add(newProduct);
-            SelectedProduct = newProduct;
-            IsEditing = true;
-        }
-
-        private void EditProduct(Product product)
-        {
-            SelectedProduct = product;
-            IsEditing = true;
-        }
-
-        private void DeleteProduct(Product product)
-        {
-            if (product != null)
+           var products = await _productService.GetAllProductsAsync();
+            Products.Clear();
+          foreach (var product in products)
             {
-                Products.Remove(product);
-                IsEditing = false;
+             Products.Add(product);
             }
         }
 
-        private void SaveChanges()
+        private async void OnAddProduct()
         {
-            IsEditing = false;
+            var newProduct = new Product { Name = "Sample", Price = 10.99, Category = "Fruit", Weight = 1.5, ImageUrl = "https://example.com/image.jpg" };
+            await _productService.AddProductAsync(newProduct);
+            LoadProducts();
         }
 
-        private async Task PickImage()
+        private async void OnUpdateProduct(Product product)
         {
-            var result = await FilePicker.PickAsync(new PickOptions
+            if (await _productService.UpdateProductAsync(product))
             {
-                PickerTitle = "Pick an image",
-                FileTypes = FilePickerFileType.Images
-            });
+                LoadProducts();
+            }
+        }
 
-            if (result != null && SelectedProduct != null)
+        private async void OnDeleteProduct(Product product)
+        {
+            if (await _productService.DeleteProductAsync(product.ProductId))
             {
-                SelectedProduct.Image = result.FullPath;
+                Products.Remove(product);
             }
         }
     }
-
-    
-        public class Product : INotifyPropertyChanged
-        {
-            private string _name;
-            private decimal _price;
-            private string _image;
-            private int _quantity;
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            public string Name
-            {
-                get => _name;
-                set { _name = value; OnPropertyChanged(nameof(Name)); }
-            }
-
-            public decimal Price
-            {
-                get => _price;
-                set { _price = value; OnPropertyChanged(nameof(Price)); }
-            }
-
-            public string Image
-            {
-                get => _image;
-                set { _image = value; OnPropertyChanged(nameof(Image)); }
-            }
-
-            public int Quantity
-            {
-                get => _quantity;
-                set { _quantity = value; OnPropertyChanged(nameof(Quantity)); }
-            }
-
-            protected void OnPropertyChanged(string propertyName) =>
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    
-
 }
