@@ -8,41 +8,15 @@
                      
              BackgroundColor="#E7E9E4" 
 FlowDirection="RightToLeft">
-    <ScrollView>
-
-        <StackLayout Padding="10">
-
-        <!-- Product List -->
-        <CollectionView ItemsSource="{Binding Products}" SelectionMode="Single"
-                        SelectionChanged="OnProductSelected">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="DarkGreen" Padding="10">
-                        <StackLayout>
-                            <Label Text="{Binding Name}" FontSize="20" TextColor="White"/>
-                            <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" TextColor="white"/>
-                            <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" TextColor="white"/>
-                               
-                            </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <Button Text="Add Product" Command="{Binding AddProductCommand}" />
-
-        <!-- Product Detail Form (Visible when Editing) -->
-        <StackLayout IsVisible="{Binding IsEditing}">
-                <Image Source="{Binding SelectedProduct.Image ,Mode=TwoWay}" HeightRequest="200"/>
-            <Button Text="Pick Image" Command="{Binding PickImageCommand}"/>
-
-                <Entry Placeholder="Name" Text="{Binding SelectedProduct.Name, Mode=TwoWay}" TextColor="White"/>
-                <Entry Placeholder="Price" Text="{Binding SelectedProduct.Price ,Mode=TwoWay}"  TextColor="White"/>
-                <Entry Placeholder="Quantity" Text="{Binding SelectedProduct.Quantity, Mode=TwoWay}"  TextColor="White"/>
-
-            <Button Text="Save Changes" Command="{Binding SaveChangesCommand}"/>
+    <ScrollView Padding="10">
+        <StackLayout>
+            <Entry x:Name="ProductName" Placeholder="Product Name" Text="{Binding Product.Name}" />
+            <Entry x:Name="ProductPrice" Placeholder="Price" Keyboard="Numeric" Text="{Binding Product.Price}" />
+            <Entry x:Name="ProductCategory" Placeholder="Category" Text="{Binding Product.Category}" />
+            <Entry x:Name="ProductWeight" Placeholder="Weight" Keyboard="Numeric" Text="{Binding Product.Weight}" />
+            <Button Text="Select Image" Command="{Binding SelectImageCommand}" />
+            <Image Source="{Binding Product.ImageUrl}" HeightRequest="200" />
+            <Button Text="Save Product" Command="{Binding SaveProductCommand}" />
         </StackLayout>
-
-    </StackLayout>
     </ScrollView>
 </ContentPage>

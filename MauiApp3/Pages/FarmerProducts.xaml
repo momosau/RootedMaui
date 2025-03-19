@@ -3,8 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp3.Pages.FarmerProducts"
               xmlns:vm="clr-namespace:MauiApp3.ModelView"
+         
              Title="FarmerProducts"
               BackgroundColor="#E7E9E4" 
  FlowDirection="RightToLeft" >
 
-   </ContentPage>
+
+
+    <StackLayout>
+        <Button Text="Add Product" Command="{Binding AddProductCommand}" />
+        <CollectionView ItemsSource="{Binding Products}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding Name}" FontSize="20" />
+                        <Label Text="{Binding Price}" />
+                        <Button Text="Edit" Command="{Binding UpdateProductCommand}" CommandParameter="{Binding}" />
+                        <Button Text="Delete" Command="{Binding DeleteProductCommand}" CommandParameter="{Binding}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
