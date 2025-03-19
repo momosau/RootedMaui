@@ -17,7 +17,7 @@ namespace MauiApp3.ModelView
          bool isBusy;
 
         [ObservableProperty]
-        string title;
+        private string title;
         public bool IsNotBusy => ! isBusy;
 
     }

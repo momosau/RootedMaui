@@ -9,12 +9,12 @@ namespace SharedLibraryy.Models;
 [Table("Cart")]
 public partial class Cart
 {
-    [Column("ConsumerID")]
-    public int ConsumerId { get; set; }
-
     [Key]
     [Column("CartID")]
     public int CartId { get; set; }
+
+    [Column("ConsumerID")]
+    public int ConsumerId { get; set; }
 
     [Column(TypeName = "decimal(18, 0)")]
     public decimal TotalPrice { get; set; }

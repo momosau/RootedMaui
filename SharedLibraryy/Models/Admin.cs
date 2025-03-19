@@ -14,20 +14,14 @@ public partial class Admin
     public int AdminId { get; set; }
 
     [StringLength(250)]
-    [Unicode(false)]
     public string Password { get; set; } = null!;
 
     [StringLength(250)]
     public string Email { get; set; } = null!;
 
     [StringLength(250)]
-    [Unicode(false)]
     public string Name { get; set; } = null!;
 
     [StringLength(250)]
-    [Unicode(false)]
     public string UserName { get; set; } = null!;
-
-    [InverseProperty("VerifiedByAdmin")]
-    public virtual ICollection<Farmer> Farmers { get; set; } = new List<Farmer>();
 }

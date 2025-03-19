@@ -1,13 +1,18 @@
 ﻿using Refit;
 using SharedLibraryy.Models;
+using SharedLibraryy.Response;
 
-namespace SharedLibraryy.Services
-{
+namespace SharedLibraryy.Services { 
     public interface  IApiServices
     {
-
+        Task<ApiResponse> AddProductAsync(Product product);
+        Task<ApiResponse> UpdateProductAsync(Product product);
+        Task<ApiResponse> DeleteProductAsync(int id);
+        Task<Product> GetProductByIdAsync(int id);
+        Task<List<Product>> GetProductsAsync();
+/*
         Task<List<Admin>> GetAdminsAsync();
         Task<Admin> GetAdminByIdAsync(int id);
-        Task<bool> CreateAdminAsync(Admin admin);
+        Task<bool> CreateAdminAsync(Admin admin);*/
     }
 }

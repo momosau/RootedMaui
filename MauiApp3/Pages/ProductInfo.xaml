@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.ProductInfo"
+             Title="ProductInfo"
+             BackgroundColor="#E7E9E4" 
+             FlowDirection="RightToLeft" 
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout>
+        <Image Aspect="Center" Source="rooted_logo.png"/>
+        <Label 
+            Text="Welcome to .NET MAUI!"
+           />
+        <HorizontalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Start">
+            <Button
+        Text="-"
+        Background="Green"
+        TextColor="White"
+        Clicked="DelButtonClicked"
+        CornerRadius="100"
+        WidthRequest="40"
+        HeightRequest="40" 
+    />
+
+            <Label x:Name="label" Text="1" TextColor="Black" 
+           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+
+            <Button
+        Text="+"
+        Background="Green"
+        TextColor="White"
+        Clicked="AddButtonClicked"
+        CornerRadius="100"
+        WidthRequest="40"
+        HeightRequest="40" 
+    />
+        </HorizontalStackLayout>
+
+
+    </VerticalStackLayout>
+</ContentPage>

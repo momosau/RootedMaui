@@ -23,8 +23,8 @@ public partial class Order
     [Column("ConsumerID")]
     public int ConsumerId { get; set; }
 
-    [Column("FarmerID")]
-    public int FarmerId { get; set; }
+    [Column("ProductID")]
+    public int ProductId { get; set; }
 
     [StringLength(250)]
     [Unicode(false)]
@@ -37,17 +37,13 @@ public partial class Order
     [Unicode(false)]
     public string ShippingAddress { get; set; } = null!;
 
+    public int? StatusShpinng { get; set; }
+
     [ForeignKey("ConsumerId")]
     [InverseProperty("Orders")]
     public virtual Consumer Consumer { get; set; } = null!;
 
-    [ForeignKey("FarmerId")]
+    [ForeignKey("ProductId")]
     [InverseProperty("Orders")]
-    public virtual Farmer Farmer { get; set; } = null!;
-
-    [InverseProperty("Order")]
-    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
-    [InverseProperty("Order")]
-    public virtual ICollection<Shipping> Shippings { get; set; } = new List<Shipping>();
+    public virtual Product Product { get; set; } = null!;
 }
