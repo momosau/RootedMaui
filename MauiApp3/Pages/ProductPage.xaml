@@ -7,9 +7,27 @@
              x:DataType="ModelView:ProductPageViewModel"
              Title="{Binding Title}"
              xmlns:Models="clr-namespace:MauiApp3.Models"
+             xmlns:models="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
              FlowDirection="RightToLeft" 
              Shell.NavBarIsVisible="False">
-
+    <ScrollView>
+        <VerticalStackLayout Spacing="10">
+           <!--category-->
+    <Grid ColumnDefinitions=".50*,.50*" RowDefinitions="*">
+                <CollectionView ItemsSource="{Binding Categories}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Category">
+                    <Frame CornerRadius="8">
+                        <VerticalStackLayout>
+                                    <Label Text="{Binding CategoryName}" FontSize="Large" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+    
+    <!--Product-->
     <Grid ColumnDefinitions=".50*,.50*" RowDefinitions="*">
         <CollectionView ItemsSource="{Binding products}">
             <CollectionView.ItemTemplate>
@@ -24,6 +42,8 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
   
     

@@ -18,14 +18,32 @@ namespace MauiApp3.ModelView
     {
         private readonly IProductService productService;
         public ObservableCollection<Productemp> products { get; set; } = new();
+        public ObservableCollection<Category> Categories { get; set; } = new();
 
         public ProductPageViewModel(IProductService productService)
         {
           
             this.productService = productService;
             Title= "المنتجات";
+            GetCategories();
             GetProduct();
+           
 
+        }
+        private async void GetCategories()
+        {
+            var categories = await productService.GetCategoriesAsync();
+            if (categories is null || categories.Count == 0)
+                return;
+            categories.Clear();
+            foreach (var category in categories)
+            { var Newcategory = new Category
+            { CategoryId = category.CategoryId,
+                CategoryName = category.CategoryName
+
+            };
+                Categories.Add(Newcategory);
+            }
         }
 
         private async void GetProduct()
@@ -50,12 +68,27 @@ namespace MauiApp3.ModelView
                     Weight = product.Weight
                 };
 
-                // Convert Base64 image to ImageSource
+                /* // Convert Base64 image to ImageSource
+                 if (!string.IsNullOrEmpty(product.ImageUrl))
+                 {
+                     var img = Convert.FromBase64String(product.ImageUrl);
+                     MemoryStream ms = new MemoryStream(img);
+                     newProduct.ImageUrl = ImageSource.FromStream(() => ms);
+                 }*/
+
+                // Load image from file path instead of Base64 conversion
                 if (!string.IsNullOrEmpty(product.ImageUrl))
                 {
-                    var img = Convert.FromBase64String(product.ImageUrl);
-                    MemoryStream ms = new MemoryStream(img);
-                    newProduct.ImageUrl = ImageSource.FromStream(() => ms);
+                    string imagePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), product.ImageUrl);
+                    if (File.Exists(imagePath))
+                    {
+                        newProduct.ImageUrl = ImageSource.FromFile(imagePath);
+                    }
+                    else
+                    {
+                        // Optional: Set a default image if file not found
+                        newProduct.ImageUrl = ImageSource.FromFile("Vegetable.png");
+                    }
                 }
 
                 products.Add(newProduct);
