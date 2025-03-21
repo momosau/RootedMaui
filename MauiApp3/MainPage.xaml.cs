@@ -14,20 +14,7 @@ namespace MauiApp3
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private async void GetDataFromApi(object sender, EventArgs e)
-        {
-
-            try
-            {
-                string apiUrl = "https://localhost:7168/api/Admins"; 
-                string response = await _httpClient.GetStringAsync(apiUrl);
-                label.Text = "API Response: " + response;
-            }
-            catch (Exception ex)
-            {
-                label.Text = "Error: " + ex.Message;
-            }
-        }
+        
         private async void FarmerClicked(object sender, EventArgs e)
         {
           

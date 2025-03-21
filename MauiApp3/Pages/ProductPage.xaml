@@ -2,49 +2,49 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp3.Pages.ProductPage"
-             BackgroundColor="#E7E9E4" 
-             xmlns:ModelView="clr-namespace:MauiApp3.ModelView"
-             x:DataType="ModelView:ProductPageViewModel"
-             Title="{Binding Title}"
              xmlns:Models="clr-namespace:MauiApp3.Models"
              xmlns:models="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
+             xmlns:ModelView="clr-namespace:MauiApp3.ModelView"
+             x:DataType="ModelView:ProductPageViewModel"
+             BackgroundColor="#E7E9E4" 
              FlowDirection="RightToLeft" 
              Shell.NavBarIsVisible="False">
+
     <ScrollView>
-        <VerticalStackLayout Spacing="10">
-           <!--category-->
-    <Grid ColumnDefinitions=".50*,.50*" RowDefinitions="*">
-                <CollectionView ItemsSource="{Binding Categories}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Category">
-                    <Frame CornerRadius="8">
-                        <VerticalStackLayout>
-                                    <Label Text="{Binding CategoryName}" FontSize="Large" HorizontalTextAlignment="Center" />
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </Grid>
-    
-    <!--Product-->
-    <Grid ColumnDefinitions=".50*,.50*" RowDefinitions="*">
-        <CollectionView ItemsSource="{Binding products}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="Models:Productemp">
-                    <Frame CornerRadius="8">
-                        <VerticalStackLayout>
-                            <Image WidthRequest="250" HeightRequest="250" Source="{Binding ImageUrl}"/>
-                            <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" />
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </Grid>
+        <VerticalStackLayout>
+            <!-- Category Section -->
+            <CollectionView ItemsSource="{Binding Categories}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Category">
+                        <Frame CornerRadius="8" Padding="10">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding CategoryName}" FontSize="Large" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Product Section -->
+            <CollectionView ItemsSource="{Binding products}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="Models:Productemp">
+                        <Frame CornerRadius="8" Padding="10">
+                            <VerticalStackLayout>
+                                <Image WidthRequest="250" HeightRequest="250" Source="{Binding ImageUrl}" />
+                                <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
-  
-    
-   

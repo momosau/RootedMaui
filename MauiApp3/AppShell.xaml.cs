@@ -33,7 +33,7 @@ namespace MauiApp3
             Routing.RegisterRoute("SplashFarmerFinal", typeof(SplashFarmerFinal));
             Routing.RegisterRoute("VerificationCodePage", typeof(VerificationCodePage));
             Routing.RegisterRoute("ProductPage", typeof(ProductPage));
-            
+            Routing.RegisterRoute("CategoriesPage", typeof(CategoriesPage));
 
 
 
