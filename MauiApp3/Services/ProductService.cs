@@ -25,6 +25,13 @@ namespace MauiApp3.Services
             return response;
         }
 
+        public async Task<List<Farmer>> GetFarmersAsync()
+        {
+            var Farmers = await httpClient.GetAsync("https://localhost:7168/api/Farmers");
+            var response = await Farmers.Content.ReadFromJsonAsync<List<Farmer>>();
+            return response;
+        }
+
         public async Task<List<Product>> GetProductAsync()
         {
             var products = await httpClient.GetAsync("https://localhost:7168/api/Products");

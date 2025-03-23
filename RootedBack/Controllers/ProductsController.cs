@@ -31,7 +31,7 @@ namespace RootedBack.Controllers
         public async Task<ActionResult<Product>> GetProductByIdAsync(int id) { 
             var products = await apiServices.GetProductByIdAsync(id);
             if(products is null)
-                return NotFound("Prosuct not found");
+                return NotFound("Product not found");
             else
                 return Ok(products);
         }

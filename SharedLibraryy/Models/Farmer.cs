@@ -12,6 +12,8 @@ public partial class Farmer
     [Key]
     [Column("FarmerID")]
     public int FarmerId { get; set; }
+    [StringLength(250)]
+    public string FarmName { get; set; } = null!;
 
     [StringLength(250)]
     public string Description { get; set; } = null!;

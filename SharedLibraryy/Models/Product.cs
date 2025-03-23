@@ -17,13 +17,15 @@ public partial class Product
     [Unicode(false)]
     public string Name { get; set; } = null!;
 
-    public double Weight { get; set; }
+    public double Weight { get; set; } 
+    public string unit { get; set; } = null!;
 
     [StringLength(250)]
     [Unicode(false)]
     public string Category { get; set; } = null!;
 
     public int Quantity { get; set; }
+  
 
     [StringLength(250)]
     [Unicode(false)]
