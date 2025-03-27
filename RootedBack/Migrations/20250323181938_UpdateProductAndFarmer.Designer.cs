@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RootedBack.Data;
 
@@ -11,9 +12,11 @@ using RootedBack.Data;
 namespace RootedBack.Migrations
 {
     [DbContext(typeof(RootedDBContext))]
-    partial class RootedDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250323181938_UpdateProductAndFarmer")]
+    partial class UpdateProductAndFarmer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -352,10 +355,6 @@ namespace RootedBack.Migrations
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
-
-                    b.Property<string>("FarmName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FarmerId")
                         .HasColumnType("int")

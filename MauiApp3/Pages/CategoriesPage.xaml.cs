@@ -5,47 +5,56 @@ namespace MauiApp3.Pages;
 
 public partial class CategoriesPage : ContentPage
 {
-	public CategoriesPage()
-	{
-		InitializeComponent();
+    public CategoriesPage()
+    {
+        InitializeComponent();
         BindingContext = this;
     }
 
 
-        private readonly HttpClient _httpClient = new HttpClient();
-        private const string ApiUrl = "https://localhost:7168/api/Categories"; //  √ﬂœ „‰ ’Õ… «·⁄‰Ê«‰
+    private readonly HttpClient _httpClient = new HttpClient();
+    private const string ApiUrl = "https://localhost:7168/api/Categories"; //  √ﬂœ „‰ ’Õ… «·⁄‰Ê«‰
 
-        public ObservableCollection<Categooo> Categories { get; set; } = new ObservableCollection<Categooo>();
+    public ObservableCollection<Categooo> Categories { get; set; } = new ObservableCollection<Categooo>();
 
 
-        protected override async void OnAppearing()
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await LoadCategories();
+    }
+
+    private async Task LoadCategories()
+    {
+        try
         {
-            base.OnAppearing();
-            await LoadCategories();
-        }
+            var response = await _httpClient.GetStringAsync(ApiUrl);
+            var categories = JsonConvert.DeserializeObject<List<Categooo>>(response);
 
-        private async Task LoadCategories()
-        {
-            try
+            if (categories != null)
             {
-                var response = await _httpClient.GetStringAsync(ApiUrl);
-                var categories = JsonConvert.DeserializeObject<List<Categooo>>(response);
-
-                if (categories != null)
+                Categories.Clear();
+                foreach (var category in categories)
                 {
-                    Categories.Clear();
-                    foreach (var category in categories)
-                    {
-                        Categories.Add(category);
-                    }
+                    Categories.Add(category);
                 }
             }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Œÿ√", "›‘· ›Ì  Õ„Ì· «·»Ì«‰« : " + ex.Message, "„Ê«›ﬁ");
-            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Œÿ√", "›‘· ›Ì  Õ„Ì· «·»Ì«‰« : " + ex.Message, "„Ê«›ﬁ");
+        }
+
+    }
+    private async void OnCategorySelected(object sender, EventArgs e)
+    {
+        if (sender is Button button)
+        {
+            string selectedCategory = button.Text;
+            await Navigation.PushAsync(new ProductPage(selectedCategory));
         }
     }
+}
 
     public class Categooo
     {

@@ -13,8 +13,13 @@
             <GridItemsLayout Orientation="Vertical" Span="2"/>
             <!-- 3 بطاقات في كل صف -->
         </CollectionView.ItemsLayout>
-
+        
+       
+        
         <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Button Text="{Binding}" Clicked="OnCategorySelected"/>
+            </DataTemplate>
             <DataTemplate>
                 <Frame Padding="10" Margin="10,12" CornerRadius="15" BackgroundColor="White"
                  HasShadow="True"

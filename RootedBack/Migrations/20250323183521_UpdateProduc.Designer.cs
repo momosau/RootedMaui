@@ -12,8 +12,8 @@ using RootedBack.Data;
 namespace RootedBack.Migrations
 {
     [DbContext(typeof(RootedDBContext))]
-    [Migration("20250323161248_UpdateProductAndFarmer")]
-    partial class UpdateProductAndFarmer
+    [Migration("20250323183521_UpdateProduc")]
+    partial class UpdateProduc
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
