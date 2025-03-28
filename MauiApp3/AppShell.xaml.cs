@@ -39,6 +39,8 @@ namespace MauiApp3
             Routing.RegisterRoute("ShoppingCart", typeof(ShoppingCart));
 
 
+            Routing.RegisterRoute("ProductPage", typeof(ProductPage));
+            Routing.RegisterRoute("CategoriesPage", typeof(CategoriesPage));
 
 
 
