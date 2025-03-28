@@ -41,8 +41,9 @@ After:
         if (CashRadioButton.IsChecked)
         {
             // Navigate to the normal confirmation page
-        
+
             await Shell.Current.GoToAsync("LocationPage");
         }
+        else { await Shell.Current.GoToAsync("Payment"); }
     }
 }

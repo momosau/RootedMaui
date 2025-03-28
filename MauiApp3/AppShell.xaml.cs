@@ -32,8 +32,13 @@ namespace MauiApp3
             Routing.RegisterRoute("SplashConsumer", typeof(SplashConsumer));
             Routing.RegisterRoute("SplashFarmerFinal", typeof(SplashFarmerFinal));
             Routing.RegisterRoute("VerificationCodePage", typeof(VerificationCodePage));
-            Routing.RegisterRoute("ProductPage", typeof(ProductPage));
-            
+            Routing.RegisterRoute("ProductPage", typeof(ProductPage)); 
+                  Routing.RegisterRoute("MyLocationPage", typeof(MyLocationPage));
+            Routing.RegisterRoute("Payment", typeof(Payment));
+            Routing.RegisterRoute("DeliveryPage", typeof(DeliveryPage));
+            Routing.RegisterRoute("ShoppingCart", typeof(ShoppingCart));
+
+
 
 
 
