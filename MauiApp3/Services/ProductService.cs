@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -13,28 +14,28 @@ namespace MauiApp3.Services
 {
     public class ProductService : IProductService
     {
-        private readonly HttpClient httpClient;
+        private readonly HttpClient _httpClient;
         public ProductService(HttpClient httpClient)
         {
-            this.httpClient = httpClient;
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
         public async Task<List<Category>> GetCategoriesAsync()
         {
-            var categories = await httpClient.GetAsync("https://localhost:7168/api/Products/Categories");
+            var categories = await _httpClient.GetAsync("https://localhost:7168/api/Products/Categories");
             var response = await categories.Content.ReadFromJsonAsync<List<Category>>();
             return response;
         }
 
         public async Task<List<Farmer>> GetFarmersAsync()
         {
-            var Farmers = await httpClient.GetAsync("https://localhost:7168/api/Farmers");
+            var Farmers = await _httpClient.GetAsync("https://localhost:7168/api/Farmers");
             var response = await Farmers.Content.ReadFromJsonAsync<List<Farmer>>();
             return response;
         }
 
         public async Task<List<Product>> GetProductAsync()
         {
-            var products = await httpClient.GetAsync("https://localhost:7168/api/Products");
+            var products = await _httpClient.GetAsync("https://localhost:7168/api/Products");
             var response = await products.Content.ReadFromJsonAsync<List<Product>>();
             return response;
 

@@ -3,40 +3,64 @@ using SharedLibraryy.Models;
 using MauiApp3.Services;
 using System.ComponentModel;
 using System.Globalization;
+using System.Windows.Input;
+using MauiApp3.Pages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace MauiApp3.ModelView
 {
-    public partial class ProductPageViewModel : BaseViewModel
+    public partial class ProductPageViewModel : INotifyPropertyChanged
+
     {
         private readonly IProductService productService;
+
+        private readonly INavigation _navigation;
         public ObservableCollection<Product> products { get; set; } = new();
         public ObservableCollection<Category> Categories { get; set; } = new();
+        public ObservableCollection<Product> FilteredProducts { get; set; } = new ObservableCollection<Product>();
+
+        public Command<int> ChangeCategoryCommand { get; }
+        public ICommand ChangeFarmerCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public ProductPageViewModel(IProductService productService)
+        public ProductPageViewModel(int selectedCategoryId, IProductService productService, INavigation navigation)
         {
-
             this.productService = productService;
-            Title = "المنتجات";
+            _navigation = navigation;
+
+            SelectedCategoryId = selectedCategoryId;
+            ChangeCategoryCommand = new Command<int>(categoryId => SetCategory(categoryId));
+            ChangeFarmerCommand = new Command<int>(farmId => SelectedFarmerId = farmId);
+            ViewProductCommand = new Command<Product>(OnProductSelected);  
+
             GetCategories();
             GetProduct();
-
-
+            FilterProducts();
         }
+
+        private void SetCategory(int categoryId)
+        {
+            if (_selectedCategoryId == categoryId) return; 
+
+            _selectedCategoryId = categoryId;
+            OnPropertyChanged(nameof(SelectedCategoryId)); 
+
+            FilterProducts();
+        }
+
         private async void GetCategories()
         {
             var categories = await productService.GetCategoriesAsync();
             if (categories is null || categories.Count == 0)
                 return;
-            categories.Clear();
+
             foreach (var category in categories)
             {
-                var Newcategory = new Category
+                var newCategory = new Category
                 {
                     CategoryId = category.CategoryId,
                     CategoryName = category.CategoryName
-
                 };
-                Categories.Add(Newcategory);
+                Categories.Add(newCategory);  
             }
         }
 
@@ -45,8 +69,6 @@ namespace MauiApp3.ModelView
             var productList = await productService.GetProductAsync();
             if (productList is null || productList.Count == 0)
                 return;
-
-            products.Clear();
 
             foreach (var product in productList)
             {
@@ -60,42 +82,72 @@ namespace MauiApp3.ModelView
                     CategoryId = product.CategoryId,
                     Quantity = product.Quantity,
                     Weight = product.Weight,
-                    ImageUrl= product.ImageUrl,
-                  //  FarmName = product.FarmName
+                    ImageUrl = product.ImageUrl,
+                    Unit = product.Unit
                 };
 
-                products.Add(newProduct);
+                products.Add(newProduct);  
             }
         }
 
-        private string _selectedCategory;
-        public string SelectedCategory
+
+        private int _selectedCategoryId;
+        public int SelectedCategoryId
         {
-            get => _selectedCategory;
+            get => _selectedCategoryId;
             set
             {
-                if (_selectedCategory != value)
+                _selectedCategoryId = value;
+                OnPropertyChanged(nameof(SelectedCategoryId));
+            }
+        }
+
+      
+
+        public ProductPageViewModel()
+        {
+            ChangeCategoryCommand = new Command<int>(OnCategoryChanged);
+        }
+
+        private void OnCategoryChanged(int categoryId)
+        {
+            SelectedCategoryId = categoryId; 
+            FilterProducts();
+        }
+
+        private int _selectedFarmerId;
+        public int SelectedFarmerId
+        {
+            get => _selectedFarmerId;
+            set
+            {
+                if (_selectedFarmerId != value)
                 {
-                    _selectedCategory = value;
+                    _selectedFarmerId = value;
                     FilterProducts();
-                    OnPropertyChanged(nameof(SelectedCategory));
+                    OnPropertyChanged(nameof(SelectedFarmerId));
                     OnPropertyChanged(nameof(FilteredProducts));
                 }
             }
         }
 
-        public List<Product> FilteredProducts { get; set; }
-
-        public ProductPageViewModel(string selectedCategory)
-        {
-            SelectedCategory = selectedCategory;
-            FilterProducts();
-        }
-
         private void FilterProducts()
         {
-            FilteredProducts = products.Where(p => p.Category == SelectedCategory).ToList();
+            FilteredProducts.Clear();
+
+            var filtered = products
+                .Where(p => p.CategoryId == SelectedCategoryId &&
+                            (SelectedFarmerId == 0 || p.FarmerId == SelectedFarmerId))
+                .ToList();
+
+            foreach (var product in filtered)
+            {
+                FilteredProducts.Add(product);
+            }
+
+            OnPropertyChanged(nameof(FilteredProducts));  
         }
+
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -103,19 +155,22 @@ namespace MauiApp3.ModelView
         }
 
 
+        public Command<Product> ViewProductCommand { get; }
 
-    }
-    public class CategoryToColorConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+
+
+        private async void OnProductSelected(Product product)
         {
-            if (value is string category && parameter is string selectedCategory)
+            if (product == null)
             {
-                return category == selectedCategory ? Colors.Green : Colors.White;
+                Console.WriteLine("Error: Selected product is null");
+                return;
             }
-            return Colors.White;
+            await _navigation.PushAsync(new ProductInfo(product));
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+
+
     }
+
 }

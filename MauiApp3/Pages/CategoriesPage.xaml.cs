@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using MauiApp3.Pages;
 
 namespace MauiApp3.Pages;
 
@@ -13,7 +14,7 @@ public partial class CategoriesPage : ContentPage
 
 
     private readonly HttpClient _httpClient = new HttpClient();
-    private const string ApiUrl = "https://localhost:7168/api/Categories"; //  √ﬂœ „‰ ’Õ… «·⁄‰Ê«‰
+    private const string ApiUrl = "https://localhost:7168/api/Categories"; 
 
     public ObservableCollection<Categooo> Categories { get; set; } = new ObservableCollection<Categooo>();
 
@@ -48,15 +49,15 @@ public partial class CategoriesPage : ContentPage
     }
     private async void OnCategorySelected(object sender, EventArgs e)
     {
-        if (sender is Button button)
+        if (sender is Button button && button.CommandParameter is int categoryId)
         {
-            string selectedCategory = button.Text;
-            await Navigation.PushAsync(new ProductPage(selectedCategory));
+            await Navigation.PushAsync(new ProductPage(categoryId, Navigation));
         }
     }
+
 }
 
-    public class Categooo
+public class Categooo
     {
         public int categoryId { get; set; }
         public string categoryName { get; set; }

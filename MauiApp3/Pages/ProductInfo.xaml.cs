@@ -1,12 +1,16 @@
+using MauiApp3.ModelView;
+using SharedLibraryy.Models;
 
 namespace MauiApp3.Pages;
 
 public partial class ProductInfo : ContentPage
 {
-    public ProductInfo()
+    public ProductInfo(Product selectedProduct)
     {
         InitializeComponent();
+        BindingContext = new ProductInfoVIewModel(selectedProduct);
     }
+   
     public int count = 1;
 
     private string GetCount()

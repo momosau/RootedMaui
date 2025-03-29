@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using MauiApp3.Pages;
 using SharedLibraryy.Models;
+using MauiApp3.Services;
 
 
 
@@ -11,12 +12,12 @@ namespace MauiApp3.Pages
 
     public partial class ProductPage : ContentPage
     {
-        public ProductPage(string selectedCategory)
+        public ProductPage(int selectedCategoryId, INavigation navigation)
         {
             InitializeComponent();
-            BindingContext = new ProductPageViewModel(selectedCategory);
+            var httpClient = new HttpClient(); 
+            BindingContext = new ProductPageViewModel(selectedCategoryId, new ProductService(httpClient), navigation);
         }
-
     }
 }
 	
