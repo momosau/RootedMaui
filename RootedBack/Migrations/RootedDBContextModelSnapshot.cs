@@ -242,8 +242,12 @@ namespace RootedBack.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasDefaultValue("Pending");
 
-                    b.HasKey("FarmerId")
-                        .HasName("PK__Farmer__731B88E8B91603B4");
+                    b.Property<int>("VerifiedByAdminId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FarmerId");
+
+                    b.HasIndex("VerifiedByAdminId");
 
                     b.ToTable("Farmer");
                 });
@@ -326,8 +330,9 @@ namespace RootedBack.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
-                    b.HasKey("PaymentId")
-                        .HasName("PK__Payment__9B556A58EA1E90FD");
+                    b.HasKey("PaymentId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Payment");
                 });
