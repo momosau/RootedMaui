@@ -14,7 +14,7 @@ namespace MauiApp3.Services
     public class ProductService1
     {
         private readonly HttpClient _httpClient;
-        private const string ApiUrl = "https://localhost:7168/api/Products"; // Replace with your actual API URL
+private const string ApiUrl = "https://localhost:7168/api/Products"; // Replace with your actual API URL
     
         public ProductService1()
         {
