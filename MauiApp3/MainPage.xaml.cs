@@ -28,7 +28,7 @@ namespace MauiApp3
         private async void Consumerclicked(object sender, EventArgs e)
         {
 
-            await Shell.Current.GoToAsync("ProductPage");
+            await Shell.Current.GoToAsync("CategoriesPage");
            
 
         }
