@@ -1,31 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace   SharedLibraryy.Models;
+namespace SharedLibraryy.Models;
 
-[Table("Review")]
 public partial class Review
 {
-    [Column("ConsumerID")]
-    public int ConsumerId { get; set; }
-
-    [Column("ProductID")]
-    public int ProductId { get; set; }
-
-    [Column(TypeName = "decimal(18, 0)")]
-    public decimal Rating { get; set; }
-
-    [StringLength(50)]
-    public string Comment { get; set; } = null!;
-
-    [Key]
-    [Column("ReviewID")]
     public int ReviewId { get; set; }
 
-    [ForeignKey("ConsumerId")]
-    [InverseProperty("Reviews")]
+    public int ConsumerId { get; set; }
+
+    public int ProductId { get; set; }
+
+    public decimal Rating { get; set; }
+
+    public string Comment { get; set; } = null!;
+
     public virtual Consumer Consumer { get; set; } = null!;
+
+    public virtual Product Product { get; set; } = null!;
 }

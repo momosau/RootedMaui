@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RootedBack.Data;
 
@@ -11,9 +12,11 @@ using RootedBack.Data;
 namespace RootedBack.Migrations
 {
     [DbContext(typeof(RootedDBContext))]
-    partial class RootedDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250323183521_UpdateProduc")]
+    partial class UpdateProduc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,12 +245,8 @@ namespace RootedBack.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasDefaultValue("Pending");
 
-                    b.Property<int>("VerifiedByAdminId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FarmerId");
-
-                    b.HasIndex("VerifiedByAdminId");
+                    b.HasKey("FarmerId")
+                        .HasName("PK__Farmer__731B88E8B91603B4");
 
                     b.ToTable("Farmer");
                 });
@@ -330,9 +329,8 @@ namespace RootedBack.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
-                    b.HasKey("PaymentId");
-
-                    b.HasIndex("OrderId");
+                    b.HasKey("PaymentId")
+                        .HasName("PK__Payment__9B556A58EA1E90FD");
 
                     b.ToTable("Payment");
                 });
@@ -357,10 +355,6 @@ namespace RootedBack.Migrations
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
-
-                    b.Property<string>("FarmName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FarmerId")
                         .HasColumnType("int")

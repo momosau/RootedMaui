@@ -2,49 +2,76 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp3.Pages.ProductPage"
-             xmlns:Models="clr-namespace:MauiApp3.Models"
-             xmlns:models="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
+             x:Name="ProductPageView"
+             xmlns:local="clr-namespace:MauiApp3.Converter"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:Models="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
              xmlns:ModelView="clr-namespace:MauiApp3.ModelView"
              x:DataType="ModelView:ProductPageViewModel"
+             Title="المنتجات"
              BackgroundColor="#E7E9E4" 
              FlowDirection="RightToLeft" 
-             Shell.NavBarIsVisible="False">
+             Shell.NavBarIsVisible="False"
+             >
+    <ContentPage.Resources>
+            <ResourceDictionary>
+                <local:CategoryToColorConverter x:Key="CategoryToColorConverter"/>
+            </ResourceDictionary>
+        </ContentPage.Resources>
 
-    <ScrollView>
-        <VerticalStackLayout>
-            <!-- Category Section -->
-            <CollectionView ItemsSource="{Binding Categories}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal" Span="2"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Category">
-                        <Frame CornerRadius="8" Padding="10">
-                            <VerticalStackLayout>
-                                <Label Text="{Binding CategoryName}" FontSize="Large" HorizontalTextAlignment="Center" />
+        <ScrollView>
+            <VerticalStackLayout>
+                <!-- Category CollectionView -->
+                <CollectionView ItemsSource="{Binding Categories}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Horizontal" Span="2"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="Models:Category">
+                        <Button Text="{Binding CategoryName}" 
+                            Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ChangeCategoryCommand}"
+                            CommandParameter="{Binding CategoryId}"
+                            BackgroundColor="{Binding CategoryId, 
+                                             Converter={StaticResource CategoryToColorConverter}, 
+                                             ConverterParameter={Binding Source={x:Reference ProductPageView}, Path=BindingContext.SelectedCategoryId}}"/>
+                    </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Product CollectionView -->
+                <CollectionView ItemsSource="{Binding FilteredProducts}" BackgroundColor="White">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="Models:Product">
+                        <Frame CornerRadius="12" Padding="15" Margin="10" BackgroundColor="White">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ViewProductCommand}"
+                              CommandParameter="{Binding}"/>
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout Spacing="10">
+                                <Image WidthRequest="250" HeightRequest="250" Source="{Binding ImageUrl}" 
+               Aspect="AspectFill" HorizontalOptions="Center" BackgroundColor="LightGray"/>
+                                <HorizontalStackLayout Spacing="5" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Name}" FontSize="Medium" TextColor="Black"/>
+                                    <Label Text="{Binding Weight}" FontSize="20" TextColor="#34495e"/>
+                                    <Label Text="{Binding Unit}" FontSize="20" TextColor="#34495e"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="300" VerticalOptions="Center" HorizontalOptions="Start">
+                                    <VerticalStackLayout>
+                                    <Label Text="{Binding Price, StringFormat='{0} ريال'}" FontSize="22" 
+                   HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Farmer.FarmName}" FontSize="20" TextColor="#34495e"/>
+                                    </VerticalStackLayout>
+                                    <Button Text="+" Background="#5E9C24" TextColor="white" CornerRadius="200" FontSize="30" 
+                    WidthRequest="25" HeightRequest="20" FontAttributes="Bold"/>
+                                </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <!-- Product Section -->
-            <CollectionView ItemsSource="{Binding products}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="2"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="Models:Productemp">
-                        <Frame CornerRadius="8" Padding="10">
-                            <VerticalStackLayout>
-                                <Image WidthRequest="250" HeightRequest="250" Source="{Binding ImageUrl}" />
-                                <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-        </VerticalStackLayout>
-    </ScrollView>
-</ContentPage>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage>
