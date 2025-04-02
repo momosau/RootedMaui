@@ -9,38 +9,44 @@
              FlowDirection="RightToLeft" 
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout>
-        
-        <Image Source="{Binding SelectedProduct.ImageUrl}"/>
-    <Label Text="{Binding SelectedProduct.Name}" FontSize="Large" TextColor="Black"/>
-    <Label Text="{Binding SelectedProduct.Weight}" FontSize="Medium" TextColor="Black"/>
-    <Label Text="{Binding SelectedProduct.Unit}" FontSize="Medium" TextColor="Black"/>
-    <Label Text="{Binding SelectedProduct.Price, StringFormat='{0} ريال'}" FontSize="Large" TextColor="Black"/>
-            
-        
+        <VerticalStackLayout Padding="10">
 
-        <HorizontalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Start">
-        <Button
-        Text="-"
-        Background="White"
-        TextColor="Green"
-        Clicked="DelButtonClicked"
-        CornerRadius="100"
-        WidthRequest="40"
-        HeightRequest="40" 
-    />
+            <!-- Product Details -->
+            <Frame Background="White">
+                <VerticalStackLayout>
+                    <Image Source="{Binding SelectedProduct.ImageUrl}" WidthRequest="250" HeightRequest="250" Background="White"/>
+                    <Label Text="{Binding SelectedProduct.Name}" FontSize="Large" TextColor="Black"/>
+                <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black"/>
+                <HorizontalStackLayout>
+                    <Label Text="زيارة" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="End">
+                    <Label Text="{Binding SelectedProduct.Weight}" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="{Binding SelectedProduct.Unit}" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="/" TextColor="Black" FontSize="Medium"></Label>
+                   <Label Text="{Binding SelectedProduct.Price, StringFormat='{0} ريال'}" FontSize="Medium" TextColor="Black"/>
+                </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
 
-        <Label x:Name="label" Text="{Binding SelectedProduct.Quantity}" TextColor="Black" 
-           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+            <!-- Quantity Control -->
+        <HorizontalStackLayout>
+        <HorizontalStackLayout  VerticalOptions="Center" HorizontalOptions="Start" >
+                <Button Text="-" Background="White" TextColor="Green"
+                    Clicked="DelButtonClicked"
+                    CornerRadius="10" WidthRequest="40" HeightRequest="40"/>
 
-        <Button
-        Text="+"
-      Background="White"
-   TextColor="Green"
-        Clicked="AddButtonClicked"
-        CornerRadius="100"
-        WidthRequest="40"
-        HeightRequest="40" />
-    </HorizontalStackLayout>
+                <Label x:Name="label" Text="{Binding SelectedProduct.Quantity}" 
+                   TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" BackgroundColor="White"/>
+
+                <Button Text="+" Background="White" TextColor="Green"
+                    Clicked="AddButtonClicked"
+                    CornerRadius="10" WidthRequest="40" HeightRequest="40"/>
+            </HorizontalStackLayout>
+            <Button Text="اضف بالسلة" Background="Green" TextColor="White" ></Button>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
-</ContentPage>
+
+    </ContentPage>
+

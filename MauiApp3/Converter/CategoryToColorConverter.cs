@@ -5,6 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MauiApp3.ModelView;
+using MauiApp3.Pages;
 
 namespace MauiApp3.Converter
 {
@@ -13,24 +15,31 @@ namespace MauiApp3.Converter
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || parameter == null)
-                return Colors.White;
+            if (value is int categoryId)
+            {
+                var categoriesPage = Application.Current.MainPage.Navigation.NavigationStack
+                    .OfType<CategoriesPage>().FirstOrDefault();
 
-            // Safely convert value to int
-            if (!int.TryParse(value.ToString(), out int categoryId))
-                return Colors.White;
+                if (categoriesPage == null)
+                {
+                    Console.WriteLine("Converter: CategoriesPage not found");
+                    return Colors.White;
+                }
 
-            // Safely convert parameter to int
-            if (!int.TryParse(parameter.ToString(), out int selectedCategoryId))
-                return Colors.White;
+                Console.WriteLine($"Converter: CategoryId={categoryId}, SelectedCategoryId={categoriesPage.SelectedCategoryId}");
 
-            return categoryId == selectedCategoryId ? Colors.Green : Colors.White;
+                return categoryId == categoriesPage.SelectedCategoryId ? Colors.DarkGreen : Colors.White;
+            }
+
+            return Colors.White;
         }
 
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return null;
-            }
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+
+    

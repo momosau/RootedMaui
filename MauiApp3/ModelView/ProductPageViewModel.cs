@@ -19,7 +19,7 @@ namespace MauiApp3.ModelView
         public ObservableCollection<Product> FilteredProducts { get; set; } = new ObservableCollection<Product>();
 
         public Command<int> ChangeCategoryCommand { get; }
-        public ICommand ChangeFarmerCommand { get; }
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         public ProductPageViewModel(int selectedCategoryId, IProductService productService, INavigation navigation)
@@ -27,25 +27,29 @@ namespace MauiApp3.ModelView
             this.productService = productService;
             _navigation = navigation;
 
-            SelectedCategoryId = selectedCategoryId;
-            ChangeCategoryCommand = new Command<int>(categoryId => SetCategory(categoryId));
-            ChangeFarmerCommand = new Command<int>(farmId => SelectedFarmerId = farmId);
-            ViewProductCommand = new Command<Product>(OnProductSelected);  
+            SelectedCategoryId = selectedCategoryId;  
+            FilterProducts(); 
 
-            GetCategories();
-            GetProduct();
-            FilterProducts();
+            ChangeCategoryCommand = new Command<int>(categoryId => SetCategory(categoryId));
+            ViewProductCommand = new Command<Product>(OnProductSelected);
+
+            GetCategories(); 
+            GetProduct();     
         }
+
+
 
         private void SetCategory(int categoryId)
         {
-            if (_selectedCategoryId == categoryId) return; 
+            if (_selectedCategoryId == categoryId) return;
 
             _selectedCategoryId = categoryId;
-            OnPropertyChanged(nameof(SelectedCategoryId)); 
+            OnPropertyChanged(nameof(SelectedCategoryId));
 
             FilterProducts();
         }
+
+
 
         private async void GetCategories()
         {
@@ -66,29 +70,39 @@ namespace MauiApp3.ModelView
 
         private async void GetProduct()
         {
+          
             var productList = await productService.GetProductAsync();
+            var farmersList = await productService.GetFarmersAsync(); // Fetch all farmers
+
             if (productList is null || productList.Count == 0)
                 return;
 
+            products.Clear();
             foreach (var product in productList)
             {
-                var newProduct = new Product
+                // Find the farmer for this product
+                var farmer = farmersList.FirstOrDefault(f => f.FarmerId == product.FarmerId);
+
+                products.Add(new Product
                 {
                     ProductId = product.ProductId,
                     Name = product.Name,
                     Description = product.Description,
                     Price = product.Price,
                     FarmerId = product.FarmerId,
+                    Farmer = farmer, // Assign the farmer manually
                     CategoryId = product.CategoryId,
                     Quantity = product.Quantity,
                     Weight = product.Weight,
                     ImageUrl = product.ImageUrl,
                     Unit = product.Unit
-                };
-
-                products.Add(newProduct);  
+                });
             }
+
+            FilterProducts();
         }
+
+        
 
 
         private int _selectedCategoryId;
@@ -133,13 +147,14 @@ namespace MauiApp3.ModelView
 
         private void FilterProducts()
         {
-            FilteredProducts.Clear();
+            if (products == null) return;
 
             var filtered = products
                 .Where(p => p.CategoryId == SelectedCategoryId &&
                             (SelectedFarmerId == 0 || p.FarmerId == SelectedFarmerId))
                 .ToList();
 
+            FilteredProducts.Clear();
             foreach (var product in filtered)
             {
                 FilteredProducts.Add(product);
@@ -147,6 +162,7 @@ namespace MauiApp3.ModelView
 
             OnPropertyChanged(nameof(FilteredProducts));  
         }
+
 
 
         protected void OnPropertyChanged(string propertyName)
@@ -166,7 +182,7 @@ namespace MauiApp3.ModelView
                 Console.WriteLine("Error: Selected product is null");
                 return;
             }
-            await _navigation.PushAsync(new ProductInfo(product));
+            await _navigation.PushAsync(new ProductInfo(product,productService));
         }
 
 

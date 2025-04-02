@@ -28,13 +28,12 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="Models:Category">
-                        <Button Text="{Binding CategoryName}"
-        Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ChangeCategoryCommand}"
-        CommandParameter="{Binding CategoryId}"
-        BackgroundColor="{Binding CategoryId, 
-                          Converter={StaticResource CategoryToColorConverter}, 
-                          ConverterParameter={Binding Source={x:Reference ProductPageView}, Path=BindingContext.SelectedCategoryId}}"/>
-
+                        <Button Text="{Binding CategoryName}" 
+                            Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ChangeCategoryCommand}"
+                            CommandParameter="{Binding CategoryId}"
+                            BackgroundColor="{Binding CategoryId, 
+                                             Converter={StaticResource CategoryToColorConverter}, 
+                                             ConverterParameter={Binding Source={x:Reference ProductPageView}, Path=BindingContext.SelectedCategoryId}}"/>
                     </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -63,7 +62,7 @@
                                     <VerticalStackLayout>
                                     <Label Text="{Binding Price, StringFormat='{0} ريال'}" FontSize="22" 
                    HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
-                                    <Label Text="name" FontSize="20" TextColor="#34495e"/>
+                                    <Label Text="{Binding Farmer.FarmName}" FontSize="20" TextColor="#34495e"/>
                                     </VerticalStackLayout>
                                     <Button Text="+" Background="#5E9C24" TextColor="white" CornerRadius="200" FontSize="30" 
                     WidthRequest="25" HeightRequest="20" FontAttributes="Bold"/>

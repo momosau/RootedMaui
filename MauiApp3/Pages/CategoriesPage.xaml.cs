@@ -1,16 +1,46 @@
-using Newtonsoft.Json;
+Ôªøusing Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using MauiApp3.Pages;
+using MauiApp3.ModelView;
+using System.ComponentModel;
 
 namespace MauiApp3.Pages;
 
 public partial class CategoriesPage : ContentPage
 {
+    private int _selectedCategoryId;
+
+    public int SelectedCategoryId
+    {
+        get => _selectedCategoryId;
+        set
+        {
+            if (_selectedCategoryId != value)
+            {
+                _selectedCategoryId = value;
+                OnPropertyChanged(nameof(SelectedCategoryId));  
+            }
+        }
+    }
+
     public CategoriesPage()
     {
         InitializeComponent();
-        BindingContext = this;
+        BindingContext = this; 
     }
+
+    private async void OnCategoryTapped(object sender, TappedEventArgs e)
+    {
+        if (e.Parameter is int categoryId)
+        {
+            // Set the SelectedCategoryId when a category is tapped
+            SelectedCategoryId = categoryId;
+
+            // Navigate to the ProductPage
+            await Navigation.PushAsync(new ProductPage(categoryId, Navigation));
+        }
+    }
+
 
 
     private readonly HttpClient _httpClient = new HttpClient();
@@ -43,19 +73,15 @@ public partial class CategoriesPage : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Œÿ√", "›‘· ›Ì  Õ„Ì· «·»Ì«‰« : " + ex.Message, "„Ê«›ﬁ");
+            await DisplayAlert("√é√ò√É", "√ù√î√° √ù√≠ √ä√ç√£√≠√° √á√°√à√≠√á√§√á√ä: " + ex.Message, "√£√¶√á√ù√û");
         }
 
     }
-    private async void OnCategorySelected(object sender, EventArgs e)
-    {
-        if (sender is Button button && button.CommandParameter is int categoryId)
-        {
-            await Navigation.PushAsync(new ProductPage(categoryId, Navigation));
-        }
-    }
-
+   
 }
+
+
+
 
 public class Categooo
     {
