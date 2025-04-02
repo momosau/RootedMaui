@@ -28,6 +28,7 @@ namespace MauiApp3
                 })
                   .UseMauiCommunityToolkit();
 
+
             builder.Services.AddSingleton<ProductPageViewModel>();
             builder.Services.AddSingleton<ProductPage>();
             builder.Services.AddHttpClient<IProductService, ProductService>();

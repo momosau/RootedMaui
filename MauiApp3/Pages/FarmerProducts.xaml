@@ -9,18 +9,39 @@
  FlowDirection="RightToLeft" >
 
 
-
-    <StackLayout>
+    <StackLayout Padding="10">
         <Button Text="Add Product" Command="{Binding AddProductCommand}" />
-        <CollectionView ItemsSource="{Binding Products}">
+
+        <CollectionView ItemsSource="{Binding Products}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10">
-                        <Label Text="{Binding Name}" FontSize="20" />
-                        <Label Text="{Binding Price}" />
-                        <Button Text="Edit" Command="{Binding UpdateProductCommand}" CommandParameter="{Binding}" />
-                        <Button Text="Delete" Command="{Binding DeleteProductCommand}" CommandParameter="{Binding}" />
-                    </StackLayout>
+                    <Frame Padding="10" Margin="5" BorderColor="Gray">
+                        <StackLayout>
+                            <Image Source="{Binding ImageUrl}" WidthRequest="100" HeightRequest="100"/>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18"/>
+                            <Label Text="{Binding Description}" FontSize="14"/>
+                            <Label Text="Price: ${Binding Price}" FontSize="14"/>
+                            <Label Text="Weight: {Binding Weight} kg" FontSize="14"/>
+                            <Label Text="Quantity: {Binding Quantity}" FontSize="14"/>
+
+                            <!-- Display Specifications -->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Local:"/>
+                                <CheckBox IsChecked="{Binding Specifications[0].IsLocal}" IsEnabled="False"/>
+                                <Label Text="Organic:"/>
+                                <CheckBox IsChecked="{Binding Specifications[0].IsOrganic}" IsEnabled="False"/>
+                                <Label Text="GMO-Free:"/>
+                                <CheckBox IsChecked="{Binding Specifications[0].IsGmofree}" IsEnabled="False"/>
+                                <Label Text="Hydroponic:"/>
+                                <CheckBox IsChecked="{Binding Specifications[0].IsHydroponicallyGrown}" IsEnabled="False"/>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                <Button Text="Edit" Command="{Binding Path=BindingContext.EditProductCommand, Source={x:Reference ProductListPage}}" CommandParameter="{Binding}"/>
+                                <Button Text="Delete" Command="{Binding Path=BindingContext.DeleteProductCommand, Source={x:Reference ProductListPage}}" CommandParameter="{Binding}" TextColor="Red"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

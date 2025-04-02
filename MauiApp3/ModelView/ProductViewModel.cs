@@ -23,49 +23,43 @@ namespace MauiApp3.ModelView
         public ObservableCollection<Product> Products { get; set; } = new();
 
         public ICommand AddProductCommand { get; }
+        public ICommand EditProductCommand { get; }
         public ICommand DeleteProductCommand { get; }
-        public ICommand UpdateProductCommand { get; }
+
 
         public ProductViewModel()
         {
             _productService = new ProductService1();
-            AddProductCommand = new Command(OnAddProduct);
-            DeleteProductCommand = new Command<Product>(OnDeleteProduct);
-            UpdateProductCommand = new Command<Product>(OnUpdateProduct);
-            LoadProducts();
-        }
+            AddProductCommand = new Command(async () => await GoToAddProduct());
+            EditProductCommand = new Command<Product>(async (product) => await GoToEditProduct(product));
+            DeleteProductCommand = new Command<Product>(async (product) => await DeleteProduct(product));
 
-        private async void LoadProducts()
+        }
+        public async Task LoadProducts()
         {
-           var products = await _productService.GetAllProductsAsync();
             Products.Clear();
-          foreach (var product in products)
+            var products = await _productService.GetProducts();
+            foreach (var product in products)
             {
-             Products.Add(product);
+                Products.Add(product);
             }
         }
 
-        private async void OnAddProduct()
+        private async Task GoToAddProduct()
         {
-            var newProduct = new Product { Name = "Sample", Price = 10.99, Category = "Fruit", Weight = 1.5, ImageUrl = "https://example.com/image.jpg" };
-            await _productService.AddProductAsync(newProduct);
-            LoadProducts();
+            await Shell.Current.GoToAsync(nameof(AddProductsFarmer));
         }
 
-        private async void OnUpdateProduct(Product product)
+        private async Task GoToEditProduct(Product product)
         {
-            if (await _productService.UpdateProductAsync(product))
-            {
-                LoadProducts();
-            }
+            var parameters = new Dictionary<string, object> { { "Product", product } };
+            await Shell.Current.GoToAsync(nameof(AddProductsFarmer), parameters);
         }
 
-        private async void OnDeleteProduct(Product product)
+        private async Task DeleteProduct(Product product)
         {
-            if (await _productService.DeleteProductAsync(product.ProductId))
-            {
-                Products.Remove(product);
-            }
+            await _productService.DeleteProduct(product.ProductId);
+            await LoadProducts(); // Refresh list
         }
     }
 }
