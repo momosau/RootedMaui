@@ -34,7 +34,7 @@ namespace RootedBack.Controllers
                 farmer.Email = model.Email;
                 farmer.Password = model.Password;
                 farmer.PhoneNumber = model.PhoneNumber;
-                farmer.Location = model.Location;
+                //farmer.Location = model.Location;
                 farmer.Description = model.Description;
                 farmer.Certificate = model.Certificate;
                 //farmer.VerificationStatus = "Pending";

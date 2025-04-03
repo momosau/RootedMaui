@@ -20,7 +20,7 @@ namespace MauiApp3
           
 
 
-            await Shell.Current.GoToAsync("SplashFarmer");
+            await Shell.Current.GoToAsync("FarmerProducts");
 
 
         }

@@ -37,8 +37,8 @@
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                                <Button Text="Edit" Command="{Binding Path=BindingContext.EditProductCommand, Source={x:Reference ProductListPage}}" CommandParameter="{Binding}"/>
-                                <Button Text="Delete" Command="{Binding Path=BindingContext.DeleteProductCommand, Source={x:Reference ProductListPage}}" CommandParameter="{Binding}" TextColor="Red"/>
+                                <Button Text="Edit" Command="{Binding Path=BindingContext.EditProductCommand, Source={x:Reference FarmerProducts}}" CommandParameter="{Binding}"/>
+                                <Button Text="Delete" Command="{Binding Path=BindingContext.DeleteProductCommand, Source={x:Reference FarmerProducts}}" CommandParameter="{Binding}" TextColor="Red"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>
