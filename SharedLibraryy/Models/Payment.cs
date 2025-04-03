@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace SharedLibraryy.Models;
 
 [Table("Payment")]
+[Index("OrderId", Name = "IX_Payment_OrderID")]
 public partial class Payment
 {
     [Key]
@@ -16,16 +17,18 @@ public partial class Payment
     public double Amount { get; set; }
 
     [StringLength(250)]
-    [Unicode(false)]
     public string PaymentMethod { get; set; } = null!;
 
     [StringLength(250)]
-    [Unicode(false)]
     public string Status { get; set; } = null!;
 
     [Column(TypeName = "datetime")]
     public DateTime PaymentDate { get; set; }
 
-    [Column("ConsumerID")]
-    public int ConsumerId { get; set; }
+    [Column("OrderID")]
+    public int OrderId { get; set; }
+
+    [ForeignKey("OrderId")]
+    [InverseProperty("Payments")]
+    public virtual Order Order { get; set; } = null!;
 }

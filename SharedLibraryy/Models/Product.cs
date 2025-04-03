@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace SharedLibraryy.Models;
 
 [Table("Product")]
+[Index("FarmerId", Name = "IX_Product_FarmerID")]
 public partial class Product
 {
     [Key]
@@ -14,33 +15,34 @@ public partial class Product
     public int ProductId { get; set; }
 
     [StringLength(250)]
-    [Unicode(false)]
     public string Name { get; set; } = null!;
 
     public double Weight { get; set; }
 
     [StringLength(250)]
-    [Unicode(false)]
     public string Category { get; set; } = null!;
 
     public int Quantity { get; set; }
 
     [StringLength(250)]
-    [Unicode(false)]
     public string? Description { get; set; }
 
     public double Price { get; set; }
 
     [Column("ImageURL")]
     [StringLength(250)]
-    [Unicode(false)]
     public string? ImageUrl { get; set; }
 
     [Column("FarmerID")]
     public int FarmerId { get; set; }
 
-    [Column("CategoryID")]
     public int CategoryId { get; set; }
+
+    [StringLength(50)]
+    public string Unit { get; set; } = null!;
+
+    [InverseProperty("Product")]
+    public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
     [ForeignKey("CategoryId")]
     [InverseProperty("Products")]
@@ -52,6 +54,9 @@ public partial class Product
 
     [InverseProperty("Product")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+    [InverseProperty("Product")]
+    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     [ForeignKey("ProductId")]
     [InverseProperty("Products")]

@@ -15,7 +15,7 @@ namespace MauiApp3.Models
 
         public int Quantity { get; set; }
         public string? Description { get; set; }
-        public ImageSource ImageUrl { get; set; }
+        public string ImageUrl { get; set; }
         public int FarmerId { get; set; }
 
 

@@ -6,17 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SharedLibraryy.Models;
 
+[Table("Category")]
 public partial class Category
 {
     [Key]
-    [Column("CategoryID")]
     public int CategoryId { get; set; }
 
-    [StringLength(250)]
+    [StringLength(50)]
     public string CategoryName { get; set; } = null!;
 
-    [Column("imagesURL")]
-    [StringLength(50)]
+    [StringLength(250)]
     public string? ImagesUrl { get; set; }
 
     [InverseProperty("CategoryNavigation")]

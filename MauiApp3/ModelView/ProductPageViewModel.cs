@@ -1,107 +1,192 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Input;
+﻿using System.Collections.ObjectModel;
 using SharedLibraryy.Models;
-using Microsoft.Maui.Controls;
-using MauiApp3.ModelView;
 using MauiApp3.Services;
-using MauiApp3.Models;
-
+using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Input;
+using MauiApp3.Pages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace MauiApp3.ModelView
 {
-    public partial class ProductPageViewModel : BaseViewModel
+    public partial class ProductPageViewModel : INotifyPropertyChanged
+
     {
         private readonly IProductService productService;
-        public ObservableCollection<Productemp> products { get; set; } = new();
+
+        private readonly INavigation _navigation;
+        public ObservableCollection<Product> products { get; set; } = new();
         public ObservableCollection<Category> Categories { get; set; } = new();
+        public ObservableCollection<Product> FilteredProducts { get; set; } = new ObservableCollection<Product>();
 
-        public ProductPageViewModel(IProductService productService)
+        public Command<int> ChangeCategoryCommand { get; }
+        
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public ProductPageViewModel(int selectedCategoryId, IProductService productService, INavigation navigation)
         {
-          
             this.productService = productService;
-            Title= "المنتجات";
-            GetCategories();
-            GetProduct();
-           
+            _navigation = navigation;
 
+            SelectedCategoryId = selectedCategoryId;  
+            FilterProducts(); 
+
+            ChangeCategoryCommand = new Command<int>(categoryId => SetCategory(categoryId));
+            ViewProductCommand = new Command<Product>(OnProductSelected);
+
+            GetCategories(); 
+            GetProduct();     
         }
+
+
+
+        private void SetCategory(int categoryId)
+        {
+            if (_selectedCategoryId == categoryId) return;
+
+            _selectedCategoryId = categoryId;
+            OnPropertyChanged(nameof(SelectedCategoryId));
+
+            FilterProducts();
+        }
+
+
+
         private async void GetCategories()
         {
             var categories = await productService.GetCategoriesAsync();
             if (categories is null || categories.Count == 0)
                 return;
-            categories.Clear();
-            foreach (var category in categories)
-            { var Newcategory = new Category
-            { CategoryId = category.CategoryId,
-                CategoryName = category.CategoryName
 
-            };
-                Categories.Add(Newcategory);
+            foreach (var category in categories)
+            {
+                var newCategory = new Category
+                {
+                    CategoryId = category.CategoryId,
+                    CategoryName = category.CategoryName
+                };
+                Categories.Add(newCategory);  
             }
         }
 
         private async void GetProduct()
         {
+          
             var productList = await productService.GetProductAsync();
+            var farmersList = await productService.GetFarmersAsync(); // Fetch all farmers
+
             if (productList is null || productList.Count == 0)
                 return;
 
             products.Clear();
-
             foreach (var product in productList)
             {
-                var newProduct = new Productemp
+                // Find the farmer for this product
+                var farmer = farmersList.FirstOrDefault(f => f.FarmerId == product.FarmerId);
+
+                products.Add(new Product
                 {
                     ProductId = product.ProductId,
                     Name = product.Name,
                     Description = product.Description,
                     Price = product.Price,
                     FarmerId = product.FarmerId,
+                    Farmer = farmer, // Assign the farmer manually
                     CategoryId = product.CategoryId,
                     Quantity = product.Quantity,
-                    Weight = product.Weight
-                };
-
-                /* // Convert Base64 image to ImageSource
-                 if (!string.IsNullOrEmpty(product.ImageUrl))
-                 {
-                     var img = Convert.FromBase64String(product.ImageUrl);
-                     MemoryStream ms = new MemoryStream(img);
-                     newProduct.ImageUrl = ImageSource.FromStream(() => ms);
-                 }*/
-
-                // Load image from file path instead of Base64 conversion
-                if (!string.IsNullOrEmpty(product.ImageUrl))
-                {
-                    string imagePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), product.ImageUrl);
-                    if (File.Exists(imagePath))
-                    {
-                        newProduct.ImageUrl = ImageSource.FromFile(imagePath);
-                    }
-                    else
-                    {
-                        // Optional: Set a default image if file not found
-                        newProduct.ImageUrl = ImageSource.FromFile("Vegetable.png");
-                    }
-                }
-
-                products.Add(newProduct);
+                    Weight = product.Weight,
+                    ImageUrl = product.ImageUrl,
+                    Unit = product.Unit
+                });
             }
+
+            FilterProducts();
+        }
+
+        
+
+
+        private int _selectedCategoryId;
+        public int SelectedCategoryId
+        {
+            get => _selectedCategoryId;
+            set
+            {
+                _selectedCategoryId = value;
+                OnPropertyChanged(nameof(SelectedCategoryId));
+            }
+        }
+
+      
+
+        public ProductPageViewModel()
+        {
+            ChangeCategoryCommand = new Command<int>(OnCategoryChanged);
+        }
+
+        private void OnCategoryChanged(int categoryId)
+        {
+            SelectedCategoryId = categoryId; 
+            FilterProducts();
+        }
+
+        private int _selectedFarmerId;
+        public int SelectedFarmerId
+        {
+            get => _selectedFarmerId;
+            set
+            {
+                if (_selectedFarmerId != value)
+                {
+                    _selectedFarmerId = value;
+                    FilterProducts();
+                    OnPropertyChanged(nameof(SelectedFarmerId));
+                    OnPropertyChanged(nameof(FilteredProducts));
+                }
+            }
+        }
+
+        private void FilterProducts()
+        {
+            if (products == null) return;
+
+            var filtered = products
+                .Where(p => p.CategoryId == SelectedCategoryId &&
+                            (SelectedFarmerId == 0 || p.FarmerId == SelectedFarmerId))
+                .ToList();
+
+            FilteredProducts.Clear();
+            foreach (var product in filtered)
+            {
+                FilteredProducts.Add(product);
+            }
+
+            OnPropertyChanged(nameof(FilteredProducts));  
         }
 
 
 
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+        public Command<Product> ViewProductCommand { get; }
+
+
+
+        private async void OnProductSelected(Product product)
+        {
+            if (product == null)
+            {
+                Console.WriteLine("Error: Selected product is null");
+                return;
+            }
+            await _navigation.PushAsync(new ProductInfo(product,productService));
+        }
+
 
 
     }
+
 }
-
-
-
-

@@ -20,15 +20,15 @@ namespace MauiApp3
           
 
 
-            await Shell.Current.GoToAsync("SplashFarmer");
+            await Shell.Current.GoToAsync("FarmerProducts");
 
 
         }
 
         private async void Consumerclicked(object sender, EventArgs e)
         {
-
-            await Shell.Current.GoToAsync("ProductPage");
+            //PaymentMethodPage
+            await Shell.Current.GoToAsync("FarmerProducts");
            
 
         }

@@ -27,9 +27,12 @@ namespace MauiApp3
                     fonts.AddFont("Rubik-Bold.ttf", "FontArabic");
                 })
                   .UseMauiCommunityToolkit();
+           
+           
+
 
             builder.Services.AddSingleton<ProductPageViewModel>();
-            builder.Services.AddSingleton<ProductPage>();
+            builder.Services.AddTransient<ProductPage>();
             builder.Services.AddHttpClient<IProductService, ProductService>();
 #if DEBUG
             builder.Logging.AddDebug();

@@ -17,6 +17,7 @@ namespace RootedBack.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .UseCollation("Arabic_CI_AS")
                 .HasAnnotation("ProductVersion", "8.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -33,7 +34,7 @@ namespace RootedBack.Migrations
                         .HasColumnName("SpecificationID");
 
                     b.HasKey("ProductId", "SpecificationId")
-                        .HasName("PK__ProductS__7E348A2CA8112B49");
+                        .HasName("PK__ProductS__7E348A2C3C9A37B0");
 
                     b.HasIndex("SpecificationId");
 
@@ -52,28 +53,25 @@ namespace RootedBack.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("nchar(250)")
-                        .IsFixedLength();
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
-                    b.HasKey("AdminId");
+                    b.HasKey("AdminId")
+                        .HasName("PK__Admin__719FE4E84F1C5ADD");
 
                     b.ToTable("Admin");
                 });
@@ -95,11 +93,36 @@ namespace RootedBack.Migrations
                         .HasColumnType("decimal(18, 0)");
 
                     b.HasKey("CartId")
-                        .HasName("PK_CArt");
+                        .HasName("PK__Cart__51BCD7971994E889");
 
                     b.HasIndex("ConsumerId");
 
                     b.ToTable("Cart");
+                });
+
+            modelBuilder.Entity("SharedLibraryy.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("CategoryID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ImagesUrl")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("imagesURL");
+
+                    b.HasKey("CategoryId")
+                        .HasName("PK__Categori__19093A2BB32FD215");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("SharedLibraryy.Models.Consumer", b =>
@@ -141,13 +164,14 @@ namespace RootedBack.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
-                    b.Property<string>("UserNamer")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
-                    b.HasKey("ConsumerId");
+                    b.HasKey("ConsumerId")
+                        .HasName("PK__Consumer__63BBE99AE94399EC");
 
                     b.ToTable("Consumer");
                 });
@@ -164,63 +188,58 @@ namespace RootedBack.Migrations
                     b.Property<string>("Certificate")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("FarmName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)")
+                        .HasColumnType("nvarchar(250)")
                         .HasColumnName("ImageURL");
 
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("VerificationStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)")
+                        .HasColumnType("nvarchar(250)")
                         .HasDefaultValue("Pending");
 
                     b.Property<int>("VerifiedByAdminId")
@@ -243,10 +262,6 @@ namespace RootedBack.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ConsumerID");
 
-                    b.Property<int>("FarmerId")
-                        .HasColumnType("int")
-                        .HasColumnName("FarmerID");
-
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime");
 
@@ -255,6 +270,10 @@ namespace RootedBack.Migrations
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int")
+                        .HasColumnName("ProductID");
 
                     b.Property<string>("ShippingAddress")
                         .IsRequired()
@@ -268,6 +287,9 @@ namespace RootedBack.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
+                    b.Property<int?>("StatusShpinng")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18, 0)");
 
@@ -275,7 +297,7 @@ namespace RootedBack.Migrations
 
                     b.HasIndex("ConsumerId");
 
-                    b.HasIndex("FarmerId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Order");
                 });
@@ -289,9 +311,9 @@ namespace RootedBack.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int>("ConsumerId")
                         .HasColumnType("int")
-                        .HasColumnName("OrderID");
+                        .HasColumnName("ConsumerID");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime");
@@ -327,10 +349,18 @@ namespace RootedBack.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("CategoryID");
+
                     b.Property<string>("Description")
                         .HasMaxLength(250)
                         .IsUnicode(false)
                         .HasColumnType("varchar(250)");
+
+                    b.Property<string>("FarmName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FarmerId")
                         .HasColumnType("int")
@@ -357,7 +387,13 @@ namespace RootedBack.Migrations
                     b.Property<double>("Weight")
                         .HasColumnType("float");
 
+                    b.Property<string>("unit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ProductId");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("FarmerId");
 
@@ -367,14 +403,16 @@ namespace RootedBack.Migrations
             modelBuilder.Entity("SharedLibraryy.Models.Review", b =>
                 {
                     b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ReviewID");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
+
                     b.Property<string>("Comment")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength();
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("ConsumerId")
                         .HasColumnType("int")
@@ -387,57 +425,12 @@ namespace RootedBack.Migrations
                     b.Property<decimal>("Rating")
                         .HasColumnType("decimal(18, 0)");
 
-                    b.HasKey("ReviewId");
+                    b.HasKey("ReviewId")
+                        .HasName("PK__Review__74BC79AE5A1F0831");
 
                     b.HasIndex("ConsumerId");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("Review");
-                });
-
-            modelBuilder.Entity("SharedLibraryy.Models.Shipping", b =>
-                {
-                    b.Property<int>("ShippingId")
-                        .HasColumnType("int")
-                        .HasColumnName("ShippingID");
-
-                    b.Property<string>("Destination")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int")
-                        .HasColumnName("OrderID");
-
-                    b.Property<string>("ShippingMethod")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<string>("ShippingStatus")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<string>("Source")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(250)");
-
-                    b.Property<int>("TrackingNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("ShippingId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Shipping");
                 });
 
             modelBuilder.Entity("SharedLibraryy.Models.Specification", b =>
@@ -459,7 +452,8 @@ namespace RootedBack.Migrations
                     b.Property<bool?>("IsOrganic")
                         .HasColumnType("bit");
 
-                    b.HasKey("SpecificationId");
+                    b.HasKey("SpecificationId")
+                        .HasName("PK__Specific__A384CC1D1928F5E4");
 
                     b.ToTable("Specification");
                 });
@@ -470,13 +464,13 @@ namespace RootedBack.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .IsRequired()
-                        .HasConstraintName("Product_Specification");
+                        .HasConstraintName("FK_ProductSpecifications_Product");
 
                     b.HasOne("SharedLibraryy.Models.Specification", null)
                         .WithMany()
                         .HasForeignKey("SpecificationId")
                         .IsRequired()
-                        .HasConstraintName("Sepcification_Product");
+                        .HasConstraintName("FK_ProductSpecifications_Specification");
                 });
 
             modelBuilder.Entity("SharedLibraryy.Models.Cart", b =>
@@ -485,20 +479,9 @@ namespace RootedBack.Migrations
                         .WithMany("Carts")
                         .HasForeignKey("ConsumerId")
                         .IsRequired()
-                        .HasConstraintName("Consumer_cart");
+                        .HasConstraintName("FK_Cart_Consumer");
 
                     b.Navigation("Consumer");
-                });
-
-            modelBuilder.Entity("SharedLibraryy.Models.Farmer", b =>
-                {
-                    b.HasOne("SharedLibraryy.Models.Admin", "VerifiedByAdmin")
-                        .WithMany("Farmers")
-                        .HasForeignKey("VerifiedByAdminId")
-                        .IsRequired()
-                        .HasConstraintName("FK_Farmer_Admin");
-
-                    b.Navigation("VerifiedByAdmin");
                 });
 
             modelBuilder.Entity("SharedLibraryy.Models.Order", b =>
@@ -507,37 +490,34 @@ namespace RootedBack.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("ConsumerId")
                         .IsRequired()
-                        .HasConstraintName("Consumer_Order");
+                        .HasConstraintName("FK_Order_Consumer");
 
-                    b.HasOne("SharedLibraryy.Models.Farmer", "Farmer")
+                    b.HasOne("SharedLibraryy.Models.Product", "Product")
                         .WithMany("Orders")
-                        .HasForeignKey("FarmerId")
+                        .HasForeignKey("ProductId")
                         .IsRequired()
-                        .HasConstraintName("Farmer_order");
+                        .HasConstraintName("FK_Order_Product");
 
                     b.Navigation("Consumer");
 
-                    b.Navigation("Farmer");
-                });
-
-            modelBuilder.Entity("SharedLibraryy.Models.Payment", b =>
-                {
-                    b.HasOne("SharedLibraryy.Models.Order", "Order")
-                        .WithMany("Payments")
-                        .HasForeignKey("OrderId")
-                        .IsRequired()
-                        .HasConstraintName("Order_Payment");
-
-                    b.Navigation("Order");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SharedLibraryy.Models.Product", b =>
                 {
+                    b.HasOne("SharedLibraryy.Models.Category", "CategoryNavigation")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Products_Categories");
+
                     b.HasOne("SharedLibraryy.Models.Farmer", "Farmer")
                         .WithMany("Products")
                         .HasForeignKey("FarmerId")
                         .IsRequired()
-                        .HasConstraintName("Farmer_Prooduct");
+                        .HasConstraintName("FK_Product_Farmer");
+
+                    b.Navigation("CategoryNavigation");
 
                     b.Navigation("Farmer");
                 });
@@ -548,33 +528,14 @@ namespace RootedBack.Migrations
                         .WithMany("Reviews")
                         .HasForeignKey("ConsumerId")
                         .IsRequired()
-                        .HasConstraintName("Review_Consumer");
-
-                    b.HasOne("SharedLibraryy.Models.Product", "Product")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ProductId")
-                        .IsRequired()
-                        .HasConstraintName("Product_Review");
+                        .HasConstraintName("FK_Review_Consumer");
 
                     b.Navigation("Consumer");
-
-                    b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("SharedLibraryy.Models.Shipping", b =>
+            modelBuilder.Entity("SharedLibraryy.Models.Category", b =>
                 {
-                    b.HasOne("SharedLibraryy.Models.Order", "Order")
-                        .WithMany("Shippings")
-                        .HasForeignKey("OrderId")
-                        .IsRequired()
-                        .HasConstraintName("Order_Shipping");
-
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("SharedLibraryy.Models.Admin", b =>
-                {
-                    b.Navigation("Farmers");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("SharedLibraryy.Models.Consumer", b =>
@@ -588,21 +549,12 @@ namespace RootedBack.Migrations
 
             modelBuilder.Entity("SharedLibraryy.Models.Farmer", b =>
                 {
-                    b.Navigation("Orders");
-
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("SharedLibraryy.Models.Order", b =>
-                {
-                    b.Navigation("Payments");
-
-                    b.Navigation("Shippings");
                 });
 
             modelBuilder.Entity("SharedLibraryy.Models.Product", b =>
                 {
-                    b.Navigation("Reviews");
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

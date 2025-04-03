@@ -8,39 +8,43 @@ using System.Net.Http.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SharedLibraryy.Models;
+using System.Text.Json;
+using MauiApp3.Models;
 
 namespace MauiApp3.Services
 {
     public class ProductService1
     {
         private readonly HttpClient _httpClient;
-        private const string ApiUrl = "https://localhost:7168/api/Products"; // Replace with your actual API URL
-    
+        private const string ApiUrl = "https://localhost:7168/api/Products";
         public ProductService1()
         {
             _httpClient = new HttpClient();
         }
 
-       public async Task<List<Product>> GetAllProductsAsync()
-       {
-           return await _httpClient.GetFromJsonAsync<List<Product>>(ApiUrl) ?? new List<Product>();
-       }
-
-        public async Task AddProductAsync(Product product)
+        public async Task<List<Product>> GetProducts()
         {
-            await _httpClient.PostAsJsonAsync(ApiUrl, product);
+            var response = await _httpClient.GetStringAsync(ApiUrl);
+            return JsonSerializer.Deserialize<List<Product>>(response, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
-        public async Task<bool> UpdateProductAsync(Product product)
+        public async Task AddProduct(Product product)
         {
-            var response = await _httpClient.PutAsJsonAsync($"{ApiUrl}/{product.ProductId}", product);
-            return response.IsSuccessStatusCode;
+            var json = JsonSerializer.Serialize(product);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            await _httpClient.PostAsync(ApiUrl, content);
         }
 
-        public async Task<bool> DeleteProductAsync(int productId)
+        public async Task UpdateProduct(Product product)
         {
-            var response = await _httpClient.DeleteAsync($"{ApiUrl}/{productId}");
-            return response.IsSuccessStatusCode;
+            var json = JsonSerializer.Serialize(product);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            await _httpClient.PutAsync($"{ApiUrl}/{product.ProductId}", content);
+        }
+
+        public async Task DeleteProduct(int productId)
+        {
+            await _httpClient.DeleteAsync($"{ApiUrl}/{productId}");
         }
     }
 }

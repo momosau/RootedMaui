@@ -24,4 +24,7 @@ public partial class Admin
 
     [StringLength(250)]
     public string UserName { get; set; } = null!;
+
+    [InverseProperty("Admin")]
+    public virtual ICollection<FarmerApplication> FarmerApplications { get; set; } = new List<FarmerApplication>();
 }

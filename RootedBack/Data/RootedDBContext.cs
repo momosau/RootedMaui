@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using SharedLibraryy.Models;
 
-
 namespace RootedBack.Data;
 
 public partial class RootedDBContext : DbContext
@@ -27,11 +26,17 @@ public partial class RootedDBContext : DbContext
 
     public virtual DbSet<Farmer> Farmers { get; set; }
 
+    public virtual DbSet<FarmerApplication> FarmerApplications { get; set; }
+
+    public virtual DbSet<FarmerSpecification> FarmerSpecifications { get; set; }
+
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<Payment> Payments { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
+
+    public virtual DbSet<Question> Questions { get; set; }
 
     public virtual DbSet<Review> Reviews { get; set; }
 
@@ -45,35 +50,53 @@ public partial class RootedDBContext : DbContext
     {
         modelBuilder.UseCollation("Arabic_CI_AS");
 
-        modelBuilder.Entity<Admin>(entity =>
-        {
-            entity.HasKey(e => e.AdminId).HasName("PK__Admin__719FE4E84F1C5ADD");
-        });
-
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity.HasKey(e => e.CartId).HasName("PK__Cart__51BCD7971994E889");
+            entity.HasKey(e => e.CartId).HasName("PK_CArt");
 
             entity.HasOne(d => d.Consumer).WithMany(p => p.Carts)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Cart_Consumer");
+                .HasConstraintName("Consumer_cart");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Carts)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Cart_product");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__Categori__19093A2BB32FD215");
-        });
-
-        modelBuilder.Entity<Consumer>(entity =>
-        {
-            entity.HasKey(e => e.ConsumerId).HasName("PK__Consumer__63BBE99AE94399EC");
+            entity.Property(e => e.CategoryId).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<Farmer>(entity =>
         {
-            entity.HasKey(e => e.FarmerId).HasName("PK__Farmer__731B88E8B91603B4");
-
             entity.Property(e => e.VerificationStatus).HasDefaultValue("Pending");
+        });
+
+        modelBuilder.Entity<FarmerApplication>(entity =>
+        {
+            entity.HasOne(d => d.Admin).WithMany(p => p.FarmerApplications)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AdminAplication");
+
+            entity.HasOne(d => d.Farmer).WithMany(p => p.FarmerApplications)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FarmerApplication");
+        });
+
+        modelBuilder.Entity<FarmerSpecification>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_Table_1");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+
+            entity.HasOne(d => d.Farmer).WithMany(p => p.FarmerSpecifications)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FarmerSpecification_Farmer");
+
+            entity.HasOne(d => d.Specification).WithMany(p => p.FarmerSpecifications)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FSpecification_FarmerSpecification");
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -82,7 +105,11 @@ public partial class RootedDBContext : DbContext
 
             entity.HasOne(d => d.Consumer).WithMany(p => p.Orders)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Order_Consumer");
+                .HasConstraintName("Consumer_Order");
+
+            entity.HasOne(d => d.Farmer).WithMany(p => p.Orders)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Farmer_order");
 
             entity.HasOne(d => d.Product).WithMany(p => p.Orders)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -91,22 +118,22 @@ public partial class RootedDBContext : DbContext
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.PaymentId).HasName("PK__Payment__9B556A58EA1E90FD");
-
             entity.Property(e => e.PaymentId).ValueGeneratedNever();
+
+            entity.HasOne(d => d.Order).WithMany(p => p.Payments)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Order_Payment");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.Property(e => e.ProductId).ValueGeneratedNever();
-
             entity.HasOne(d => d.CategoryNavigation).WithMany(p => p.Products)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Products_Categories");
+                .HasConstraintName("FK_CategoryProduct");
 
             entity.HasOne(d => d.Farmer).WithMany(p => p.Products)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Product_Farmer");
+                .HasConstraintName("Farmer_Prooduct");
 
             entity.HasMany(d => d.Specifications).WithMany(p => p.Products)
                 .UsingEntity<Dictionary<string, object>>(
@@ -114,15 +141,16 @@ public partial class RootedDBContext : DbContext
                     r => r.HasOne<Specification>().WithMany()
                         .HasForeignKey("SpecificationId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_ProductSpecifications_Specification"),
+                        .HasConstraintName("Sepcification_Product"),
                     l => l.HasOne<Product>().WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_ProductSpecifications_Product"),
+                        .HasConstraintName("Product_Specification"),
                     j =>
                     {
-                        j.HasKey("ProductId", "SpecificationId").HasName("PK__ProductS__7E348A2C3C9A37B0");
+                        j.HasKey("ProductId", "SpecificationId").HasName("PK__ProductS__7E348A2CA8112B49");
                         j.ToTable("ProductSpecifications");
+                        j.HasIndex(new[] { "SpecificationId" }, "IX_ProductSpecifications_SpecificationID");
                         j.IndexerProperty<int>("ProductId").HasColumnName("ProductID");
                         j.IndexerProperty<int>("SpecificationId").HasColumnName("SpecificationID");
                     });
@@ -130,17 +158,23 @@ public partial class RootedDBContext : DbContext
 
         modelBuilder.Entity<Review>(entity =>
         {
-            entity.HasKey(e => e.ReviewId).HasName("PK__Review__74BC79AE5A1F0831");
+            entity.Property(e => e.ReviewId).ValueGeneratedNever();
 
             entity.HasOne(d => d.Consumer).WithMany(p => p.Reviews)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Review_Consumer");
+                .HasConstraintName("Review_Consumer");
+
+            entity.HasOne(d => d.Farmer).WithMany(p => p.Reviews)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_FarmerReview");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Reviews)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Product_Review");
         });
 
         modelBuilder.Entity<Specification>(entity =>
         {
-            entity.HasKey(e => e.SpecificationId).HasName("PK__Specific__A384CC1D1928F5E4");
-
             entity.Property(e => e.SpecificationId).ValueGeneratedNever();
         });
 
