@@ -22,8 +22,7 @@ public partial class Specification
 
     public bool? IsPesticideFree { get; set; }
 
-    [InverseProperty("Specification")]
-    public virtual ICollection<FarmerSpecification> FarmerSpecifications { get; set; } = new List<FarmerSpecification>();
+   
 
     [ForeignKey("SpecificationId")]
     [InverseProperty("Specifications")]

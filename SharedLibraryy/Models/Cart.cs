@@ -15,16 +15,15 @@ public partial class Cart
     public int CartId { get; set; }
 
     [Column("ConsumerID")]
-    public int ConsumerId { get; set; }
-
+    public int? ConsumerId { get; set; } 
     [Column(TypeName = "decimal(18, 0)")]
     public decimal Price { get; set; }
 
     [Column("ProductID")]
     public int ProductId { get; set; }
 
-    [Column(TypeName = "decimal(18, 0)")]
-    public decimal Amount { get; set; }
+    [NotMapped]
+    public decimal Amount => Price * Quantity;
 
     public int Quantity { get; set; }
 

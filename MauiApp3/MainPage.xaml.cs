@@ -27,8 +27,8 @@ namespace MauiApp3
 
         private async void Consumerclicked(object sender, EventArgs e)
         {
-            //PaymentMethodPage
-            await Shell.Current.GoToAsync("FarmerProducts");
+            
+            await Shell.Current.GoToAsync("CategoriesPage");
            
 
         }

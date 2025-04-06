@@ -58,9 +58,7 @@ public partial class Farmer
     [InverseProperty("Farmer")]
     public virtual ICollection<FarmerApplication> FarmerApplications { get; set; } = new List<FarmerApplication>();
 
-    [InverseProperty("Farmer")]
-    public virtual ICollection<FarmerSpecification> FarmerSpecifications { get; set; } = new List<FarmerSpecification>();
-
+   
     [InverseProperty("Farmer")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 

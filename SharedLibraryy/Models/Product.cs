@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -61,4 +62,24 @@ public partial class Product
     [ForeignKey("ProductId")]
     [InverseProperty("Products")]
     public virtual ICollection<Specification> Specifications { get; set; } = new List<Specification>();
+    [NotMapped]
+    private bool _isInCart;
+    [NotMapped]
+    public bool IsInCart
+    {
+        get => _isInCart;
+        set
+        {
+            if (_isInCart != value)
+            {
+                _isInCart = value;
+                OnPropertyChanged(nameof(IsInCart));
+            }
+        }
+    }
+    
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged(string propertyName) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }
+

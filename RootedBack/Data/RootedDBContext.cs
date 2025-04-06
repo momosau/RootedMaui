@@ -28,7 +28,7 @@ public partial class RootedDBContext : DbContext
 
     public virtual DbSet<FarmerApplication> FarmerApplications { get; set; }
 
-    public virtual DbSet<FarmerSpecification> FarmerSpecifications { get; set; }
+  //  public virtual DbSet<FarmerSpecification> FarmerSpecifications { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
 
@@ -84,20 +84,7 @@ public partial class RootedDBContext : DbContext
                 .HasConstraintName("FK_FarmerApplication");
         });
 
-        modelBuilder.Entity<FarmerSpecification>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK_Table_1");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.Farmer).WithMany(p => p.FarmerSpecifications)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_FarmerSpecification_Farmer");
-
-            entity.HasOne(d => d.Specification).WithMany(p => p.FarmerSpecifications)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_FSpecification_FarmerSpecification");
-        });
+       
 
         modelBuilder.Entity<Order>(entity =>
         {

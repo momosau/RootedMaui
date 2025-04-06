@@ -42,10 +42,14 @@
 
                 <Button Text="+" Background="White" TextColor="Green"
                     Clicked="AddButtonClicked"
-                    CornerRadius="10" WidthRequest="40" HeightRequest="40"/>
+                    CornerRadius="10" WidthRequest="40" HeightRequest="40">
+                    
+                </Button>
             </HorizontalStackLayout>
-            <Button Text="اضف بالسلة" Background="Green" TextColor="White" ></Button>
+            <Button Text="اضف بالسلة" Background="Green" TextColor="White" Clicked="AddToCartCLicked" ></Button>
+            
         </HorizontalStackLayout>
+       
     </VerticalStackLayout>
 
     </ContentPage>

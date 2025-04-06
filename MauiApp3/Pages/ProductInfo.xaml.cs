@@ -36,4 +36,12 @@ public partial class ProductInfo : ContentPage
             count--;
         // label.Text = GetCount();
     }
+
+    
+
+    private async void AddToCartCLicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(ShoppingCart));
+
+    }
 }
