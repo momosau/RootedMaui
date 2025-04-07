@@ -7,13 +7,11 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:Models="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
              xmlns:ModelView="clr-namespace:MauiApp3.ModelView"
-             xmlns:page="clr-namespace:MauiApp3.Pages"
              x:DataType="ModelView:ProductPageViewModel"
              Title="المنتجات"
              BackgroundColor="#E7E9E4" 
              FlowDirection="RightToLeft" 
              Shell.NavBarIsVisible="False"
-          
              >
     <ContentPage.Resources>
             <ResourceDictionary>
@@ -66,21 +64,8 @@
                    HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
                                     <Label Text="{Binding Farmer.FarmName}" FontSize="20" TextColor="#34495e"/>
                                     </VerticalStackLayout>
-                                    
-                                    <Button  Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.AddToCartCommand}" CommandParameter="{Binding .}">
-
-                                        <Button.Triggers>
-                                                <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="True">
-                                                    <Setter Property="Text" Value="✔ تمت الإضافة" />
-                                                    <Setter Property="BackgroundColor" Value="LightGreen" />
-                                                </DataTrigger>
-                                                <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="False">
-                                                    <Setter Property="Text" Value="➕ أضف إلى السلة" />
-                                                    <Setter Property="BackgroundColor" Value="LightGray" />
-                                                </DataTrigger>
-                                            </Button.Triggers>
-                                        </Button>
-                                
+                                    <Button Text="+" Background="#5E9C24" TextColor="white" CornerRadius="200" FontSize="30" 
+                    WidthRequest="25" HeightRequest="20" FontAttributes="Bold"/>
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </Frame>

@@ -3,11 +3,8 @@ using Android.Runtime;
 
 namespace MauiApp3
 {
-#if DEBUG
-    [Application(UsesCleartextTraffic = true)]
-#else
-[Application]
-#endif
+   
+    [Application(UsesCleartextTraffic =true)]
 
     public class MainApplication : MauiApplication
     {
