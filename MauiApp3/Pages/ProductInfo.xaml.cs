@@ -37,7 +37,7 @@ public partial class ProductInfo : ContentPage
         // label.Text = GetCount();
     }
 
-    
+
 
     private async void AddToCartCLicked(object sender, EventArgs e)
     {

@@ -16,19 +16,19 @@
           
              >
     <ContentPage.Resources>
-            <ResourceDictionary>
-                <local:CategoryToColorConverter x:Key="CategoryToColorConverter"/>
-            </ResourceDictionary>
-        </ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CategoryToColorConverter x:Key="CategoryToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <ScrollView>
-            <VerticalStackLayout>
-                <!-- Category CollectionView -->
-                <CollectionView ItemsSource="{Binding Categories}">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Horizontal" Span="2"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
+    <ScrollView>
+        <VerticalStackLayout>
+            <!-- Category CollectionView -->
+            <CollectionView ItemsSource="{Binding Categories}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="Models:Category">
                         <Button Text="{Binding CategoryName}" 
                             Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ChangeCategoryCommand}"
@@ -37,16 +37,16 @@
                                              Converter={StaticResource CategoryToColorConverter}, 
                                              ConverterParameter={Binding Source={x:Reference ProductPageView}, Path=BindingContext.SelectedCategoryId}}"/>
                     </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                <!-- Product CollectionView -->
-                <CollectionView ItemsSource="{Binding FilteredProducts}" BackgroundColor="White">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="2"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="Models:Product">
+            <!-- Product CollectionView -->
+            <CollectionView ItemsSource="{Binding FilteredProducts}" BackgroundColor="White">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="Models:Product">
                         <Frame CornerRadius="12" Padding="15" Margin="10" BackgroundColor="White">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ViewProductCommand}"
@@ -62,31 +62,31 @@
                                 </HorizontalStackLayout>
                                 <HorizontalStackLayout Spacing="300" VerticalOptions="Center" HorizontalOptions="Start">
                                     <VerticalStackLayout>
-                                    <Label Text="{Binding Price, StringFormat='{0} ريال'}" FontSize="22" 
+                                        <Label Text="{Binding Price, StringFormat='{0} ريال'}" FontSize="22" 
                    HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
-                                    <Label Text="{Binding Farmer.FarmName}" FontSize="20" TextColor="#34495e"/>
+                                        <Label Text="{Binding Farmer.FarmName}" FontSize="20" TextColor="#34495e"/>
                                     </VerticalStackLayout>
-                                    
+
                                     <Button  Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.AddToCartCommand}" CommandParameter="{Binding .}">
 
                                         <Button.Triggers>
-                                                <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="True">
-                                                    <Setter Property="Text" Value="✔ تمت الإضافة" />
-                                                    <Setter Property="BackgroundColor" Value="LightGreen" />
-                                                </DataTrigger>
-                                                <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="False">
-                                                    <Setter Property="Text" Value="➕ أضف إلى السلة" />
-                                                    <Setter Property="BackgroundColor" Value="LightGray" />
-                                                </DataTrigger>
-                                            </Button.Triggers>
-                                        </Button>
-                                
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="True">
+                                                <Setter Property="Text" Value="✔ تمت الإضافة" />
+                                                <Setter Property="BackgroundColor" Value="LightGreen" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="False">
+                                                <Setter Property="Text" Value="➕ أضف إلى السلة" />
+                                                <Setter Property="BackgroundColor" Value="LightGray" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
-        </ScrollView>
-    </ContentPage>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

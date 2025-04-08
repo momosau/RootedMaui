@@ -28,7 +28,7 @@ namespace MauiApp3
             Routing.RegisterRoute("ResetPasswordPage", typeof(ResetPasswordPage));
             Routing.RegisterRoute("SignInConsumer", typeof(SignInConsumer));
             Routing.RegisterRoute("SignUpFarmer", typeof(SignUpFarmer));
-            Routing.RegisterRoute("SignUpFarmer2", typeof(SignUpFarmer2));
+           
             Routing.RegisterRoute("SplashConsumer", typeof(SplashConsumer));
             Routing.RegisterRoute("SplashFarmerFinal", typeof(SplashFarmerFinal));
             Routing.RegisterRoute("VerificationCodePage", typeof(VerificationCodePage));
@@ -42,7 +42,6 @@ namespace MauiApp3
             Routing.RegisterRoute("ProductPage", typeof(ProductPage));
             Routing.RegisterRoute("CategoriesPage", typeof(CategoriesPage));
             Routing.RegisterRoute("AddProductsFarmer", typeof(AddProductsFarmer));
-            Routing.RegisterRoute(nameof(ShoppingCart), typeof(ShoppingCart));
 
 
 
