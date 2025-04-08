@@ -1,9 +1,11 @@
-﻿using MauiApp3.Models;
-using MauiApp3.Pages;
-using MauiApp3.Services;
+﻿using System.Collections.ObjectModel;
 using SharedLibraryy.Models;
-using System.Collections.ObjectModel;
+using MauiApp3.Services;
 using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Input;
+using MauiApp3.Pages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace MauiApp3.ModelView
 {
     public partial class ProductPageViewModel : INotifyPropertyChanged
@@ -16,42 +18,23 @@ namespace MauiApp3.ModelView
         public ObservableCollection<Category> Categories { get; set; } = new();
         public ObservableCollection<Product> FilteredProducts { get; set; } = new ObservableCollection<Product>();
 
-        public readonly CartViewModel _cartViewModel;
         public Command<int> ChangeCategoryCommand { get; }
+        
 
-        public Command<Product> AddToCartCommand { get; }
-
-        private void OnAddToCart(Product product)
-        {
-            if (product == null) return;
-
-
-            _cartViewModel.addToCart(new Product
-            {
-                ProductId = product.ProductId,
-                Name = product.Name,
-                Price = product.Price,
-                Quantity = 1,
-            });
-
-
-            product.IsInCart = true;
-        }
-
-        public ProductPageViewModel(int selectedCategoryId, IProductService productService, INavigation navigation, CartViewModel
-            cartViewModel)
+        public event PropertyChangedEventHandler PropertyChanged;
+        public ProductPageViewModel(int selectedCategoryId, IProductService productService, INavigation navigation)
         {
             this.productService = productService;
             _navigation = navigation;
-            _cartViewModel = cartViewModel;
-            SelectedCategoryId = selectedCategoryId;
-            FilterProducts();
+
+            SelectedCategoryId = selectedCategoryId;  
+            FilterProducts(); 
 
             ChangeCategoryCommand = new Command<int>(categoryId => SetCategory(categoryId));
             ViewProductCommand = new Command<Product>(OnProductSelected);
-            AddToCartCommand = new Command<Product>(OnAddToCart);
-            GetCategories();
-            GetProduct();
+
+            GetCategories(); 
+            GetProduct();     
         }
 
 
@@ -81,13 +64,13 @@ namespace MauiApp3.ModelView
                     CategoryId = category.CategoryId,
                     CategoryName = category.CategoryName
                 };
-                Categories.Add(newCategory);
+                Categories.Add(newCategory);  
             }
         }
 
         private async void GetProduct()
         {
-
+          
             var productList = await productService.GetProductAsync();
             var farmersList = await productService.GetFarmersAsync(); // Fetch all farmers
 
@@ -119,7 +102,7 @@ namespace MauiApp3.ModelView
             FilterProducts();
         }
 
-
+        
 
 
         private int _selectedCategoryId;
@@ -133,7 +116,7 @@ namespace MauiApp3.ModelView
             }
         }
 
-
+      
 
         public ProductPageViewModel()
         {
@@ -142,14 +125,11 @@ namespace MauiApp3.ModelView
 
         private void OnCategoryChanged(int categoryId)
         {
-            SelectedCategoryId = categoryId;
+            SelectedCategoryId = categoryId; 
             FilterProducts();
         }
 
         private int _selectedFarmerId;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         public int SelectedFarmerId
         {
             get => _selectedFarmerId;
@@ -180,7 +160,7 @@ namespace MauiApp3.ModelView
                 FilteredProducts.Add(product);
             }
 
-            OnPropertyChanged(nameof(FilteredProducts));
+            OnPropertyChanged(nameof(FilteredProducts));  
         }
 
 
@@ -193,6 +173,8 @@ namespace MauiApp3.ModelView
 
         public Command<Product> ViewProductCommand { get; }
 
+
+
         private async void OnProductSelected(Product product)
         {
             if (product == null)
@@ -200,7 +182,7 @@ namespace MauiApp3.ModelView
                 Console.WriteLine("Error: Selected product is null");
                 return;
             }
-            await _navigation.PushAsync(new ProductInfo(product, productService));
+            await _navigation.PushAsync(new ProductInfo(product,productService));
         }
 
 

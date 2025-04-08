@@ -12,7 +12,7 @@ namespace MauiApp3.ModelView
     public class ProductInfoVIewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-       
+
         private Product _selectedProduct;
         public Product SelectedProduct
         {

@@ -20,9 +20,9 @@
                             <Image Source="{Binding ImageUrl}" WidthRequest="100" HeightRequest="100"/>
                             <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18"/>
                             <Label Text="{Binding Description}" FontSize="14"/>
-                            <Label Text="Price: ${Binding Price}" FontSize="14"/>
-                            <Label Text="Weight: {Binding Weight} kg" FontSize="14"/>
-                            <Label Text="Quantity: {Binding Quantity}" FontSize="14"/>
+                            <Label Text= "{Binding Price}" FontSize="14"/>
+                            <Label Text="{Binding Weight} " FontSize="14"/>
+                            <Label Text="{Binding Quantity}" FontSize="14"/>
 
                             <!-- Display Specifications -->
                             <StackLayout Orientation="Horizontal">
