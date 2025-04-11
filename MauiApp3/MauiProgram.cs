@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Syncfusion.Maui.Core.Hosting;
 using MauiApp3.ModelView;
 using MauiApp3.Pages;
+using CommunityToolkit.Mvvm.DependencyInjection;
 
 namespace MauiApp3
 {
@@ -37,6 +38,10 @@ namespace MauiApp3
             builder.Services.AddHttpClient<IProductService, ProductService>();
             builder.Services.AddSingleton<CartViewModel>();
             builder.Services.AddTransient<ShoppingCart>();
+            builder.Services.AddHttpClient<ICartService, CartService>();
+            builder.Services.AddSingleton<ProductInfoVIewModel>();
+            builder.Services.AddTransient<ProductInfo>();
+            Ioc.Default.ConfigureServices(builder.Services.BuildServiceProvider());
 
 #if DEBUG
             builder.Logging.AddDebug();

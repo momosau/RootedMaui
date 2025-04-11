@@ -1,23 +1,15 @@
-﻿using Refit;
-using System.Net.Http;
+﻿using SharedLibraryy.Models;
 using System.Net.Http.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using SharedLibraryy.Services;
-using SharedLibraryy.Models;
 
 
 namespace MauiApp3.Services
 {
-    public class  ApiServices 
+    public class ApiServices
     {
         private readonly HttpClient _httpClient;
-        private static readonly string _baseUrl =
-#if ANDROID
-       "http://10.0.2.2:7168/api"; 
-#else
-        "http://localhost:7168/api"; 
-#endif
+        private readonly string ApiUrl = DeviceInfo.Platform == DevicePlatform.Android
+       ? "http://10.0.2.2:5140/"
+       : "https://localhost:7168/";
 
         public ApiServices(HttpClient httpClient)
         {
@@ -25,17 +17,17 @@ namespace MauiApp3.Services
         }
         public async Task<List<Admin>> GetAdminsAsync()
         {
-            return await _httpClient.GetFromJsonAsync<List<Admin>>($"{_baseUrl}/Admins");
+            return await _httpClient.GetFromJsonAsync<List<Admin>>($"{ApiUrl}Admins");
         }
 
         public async Task<Admin> GetAdminByIdAsync(int id)
         {
-            return await _httpClient.GetFromJsonAsync<Admin>($"{_baseUrl}/Admins/{id}");
+            return await _httpClient.GetFromJsonAsync<Admin>($"{ApiUrl}Admins/{id}");
         }
 
         public async Task<bool> CreateAdminAsync(Admin admin)
         {
-            var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/Admins", admin);
+            var response = await _httpClient.PostAsJsonAsync($"{ApiUrl}Admins", admin);
             return response.IsSuccessStatusCode;
         }
     }
