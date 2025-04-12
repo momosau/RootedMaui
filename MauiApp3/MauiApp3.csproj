@@ -84,6 +84,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\EmailVerification.xaml.cs">
+	    <DependentUpon>EmailVerification.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\SignInConsumer.xaml.cs">
 	    <DependentUpon>SignInConsumer.xaml</DependentUpon>
 	  </Compile>
@@ -153,7 +156,7 @@
 	  <MauiXaml Update="Pages\PaymentMethodPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\PhoneVerification.xaml">
+	  <MauiXaml Update="Pages\EmailVerification.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ProductInfo.xaml">

@@ -23,7 +23,7 @@ namespace MauiApp3
             Routing.RegisterRoute("ForgotPasswordEmail", typeof(ForgotPasswordEmail));
             Routing.RegisterRoute("LocationPage", typeof(LocationPage));
             Routing.RegisterRoute("PaymentMethodPage", typeof(PaymentMethodPage));
-            Routing.RegisterRoute("PhoneVerification", typeof(PhoneVerification));
+            Routing.RegisterRoute("PhoneVerification", typeof(EmailVerification));
             Routing.RegisterRoute("PrivacyPolicyPage", typeof(PrivacyPolicyPage));
             Routing.RegisterRoute("ResetPasswordPage", typeof(ResetPasswordPage));
             Routing.RegisterRoute("SignInConsumer", typeof(SignInConsumer));

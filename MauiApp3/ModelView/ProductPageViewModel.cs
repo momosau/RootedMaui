@@ -1,11 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using SharedLibraryy.Models;
+﻿using MauiApp3.Pages;
 using MauiApp3.Services;
+using SharedLibraryy.Models;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
-using System.Windows.Input;
-using MauiApp3.Pages;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace MauiApp3.ModelView
 {
     public partial class ProductPageViewModel : INotifyPropertyChanged
@@ -19,22 +16,27 @@ namespace MauiApp3.ModelView
         public ObservableCollection<Product> FilteredProducts { get; set; } = new ObservableCollection<Product>();
 
         public Command<int> ChangeCategoryCommand { get; }
-        
+        private readonly ICartService _cartService;
+
+        public Command<Product> AddToCartCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public ProductPageViewModel(int selectedCategoryId, IProductService productService, INavigation navigation)
+        public ProductPageViewModel(int selectedCategoryId, IProductService productService , ICartService cartService, INavigation navigation)
         {
             this.productService = productService;
             _navigation = navigation;
 
-            SelectedCategoryId = selectedCategoryId;  
-            FilterProducts(); 
+            SelectedCategoryId = selectedCategoryId;
+            FilterProducts();
 
             ChangeCategoryCommand = new Command<int>(categoryId => SetCategory(categoryId));
             ViewProductCommand = new Command<Product>(OnProductSelected);
+            this._cartService = cartService;
+            AddToCartCommand = new Command<Product>(AddToCart);
 
-            GetCategories(); 
-            GetProduct();     
+
+            GetCategories();
+            GetProduct();
         }
 
 
@@ -64,13 +66,13 @@ namespace MauiApp3.ModelView
                     CategoryId = category.CategoryId,
                     CategoryName = category.CategoryName
                 };
-                Categories.Add(newCategory);  
+                Categories.Add(newCategory);
             }
         }
 
         private async void GetProduct()
         {
-          
+
             var productList = await productService.GetProductAsync();
             var farmersList = await productService.GetFarmersAsync(); // Fetch all farmers
 
@@ -90,7 +92,7 @@ namespace MauiApp3.ModelView
                     Description = product.Description,
                     Price = product.Price,
                     FarmerId = product.FarmerId,
-                    Farmer = farmer, // Assign the farmer manually 
+                    Farmer = farmer, // Assign the farmer manually
                     CategoryId = product.CategoryId,
                     Quantity = product.Quantity,
                     Weight = product.Weight,
@@ -102,7 +104,7 @@ namespace MauiApp3.ModelView
             FilterProducts();
         }
 
-        
+
 
 
         private int _selectedCategoryId;
@@ -116,16 +118,17 @@ namespace MauiApp3.ModelView
             }
         }
 
-      
+
 
         public ProductPageViewModel()
         {
             ChangeCategoryCommand = new Command<int>(OnCategoryChanged);
+            AddToCartCommand = new Command<Product>((_) => { });
         }
 
         private void OnCategoryChanged(int categoryId)
         {
-            SelectedCategoryId = categoryId; 
+            SelectedCategoryId = categoryId;
             FilterProducts();
         }
 
@@ -160,7 +163,7 @@ namespace MauiApp3.ModelView
                 FilteredProducts.Add(product);
             }
 
-            OnPropertyChanged(nameof(FilteredProducts));  
+            OnPropertyChanged(nameof(FilteredProducts));
         }
 
 
@@ -182,8 +185,39 @@ namespace MauiApp3.ModelView
                 Console.WriteLine("Error: Selected product is null");
                 return;
             }
-            await _navigation.PushAsync(new ProductInfo(product,productService));
+            await _navigation.PushAsync(new ProductInfo(product, productService));
         }
+        private void AddToCart(Product product)
+        {
+            if (product == null)
+                return;
+
+            // Check if the product is already in the cart
+            var existingCartItem = _cartService.GetCart().FirstOrDefault(c => c.ProductId == product.ProductId);
+
+            if (existingCartItem == null)
+            {
+                // Create a new Cart item with the required properties (e.g., Quantity, Amount)
+                var cartItem = new Cart
+                {
+                    ProductId = product.ProductId,
+                    Product = product,
+                    Quantity = 1, // Default quantity when adding for the first time
+                    Price = (decimal)product.Price,
+                    Amount = (decimal)product.Price * 1 // Amount is price * quantity
+                };
+
+                _cartService.AddProductToCart(cartItem.Product,cartItem.Quantity);
+                product.IsInCart = true; // Assuming this is a property that marks the product as in the cart
+            }
+            else
+            {
+                // If the product is already in the cart, you can just update the quantity or do any other logic you need
+                existingCartItem.Quantity++;
+                existingCartItem.Amount = existingCartItem.Price * existingCartItem.Quantity;
+            }
+        }
+
 
 
 

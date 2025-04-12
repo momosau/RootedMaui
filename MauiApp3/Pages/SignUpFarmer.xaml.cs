@@ -17,8 +17,8 @@ namespace MauiApp3.Pages
         private void EyeClicked(object sender, EventArgs e)
         {
             PasswordVisible1 = !PasswordVisible1;
-            //passwordEntry.IsPassword = !PasswordVisible1;
-            //eyeButton.Source = PasswordVisible1 ? "eyeo.png" : "eyec.png";
+            passwordEntry.IsPassword = !PasswordVisible1;
+            eyeButton.Source = PasswordVisible1 ? "eyeo.png" : "eyec.png";
         }
 
         private async void PickAndUploadImage(object sender, EventArgs e)
@@ -35,8 +35,7 @@ namespace MauiApp3.Pages
 
                 string Certificate = result.FullPath;
 
-                // ⁄—÷ «·’Ê—… «·„Œ «—…
-                // selectedImage.Source = ImageSource.FromFile(Certificate);
+
 
                 // —›⁄ «·’Ê—…
                 using var client = new HttpClient();
@@ -58,73 +57,71 @@ namespace MauiApp3.Pages
                 await DisplayAlert("Œÿ√", "ÕœÀ Œÿ√ √À‰«¡ «Œ Ì«— √Ê —›⁄ «·’Ê—…", "„Ê«›ﬁ");
             }
         }
-        /*
-                private async void NextClicked(object sender, EventArgs e)
+
+        private async void NextClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                // «· Õﬁﬁ „‰ ≈œŒ«· Ã„Ì⁄ «·ÕﬁÊ·
+                if (string.IsNullOrWhiteSpace(fullNameEntry.Text) ||
+                    string.IsNullOrWhiteSpace(phoneNumberEntry.Text) ||
+                    string.IsNullOrWhiteSpace(emailEntry.Text) ||
+                    string.IsNullOrWhiteSpace(passwordEntry.Text) ||
+                    string.IsNullOrWhiteSpace(FarmNameEntry.Text) ||
+                    string.IsNullOrWhiteSpace(FarmLocationEntry.Text) ||
+                    string.IsNullOrWhiteSpace(ProductsEntry.Text) ||
+                    string.IsNullOrEmpty(Certificate))
                 {
-                    try
-                    {
-                        // «· Õﬁﬁ „‰ ≈œŒ«· Ã„Ì⁄ «·ÕﬁÊ·
-                        if (string.IsNullOrWhiteSpace(fullNameEntry.Text) ||
-                            string.IsNullOrWhiteSpace(phoneNumberEntry.Text) ||
-                            string.IsNullOrWhiteSpace(emailEntry.Text) ||
-                            string.IsNullOrWhiteSpace(passwordEntry.Text) ||
-                            string.IsNullOrWhiteSpace(FarmNameEntry.Text) ||
-                            string.IsNullOrWhiteSpace(FarmLocationEntry.Text) ||
-                            string.IsNullOrWhiteSpace(ProductsEntry.Text) ||
-                            string.IsNullOrEmpty(Certificate))
-                        {
-                            await DisplayAlert("Œÿ√", "Ì—ÃÏ „·¡ Ã„Ì⁄ «·ÕﬁÊ· Ê—›⁄ «·’Ê—…", "„Ê«›ﬁ");
-                            return;
-                        }
+                    await DisplayAlert("Œÿ√", "Ì—ÃÏ „·¡ Ã„Ì⁄ «·ÕﬁÊ· Ê—›⁄ «·’Ê—…", "„Ê«›ﬁ");
+                    return;
+                }
 
-                        var farmer = new Farmer
-                        {
-                            Name = fullNameEntry.Text,
-                            PhoneNumber = phoneNumberEntry.Text,
-                            Email = emailEntry.Text,
-                            Password = passwordEntry.Text,
-                            UserName = FarmNameEntry.Text,
-                            Location = FarmLocationEntry.Text,
-                            Description = ProductsEntry.Text,
-                            Certificate = Certificate,
-                            VerificationStatus = "Pending",
-                        };
+                var farmer = new Farmer
+                {
+                    Name = fullNameEntry.Text,
+                    PhoneNumber = phoneNumberEntry.Text,
+                    Email = emailEntry.Text,
+                    Password = passwordEntry.Text,
+                    UserName = FarmNameEntry.Text,
+                    Location = FarmLocationEntry.Text,
+                    Description = ProductsEntry.Text,
+                    Certificate = Certificate,
+                    VerificationStatus = "Pending",
+                };
 
-                        await Navigation.PushAsync(new PhoneVerification(farmer));
-                    }
-                    catch (Exception ex)
-                    {
-                        await DisplayAlert("Œÿ√", $"ÕœÀ Œÿ√: {ex.Message}", "„Ê«›ﬁ");
-                        Console.WriteLine($"Error: {ex}");
-                    }
-                }*/
+                await Navigation.PushAsync(new EmailVerification(farmer));
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Œÿ√", $"ÕœÀ Œÿ√: {ex.Message}", "„Ê«›ﬁ");
+                Console.WriteLine($"Error: {ex}");
+            }
+        }
     }
+}
 
+public partial class Farmer
+{
+    public int FarmerId { get; set; }
 
+    public string Description { get; set; }
 
-    public partial class Farmer
-    {
-        public int FarmerId { get; set; }
+    public string Certificate { get; set; }
 
-        public string Description { get; set; }
+    public string Location { get; set; }
 
-        public string Certificate { get; set; }
+    public string ImageUrl { get; set; }
 
-        public string Location { get; set; }
+    public string Name { get; set; }
 
-        public string ImageUrl { get; set; }
+    public string PhoneNumber { get; set; }
 
-        public string Name { get; set; }
+    public string Email { get; set; }
 
-        public string PhoneNumber { get; set; }
+    public string Password { get; set; }
 
-        public string Email { get; set; }
+    public string VerificationStatus { get; set; }
 
-        public string Password { get; set; }
+    public string UserName { get; set; }
 
-        public string VerificationStatus { get; set; }
-
-        public string UserName { get; set; }
-
-    }
 }
