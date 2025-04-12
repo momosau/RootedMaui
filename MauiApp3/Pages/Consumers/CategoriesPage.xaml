@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp3.Pages.CategoriesPage"
+            x:Class="MauiApp3.Pages.Consumers.CategoriesPage"
              xmlns:coverters="clr-namespace:MauiApp3.Converter"
              Title="CategoriesPage"
-             BackgroundColor="#E7E9E4">
+             BackgroundColor="#E7E9E4" 
+          
+         >
   
 
     <CollectionView ItemsSource="{Binding Categories}"

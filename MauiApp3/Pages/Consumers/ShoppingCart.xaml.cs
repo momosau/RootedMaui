@@ -4,7 +4,7 @@ using MauiApp3.Services;
 using SharedLibraryy.Models;
 using System.Collections.ObjectModel;
 
-namespace MauiApp3.Pages;
+namespace MauiApp3.Pages.Consumers;
 
 public partial class ShoppingCart : ContentPage
 {

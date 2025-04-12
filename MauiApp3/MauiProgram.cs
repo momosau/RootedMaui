@@ -34,13 +34,13 @@ namespace MauiApp3
 
             builder.Services.AddHttpClient();
             builder.Services.AddSingleton<ProductPageViewModel>();
-            builder.Services.AddTransient<ProductPage>();
+            builder.Services.AddTransient<Pages.Consumers.ProductPage>();
             builder.Services.AddHttpClient<IProductService, ProductService>();
             builder.Services.AddSingleton<CartViewModel>();
-            builder.Services.AddTransient<ShoppingCart>();
+            builder.Services.AddTransient<Pages.Consumers.ShoppingCart>();
             builder.Services.AddHttpClient<ICartService, CartService>();
             builder.Services.AddSingleton<ProductInfoVIewModel>();
-            builder.Services.AddTransient<ProductInfo>();
+            builder.Services.AddTransient<Pages.Consumers.ProductInfo>();
             Ioc.Default.ConfigureServices(builder.Services.BuildServiceProvider());
 
 #if DEBUG

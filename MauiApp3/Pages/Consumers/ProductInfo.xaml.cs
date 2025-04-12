@@ -4,7 +4,7 @@ using MauiApp3.Services;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.DependencyInjection;
 
-namespace MauiApp3.Pages;
+namespace MauiApp3.Pages.Consumers;
 
 public partial class ProductInfo : ContentPage
 {

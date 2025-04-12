@@ -5,7 +5,7 @@ using SharedLibraryy.Models;
 
 
 
-namespace MauiApp3.Pages;
+namespace MauiApp3.Pages.Farmers;
 
 [QueryProperty(nameof(Product), "Product")]
 public partial class AddProductsFarmer : ContentPage

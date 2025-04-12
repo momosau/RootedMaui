@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
-namespace MauiApp3.Pages;
+namespace MauiApp3.Pages.Consumers;
 
 public partial class CategoriesPage : ContentPage
 {

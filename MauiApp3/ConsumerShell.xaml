@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.ConsumerShell"
+       xmlns:local="clr-namespace:MauiApp3.Pages.Consumers"
+  Shell.FlyoutBehavior="Disabled"
+           >
+    <TabBar>
+      
+        <ShellContent 
+ Title="Home" 
+ Icon="home.png" 
+ ContentTemplate="{DataTemplate local:CategoriesPage}" />
+        <ShellContent 
+Title="Farmers" 
+Icon="farmers.png" 
+ContentTemplate="{DataTemplate local:CategoriesPage}" />
+        <ShellContent 
+  Title="Category" 
+  Icon="category.png" 
+  ContentTemplate="{DataTemplate local:CategoriesPage}" />
+  
+        <ShellContent 
+  Title="Cart" 
+  Icon="cart.png" 
+  ContentTemplate="{DataTemplate local:ShoppingCart}" />
+        <ShellContent 
+Title="Acount" 
+Icon="account.png" 
+ContentTemplate="{DataTemplate local:CategoriesPage}" />
+
+
+    </TabBar>
+
+</Shell>

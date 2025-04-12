@@ -17,19 +17,21 @@ namespace MauiApp3
         
         private async void FarmerClicked(object sender, EventArgs e)
         {
+            App.UserType = "farmer";
+
+
           
-
-
-            await Shell.Current.GoToAsync("FarmerProducts");
+            Application.Current.MainPage = new FarmerShell();
 
 
         }
 
         private async void Consumerclicked(object sender, EventArgs e)
         {
-        
-            await Shell.Current.GoToAsync("CategoriesPage");
-           
+            App.UserType = "consumer";
+
+            Application.Current.MainPage = new ConsumerShell();
+
 
         }
     }

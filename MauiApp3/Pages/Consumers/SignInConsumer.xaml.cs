@@ -1,4 +1,4 @@
-namespace MauiApp3;
+namespace MauiApp3.Pages.Consumers;
 
 public partial class SignInConsumer: ContentPage
 {
@@ -17,9 +17,9 @@ public partial class SignInConsumer: ContentPage
 
     private void eyeClicked(object sender, EventArgs e)
     {
-        PasswordVisible = !PasswordVisible;
-        passwordEntry.IsPassword = !PasswordVisible;
-        eyeButton.Source = PasswordVisible ? "eyeo.png" : "eyec.png";
+        //PasswordVisible = !PasswordVisible;
+        //passwordEntry.IsPassword = !PasswordVisible;
+        //eyeButton.Source = PasswordVisible ? "eyeo.png" : "eyec.png";
     }
     private async void SignInClicked(object sender, EventArgs e)
     {

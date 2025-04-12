@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp3.Pages.FarmerProducts"
+             x:Class="MauiApp3.Pages.Farmers.FarmerProducts"
               xmlns:vm="clr-namespace:MauiApp3.ModelView"
-         
+          Shell.TabBarIsVisible="True"
              Title="FarmerProducts"
               BackgroundColor="#E7E9E4" 
  FlowDirection="RightToLeft" >
