@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.FarmersListPage"
+             Title="FarmersListPage"
+             
+ FlowDirection="RightToLeft"
+         
+ BackgroundColor="#EAE9E2">
+
+    <CollectionView ItemsSource="{Binding Farmers}" SelectionMode="Single" SelectionChanged="OnFarmerSelected">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame Margin="10" Padding="10" BorderColor="LightGray" CornerRadius="10">
+                    <HorizontalStackLayout Spacing="10">
+                        <Image Source="{Binding ImageUrl}" WidthRequest="60" HeightRequest="60"/>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18"/>
+                            <Label Text="{Binding City}" FontSize="14" TextColor="Gray"/>
+                            <Label Text="{Binding FarmName}" FontSize="14"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

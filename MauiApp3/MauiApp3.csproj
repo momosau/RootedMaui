@@ -135,6 +135,9 @@
 	  <MauiXaml Update="Pages\FarmerProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\FarmersListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\ForgotPasswordEmail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
