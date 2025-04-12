@@ -32,23 +32,20 @@
 
         <!-- Quantity Control -->
         <HorizontalStackLayout>
-            <HorizontalStackLayout  VerticalOptions="Center" HorizontalOptions="Start" >
-                <Button Text="-" Background="White" TextColor="Green"
-                    Clicked="DelButtonClicked"
-                    CornerRadius="10" WidthRequest="40" HeightRequest="40"/>
+            <Border StrokeThickness="0" BackgroundColor="White">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+                <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="White" HorizontalOptions="Start" WidthRequest="100">
+                    <Button Clicked="OnIncreaseClicked" Text="+" BackgroundColor="White" CornerRadius="50" WidthRequest="30" HeightRequest="30" TextColor="Grey"/>
+                    <Label Text="{Binding QuantityInCart}" FontSize="20" VerticalOptions="Center" BackgroundColor="White" TextColor="Grey"/>
+                    <Button Text="-"  Clicked="OnDecreaseClicked" BackgroundColor="White" CornerRadius="50" WidthRequest="30" HeightRequest="30" TextColor="Grey"/>
+                </StackLayout>
+            </Border>
 
-                <Label x:Name="label" Text="{Binding SelectedProduct.Quantity}" 
-                   TextColor="Black" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" BackgroundColor="White"/>
-
-                <Button Text="+" Background="White" TextColor="Green"
-                    Clicked="AddButtonClicked"
-                    CornerRadius="10" WidthRequest="40" HeightRequest="40">
-
-                </Button>
-            </HorizontalStackLayout>
             <Button Text="اضف بالسلة" Background="Green" TextColor="White" Clicked="AddToCartCLicked" ></Button>
 
-        </HorizontalStackLayout>
+        </HorizontalStackLayout >
 
     </VerticalStackLayout>
 

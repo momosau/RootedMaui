@@ -66,17 +66,25 @@
                    HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
                                         <Label Text="{Binding Farmer.FarmName}" FontSize="20" TextColor="#34495e"/>
                                     </VerticalStackLayout>
+                                    <Button 
+    Text="Add to Cart"
+    Command="{Binding Source={RelativeSource AncestorType={x:Type ModelView:ProductPageViewModel}}, Path=AddToCartCommand}"
+    CommandParameter="{Binding .}" >
 
-                                    <Button  Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.AddToCartCommand}" CommandParameter="{Binding .}">
 
-                                        <Button.Triggers>
+                                    <Button.Triggers>
+                                            <!-- When already in cart -->
                                             <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="True">
                                                 <Setter Property="Text" Value="✔ تمت الإضافة" />
                                                 <Setter Property="BackgroundColor" Value="LightGreen" />
+                                                <Setter Property="IsEnabled" Value="False" />
                                             </DataTrigger>
+
+                                            <!-- When not in cart -->
                                             <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="False">
                                                 <Setter Property="Text" Value="➕ أضف إلى السلة" />
                                                 <Setter Property="BackgroundColor" Value="LightGray" />
+                                                <Setter Property="IsEnabled" Value="True" />
                                             </DataTrigger>
                                         </Button.Triggers>
                                     </Button>

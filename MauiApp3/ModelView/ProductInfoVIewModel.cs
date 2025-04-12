@@ -60,6 +60,31 @@ namespace MauiApp3.ModelView
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        private int _quantityInCart = 1;
+        public int QuantityInCart
+        {
+            get => _quantityInCart;
+            set
+            {
+                if (value != _quantityInCart)
+                {
+                    _quantityInCart = value;
+                    OnPropertyChanged(nameof(QuantityInCart));
+                }
+            }
+        }
+
+        public void IncreaseQuantity()
+        {
+            if (QuantityInCart < SelectedProduct.Quantity)
+                QuantityInCart++;
+        }
+
+        public void DecreaseQuantity()
+        {
+            if (QuantityInCart > 1)
+                QuantityInCart--;
+        }
     }
 
 }

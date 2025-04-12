@@ -9,30 +9,74 @@
              FlowDirection="RightToLeft" 
              Padding="0" 
              x:DataType="ViewModel:CartViewModel">
-    <Grid RowDefinitions="*,Auto"
-          Padding="0" Margin="0">
-        <ScrollView Grid.Row="0">
-            <CollectionView ItemsSource="{Binding Cartitem}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="Model:Cart">
-                        <Border BackgroundColor="White" StrokeShape="RoundRectangle 5" Padding="5,8" StrokeThickness="0">
-                            <Grid ColumnDefinitions="*,125,100">
-                                <Label Grid.Column="0" Text="{Binding Product.Name}" FontSize="15" VerticalOptions="Center"/>
 
-                                <Label Grid.Column="2" Text="{Binding Amount ,StringFormat='ريال'}" FontSize="15" VerticalOptions="Center"/>
+    <VerticalStackLayout Padding="10">
 
-                            </Grid>
-                        </Border>
+        <!-- CART ITEMS -->
+        <CollectionView ItemsSource="{Binding Cartitem}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="Model:Cart">
+                    <Border BackgroundColor="White"
+                            StrokeShape="RoundRectangle 5"
+                            Padding="5,8"
+                            StrokeThickness="1"
+                            Stroke="#ccc">
+                        <HorizontalStackLayout>
+                            <Image Source="{Binding Product.ImageUrl}"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   Aspect="AspectFill"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center"/>
+                            <VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                
+                            <Label Text="{Binding Product.Name}"
+                                   FontSize="15"
+                                   TextColor="Black"
+                                   VerticalOptions="Center"/>
+                                <Label Text="{Binding Product.Weight}" TextColor="Black" FontSize="Body"  />
+                                <Label Text="{Binding Product.Unit}" TextColor="Black"/>
+                            </HorizontalStackLayout>
+                                <Label Text="{Binding Amount, StringFormat='{0} ريال'}"
+         FontSize="18"
+         FontAttributes="Bold"
+       />
+                            </VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                <Border StrokeThickness="0" BackgroundColor="White">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="20"/>
+                                    </Border.StrokeShape>
+                                    <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="White" HorizontalOptions="Start" WidthRequest="100">
+                                        <Button Clicked="OnIncreaseClicked" Text="+" BackgroundColor="White" CornerRadius="50" WidthRequest="30" HeightRequest="30" TextColor="Grey"/>
+                                        <Label Text="{Binding Quantity}" FontSize="20" VerticalOptions="Center" BackgroundColor="White" TextColor="Grey"/>
+                                        <Button Text="-"  Clicked="OnDecreaseClicked" BackgroundColor="White" CornerRadius="50" WidthRequest="30" HeightRequest="30" TextColor="Grey"/>
+                                    </StackLayout>
+                                </Border>
+                            </HorizontalStackLayout >
+                        </HorizontalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ScrollView>
-        <Border Grid.Row="1">
-            <Label Text="المجموع"/>
+        <!-- TOTAL SECTION -->
+        <Border BackgroundColor="#eee" Padding="10"
+                StrokeShape="RoundRectangle 5"
+                Stroke="#ccc"
+                StrokeThickness="1"
+                Margin="0,10,0,0">
+            <Label Text="{Binding TotalAmount, StringFormat='المجموع الكلي: {0} ريال'}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
         </Border>
-    </Grid>
+
+    </VerticalStackLayout>
 </ContentPage>
+    

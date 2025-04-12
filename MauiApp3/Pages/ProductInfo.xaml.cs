@@ -1,6 +1,8 @@
 using MauiApp3.ModelView;
 using SharedLibraryy.Models;
 using MauiApp3.Services;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.DependencyInjection;
 
 namespace MauiApp3.Pages;
 
@@ -19,29 +21,32 @@ public partial class ProductInfo : ContentPage
 
     public int count = 1;
 
-    private string GetCount()
-    {
-        return count.ToString();
-    }
-
-    async void AddButtonClicked(object sender, EventArgs e)
-    {
-        count++;
-        // label.Text = GetCount();
-    }
-
-    async void DelButtonClicked(object sender, EventArgs e)
-    {
-        if (count > 1)
-            count--;
-        // label.Text = GetCount();
-    }
-
-
 
     private async void AddToCartCLicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(ShoppingCart));
+        if (BindingContext is ProductInfoVIewModel vm)
+        {
+            var cartViewModel = Ioc.Default.GetRequiredService<CartViewModel>();
+            for (int i = 0; i < vm.QuantityInCart; i++)
+            {
+                cartViewModel.AddToCartCommand.Execute(vm.SelectedProduct);
+            }
 
+
+            await Shell.Current.GoToAsync(nameof(ShoppingCart));
+        }
+    }
+
+
+    private void OnIncreaseClicked(object sender, EventArgs e)
+    {
+        if (BindingContext is ProductInfoVIewModel vm)
+            vm.IncreaseQuantity();
+    }
+
+    private void OnDecreaseClicked(object sender, EventArgs e)
+    {
+        if (BindingContext is ProductInfoVIewModel vm)
+            vm.DecreaseQuantity();
     }
 }
