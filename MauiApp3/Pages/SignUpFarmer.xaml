@@ -315,9 +315,7 @@
                                 Clicked="PickAndUploadImage"/>
                     </Grid>
                 </Border>
-                <!--   <Frame CornerRadius="10" Padding="5" BackgroundColor="#EFEFEF" HorizontalOptions="Center">
-                    <Image x:Name="selectedImage" HeightRequest="200" WidthRequest="200" Aspect="AspectFill" Source="default_image.png"/>
-                </Frame>-->
+
 
                 <!-- Next Button -->
                 <Button Grid.Row="13" 
@@ -327,10 +325,10 @@
                         FontSize="15" 
                         FontAttributes="Bold" 
                         CornerRadius="15" 
-                         HorizontalOptions="FillAndExpand"/>
-                    <!--Clicked="NextClicked"-->
-                       
+                        Clicked="NextClicked"
+                        HorizontalOptions="FillAndExpand"/>
             </Grid>
         </StackLayout>
     </ScrollView>
-</ContentPage> 
+</ContentPage>
+
