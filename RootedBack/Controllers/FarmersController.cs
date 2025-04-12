@@ -112,7 +112,7 @@ namespace RootedBack.Controllers
                 return BadRequest("File is empty.");
 
             string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/certificates");
-            Directory.CreateDirectory(uploadsFolder); 
+            Directory.CreateDirectory(uploadsFolder);
 
             string fileName = $"farmer_{farmerId}.pdf";
             string filePath = Path.Combine(uploadsFolder, fileName);
@@ -137,6 +137,33 @@ namespace RootedBack.Controllers
             }
 
             return Ok(new { Message = "File uploaded successfully!", Path = relativePath });
+        }
+
+
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<Farmer>> SignInFarmer(FarmerLoginRequest request)
+        {
+            var farmer = await _context.Farmers
+                .FirstOrDefaultAsync(f => f.Email == request.Email && f.Password == request.Password);
+
+            if (farmer == null)
+            {
+                return BadRequest("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
+            }
+
+            if (farmer.VerificationStatus != "Approved")
+            {
+                return Unauthorized("ليس لديك صلاحية للدخول. يرجى الانتظار حتى تتم الموافقة عليك من قبل الإدارة.");
+            }
+
+            return Ok(farmer);
+        }
+
+        public class FarmerLoginRequest
+        {
+            public string Email { get; set; }
+            public string Password { get; set; }
         }
 
     }
