@@ -1,4 +1,7 @@
-﻿namespace AdminApp
+﻿using AdminApp.Pages;
+using AdminApp.Services;
+using AdminApp.ViewModel;
+namespace AdminApp
 {
     public partial class MainPage : ContentPage
     {
@@ -24,16 +27,13 @@
                 label.Text = "Error: " + ex.Message;
             }
         }
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void OnCounterClicked(object sender, EventArgs e)
         {
-            count++;
+            var httpClient = new HttpClient();
+            var viewModel = new AdminApprovalViewModel(new FarmerApilicationService(httpClient)); 
+            await Navigation.PushAsync(new AdminApproval(viewModel));
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
         }
     }
 

@@ -8,7 +8,7 @@
          
  BackgroundColor="#EAE9E2">
 
-    <CollectionView ItemsSource="{Binding Farmers}" SelectionMode="Single" SelectionChanged="OnFarmerSelected">
+    <CollectionView ItemsSource="{Binding Farmers}" SelectionMode="Single" >
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Frame Margin="10" Padding="10" BorderColor="LightGray" CornerRadius="10">

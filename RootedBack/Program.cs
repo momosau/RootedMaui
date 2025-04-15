@@ -38,6 +38,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<IApiServices, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IFarmerApplicationsService, FarmerApplicationsService>();
 
 var app = builder.Build();
 

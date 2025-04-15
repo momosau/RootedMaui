@@ -33,7 +33,7 @@ public partial class ProductInfo : ContentPage
             }
 
 
-            await Shell.Current.GoToAsync(nameof(ShoppingCart));
+            await Shell.Current.GoToAsync(nameof(Pages.Consumers.ShoppingCart));
         }
     }
 

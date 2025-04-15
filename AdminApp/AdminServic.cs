@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using SharedLibraryy.Models;
 using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-using SharedLibraryy.Models;
 
 namespace AdminApp
 {

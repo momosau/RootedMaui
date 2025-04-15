@@ -92,7 +92,7 @@ namespace MauiApp3.ModelView
                     Description = product.Description,
                     Price = product.Price,
                     FarmerId = product.FarmerId,
-                    Farmer = farmer, // Assign the farmer manually
+                    Farmer = product.Farmer, 
                     CategoryId = product.CategoryId,
                     Quantity = product.Quantity,
                     Weight = product.Weight,

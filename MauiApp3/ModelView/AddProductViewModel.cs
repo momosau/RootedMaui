@@ -1,15 +1,10 @@
 ﻿using MauiApp3.Services;
 using SharedLibraryy.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace MauiApp3.ModelView
 {
-    public partial class AddProductViewModel: BaseViewModel
+    public partial class AddProductViewModel : BaseViewModel
     {
         private readonly ProductService1 _productService;
         public Product NewProduct { get; private set; } = new();

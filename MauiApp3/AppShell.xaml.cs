@@ -24,13 +24,17 @@ public AppShell()
             Routing.RegisterRoute("FarmerProfilePage", typeof(FarmerProfilePage));
             Routing.RegisterRoute("ForgotPasswordEmail", typeof(ForgotPasswordEmail));
             Routing.RegisterRoute("LocationPage", typeof(LocationPage));
+
             Routing.RegisterRoute("PaymentMethodPage", typeof(Pages.Consumers.PaymentMethodPage));
-            Routing.RegisterRoute("PhoneVerification", typeof(PhoneVerification));
+           
+
+            Routing.RegisterRoute("PhoneVerification", typeof(Pages.Farmers.EmailVerification));
+
             Routing.RegisterRoute("PrivacyPolicyPage", typeof(PrivacyPolicyPage));
             Routing.RegisterRoute("ResetPasswordPage", typeof(ResetPasswordPage));
             Routing.RegisterRoute("SignInConsumer", typeof(Pages.Consumers.SignInConsumer));
-            Routing.RegisterRoute("SignUpFarmer", typeof(SignUpFarmer));
-           
+            Routing.RegisterRoute("SignUpFarmer", typeof(Pages.Farmers.SignUpFarmer));
+            Routing.RegisterRoute("SignUpFarmer2", typeof(Pages.Farmers.SignUpFarmer2));
             Routing.RegisterRoute("SplashConsumer", typeof(Pages.Consumers.SplashConsumer));
             Routing.RegisterRoute("SplashFarmerFinal", typeof(SplashFarmerFinal));
             Routing.RegisterRoute("VerificationCodePage", typeof(VerificationCodePage));
@@ -40,9 +44,11 @@ public AppShell()
             Routing.RegisterRoute("DeliveryPage", typeof(DeliveryPage));
             Routing.RegisterRoute("ShoppingCart", typeof(Pages.Consumers.ShoppingCart));
 
-
+         //   Routing.RegisterRoute("PhoneVerification", typeof(EmailVerification));
             Routing.RegisterRoute("ProductPage", typeof(Pages.Consumers.ProductPage));
             Routing.RegisterRoute("CategoriesPage", typeof(Pages.Consumers.CategoriesPage));
+
+            Routing.RegisterRoute("FarmersListPage", typeof(FarmersListPage));
 
 
 

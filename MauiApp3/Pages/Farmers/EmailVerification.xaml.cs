@@ -1,23 +1,24 @@
-using System.Diagnostics;
+ï»¿using System.Diagnostics;
 using System.Text;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 
-namespace MauiApp3.Pages
+namespace MauiApp3.Pages.Farmers
 {
     public partial class EmailVerification : ContentPage
     {
-        private Farmer _farmer;
+        private FarmerApplication _farmer;
         private const string FixedVerificationCode = "1111";
         private readonly HttpClient _httpClient = new HttpClient();
         private const string apiKey = "http://localhost:7168/api/Farmers";
-        public EmailVerification(Farmer farmer)
+        //FarmerApplication
+        public EmailVerification(FarmerApplication farmer)
         {
             InitializeComponent();
             _farmer = farmer;
-            Debug.WriteLine($"Êã ÇÓÊŞÈÇá ÈíÇäÇÊ ÇáãÒÇÑÚ: {JsonConvert.SerializeObject(_farmer)}");
+            Debug.WriteLine($"ØªÙ… Ø§Ø³ØªÙ‚Ø¨Ø§Ù„ Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ù…Ø²Ø§Ø±Ø¹: {JsonConvert.SerializeObject(_farmer)}");
         }
 
         private void MoveText(object sender, TextChangedEventArgs e)
@@ -34,39 +35,39 @@ namespace MauiApp3.Pages
         {
             try
             {
-                // ÇáÊÍŞŞ ãä ÅÏÎÇá ÌãíÚ ÇáÃÑŞÇã
+                // Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø¥Ø¯Ø®Ø§Ù„ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ø±Ù‚Ø§Ù…
                 if (string.IsNullOrEmpty(pin1.Text) || string.IsNullOrEmpty(pin2.Text) ||
                     string.IsNullOrEmpty(pin3.Text) || string.IsNullOrEmpty(pin4.Text))
                 {
-                    await DisplayAlert("ÎØÃ", "ÇáÑÌÇÁ ÅÏÎÇá ÑãÒ ÇáÊÍŞŞ ÈÇáßÇãá", "ãæÇİŞ");
+                    await DisplayAlert("Ø®Ø·Ø£", "Ø§Ù„Ø±Ø¬Ø§Ø¡ Ø¥Ø¯Ø®Ø§Ù„ Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ Ø¨Ø§Ù„ÙƒØ§Ù…Ù„", "Ù…ÙˆØ§ÙÙ‚");
                     return;
                 }
                 string enteredCode = $"{pin1.Text}{pin2.Text}{pin3.Text}{pin4.Text}";
                 if (enteredCode != FixedVerificationCode)
                 {
-                    await DisplayAlert("ÎØÃ", "ßæÏ ÇáÊÍŞŞ ÛíÑ ÕÍíÍ", "ãæÇİŞ");
+                    await DisplayAlert("Ø®Ø·Ø£", "ÙƒÙˆØ¯ Ø§Ù„ØªØ­Ù‚Ù‚ ØºÙŠØ± ØµØ­ÙŠØ­", "Ù…ÙˆØ§ÙÙ‚");
                     return;
                 }
 
                 loadingIndicator.IsVisible = true;
                 verifyButton.IsEnabled = false;
 
-                // ÅÑÓÇá ÇáÈíÇäÇÊ Åáì API
+                // Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª Ø¥Ù„Ù‰ API
                 bool isSuccess = await UploadFarmerData(_farmer);
 
                 if (isSuccess)
                 {
-                    await DisplayAlert("äÌÇÍ", "Êã ÊÓÌíá ÇáãÒÇÑÚ ÈäÌÇÍ", "ãæÇİŞ");
+                    await DisplayAlert("Ù†Ø¬Ø§Ø­", "ØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ù…Ø²Ø§Ø±Ø¹ Ø¨Ù†Ø¬Ø§Ø­", "Ù…ÙˆØ§ÙÙ‚");
                     await Navigation.PushAsync(new SplashFarmerFinal());
                 }
                 else
                 {
-                    await DisplayAlert("ÎØÃ", "İÔá İí ÊÓÌíá ÇáãÒÇÑÚ", "ãæÇİŞ");
+                    await DisplayAlert("Ø®Ø·Ø£", "ÙØ´Ù„ ÙÙŠ ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ù…Ø²Ø§Ø±Ø¹", "Ù…ÙˆØ§ÙÙ‚");
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("ÎØÃ", $"ÍÏË ÎØÃ ÛíÑ ãÊæŞÚ: {ex.Message}", "ãæÇİŞ");
+                await DisplayAlert("Ø®Ø·Ø£", $"Ø­Ø¯Ø« Ø®Ø·Ø£ ØºÙŠØ± Ù…ØªÙˆÙ‚Ø¹: {ex.Message}", "Ù…ÙˆØ§ÙÙ‚");
                 Debug.WriteLine($"Error: {ex}");
             }
             finally
@@ -76,16 +77,16 @@ namespace MauiApp3.Pages
             }
         }
 
-        private async Task<bool> UploadFarmerData(Farmer farmer)
+        private async Task<bool> UploadFarmerData(FarmerApplication farmer)
         {
 
             try
             {
-                // ÑÇÈØ ÇáÜ API
-                var apiUrl = "http://localhost:7168/api/Farmers"; // ÖÚ ÚäæÇä IP ÇáãÍáí ÇáÕÍíÍ åäÇ
+                // Ø±Ø§Ø¨Ø· Ø§Ù„Ù€ API
+                var apiUrl = "http://localhost:7168/api/Farmers"; // Ø¶Ø¹ Ø¹Ù†ÙˆØ§Ù† IP Ø§Ù„Ù…Ø­Ù„ÙŠ Ø§Ù„ØµØ­ÙŠØ­ Ù‡Ù†Ø§
                 var json = JsonConvert.SerializeObject(farmer);
 
-                // ÚÑÖ ÇáÈíÇäÇÊ ÇáãÑÓáÉ İí ÇáÜ Debug
+                // Ø¹Ø±Ø¶ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ù…Ø±Ø³Ù„Ø© ÙÙŠ Ø§Ù„Ù€ Debug
                 Debug.WriteLine($"JSON to API: {json}");
 
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -108,4 +109,3 @@ namespace MauiApp3.Pages
         }
     }
 }
-

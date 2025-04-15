@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RootedBack.Data;
 using SharedLibraryy.Models;
+using SharedLibraryy.Services;
 
 namespace RootedBack.Controllers
 {
@@ -14,95 +9,89 @@ namespace RootedBack.Controllers
     [ApiController]
     public class FarmerApplicationsController : ControllerBase
     {
-        private readonly RootedDBContext _context;
+        private readonly IFarmerApplicationsService _service;
 
-        public FarmerApplicationsController(RootedDBContext context)
+        public FarmerApplicationsController(IFarmerApplicationsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: api/FarmerApplications
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FarmerApplication>>> GetFarmerApplications()
+        public async Task<ActionResult<IEnumerable<FarmerApplication>>> GetAllApplications()
         {
-            return await _context.FarmerApplications.ToListAsync();
+            var applications = await _service.GetAllAsync();
+            return Ok(applications);
+        }
+
+        // GET: api/FarmerApplications/pending
+        [HttpGet("pending")]
+        public async Task<ActionResult<IEnumerable<FarmerApplication>>> GetPendingApplications()
+        {
+            var pending = await _service.GetPendingAsync();
+            return Ok(pending);
         }
 
         // GET: api/FarmerApplications/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<FarmerApplication>> GetFarmerApplication(int id)
+        public async Task<ActionResult<FarmerApplication>> GetById(int id)
         {
-            var farmerApplication = await _context.FarmerApplications.FindAsync(id);
-
-            if (farmerApplication == null)
-            {
+            var app = await _service.GetByIdAsync(id);
+            if (app == null)
                 return NotFound();
-            }
-
-            return farmerApplication;
-        }
-
-        // PUT: api/FarmerApplications/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutFarmerApplication(int id, FarmerApplication farmerApplication)
-        {
-            if (id != farmerApplication.AppilicationId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(farmerApplication).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FarmerApplicationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(app);
         }
 
         // POST: api/FarmerApplications
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<FarmerApplication>> PostFarmerApplication(FarmerApplication farmerApplication)
+        public async Task<ActionResult<FarmerApplication>> SubmitApplication(FarmerApplication application)
         {
-            _context.FarmerApplications.Add(farmerApplication);
-            await _context.SaveChangesAsync();
+            var created = await _service.CreateAsync(application);
+            return CreatedAtAction(nameof(GetById), new { id = created.AppilicationId }, created);
+        }
 
-            return CreatedAtAction("GetFarmerApplication", new { id = farmerApplication.AppilicationId }, farmerApplication);
+
+        // PUT: api/FarmerApplications/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateApplication(int id, FarmerApplication application)
+        {
+            var updated = await _service.UpdateAsync(id, application);
+            if (!updated) return NotFound();
+            return NoContent();
         }
 
         // DELETE: api/FarmerApplications/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFarmerApplication(int id)
+        public async Task<IActionResult> DeleteApplication(int id)
         {
-            var farmerApplication = await _context.FarmerApplications.FindAsync(id);
-            if (farmerApplication == null)
-            {
-                return NotFound();
-            }
-
-            _context.FarmerApplications.Remove(farmerApplication);
-            await _context.SaveChangesAsync();
-
+            var deleted = await _service.DeleteAsync(id);
+            if (!deleted) return NotFound();
             return NoContent();
         }
 
-        private bool FarmerApplicationExists(int id)
+        // POST: api/FarmerApplications/5/accept
+        [HttpPost("{id}/accept")]
+        public async Task<IActionResult> AcceptApplication(int id)
         {
-            return _context.FarmerApplications.Any(e => e.AppilicationId == id);
+            var acceptedFarmer = await _service.AcceptApplicationAsync(id);
+            if (acceptedFarmer == null)
+                return NotFound();
+
+            return Ok(new
+            {
+                Message = "Farmer application accepted and added to Farmers.",
+                Farmer = acceptedFarmer
+            });
         }
+
+        // DELETE: api/FarmerApplications/5/reject
+        [HttpDelete("{id}/reject")]
+        public async Task<IActionResult> RejectApplication(int id)
+        {
+            var rejected = await _service.RejectApplicationAsync(id);
+            if (!rejected) return NotFound();
+            return NoContent();
+        }
+    
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MauiApp3.ModelView;
-using MauiApp3.Pages;
+using MauiApp3.Pages.Farmers;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Internals;
 
 namespace MauiApp3
 {
@@ -19,9 +20,9 @@ namespace MauiApp3
         {
             App.UserType = "farmer";
 
-
+            await Navigation.PushAsync(new SignUpFarmer());
           
-            Application.Current.MainPage = new FarmerShell();
+           // Application.Current.MainPage = new FarmerShell();
 
 
         }

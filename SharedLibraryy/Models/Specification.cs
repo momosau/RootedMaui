@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace SharedLibraryy.Models;
 
@@ -23,8 +20,11 @@ public partial class Specification
 
     public bool? IsPesticideFree { get; set; }
 
-    [InverseProperty("Specification")]
-    public virtual ICollection<FarmerSpecification> FarmerSpecifications { get; set; } = new List<FarmerSpecification>();
+    [ForeignKey("SpecificationId")]
+    public virtual ICollection<Farmer> Farmers { get; set; } = new List<Farmer>();
+    [ForeignKey("SpecificationId")]
+    public ICollection<FarmerApplication> FarmerApplications { get; set; } = new List<FarmerApplication>();
+
 
     [ForeignKey("SpecificationId")]
     [InverseProperty("Specifications")]

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp3.Pages.SignUpFarmer"
+             x:Class="MauiApp3.Pages.Farmers.SignUpFarmer"
              Title="تسجيل المزارع"
              BackgroundColor="#E7E9E4"
              FlowDirection="RightToLeft">
-
     <ScrollView>
         <StackLayout Spacing="20" Padding="20">
             <ActivityIndicator x:Name="loadingIndicator" 
@@ -13,312 +12,75 @@
                              Color="#3E6F41"
                              HorizontalOptions="Center"/>
 
-            <!-- القسم الأول: البيانات الأساسية -->
-            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" 
-                  RowSpacing="12">
+            <!-- استخدام VerticalStackLayout لعرض الصورة والنص -->
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
 
-                <!-- Logo -->
-                <Image Grid.Row="0" 
-                       Source="rooted_logo.png" 
-                       WidthRequest="200" 
-                       HeightRequest="100" 
-                       HorizontalOptions="Center"/>
+                <!-- صورة البروفايل -->
+                <Frame HeightRequest="120" WidthRequest="120" CornerRadius="60" Padding="0" IsClippedToBounds="True" HasShadow="False" BackgroundColor="Transparent" HorizontalOptions="Center">
+                    <Image x:Name="selectedImage" Source="account.png" Aspect="AspectFill" />
+                </Frame>
+
+                <!-- زر تغيير الصورة -->
+                <Label Text="اضغط لاختيار صورة" TextColor="CornflowerBlue" FontSize="16" HorizontalOptions="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PickAndUploadImage"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </VerticalStackLayout>
+
+            <!-- Grid لعرض باقي المعلومات -->
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" 
+   ColumnDefinitions="*,*" RowSpacing="13" Padding="20, 0">
 
                 <!-- Full Name -->
-                <Label Grid.Row="1" 
-                       Text="الاسم الثلاثي" 
-                       TextColor="#0E3230" 
-                       FontAttributes="Bold"/>
-
-                <Border Grid.Row="2" 
-                        Stroke="#71873F" 
-                        StrokeThickness="1.5" 
-                        StrokeShape="RoundRectangle 15"
-                        Background="White" 
-                        HeightRequest="50">
+                <Label Grid.Row="0" Text="الاسم" TextColor="#0E3230" FontAttributes="Bold" />
+                <Border Grid.Row="1" Stroke="#71873F" StrokeThickness="1.5" StrokeShape="RoundRectangle 15" Background="White" HeightRequest="50">
                     <Grid ColumnDefinitions="*, Auto">
-                        <Entry x:Name="fullNameEntry"
-                               Grid.Column="0" 
-                               FontFamily="FontArabic" 
-                               Placeholder="علي محمد سعد" 
-                               TextColor="Black" 
-                               PlaceholderColor="Gray" 
-                               FontSize="14" 
-                               Margin="10,0"/>
-                        <Image Grid.Column="1" 
-                               Source="user_icon.png" 
-                               WidthRequest="20" 
-                               HeightRequest="20" 
-                               VerticalOptions="Center" 
-                               Margin="10"/>
+                        <Entry x:Name="fullNameEntry" Grid.Column="0" FontFamily="FontArabic" Placeholder="محمد" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <Image Grid.Column="1" Source="user_icon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
+                    </Grid>
+                </Border>
+
+                <!-- Username -->
+                <Label Grid.Row="2" Text="اسم المستخدم" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                <Border Grid.Row="3" Stroke="#71873F" StrokeThickness="1.5" StrokeShape="RoundRectangle 15" Background="White" HeightRequest="50">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Entry x:Name="usernameEntry" Grid.Column="0" Placeholder="اسم المستخدم" FontFamily="FontArabic" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <Image Grid.Column="1" Source="user_icon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
                     </Grid>
                 </Border>
 
                 <!-- Phone Number -->
-                <Label Grid.Row="3"
-                       Text="رقم الجوال" 
-                       FontFamily="FontArabic"          
-                       TextColor="#0E3230" 
-                       FontAttributes="Bold"/>
-                <Border Grid.Row="4" 
-                        Stroke="#71873F" 
-                        StrokeShape="RoundRectangle 15"
-                        StrokeThickness="1.5" 
-                        Background="White" 
-                        HeightRequest="50">
+                <Label Grid.Row="4" Text="رقم الجوال" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                <Border Grid.Row="5" Stroke="#71873F" StrokeShape="RoundRectangle 15" StrokeThickness="1.5" Background="White" HeightRequest="50">
                     <Grid ColumnDefinitions="Auto, *, Auto">
-                        <Label Grid.Column="0" 
-                               Text="+966" 
-                               TextColor="Black"
-                               BackgroundColor="#E7E9E4" 
-                               Padding="10"/>
-                        <Entry x:Name="phoneNumberEntry"
-                               Grid.Column="1" 
-                               Placeholder="500000000" 
-                               Keyboard="Telephone" 
-                               TextColor="Black" 
-                               PlaceholderColor="Gray" 
-                               FontSize="14" 
-                               Margin="10,0"/>
-                        <Image Grid.Column="2" 
-                               Source="phone_icon.png"
-                               WidthRequest="20" 
-                               HeightRequest="20" 
-                               VerticalOptions="Center" 
-                               Margin="10"/>
+                        <Label Grid.Column="0" Text="+966" TextColor="Black" BackgroundColor="#E7E9E4" Padding="10"/>
+                        <Entry x:Name="phoneNumberEntry" Grid.Column="1" Placeholder="500000000" Keyboard="Telephone" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <Image Grid.Column="2" Source="phone_icon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
                     </Grid>
                 </Border>
 
                 <!-- Email -->
-                <Label Grid.Row="5" 
-                       Text="البريد الإلكتروني" 
-                       TextColor="#0E3230"
-                       FontFamily="FontArabic" 
-                       FontAttributes="Bold"/>
-                <Border Grid.Row="6" 
-                        StrokeShape="RoundRectangle 15"
-                        Stroke="#71873F" 
-                        StrokeThickness="1.5" 
-                        Background="White" 
-                        HeightRequest="50">
+                <Label Grid.Row="6" Text="البريد الإلكتروني" TextColor="#0E3230" FontFamily="FontArabic" FontAttributes="Bold"/>
+                <Border Grid.Row="7" StrokeShape="RoundRectangle 15" Stroke="#71873F" StrokeThickness="1.5" Background="White" HeightRequest="50">
                     <Grid ColumnDefinitions="*, Auto">
-                        <Entry x:Name="emailEntry"
-                               Grid.Column="0" 
-                               Placeholder="Example@gmail.com" 
-                               Keyboard="Email" 
-                               TextColor="Black" 
-                               PlaceholderColor="Gray" 
-                               FontSize="14" 
-                               Margin="10,0"/>
-                        <Image Grid.Column="1" 
-                               Source="envelope.png" 
-                               WidthRequest="20" 
-                               HeightRequest="20" 
-                               VerticalOptions="Center" 
-                               Margin="10"/>
+                        <Entry x:Name="emailEntry" Grid.Column="0" Placeholder="Example@gmail.com" Keyboard="Email" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <Image Grid.Column="1" Source="envelope.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
                     </Grid>
                 </Border>
 
                 <!-- Password -->
-                <Label Grid.Row="7" 
-                       Text="كلمة السر" 
-                       FontFamily="FontArabic" 
-                       TextColor="#0E3230"
-                       FontAttributes="Bold"/>
-                <Border Grid.Row="8" 
-                        StrokeShape="RoundRectangle 15"
-                        Stroke="#71873F" 
-                        StrokeThickness="1.5" 
-                        Background="White" 
-                        HeightRequest="50">
+                <Label Grid.Row="8" Text="كلمة السر" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                <Border Grid.Row="9" StrokeShape="RoundRectangle 15" Stroke="#71873F" StrokeThickness="1.5" Background="White" HeightRequest="50">
                     <Grid ColumnDefinitions="*, Auto">
-                        <Entry x:Name="passwordEntry"
-                               Grid.Column="0" 
-                               Placeholder="****" 
-                               IsPassword="True" 
-                               TextColor="Black" 
-                               PlaceholderColor="Gray" 
-                               FontSize="14" 
-                               Margin="10,0"/>
-                        <ImageButton x:Name="eyeButton"
-                                     Grid.Column="1" 
-                                     Source="eyec.png" 
-                                     Aspect="AspectFit" 
-                                     WidthRequest="30" 
-                                     HeightRequest="30" 
-                                     Clicked="EyeClicked"
-                                     VerticalOptions="Center" 
-                                     Margin="10"/>
+                        <Entry x:Name="passwordEntry" Grid.Column="0" Placeholder="****" IsPassword="True" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <ImageButton x:Name="eyeButton" Grid.Column="1" Source="eyec.png" Aspect="AspectFit" WidthRequest="30" HeightRequest="30" Clicked="EyeClicked" VerticalOptions="Center" Margin="10"/>
                     </Grid>
                 </Border>
             </Grid>
-
-            <!-- فاصل مرئي -->
-            <BoxView Color="#71873F" HeightRequest="2" HorizontalOptions="FillAndExpand"/>
-
-            <!-- القسم الثاني: تفاصيل المزرعة -->
-            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" 
-                  RowSpacing="10">
-
-                <!-- Farm Name -->
-                <Label Grid.Row="1" 
-                       Text="اسم المزرعة" 
-                       FontFamily="FontArabic" 
-                       TextColor="#0E3230" 
-                       FontAttributes="Bold"/>
-
-                <Border Grid.Row="2" 
-                        Stroke="#71873F" 
-                        StrokeThickness="1.5" 
-                        Background="White" 
-                        StrokeShape="RoundRectangle 10"
-                        HeightRequest="50">
-                    <Grid ColumnDefinitions="Auto, *">
-                        <Image Grid.Column="1"
-                               Source="field.png" 
-                               WidthRequest="20" 
-                               HeightRequest="20" 
-                               VerticalOptions="Center" 
-                               Margin="10"
-                               HorizontalOptions="End"/>
-                        <Entry x:Name="FarmNameEntry"
-                               Placeholder="مزرعة" 
-                               Grid.Column="0"
-                               TextColor="Black" 
-                               PlaceholderColor="Gray" 
-                               FontSize="14" 
-                               BackgroundColor="White"/>
-                    </Grid>
-                </Border>
-
-                <!-- Farm Location -->
-                <Label Grid.Row="3" 
-                       Text="موقع المزرعة" 
-                       FontFamily="FontArabic" 
-                       TextColor="#0E3230" 
-                       FontAttributes="Bold"/>
-
-                <Border Grid.Row="4" 
-                        Stroke="#71873F" 
-                        StrokeThickness="1.5" 
-                        Background="White" 
-                        StrokeShape="RoundRectangle 10"
-                        HeightRequest="50">
-                    <Grid ColumnDefinitions="Auto, *">
-                        <Image Source="location.png" 
-                               WidthRequest="20" 
-                               HeightRequest="20" 
-                               VerticalOptions="Center" 
-                               Margin="10"/>
-                        <Entry x:Name="FarmLocationEntry"
-                               Placeholder="الرياض - المزاحمية" 
-                               TextColor="Black" 
-                               PlaceholderColor="Gray" 
-                               FontSize="14" 
-                               BackgroundColor="White"/>
-                    </Grid>
-                </Border>
-
-                <!-- Products -->
-                <Label Grid.Row="5" 
-                       Text="المنتجات المراد عرضها" 
-                       FontFamily="FontArabic" 
-                       TextColor="#0E3230" 
-                       FontAttributes="Bold"/>
-                <Border Grid.Row="6" 
-                        Stroke="#71873F" 
-                        StrokeThickness="1.5" 
-                        Background="White" 
-                        StrokeShape="RoundRectangle 10"
-                        HeightRequest="50">
-                    <Entry x:Name="ProductsEntry"
-                           Placeholder="طماطم، بطاطس، كزبرة" 
-                           TextColor="Black" 
-                           PlaceholderColor="Gray" 
-                           FontSize="14" 
-                           BackgroundColor="White"/>
-                </Border>
-
-                <!-- Organic Products -->
-                <Grid Grid.Row="7" ColumnDefinitions="*,Auto">
-                    <Label VerticalOptions="Center"
-                           Grid.Column="0"
-                           FontFamily="FontArabic" 
-                           Text="هل المنتجات عضوية؟" 
-                           TextColor="#0E3230" 
-                           FontAttributes="Bold"/>
-                    <CheckBox Grid.Column="1"
-                               x:Name="OrganicCheck"/>
-                </Grid>
-
-                <!-- Watergrown Products -->
-                <Grid Grid.Row="8" ColumnDefinitions="*,Auto">
-                    <Label VerticalOptions="Center"
-                           Grid.Column="0"
-                           Text="هل المنتجات مزروعة مائيًا؟" 
-                           FontFamily="FontArabic" 
-                           TextColor="#0E3230" 
-                           FontAttributes="Bold"/>
-                    <CheckBox Grid.Column="1"
-                              x:Name="WatergrownCheck"/>
-                </Grid>
-
-                <!-- GMO-Free Products -->
-                <Grid Grid.Row="9" ColumnDefinitions="*,Auto">
-                    <Label VerticalOptions="Center"
-                           Grid.Column="0"
-                           Text="هل المنتجات غير معدلة وراثياً" 
-                           FontFamily="FontArabic" 
-                           TextColor="#0E3230" 
-                           FontAttributes="Bold"/>
-                    <CheckBox Grid.Column="1"
-                              x:Name="GMOFreeCheck"/>
-                </Grid>
-
-                <!-- Pesticide-Free Products -->
-                <Grid Grid.Row="10" ColumnDefinitions="*,Auto">
-                    <Label VerticalOptions="Center"
-                           Grid.Column="0"
-                           Text="هل المنتجات خالية من المبيدات الحشرية؟" 
-                           TextColor="#0E3230" 
-                           FontFamily="FontArabic"        
-                           FontAttributes="Bold"/>
-                    <CheckBox Grid.Column="1"
-                               x:Name="PesticideFreeCheck"/>
-                </Grid>
-
-                <!-- Organic Certification -->
-
-                <Label Grid.Row="11" 
-                       Text="أرفق شهادة توثيق المنتجات العضوية" 
-                       FontFamily="FontArabic" 
-                       TextColor="#0E3230" 
-                       FontAttributes="Bold"/>
-                <Border Grid.Row="12" 
-                        Stroke="Gray" 
-                        StrokeDashArray="5"
-                        StrokeThickness="1.5" 
-                        Background="White" 
-                        StrokeShape="RoundRectangle 10"
-                        HeightRequest="50">
-                    <Grid ColumnDefinitions="Auto, *">
-                        <Image Grid.Column="0"
-                               Source="pdfa.png" 
-                               WidthRequest="30" 
-                               HeightRequest="30" 
-                               VerticalOptions="Center"/>
-                        <Button Grid.Column="1"
-                                Text="إرفاق ملف" 
-                                BackgroundColor="#71873F" 
-                                TextColor="White" 
-                                FontSize="14" 
-                                Clicked="PickAndUploadImage"/>
-                    </Grid>
-                </Border>
-
-
-                <!-- Next Button -->
-                <Button Grid.Row="13" 
+            <!-- Next Button -->
+            <Button Grid.Row="13" 
                         Text="التالي" 
                         BackgroundColor="#3E6F41" 
                         TextColor="White" 
@@ -327,8 +89,9 @@
                         CornerRadius="15" 
                         Clicked="NextClicked"
                         HorizontalOptions="FillAndExpand"/>
-            </Grid>
-        </StackLayout>
-    </ScrollView>
-</ContentPage>
 
+        </StackLayout>
+
+    </ScrollView>
+
+</ContentPage>

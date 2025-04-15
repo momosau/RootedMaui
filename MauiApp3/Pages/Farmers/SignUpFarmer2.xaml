@@ -1,0 +1,107 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.Farmers.SignUpFarmer2"
+             Title="تسجيل المزارع"
+             BackgroundColor="#E7E9E4"
+             FlowDirection="RightToLeft">
+
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="20">
+            <ActivityIndicator x:Name="loadingIndicator" 
+                               IsVisible="False" 
+                               Color="#3E6F41"
+                               HorizontalOptions="Center"/>
+
+            <VerticalStackLayout Spacing="20" Padding="20, 30, 20, 20">
+
+                <!-- عنوان معلومات المزرعة -->
+                <Label Text="معلومات المزرعة"
+                       FontFamily="FontArabic"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="#0E3230"
+                       HorizontalOptions="Center" />
+
+                <!-- Grid لعرض معلومات المزرعة -->
+                <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                      ColumnDefinitions="*,*"
+                      RowSpacing="10"
+                      ColumnSpacing="10"
+                      Padding="0">
+
+                    <!-- اسم المزرعة -->
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="اسم المزرعة" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                    <Border Grid.Row="1" Grid.ColumnSpan="2" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                        <Grid ColumnDefinitions="Auto,*">
+                            <Image Source="field.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
+                            <Entry x:Name="FarmNameEntry" Placeholder="مزرعة" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- المدينة و الحي -->
+                    <Label Grid.Row="2" Grid.Column="0" Text="المدينة" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                    <Label Grid.Row="2" Grid.Column="1" Text="الحي" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                    <Border Grid.Row="3" Grid.Column="0" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                        <Entry x:Name="CityEntry" Placeholder="الرياض" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                    </Border>
+                    <Border Grid.Row="3" Grid.Column="1" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                        <Entry x:Name="DistrictEntry" Placeholder="حي الشفا" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                    </Border>
+
+                    <!-- الشارع و رقم المزرعة -->
+                    <Label Grid.Row="4" Grid.Column="0" Text="الشارع" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                    <Label Grid.Row="4" Grid.Column="1" Text="رقم المزرعة" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                    <Border Grid.Row="5" Grid.Column="0" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                        <Entry x:Name="StreetEntry" Placeholder="شارع الأمير محمد" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                    </Border>
+                    <Border Grid.Row="5" Grid.Column="1" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                        <Entry x:Name="FarmNumberEntry" Placeholder="1234" Keyboard="Numeric" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                    </Border>
+
+                    <!-- وصف المزرعة -->
+                    <Label Grid.Row="6" Grid.ColumnSpan="2" Text="وصف المزرعة" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                    <Border Grid.Row="7" Grid.ColumnSpan="2" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="100">
+                        <Entry x:Name="FarmDescriptionEntry" Placeholder="اكتب وصفاً موجزاً عن المزرعة" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White" VerticalOptions="Start" MaxLength="300"/>
+                    </Border>
+                    <Label Grid.Row="11" 
+       Text="أرفق شهادة توثيق المنتجات العضوية" 
+       FontFamily="FontArabic" 
+       TextColor="#0E3230" 
+       FontAttributes="Bold"/>
+                    <Border Grid.Row="12" 
+        Stroke="Gray" 
+        StrokeDashArray="5"
+        StrokeThickness="1.5" 
+        Background="White" 
+        StrokeShape="RoundRectangle 10"
+        HeightRequest="50">
+                        <Grid ColumnDefinitions="Auto, *">
+                            <Image Grid.Column="0"
+               Source="pdfa.png" 
+               WidthRequest="30" 
+               HeightRequest="30" 
+               VerticalOptions="Center"/>
+                            <Button Grid.Column="1"
+                Text="إرفاق ملف" 
+                BackgroundColor="#71873F" 
+                TextColor="White" 
+                FontSize="14" 
+                Clicked="PickAndUploadImage"/>
+                        </Grid>
+                    </Border>
+
+                </Grid>
+
+                <!-- زر التالي -->
+                <Button Text="التالي" 
+                        BackgroundColor="#3E6F41" 
+                        TextColor="White" 
+                        FontSize="15" 
+                        FontAttributes="Bold" 
+                        CornerRadius="15" 
+                        Clicked="NextClicked"
+                        HorizontalOptions="FillAndExpand"/>
+            </VerticalStackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

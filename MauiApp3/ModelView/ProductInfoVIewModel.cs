@@ -1,11 +1,6 @@
-﻿using SharedLibraryy.Models;
-using System;
-using System.Collections.Generic;
+﻿using MauiApp3.Services;
+using SharedLibraryy.Models;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MauiApp3.Services;
 
 namespace MauiApp3.ModelView
 {
@@ -21,7 +16,7 @@ namespace MauiApp3.ModelView
             {
                 _selectedProduct = value;
                 OnPropertyChanged(nameof(SelectedProduct));
-                OnPropertyChanged(nameof(FarmName));  // Notify UI when product changes
+                OnPropertyChanged(nameof(FarmName));  
             }
         }
 
@@ -42,7 +37,7 @@ namespace MauiApp3.ModelView
             _productService = productService;
             SelectedProduct = product;
 
-            // Fetch farm name from API
+     
             LoadFarmName();
         }
 
@@ -53,7 +48,7 @@ namespace MauiApp3.ModelView
 
             var farmers = await _productService.GetFarmersAsync();
             var farmer = farmers.FirstOrDefault(f => f.FarmerId == SelectedProduct.FarmerId);
-            FarmName = farmer?.FarmName ?? "Unknown Farm";
+         //   FarmName = farmer?.FarmName;
         }
 
         protected void OnPropertyChanged(string propertyName)

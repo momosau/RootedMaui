@@ -2,6 +2,7 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using Microsoft.Maui.Controls;
+using SharedLibraryy.Models;
 
 namespace MauiApp3.Pages;
 

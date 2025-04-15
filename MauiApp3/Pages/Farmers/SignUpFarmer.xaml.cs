@@ -1,19 +1,19 @@
-using Newtonsoft.Json;
+ï»¿using Newtonsoft.Json;
 
-namespace MauiApp3.Pages
+namespace MauiApp3.Pages.Farmers
 {
     public partial class SignUpFarmer : ContentPage
     {
+
+
         private bool PasswordVisible1 = false;
-        private string Certificate = "8a055776c7d5188e7a86f1c50a071a56";
-        private const string apiKey = "http://localhost:7168/api/Farmers";
-        private readonly HttpClient _httpClient = new HttpClient();
+        private string imageUrl = "";
+        private string apiKey = "8a055776c7d5188e7a86f1c50a071a56";
 
         public SignUpFarmer()
         {
             InitializeComponent();
         }
-
         private void EyeClicked(object sender, EventArgs e)
         {
             PasswordVisible1 = !PasswordVisible1;
@@ -25,103 +25,96 @@ namespace MauiApp3.Pages
         {
             try
             {
-                // ÇÎÊíÇÑ ÇáÕæÑÉ
+                // Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„ØµÙˆØ±Ø©
                 var result = await FilePicker.PickAsync(new PickOptions { FileTypes = FilePickerFileType.Images });
                 if (result == null)
                 {
-                    await DisplayAlert("ÎØÃ", "áã íÊã ÇÎÊíÇÑ ÕæÑÉ", "ãæÇİŞ");
+                    await DisplayAlert("Ø®Ø·Ø£", "Ù„Ù… ÙŠØªÙ… Ø§Ø®ØªÙŠØ§Ø± ØµÙˆØ±Ø©", "Ù…ÙˆØ§ÙÙ‚");
                     return;
                 }
 
-                string Certificate = result.FullPath;
+                string ImageUrl = result.FullPath;
 
+                //Ø¹Ø±Ø¶ Ø§Ù„ØµÙˆØ±Ø© Ø§Ù„Ù…Ø®ØªØ§Ø±Ø©
+                selectedImage.Source = ImageSource.FromFile(ImageUrl);
 
-
-                // ÑİÚ ÇáÕæÑÉ
+                // Ø±ÙØ¹ Ø§Ù„ØµÙˆØ±Ø©
                 using var client = new HttpClient();
                 using var form = new MultipartFormDataContent
         {
-            { new ByteArrayContent(File.ReadAllBytes(Certificate)), "image", Path.GetFileName(Certificate) }
+            { new ByteArrayContent(File.ReadAllBytes(ImageUrl)), "image", Path.GetFileName(ImageUrl) }
         };
                 var response = await client.PostAsync($"https://api.imgbb.com/1/upload?key={apiKey}", form);
                 var jsonResponse = JsonConvert.DeserializeObject<dynamic>(await response.Content.ReadAsStringAsync());
                 string uploadedImageUrl = jsonResponse["data"]["url"].ToString();
 
-                await DisplayAlert("äÌÇÍ", "Êã ÑİÚ ÇáÕæÑÉ ÈäÌÇÍ", "ãæÇİŞ");
+                await DisplayAlert("Ù†Ø¬Ø§Ø­", "ØªÙ… Ø±ÙØ¹ Ø§Ù„ØµÙˆØ±Ø© Ø¨Ù†Ø¬Ø§Ø­", "Ù…ÙˆØ§ÙÙ‚");
 
-                // ÅĞÇ ßäÊ ÈÍÇÌÉ ááÇÍÊİÇÙ ÈÇáÑÇÈØ ÇáãÑİæÚ áÇÓÊÎÏÇãå áÇÍŞğÇ
-                Certificate = uploadedImageUrl;
+
+                // Ø¥Ø°Ø§ ÙƒÙ†Øª Ø¨Ø­Ø§Ø¬Ø© Ù„Ù„Ø§Ø­ØªÙØ§Ø¸ Ø¨Ø§Ù„Ø±Ø§Ø¨Ø· Ø§Ù„Ù…Ø±ÙÙˆØ¹ Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…Ù‡ Ù„Ø§Ø­Ù‚Ù‹Ø§
+                imageUrl = uploadedImageUrl; // Ø¥Ø¶Ø§ÙØ© Ù‡Ø°Ø§ Ø§Ù„Ø³Ø·Ø±
+
             }
             catch
             {
-                await DisplayAlert("ÎØÃ", "ÍÏË ÎØÃ ÃËäÇÁ ÇÎÊíÇÑ Ãæ ÑİÚ ÇáÕæÑÉ", "ãæÇİŞ");
+                await DisplayAlert("Ø®Ø·Ø£", "Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ø§Ø®ØªÙŠØ§Ø± Ø£Ùˆ Ø±ÙØ¹ Ø§Ù„ØµÙˆØ±Ø©", "Ù…ÙˆØ§ÙÙ‚");
             }
         }
-
         private async void NextClicked(object sender, EventArgs e)
         {
             try
             {
-                // ÇáÊÍŞŞ ãä ÅÏÎÇá ÌãíÚ ÇáÍŞæá
+                // Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø¥Ø¯Ø®Ø§Ù„ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ„
                 if (string.IsNullOrWhiteSpace(fullNameEntry.Text) ||
                     string.IsNullOrWhiteSpace(phoneNumberEntry.Text) ||
                     string.IsNullOrWhiteSpace(emailEntry.Text) ||
                     string.IsNullOrWhiteSpace(passwordEntry.Text) ||
-                    string.IsNullOrWhiteSpace(FarmNameEntry.Text) ||
-                    string.IsNullOrWhiteSpace(FarmLocationEntry.Text) ||
-                    string.IsNullOrWhiteSpace(ProductsEntry.Text) ||
-                    string.IsNullOrEmpty(Certificate))
+                    string.IsNullOrWhiteSpace(usernameEntry.Text))
+
                 {
-                    await DisplayAlert("ÎØÃ", "íÑÌì ãáÁ ÌãíÚ ÇáÍŞæá æÑİÚ ÇáÕæÑÉ", "ãæÇİŞ");
+                    await DisplayAlert("Ø®Ø·Ø£", "ÙŠØ±Ø¬Ù‰ Ù…Ù„Ø¡ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ„ ÙˆØ±ÙØ¹ Ø§Ù„ØµÙˆØ±Ø©", "Ù…ÙˆØ§ÙÙ‚");
                     return;
                 }
 
-                var farmer = new Farmer
+                var farmer = new FarmerApplication
                 {
                     Name = fullNameEntry.Text,
                     PhoneNumber = phoneNumberEntry.Text,
                     Email = emailEntry.Text,
                     Password = passwordEntry.Text,
-                    UserName = FarmNameEntry.Text,
-                    Location = FarmLocationEntry.Text,
-                    Description = ProductsEntry.Text,
-                    Certificate = Certificate,
-                    VerificationStatus = "Pending",
+                    UserName = usernameEntry.Text,
+                    ImageUrl = imageUrl,
+
                 };
 
-                await Navigation.PushAsync(new EmailVerification(farmer));
+                await Navigation.PushAsync(new SignUpFarmer2(farmer));
             }
             catch (Exception ex)
             {
-                await DisplayAlert("ÎØÃ", $"ÍÏË ÎØÃ: {ex.Message}", "ãæÇİŞ");
+                await DisplayAlert("Ø®Ø·Ø£", $"Ø­Ø¯Ø« Ø®Ø·Ø£: {ex.Message}", "Ù…ÙˆØ§ÙÙ‚");
                 Console.WriteLine($"Error: {ex}");
             }
         }
     }
 }
 
-public partial class Farmer
+
+public class FarmerApplication
 {
-    public int FarmerId { get; set; }
-
-    public string Description { get; set; }
-
-    public string Certificate { get; set; }
-
-    public string Location { get; set; }
-
-    public string ImageUrl { get; set; }
-
     public string Name { get; set; }
-
-    public string PhoneNumber { get; set; }
-
+    public string UserName { get; set; }
     public string Email { get; set; }
-
+    public string PhoneNumber { get; set; }
     public string Password { get; set; }
-
+    public string City { get; set; }
+    public string Neighborhood { get; set; }
+    public string Street { get; set; }
+    public string FarmName { get; set; }
+    public int? FarmNum { get; set; }
+    public string Certificate { get; set; }
+    public string ImageUrl { get; set; }
+    public string Description { get; set; }
     public string VerificationStatus { get; set; }
 
-    public string UserName { get; set; }
 
 }
