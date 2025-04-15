@@ -19,10 +19,6 @@ public partial class FarmerApplication
     public int AdminId { get; set; }
 
     public DateOnly SubmitDate { get; set; }
-
-    [StringLength(250)]
-    public string Status { get; set; } = null!;
-
     [StringLength(255)]
     [Unicode(false)]
     public string? Description { get; set; }

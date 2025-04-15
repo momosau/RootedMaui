@@ -11,7 +11,7 @@ namespace AdminApp.Services
 #if ANDROID
        "http://10.0.2.2:7168/api";
 #else
-        "http://localhost:7168/api"; 
+        "https://localhost:7168/api"; 
 #endif
         public FarmerApilicationService(HttpClient httpClient)
         {
