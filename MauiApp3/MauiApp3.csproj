@@ -84,16 +84,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\EmailVerification.xaml.cs">
-	    <DependentUpon>EmailVerification.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Pages\SignInConsumer.xaml.cs">
 	    <DependentUpon>SignInConsumer.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\SplashConsumer.xaml.cs">
+	  <Compile Update="Pages\Consumers\SplashConsumer.xaml.cs">
 	    <DependentUpon>SplashConsumer.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\ConsumerMainPage.xaml.cs">
+	  <Compile Update="Pages\Consumers\ConsumerMainPage.xaml.cs">
 	    <DependentUpon>ConsumerMainPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -105,16 +102,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="ConsumerShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="FarmerShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\AboutUsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\AccountPageFarmer.xaml">
+	  <MauiXaml Update="Pages\Farmers\AccountPageFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\AddProductsFarmer.xaml">
+	  <MauiXaml Update="Pages\Farmers\AddProductsFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\CategoriesPage.xaml">
+	  <MauiXaml Update="Pages\Consumers\CategoriesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ContactUsPage.xaml">
@@ -123,25 +126,28 @@
 	  <MauiXaml Update="Pages\DeliveryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\EditProductsFarmer.xaml">
+	  <MauiXaml Update="Pages\Farmers\EditProductsFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\FarmerDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\FarmerHome.xaml">
+		  <MauiXaml Update="Pages\Farmers\FarmerHome.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\FarmerOrders.xaml">
+	  <MauiXaml Update="Pages\Farmers\FarmerOrders.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\FarmerProducts.xaml">
+	  <MauiXaml Update="Pages\Farmers\FarmerProducts.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\FarmerProfilePage.xaml">
+	  <MauiXaml Update="Pages\Farmers\FarmerProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\FarmersListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Farmers\SignUpFarmer2.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ForgotPasswordEmail.xaml">
@@ -153,37 +159,37 @@
 	  <MauiXaml Update="Pages\MyLocationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Payment.xaml">
+	  <MauiXaml Update="Pages\Consumers\Payment.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\PaymentMethodPage.xaml">
+	  <MauiXaml Update="Pages\Consumers\PaymentMethodPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\EmailVerification.xaml">
+	  <MauiXaml Update="Pages\Farmers\EmailVerification.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ProductInfo.xaml">
+	  <MauiXaml Update="Pages\Consumers\ProductInfo.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ProductPage.xaml">
+	  <MauiXaml Update="Pages\Consumers\ProductPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ShoppingCart.xaml">
+	  <MauiXaml Update="Pages\Consumers\ShoppingCart.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\SignInConsumer.xaml">
+	  <MauiXaml Update="Pages\Consumers\SignInConsumer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\SignInFarmer.xaml">
+	  <MauiXaml Update="Pages\Farmers\SignInFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\SplashConsumer.xaml">
+	  <MauiXaml Update="Pages\Consumers\SplashConsumer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SplashFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ConsumerMainPage.xaml">
+	  <MauiXaml Update="Pages\Consumers\ConsumerMainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\SplashFarmerFinal.xaml">

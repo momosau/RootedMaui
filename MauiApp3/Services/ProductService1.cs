@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using SharedLibraryy.Models;
 using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using SharedLibraryy.Models;
 using System.Text.Json;
-using MauiApp3.Models;
 
 namespace MauiApp3.Services
 {

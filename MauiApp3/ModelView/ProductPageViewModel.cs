@@ -92,7 +92,7 @@ namespace MauiApp3.ModelView
                     Description = product.Description,
                     Price = product.Price,
                     FarmerId = product.FarmerId,
-                    Farmer = farmer, // Assign the farmer manually
+                    Farmer = product.Farmer, 
                     CategoryId = product.CategoryId,
                     Quantity = product.Quantity,
                     Weight = product.Weight,
@@ -185,7 +185,7 @@ namespace MauiApp3.ModelView
                 Console.WriteLine("Error: Selected product is null");
                 return;
             }
-            await _navigation.PushAsync(new ProductInfo(product, productService));
+            await _navigation.PushAsync(new Pages.Consumers.ProductInfo(product, productService));
         }
         private void AddToCart(Product product)
         {

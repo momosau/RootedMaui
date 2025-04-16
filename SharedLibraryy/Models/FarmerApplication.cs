@@ -13,17 +13,12 @@ public partial class FarmerApplication
     [Column("AppilicationID")]
     public int AppilicationId { get; set; }
 
-    [Column("FarmerID")]
-    public int FarmerId { get; set; }
+  
 
     [Column("AdminID")]
     public int AdminId { get; set; }
 
     public DateOnly SubmitDate { get; set; }
-
-    [StringLength(250)]
-    public string Status { get; set; } = null!;
-
     [StringLength(255)]
     [Unicode(false)]
     public string? Description { get; set; }
@@ -59,7 +54,7 @@ public partial class FarmerApplication
 
     [StringLength(50)]
     [Unicode(false)]
-    public string? VerificationStatus { get; set; }
+    public bool? VerificationStatus { get; set; }
 
     [StringLength(100)]
     [Unicode(false)]
@@ -83,7 +78,8 @@ public partial class FarmerApplication
     [InverseProperty("FarmerApplications")]
     public virtual Admin Admin { get; set; } = null!;
 
-    [ForeignKey("FarmerId")]
-    [InverseProperty("FarmerApplications")]
-    public virtual Farmer Farmer { get; set; } = null!;
+
+
+    [ForeignKey("FarmerApplicationId")]
+    public ICollection<Specification> Specifications { get; set; } = new List<Specification>();
 }

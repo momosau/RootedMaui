@@ -34,9 +34,7 @@ public partial class Farmer
 
     [StringLength(250)]
     public string Password { get; set; } = null!;
-
-    [StringLength(250)]
-    public string VerificationStatus { get; set; } = null!;
+    public bool VerificationStatus { get; set; }
 
     [StringLength(250)]
     public string UserName { get; set; } = null!;
@@ -51,13 +49,8 @@ public partial class Farmer
     public string? Street { get; set; }
 
     public int? FarmNum { get; set; }
-
-    [InverseProperty("Farmer")]
-    public virtual ICollection<FarmerApplication> FarmerApplications { get; set; } = new List<FarmerApplication>();
-
-    [InverseProperty("Farmer")]
-    public virtual ICollection<FarmerSpecification> FarmerSpecifications { get; set; } = new List<FarmerSpecification>();
-
+    [ForeignKey("FarmerID")]
+    public virtual ICollection<Specification> Specifications { get; set; } = new List<Specification>();
     [InverseProperty("Farmer")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 

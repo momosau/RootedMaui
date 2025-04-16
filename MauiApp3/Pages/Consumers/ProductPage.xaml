@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.Consumers.ProductPage"
+             x:Name="ProductPageView"
+             xmlns:local="clr-namespace:MauiApp3.Converter"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:Models="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
+             xmlns:ModelView="clr-namespace:MauiApp3.ModelView"
+             xmlns:page="clr-namespace:MauiApp3.Pages"
+             x:DataType="ModelView:ProductPageViewModel"
+             Title="المنتجات"
+             BackgroundColor="#E7E9E4" 
+             FlowDirection="RightToLeft" 
+             Shell.NavBarIsVisible="False"
+          
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CategoryToColorConverter x:Key="CategoryToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <!-- Category CollectionView -->
+            <CollectionView ItemsSource="{Binding Categories}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="Models:Category">
+                        <Button Text="{Binding CategoryName}" 
+                            Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ChangeCategoryCommand}"
+                            CommandParameter="{Binding CategoryId}"
+                            BackgroundColor="{Binding CategoryId, 
+                                             Converter={StaticResource CategoryToColorConverter}, 
+                                             ConverterParameter={Binding Source={x:Reference ProductPageView}, Path=BindingContext.SelectedCategoryId}}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Product CollectionView -->
+            <CollectionView ItemsSource="{Binding FilteredProducts}" BackgroundColor="White">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="Models:Product">
+                        <Frame CornerRadius="12" Padding="15" Margin="10" BackgroundColor="White">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ViewProductCommand}"
+                              CommandParameter="{Binding}"/>
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout Spacing="10">
+                                <Image WidthRequest="250" HeightRequest="250" Source="{Binding ImageUrl}" 
+               Aspect="AspectFill" HorizontalOptions="Center" BackgroundColor="LightGray"/>
+                                <HorizontalStackLayout Spacing="5" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Name}" FontSize="Medium" TextColor="Black"/>
+                                    <Label Text="{Binding Weight}" FontSize="20" TextColor="#34495e"/>
+                                    <Label Text="{Binding Unit}" FontSize="20" TextColor="#34495e"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="300" VerticalOptions="Center" HorizontalOptions="Start">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Price, StringFormat='{0} ريال'}" FontSize="22" 
+                   HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Farmer.FarmName}" FontSize="20" TextColor="#34495e"/>
+                                    </VerticalStackLayout>
+                                    <Button 
+    Text="Add to Cart"
+    Command="{Binding Source={RelativeSource AncestorType={x:Type ModelView:ProductPageViewModel}}, Path=AddToCartCommand}"
+    CommandParameter="{Binding .}" >
+
+
+                                    <Button.Triggers>
+                                            <!-- When already in cart -->
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="True">
+                                                <Setter Property="Text" Value="✔ تمت الإضافة" />
+                                                <Setter Property="BackgroundColor" Value="LightGreen" />
+                                                <Setter Property="IsEnabled" Value="False" />
+                                            </DataTrigger>
+
+                                            <!-- When not in cart -->
+                                            <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="False">
+                                                <Setter Property="Text" Value="➕ أضف إلى السلة" />
+                                                <Setter Property="BackgroundColor" Value="LightGray" />
+                                                <Setter Property="IsEnabled" Value="True" />
+                                            </DataTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

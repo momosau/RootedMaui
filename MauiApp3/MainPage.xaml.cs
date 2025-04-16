@@ -1,6 +1,7 @@
 ﻿using MauiApp3.ModelView;
-using MauiApp3.Pages;
+using MauiApp3.Pages.Farmers;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Internals;
 
 namespace MauiApp3
 {
@@ -17,19 +18,21 @@ namespace MauiApp3
         
         private async void FarmerClicked(object sender, EventArgs e)
         {
+            App.UserType = "farmer";
+
+            await Navigation.PushAsync(new SignUpFarmer());
           
-
-
-            await Shell.Current.GoToAsync("SignInFarmer");
+           // Application.Current.MainPage = new FarmerShell();
 
 
         }
 
         private async void Consumerclicked(object sender, EventArgs e)
         {
-        
-            await Shell.Current.GoToAsync("FarmersListPage");
-           
+            App.UserType = "consumer";
+
+            Application.Current.MainPage = new ConsumerShell();
+
 
         }
     }

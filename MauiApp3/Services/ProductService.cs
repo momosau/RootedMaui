@@ -21,7 +21,7 @@ namespace MauiApp3.Services
 
         public ProductService(HttpClient httpClient)
         {
-            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            _httpClient = httpClient;
         }
         public async Task<List<Category>> GetCategoriesAsync()
         {

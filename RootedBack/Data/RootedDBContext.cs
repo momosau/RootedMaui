@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SharedLibraryy.Models;
 
 namespace RootedBack.Data;
@@ -28,7 +26,7 @@ public partial class RootedDBContext : DbContext
 
     public virtual DbSet<FarmerApplication> FarmerApplications { get; set; }
 
-   // public virtual DbSet<FarmerSpecification> FarmerSpecifications { get; set; }
+    // public virtual DbSet<FarmerSpecification> FarmerSpecifications { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
 
@@ -68,10 +66,7 @@ public partial class RootedDBContext : DbContext
             entity.Property(e => e.CategoryId).ValueGeneratedNever();
         });
 
-        modelBuilder.Entity<Farmer>(entity =>
-        {
-            entity.Property(e => e.VerificationStatus).HasDefaultValue("Pending");
-        });
+
 
         modelBuilder.Entity<FarmerApplication>(entity =>
         {
@@ -79,42 +74,44 @@ public partial class RootedDBContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AdminAplication");
 
-            entity.HasOne(d => d.Farmer).WithMany(p => p.FarmerApplications)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_FarmerApplication");
+
         });
+        modelBuilder.Entity<Farmer>()
+            .HasMany(f => f.Specifications)
+            .WithMany(s => s.Farmers)
+            .UsingEntity<Dictionary<string, object>>(
+                "FarmerSpecification",
+                j => j.HasOne<Specification>().WithMany().HasForeignKey("SpecificationID"),
+                j => j.HasOne<Farmer>().WithMany().HasForeignKey("FarmerID"),
+                j =>
+                {
+                    j.HasKey("FarmerID", "SpecificationID");
+                    j.ToTable("FarmerSpecification");
+                }
+            );
+        modelBuilder.Entity<FarmerApplication>()
+            .HasMany(fa => fa.Specifications)
+            .WithMany(s => s.FarmerApplications);
 
-        //modelBuilder.Entity<FarmerSpecification>(entity =>
-        //{
-        //    entity.HasKey(e => e.Id).HasName("PK_Table_1");
 
-        //    entity.Property(e => e.Id).ValueGeneratedNever();
 
-        //    entity.HasOne(d => d.Farmer).WithMany(p => p.FarmerSpecifications)
-        //        .OnDelete(DeleteBehavior.ClientSetNull)
-        //        .HasConstraintName("FK_FarmerSpecification_Farmer");
-
-        //    entity.HasOne(d => d.Specification).WithMany(p => p.FarmerSpecifications)
-        //        .OnDelete(DeleteBehavior.ClientSetNull)
-        //        .HasConstraintName("FK_FSpecification_FarmerSpecification");
-        //});
 
         modelBuilder.Entity<Order>(entity =>
-        {
-            entity.Property(e => e.OrderId).ValueGeneratedNever();
+            {
+                entity.Property(e => e.OrderId).ValueGeneratedNever();
 
-            entity.HasOne(d => d.Consumer).WithMany(p => p.Orders)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Consumer_Order");
+                entity.HasOne(d => d.Consumer).WithMany(p => p.Orders)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Consumer_Order");
 
-            entity.HasOne(d => d.Farmer).WithMany(p => p.Orders)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Farmer_order");
+                entity.HasOne(d => d.Farmer).WithMany(p => p.Orders)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Farmer_order");
 
-            entity.HasOne(d => d.Product).WithMany(p => p.Orders)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Order_Product");
-        });
+                entity.HasOne(d => d.Product).WithMany(p => p.Orders)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Order_Product");
+            });
 
         modelBuilder.Entity<Payment>(entity =>
         {

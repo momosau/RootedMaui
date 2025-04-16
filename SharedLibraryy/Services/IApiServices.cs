@@ -10,9 +10,6 @@ namespace SharedLibraryy.Services {
         Task<ApiResponse> DeleteProductAsync(int id);
         Task<Product> GetProductByIdAsync(int id);
         Task<List<Product>> GetProductsAsync();
-/*
-        Task<List<Admin>> GetAdminsAsync();
-        Task<Admin> GetAdminByIdAsync(int id);
-        Task<bool> CreateAdminAsync(Admin admin);*/
+
     }
 }

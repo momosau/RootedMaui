@@ -154,7 +154,7 @@ namespace RootedBack.Controllers
                 return BadRequest("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
             }
 
-            if (farmer.VerificationStatus != "Approved")
+            if (farmer.VerificationStatus != true)
             {
                 return Unauthorized("ليس لديك صلاحية للدخول. يرجى الانتظار حتى تتم الموافقة عليك من قبل الإدارة.");
             }

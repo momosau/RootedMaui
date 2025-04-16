@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.Farmers.AddProductsFarmer"
+             Title="AddProductsFarmer"
+              xmlns:vm="clr-namespace:MauiApp3.ModelView"
+           
+                     
+             BackgroundColor="#E7E9E4" 
+FlowDirection="RightToLeft">
+
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Entry Placeholder="Name" Text="{Binding NewProduct.Name}"/>
+            <Entry Placeholder="Description" Text="{Binding NewProduct.Description}"/>
+            <Entry Placeholder="Price" Text="{Binding NewProduct.Price}" Keyboard="Numeric"/>
+            <Entry Placeholder="Weight" Text="{Binding NewProduct.Weight}" Keyboard="Numeric"/>
+            <Entry Placeholder="Quantity" Text="{Binding NewProduct.Quantity}" Keyboard="Numeric"/>
+            <Entry Placeholder="Image URL" Text="{Binding NewProduct.ImageUrl}"/>
+            <Button Text="Pick Image" Command="{Binding PickImageCommand}" />
+            <Image Source="{Binding NewProduct.ImageUrl}" WidthRequest="100" HeightRequest="100" />
+        <Label Text="Product Specifications:" FontAttributes="Bold" />
+
+        <Grid
+            ColumnDefinitions="Auto,Auto"
+            RowDefinitions="*,*,*,*"
+    VerticalOptions="Center"
+            >
+             <CheckBox IsChecked="{Binding NewProduct.Specifications[0].IsLocal}" Grid.Column="0" Grid.Row="0"/>
+                <Label Text="Local" Grid.Column="1" Grid.Row="0" TextColor="Black" />
+
+                <CheckBox IsChecked="{Binding NewProduct.Specifications[0].IsOrganic}" Grid.Column="0" Grid.Row="1" />
+                <Label Text="Organic" TextColor="Black"  Grid.Column="1" Grid.Row="1" />
+                <CheckBox IsChecked="{Binding NewProduct.Specifications[0].IsGmofree}" Grid.Column="0" Grid.Row="2" />
+                <Label Text="GMO-Free" TextColor="Black" Grid.Column="1" Grid.Row="2" />
+                <CheckBox IsChecked="{Binding NewProduct.Specifications[0].IsHydroponicallyGrown}" Grid.Column="0" Grid.Row="3" />
+                <Label Text="Hydroponic" TextColor="Black" Grid.Column="1" Grid.Row="3" />
+            </Grid>
+            <!-- Specification Checkboxes -->
+
+           
+          
+
+            <Button Text="Save Product" Command="{Binding SaveProductCommand}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
