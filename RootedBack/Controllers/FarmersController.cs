@@ -26,7 +26,9 @@ namespace RootedBack.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Farmer>>> GetFarmers()
         {
-            return await _context.Farmers.ToListAsync();
+            return await _context.Farmers
+          .Include(f => f.Specification)
+          .ToListAsync();
         }
 
         // GET: api/Farmers/5

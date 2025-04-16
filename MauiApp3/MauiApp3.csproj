@@ -126,6 +126,9 @@
 	  <MauiXaml Update="Pages\EditProductsFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\FarmerDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\FarmerHome.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
