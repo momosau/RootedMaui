@@ -129,7 +129,10 @@
 	  <MauiXaml Update="Pages\Farmers\EditProductsFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Farmers\FarmerHome.xaml">
+	  <MauiXaml Update="Pages\FarmerDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+		  <MauiXaml Update="Pages\Farmers\FarmerHome.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Farmers\FarmerOrders.xaml">
