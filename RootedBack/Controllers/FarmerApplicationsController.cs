@@ -71,11 +71,16 @@ namespace RootedBack.Controllers
 
         // POST: api/FarmerApplications/5/accept
         [HttpPost("{id}/accept")]
+
         public async Task<IActionResult> AcceptApplication(int id)
         {
             var acceptedFarmer = await _service.AcceptApplicationAsync(id);
+
             if (acceptedFarmer == null)
+            {
+                Console.WriteLine($"FarmerApplication with ID {id} not found.");
                 return NotFound();
+            }
 
             return Ok(new
             {
@@ -83,6 +88,8 @@ namespace RootedBack.Controllers
                 Farmer = acceptedFarmer
             });
         }
+
+
 
         // DELETE: api/FarmerApplications/5/reject
         [HttpDelete("{id}/reject")]

@@ -49,7 +49,7 @@ public partial class Farmer
     public string? Street { get; set; }
 
     public int? FarmNum { get; set; }
-    [ForeignKey("FarmerID")]
+
     public virtual ICollection<Specification> Specifications { get; set; } = new List<Specification>();
     [InverseProperty("Farmer")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();

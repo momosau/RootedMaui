@@ -8,9 +8,9 @@ namespace AdminApp
         private readonly HttpClient _httpClient;
         private static readonly string _baseUrl =
 #if ANDROID
-       "http://10.0.2.2:7168/api";
+       "http://10.0.2.2:5140/api";
 #else
-        "http://localhost:7168/api"; 
+        "https://localhost:7168/api"; 
 #endif
 
         public AdminServic(HttpClient httpClient)

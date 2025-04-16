@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace SharedLibraryy.Models;
 
@@ -13,7 +11,7 @@ public partial class FarmerApplication
     [Column("AppilicationID")]
     public int AppilicationId { get; set; }
 
-  
+
 
     [Column("AdminID")]
     public int AdminId { get; set; }
@@ -80,6 +78,6 @@ public partial class FarmerApplication
 
 
 
-    [ForeignKey("FarmerApplicationId")]
+
     public ICollection<Specification> Specifications { get; set; } = new List<Specification>();
 }

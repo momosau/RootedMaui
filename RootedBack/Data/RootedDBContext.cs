@@ -77,18 +77,14 @@ public partial class RootedDBContext : DbContext
 
         });
         modelBuilder.Entity<Farmer>()
-            .HasMany(f => f.Specifications)
-            .WithMany(s => s.Farmers)
-            .UsingEntity<Dictionary<string, object>>(
-                "FarmerSpecification",
-                j => j.HasOne<Specification>().WithMany().HasForeignKey("SpecificationID"),
-                j => j.HasOne<Farmer>().WithMany().HasForeignKey("FarmerID"),
-                j =>
-                {
-                    j.HasKey("FarmerID", "SpecificationID");
-                    j.ToTable("FarmerSpecification");
-                }
-            );
+             .HasMany(f => f.Specifications)
+             .WithMany(s => s.Farmers)
+             .UsingEntity<Dictionary<string, object>>(
+                 "FarmerSpecification", // the name of the join table
+                 j => j.HasOne<Specification>().WithMany().HasForeignKey("SpecificationId"),
+                 j => j.HasOne<Farmer>().WithMany().HasForeignKey("FarmerId")
+             );
+            
         modelBuilder.Entity<FarmerApplication>()
             .HasMany(fa => fa.Specifications)
             .WithMany(s => s.FarmerApplications);

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using RootedBack.Data;
@@ -33,7 +28,9 @@ namespace RootedBack.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Farmer>> GetFarmer(int id)
         {
-            var farmer = await _context.Farmers.FindAsync(id);
+            var farmer = await _context.Farmers
+                .Include(f => f.Specifications)
+                .FirstOrDefaultAsync(f => f.FarmerId == id);
 
             if (farmer == null)
             {
@@ -42,6 +39,7 @@ namespace RootedBack.Controllers
 
             return farmer;
         }
+
 
         // PUT: api/Farmers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -100,6 +98,38 @@ namespace RootedBack.Controllers
 
             return NoContent();
         }
+        [HttpGet("{id}/with-specifications")]
+        public async Task<ActionResult<FarmerDTO>> GetFarmerWithSpecs(int id)
+        {
+            var farmer = await _context.Farmers
+                .Include(f => f.Specifications)
+                .FirstOrDefaultAsync(f => f.FarmerId == id);
+
+            if (farmer == null)
+            {
+                return NotFound();
+            }
+
+            var dto = new FarmerDTO
+            {
+                FarmerId = farmer.FarmerId,
+                Name = farmer.Name,
+                Email = farmer.Email,
+                Specifications = farmer.Specifications
+                    .Select(s => new SpecificationDTO
+                    {
+                        IsOrganic = s.IsOrganic,
+                        IsGmofree = s.IsGmofree,
+                        IsHydroponicallyGrown = s.IsHydroponicallyGrown,
+                        IsLocal = s.IsLocal,
+                        IsPesticideFree = s.IsPesticideFree
+                    })
+                    .ToList()
+            };
+
+            return Ok(dto);
+        }
+
 
         private bool FarmerExists(int id)
         {
@@ -164,6 +194,23 @@ namespace RootedBack.Controllers
         {
             public string Email { get; set; }
             public string Password { get; set; }
+
+        }
+        public class SpecificationDTO
+        {
+            public bool? IsOrganic { get; set; }
+            public bool? IsGmofree { get; set; }
+            public bool? IsHydroponicallyGrown { get; set; }
+            public bool? IsLocal { get; set; }
+            public bool? IsPesticideFree { get; set; }
+        }
+
+        public class FarmerDTO
+        {
+            public int FarmerId { get; set; }
+            public string Name { get; set; }
+            public string Email { get; set; }
+            public List<SpecificationDTO> Specifications { get; set; }
         }
 
     }

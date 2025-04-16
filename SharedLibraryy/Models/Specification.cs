@@ -20,9 +20,9 @@ public partial class Specification
 
     public bool? IsPesticideFree { get; set; }
 
-    [ForeignKey("SpecificationId")]
+
     public virtual ICollection<Farmer> Farmers { get; set; } = new List<Farmer>();
-    [ForeignKey("SpecificationId")]
+
     public ICollection<FarmerApplication> FarmerApplications { get; set; } = new List<FarmerApplication>();
 
 

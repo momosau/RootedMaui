@@ -9,7 +9,7 @@ namespace AdminApp.Services
 
         private static readonly string _baseUrl =
 #if ANDROID
-       "http://10.0.2.2:7168/api";
+       "http://10.0.2.2:5140/api";
 #else
         "https://localhost:7168/api"; 
 #endif
@@ -51,11 +51,17 @@ namespace AdminApp.Services
 
         public async Task ApproveApplicationAsync(int id)
         {
+            Console.WriteLine($"Calling approve for ID: {id}");
+            Console.WriteLine($"Full URL: {_baseUrl}/FarmerApplications/{id}/accept");
+
+
             var response = await _httpClient.PostAsync($"{_baseUrl}/FarmerApplications/{id}/accept", null);
+           
             if (!response.IsSuccessStatusCode)
             {
+               
                 var content = await response.Content.ReadAsStringAsync();
-                throw new HttpRequestException($"Error: {response.StatusCode}, Content: {content}");
+                throw new HttpRequestException($"Error: {response.StatusCode}, Content: {content} ID {id}");
             }
             response.EnsureSuccessStatusCode();
         }
