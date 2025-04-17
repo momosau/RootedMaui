@@ -1,9 +1,28 @@
+using MauiApp3.ModelView;
+using Microsoft.Maui.Controls;
+using SharedLibraryy.Models;
+
 namespace MauiApp3.Pages;
 
 public partial class FarmersListPage : ContentPage
 {
-	public FarmersListPage()
-	{
-		InitializeComponent();
-	}
+    public FarmersListPage()
+    {
+        InitializeComponent();
+        BindingContext = new FarmersViewModel();
+    }
+
+    private async void OnFarmerSelected(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is Farmer selectedFarmer)
+        {
+            await Shell.Current.GoToAsync("FarmerDetailPage", new Dictionary<string, object>
+            {
+                ["SelectedFarmer"] = selectedFarmer
+            });
+        }
+
+      ((CollectionView)sender).SelectedItem = null;
+    }
 }
+    

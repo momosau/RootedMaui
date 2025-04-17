@@ -11,15 +11,69 @@
     <CollectionView ItemsSource="{Binding Farmers}" SelectionMode="Single" >
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Frame Margin="10" Padding="10" BorderColor="LightGray" CornerRadius="10">
-                    <HorizontalStackLayout Spacing="10">
-                        <Image Source="{Binding ImageUrl}" WidthRequest="60" HeightRequest="60"/>
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="18"/>
-                            <Label Text="{Binding City}" FontSize="14" TextColor="Gray"/>
-                            <Label Text="{Binding FarmName}" FontSize="14"/>
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
+                <Frame Margin="10,10,10,70" Padding="10" BackgroundColor="White" BorderColor="LightGray" CornerRadius="10">
+                    <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto" Padding="10" ColumnSpacing="10">
+                        <!-- Image -->
+                        <Frame Grid.Column="0"
+                               Padding="2"
+                               HeightRequest="100"
+                               WidthRequest="100"
+                               CornerRadius="60"
+                               IsClippedToBounds="True"
+                               HasShadow="False"
+                               BorderColor="DarkGreen"
+                               VerticalOptions="Center">
+                            <Image Source="{Binding ImageUrl}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="100"
+                                   WidthRequest="100" />
+                        </Frame>
+
+                        <!-- Info -->
+                        <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand" Spacing="10">
+                            <Label Text="{Binding FarmName}" FontFamily="FontArabic" FontSize="18" TextColor="Black"/>
+                            <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold" FontFamily="FontArabic"/>
+                            <Label Text="{Binding City}" FontSize="14" FontFamily="FontArabic" TextColor="DarkGreen"/>
+
+                            <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Start" JustifyContent="Start" Margin="0,5,0,0">
+                                <Label Text="عضوية"
+                                       TextColor="Gold"
+                                       FontAttributes="Bold"
+                                       FontSize="10"
+                                       FontFamily="FontArabic"
+                                       IsVisible="{Binding Specification.IsOrganic}" 
+                                       Margin="0,0,10,5" />
+                                <Label Text="غير معدلة وراثياً"
+                                       TextColor="Black"
+                                       FontAttributes="Bold"
+                                       FontSize="10"
+                                       FontFamily="FontArabic"
+                                       IsVisible="{Binding Specification.IsGmofree}" 
+                                       Margin="0,0,10,5" />
+                                <Label Text="مزروعة مائياً"
+                                       TextColor="Blue"
+                                       FontAttributes="Bold"
+                                       FontSize="10"
+                                       FontFamily="FontArabic"
+                                       IsVisible="{Binding Specification.IsHydroponicallyGrown}" 
+                                       Margin="0,0,10,5" />
+                                <Label Text="محلية"
+                                       TextColor="Black"
+                                       FontAttributes="Bold"
+                                       FontSize="10"
+                                       FontFamily="FontArabic"
+                                       IsVisible="{Binding Specification.IsLocal}" 
+                                       Margin="0,0,10,5" />
+                                <Label Text="خالية من المبيدات الحشرية"
+                                       TextColor="Red"
+                                       FontAttributes="Bold"
+                                       FontSize="10"
+                                       FontFamily="FontArabic"
+                                       IsVisible="{Binding Specification.IsPesticideFree}" 
+                                       Margin="0,0,10,5" />
+                            </FlexLayout>
+                        </StackLayout>
+                    </Grid>
                 </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>
