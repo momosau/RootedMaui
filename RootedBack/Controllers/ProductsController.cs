@@ -29,6 +29,16 @@ namespace RootedBack.Controllers
             else
                 return Ok(products);
         }
+        [HttpGet("WithSpec/{id:int}")]
+        public async Task<ActionResult<Product>> GetProductWithSpec(int id)
+        {
+            var product = await apiServices.GetProductWithSpecificationsAsync(id);
+            if (product is null)
+                return NotFound("Product not found");
+
+            return Ok(product);
+        }
+
         [HttpDelete("{id:int}")]
         public async Task<ActionResult<ApiResponse>> DeleteProductAsync(int id)
         {
@@ -50,20 +60,20 @@ namespace RootedBack.Controllers
             return Ok(response);
         }
         [HttpPost]
-        public async Task<ActionResult<ApiResponse>> AddProductAsync(Product product)
+    
+        public async Task<ActionResult<ApiResponse>> AddProduct(Product product)
         {
-            if (product is null)
-                return BadRequest("product is null");
-
-            var result = await apiServices.AddProductAsync(product);
-            if (result.Success)
-                return Ok(result);
-            else
-                return BadRequest(result);
+            var response = await apiServices.AddProductAsync(product);
+            if (response.Success)
+            {
+                return CreatedAtAction(nameof(GetProductByIdAsync), new { id = product.ProductId }, response);
+            }
+            return BadRequest(response);
         }
+
+
         [HttpGet("Categories")]
         public async Task<ActionResult<List<Category>>> GetCategoriesAsync() => Ok(await categoryService.GetCategoriesAsync());
-
 
     }
 }

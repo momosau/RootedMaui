@@ -7,47 +7,47 @@ namespace RootedBack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewsController : ControllerBase
+    public class SpecificationsController : ControllerBase
     {
         private readonly RootedDBContext _context;
 
-        public ReviewsController(RootedDBContext context)
+        public SpecificationsController(RootedDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Reviews
+        // GET: api/Specifications
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviews()
+        public async Task<ActionResult<IEnumerable<Specification>>> GetSpecifications()
         {
-            return await _context.Reviews.ToListAsync();
+            return await _context.Specifications.ToListAsync();
         }
 
-        // GET: api/Reviews/5
+        // GET: api/Specifications/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Review>> GetReview(int id)
+        public async Task<ActionResult<Specification>> GetSpecification(int id)
         {
-            var review = await _context.Reviews.FindAsync(id);
+            var specification = await _context.Specifications.FindAsync(id);
 
-            if (review == null)
+            if (specification == null)
             {
                 return NotFound();
             }
 
-            return review;
+            return specification;
         }
 
-        // PUT: api/Reviews/5
+        // PUT: api/Specifications/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutReview(int id, Review review)
+        public async Task<IActionResult> PutSpecification(int id, Specification specification)
         {
-            if (id != review.ReviewId)
+            if (id != specification.SpecificationId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(review).State = EntityState.Modified;
+            _context.Entry(specification).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +55,7 @@ namespace RootedBack.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ReviewExists(id))
+                if (!SpecificationExists(id))
                 {
                     return NotFound();
                 }
@@ -68,19 +68,19 @@ namespace RootedBack.Controllers
             return NoContent();
         }
 
-        // POST: api/Reviews
+        // POST: api/Specifications
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Review>> PostReview(Review review)
+        public async Task<ActionResult<Specification>> PostSpecification(Specification specification)
         {
-            _context.Reviews.Add(review);
+            _context.Specifications.Add(specification);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (ReviewExists(review.ReviewId))
+                if (SpecificationExists(specification.SpecificationId))
                 {
                     return Conflict();
                 }
@@ -90,37 +90,28 @@ namespace RootedBack.Controllers
                 }
             }
 
-            return CreatedAtAction("GetReview", new { id = review.ReviewId }, review);
+            return CreatedAtAction("GetSpecification", new { id = specification.SpecificationId }, specification);
         }
 
-        // DELETE: api/Reviews/5
+        // DELETE: api/Specifications/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReview(int id)
+        public async Task<IActionResult> DeleteSpecification(int id)
         {
-            var review = await _context.Reviews.FindAsync(id);
-            if (review == null)
+            var specification = await _context.Specifications.FindAsync(id);
+            if (specification == null)
             {
                 return NotFound();
             }
 
-            _context.Reviews.Remove(review);
+            _context.Specifications.Remove(specification);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ReviewExists(int id)
+        private bool SpecificationExists(int id)
         {
-            return _context.Reviews.Any(e => e.ReviewId == id);
+            return _context.Specifications.Any(e => e.SpecificationId == id);
         }
-        // GET: api/Reviews/product/5
-        [HttpGet("product/{productId}")]
-        public async Task<ActionResult<IEnumerable<Review>>> GetReviewsForProduct(int productId)
-        {
-            return await _context.Reviews
-                .Where(r => r.ProductId == productId)
-                .ToListAsync();
-        }
-
     }
 }

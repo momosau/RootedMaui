@@ -5,6 +5,7 @@
              Title="ProductInfo"
              xmlns:ViewModel="clr-namespace:MauiApp3.ModelView" 
              x:DataType="ViewModel:ProductInfoVIewModel"
+             xmlns:Model="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
               xmlns:local="clr-namespace:MauiApp3.Converter"
              BackgroundColor="#E7E9E4" 
              FlowDirection="RightToLeft" 
@@ -34,11 +35,11 @@
                     <Label Text="{Binding SelectedProduct.Price, StringFormat='{0} ريال'}" FontSize="Medium" TextColor="Black"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout>
-                    <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding Organic, Converter={StaticResource SpecConverter}, ConverterParameter=organic}" />
+                 <!--  <Image WidthRequest="32" HeightRequest="32"
+         Source="{Binding Organic, Converter={StaticResource SpecConverter}, ConverterParameter}" />
 
                     <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding PesticideFree, Converter={StaticResource SpecConverter}, ConverterParameter=pesticide_free}" />
+         Source="{Binding PesticideFree, Converter={StaticResource SpecConverter}, ConverterParameter=" />
 
                     <Image WidthRequest="32" HeightRequest="32"
          Source="{Binding FairTrade, Converter={StaticResource SpecConverter}, ConverterParameter=fair_trade}" />
@@ -48,9 +49,28 @@
 
                     <Image WidthRequest="32" HeightRequest="32"
          Source="{Binding NonGMO, Converter={StaticResource SpecConverter}, ConverterParameter=non_gmo}" />
-                </HorizontalStackLayout>
+               --> </HorizontalStackLayout>
             </VerticalStackLayout>
         </Frame>
+        <Label Text="التقييمات" FontSize="18" FontAttributes="Bold" Margin="10,20,10,10" />
+        <CollectionView ItemsSource="{Binding Reviews}" Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="Model:Review">
+                    <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5">
+                        <StackLayout>
+                            <Label Text="{Binding ReviewId}"/>
+                            <Label Text="{Binding Comment}" FontSize="14" TextColor="Wheat" />
+                            <Label Text="⭐ التقييم: " FontSize="12" TextColor="Gray" />
+                            <Label Text="{Binding Rating}" FontSize="12" TextColor="DarkOrange" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+
+
 
         <!-- Quantity Control -->
         <HorizontalStackLayout>
