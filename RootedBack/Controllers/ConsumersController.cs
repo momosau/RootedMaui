@@ -104,5 +104,28 @@ namespace RootedBack.Controllers
         {
             return _context.Consumers.Any(e => e.ConsumerId == id);
         }
+        [HttpPost("Login")]
+        public async Task<ActionResult<Consumer>> SignInConsumer(ConsumerLoginRequest request)
+        {
+            var consumer = await _context.Consumers
+            .FirstOrDefaultAsync(C => C.Email == request.Email && C.Password == request.Password);
+
+            if (consumer == null)
+            {
+                return BadRequest("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
+            }
+
+
+            return Ok(consumer);
+        }
+
+
+
+        public class ConsumerLoginRequest
+        {
+            public int ConsumerId { get; set; }
+            public string Email { get; set; }
+            public string Password { get; set; }
+        }
     }
 }
