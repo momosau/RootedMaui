@@ -43,8 +43,8 @@ public partial class SignUpConsumer : ContentPage
                 PhoneNumber = phoneNumberEntry.Text,
                 Email = emailEntry.Text,
                 Password = passwordEntry.Text,
-                UserName = usernameEntry.Text,
-                Location = LocationEntry.Text,
+                UserNamer = usernameEntry.Text,
+                City = LocationEntry.Text,
 
 
             };
@@ -65,17 +65,16 @@ public partial class Consumer
 {
     public int ConsumerId { get; set; }
 
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-    public string PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; } = null!;
 
-    public string Location { get; set; }
+    public string City { get; set; } = null!;
 
-    public string Email { get; set; }
+    public string Email { get; set; } = null!;
 
-    public string Password { get; set; }
+    public string Password { get; set; } = null!;
 
-    public string UserName { get; set; }
-
+    public string UserNamer { get; set; } = null!;
 
 }
