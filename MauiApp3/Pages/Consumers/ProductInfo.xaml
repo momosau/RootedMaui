@@ -68,7 +68,23 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <Label Text="Specification" FontSize="18" FontAttributes="Bold" Margin="10,20,10,10" />
 
+<CollectionView ItemsSource="{Binding ProductsSpec}" Margin="10">
+    <CollectionView.ItemTemplate>
+        <DataTemplate x:DataType="Model:Specification">
+            <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5">
+                <StackLayout>
+                            <Label Text="{Binding IsGmofree, StringFormat='Is GMO-Free: {0}'}" />
+                            <Label Text="{Binding IsHydroponicallyGrown, StringFormat='Is Hydroponically Grown: {0}'}" />
+                            <Label Text="{Binding IsPesticideFree, StringFormat='Is Pesticide Free: {0}'}" />
+                            <Label Text="{Binding IsLocal, StringFormat='Is Local: {0}'}" />
+
+                        </StackLayout>
+            </Frame>
+        </DataTemplate>
+    </CollectionView.ItemTemplate>
+</CollectionView>
 
 
 
@@ -80,8 +96,8 @@
                 </Border.StrokeShape>
                 <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="White" HorizontalOptions="Start" WidthRequest="100">
                     <Button Clicked="OnIncreaseClicked" Text="+" BackgroundColor="White" CornerRadius="50" WidthRequest="30" HeightRequest="30" TextColor="Grey"/>
-                    <Label Text="{Binding QuantityInCart}" FontSize="20" VerticalOptions="Center" BackgroundColor="White" TextColor="Grey"/>
-                    <Button Text="-"  Clicked="OnDecreaseClicked" BackgroundColor="White" CornerRadius="50" WidthRequest="30" HeightRequest="30" TextColor="Grey"/>
+                    <Label Text="{Binding QuantityInCart}" FontSize="20" VerticalOptions="Center" BackgroundColor="White" TextColor="Black"/>
+                    <Button Text="-"  Clicked="OnDecreaseClicked" BackgroundColor="White" CornerRadius="50" WidthRequest="30" HeightRequest="30" TextColor="Black"/>
                 </StackLayout>
             </Border>
 

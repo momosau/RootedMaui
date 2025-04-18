@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using SharedLibraryy.Models;
 using System.Net.Http.Json;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using SharedLibraryy.Models;
 
 
 namespace MauiApp3.Services
@@ -44,12 +36,19 @@ namespace MauiApp3.Services
             return response;
 
         }
-        public async Task<List<Review>>GetReviewsAsync(int id)
+        public async Task<List<Review>> GetReviewsAsync(int id)
         {
             var reviews = await _httpClient.GetAsync($"{ApiUrl}api/Reviews/product/{id}");
             var response = await reviews.Content.ReadFromJsonAsync<List<Review>>();
             return response;
         }
+        public async Task<Specification> GetProductSpecAsync(int id)
+        {
+            var product = await _httpClient.GetFromJsonAsync<Product>($"{ApiUrl}api/Products/WithSpec/{id}");
+            return product?.Specification;
+        }
+
+
     }
 
 }

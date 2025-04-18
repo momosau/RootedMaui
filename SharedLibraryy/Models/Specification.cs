@@ -1,18 +1,25 @@
-﻿namespace SharedLibraryy.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace SharedLibraryy.Models;
 
 public partial class Specification
 {
     public int SpecificationId { get; set; }
 
-    public bool? IsOrganic { get; set; }
+    [JsonPropertyName("isOrganic")]
+    public bool IsOrganic { get; set; }
 
-    public bool? IsGmofree { get; set; }
+    [JsonPropertyName("isGmofree")]
+    public bool IsGmofree { get; set; }
 
-    public bool? IsHydroponicallyGrown { get; set; }
+    [JsonPropertyName("isHydroponicallyGrown")]
+    public bool IsHydroponicallyGrown { get; set; }
 
-    public bool? IsPesticideFree { get; set; }
+    [JsonPropertyName("isPesticideFree")]
+    public bool IsPesticideFree { get; set; }
 
-    public bool? IsLocal { get; set; }
+    [JsonPropertyName("isLocal")]
+    public bool IsLocal { get; set; }
 
     public int? FarmerId { get; set; }
 
