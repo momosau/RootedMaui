@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net.Http;
 using System.Text.Json;
+using MauiApp3.Services;
 
 namespace MauiApp3.ModelView
 {
@@ -87,7 +88,7 @@ namespace MauiApp3.ModelView
        
         public ObservableCollection<Review> Reviews { get; set; } = new();
 
-        private async Task LoadReviewsAsync()
+        private async Task LoadReviewsAsync() 
         {
             var reviewsFromService = await _productService.GetReviewsAsync(_selectedProduct.ProductId);
             foreach (var review in reviewsFromService)

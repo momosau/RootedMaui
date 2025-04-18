@@ -1,19 +1,15 @@
 ﻿using MauiApp3.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SharedLibraryy.Models;
 
 namespace MauiApp3.ModelView
-
 {
     public class FarmersViewModel : BaseViewModel
     {
         private readonly FarmerService _service;
         public ObservableCollection<Farmer> Farmers { get; set; } = new();
+
+        public Command LoadFarmersCommand { get; }
 
         public FarmersViewModel()
         {
@@ -22,32 +18,18 @@ namespace MauiApp3.ModelView
             LoadFarmersCommand.Execute(null);
         }
 
-        public Command LoadFarmersCommand { get; }
-
         private async Task LoadFarmers()
         {
-            if (IsBusy) return;
+            var farmersList = await _service.GetFarmersAsync();
 
-            try
+            foreach (var farmer in farmersList)
             {
-                IsBusy = true;
-                var farmers = await _service.GetFarmersAsync();
-                Farmers.Clear();
+                Console.WriteLine($"Farmer: {farmer.Name} | City: {farmer.City} | IsOrganic: {farmer.Specification?.IsOrganic}");
+            }
 
-                if (farmers != null)
-                {
-                    foreach (var farmer in farmers)
-                        Farmers.Add(farmer);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error in LoadFarmers: {ex.Message}");
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            Farmers.Clear();
+            foreach (var farmer in farmersList)
+                Farmers.Add(farmer);
         }
     }
-    }
+}
