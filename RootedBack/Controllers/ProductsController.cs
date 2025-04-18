@@ -23,20 +23,23 @@ namespace RootedBack.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Product>> GetProductByIdAsync(int id)
         {
-            var products = await apiServices.GetProductByIdAsync(id);
-            if (products is null)
-                return NotFound("Product not found");
-            else
-                return Ok(products);
-        }
-        [HttpGet("WithSpec/{id:int}")]
-        public async Task<ActionResult<Product>> GetProductWithSpec(int id)
-        {
             var product = await apiServices.GetProductWithSpecificationsAsync(id);
             if (product is null)
                 return NotFound("Product not found");
 
             return Ok(product);
+        }
+        [HttpGet("WithSpec/{id}")]
+        public async Task<ActionResult<Product>> GetProductWithSpecifications(int id)
+        {
+            var product = await apiServices.GetProductWithSpecificationsAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product); // Returns the full product including specifications
         }
 
         [HttpDelete("{id:int}")]
@@ -60,7 +63,7 @@ namespace RootedBack.Controllers
             return Ok(response);
         }
         [HttpPost]
-    
+
         public async Task<ActionResult<ApiResponse>> AddProduct(Product product)
         {
             var response = await apiServices.AddProductAsync(product);
@@ -73,7 +76,9 @@ namespace RootedBack.Controllers
 
 
         [HttpGet("Categories")]
-        public async Task<ActionResult<List<Category>>> GetCategoriesAsync() => Ok(await categoryService.GetCategoriesAsync());
+        
+        public async Task<List<Category>> GetCategoriesAsync() => await categoryService.GetCategoriesAsync();
 
     }
 }
+

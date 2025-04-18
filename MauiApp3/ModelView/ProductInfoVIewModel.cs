@@ -2,14 +2,12 @@
 using SharedLibraryy.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Net.Http;
-using System.Text.Json;
 
 namespace MauiApp3.ModelView
 {
     public class ProductInfoVIewModel : INotifyPropertyChanged
     {
-       
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Product _selectedProduct;
@@ -20,7 +18,7 @@ namespace MauiApp3.ModelView
             {
                 _selectedProduct = value;
                 OnPropertyChanged(nameof(SelectedProduct));
-                OnPropertyChanged(nameof(FarmName));  
+                OnPropertyChanged(nameof(FarmName));
             }
         }
 
@@ -43,6 +41,7 @@ namespace MauiApp3.ModelView
 
             _ = LoadReviewsAsync();
             LoadFarmName();
+            getProductspec();
         }
 
         private async void LoadFarmName()
@@ -52,7 +51,7 @@ namespace MauiApp3.ModelView
 
             var farmers = await _productService.GetFarmersAsync();
             var farmer = farmers.FirstOrDefault(f => f.FarmerId == SelectedProduct.FarmerId);
-          FarmName = farmer?.FarmName;
+            FarmName = farmer?.FarmName;
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -84,8 +83,9 @@ namespace MauiApp3.ModelView
             if (QuantityInCart > 1)
                 QuantityInCart--;
         }
-       
+
         public ObservableCollection<Review> Reviews { get; set; } = new();
+       
 
         private async Task LoadReviewsAsync()
         {
@@ -93,6 +93,27 @@ namespace MauiApp3.ModelView
             foreach (var review in reviewsFromService)
                 Reviews.Add(review);
         }
+        public ObservableCollection<Specification> ProductsSpec { get; set; } = new();
+
+        private async Task getProductspec()
+        {
+            var spec = await _productService.GetProductSpecAsync(_selectedProduct.ProductId);
+
+            if (spec != null)
+            {
+                Console.WriteLine($"Spec loaded: IsOrganic = {spec.IsOrganic}, IsGmofree = {spec.IsGmofree}");
+                ProductsSpec.Clear();
+                ProductsSpec.Add(spec);
+            }
+            else
+            {
+                Console.WriteLine("No spec found.");
+            }
+        }
+
+
+
+
 
     }
 

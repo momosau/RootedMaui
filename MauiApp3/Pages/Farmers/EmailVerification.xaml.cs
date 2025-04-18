@@ -25,9 +25,9 @@ namespace MauiApp3.Pages.Farmers
         {
             if (sender is Entry currentEntry && !string.IsNullOrEmpty(e.NewTextValue))
             {
-                if (currentEntry == pin1) pin2.Focus();
-                else if (currentEntry == pin2) pin3.Focus();
-                else if (currentEntry == pin3) pin4.Focus();
+               // if (currentEntry == pin1) pin2.Focus();
+                //else if (currentEntry == pin2) pin3.Focus();
+                //else if (currentEntry == pin3) pin4.Focus();
             }
         }
 
@@ -36,21 +36,21 @@ namespace MauiApp3.Pages.Farmers
             try
             {
                 // التحقق من إدخال جميع الأرقام
-                if (string.IsNullOrEmpty(pin1.Text) || string.IsNullOrEmpty(pin2.Text) ||
-                    string.IsNullOrEmpty(pin3.Text) || string.IsNullOrEmpty(pin4.Text))
-                {
-                    await DisplayAlert("خطأ", "الرجاء إدخال رمز التحقق بالكامل", "موافق");
-                    return;
-                }
-                string enteredCode = $"{pin1.Text}{pin2.Text}{pin3.Text}{pin4.Text}";
-                if (enteredCode != FixedVerificationCode)
+                // if (string.IsNullOrEmpty(pin1.Text) || string.IsNullOrEmpty(pin2.Text) ||
+                //     string.IsNullOrEmpty(pin3.Text) || string.IsNullOrEmpty(pin4.Text))
+                // {
+                //    await DisplayAlert("خطأ", "الرجاء إدخال رمز التحقق بالكامل", "موافق");
+                    //   return;
+                //   }
+                //   string enteredCode = $"{pin1.Text}{pin2.Text}{pin3.Text}{pin4.Text}";
+                //  if (enteredCode != FixedVerificationCode)
                 {
                     await DisplayAlert("خطأ", "كود التحقق غير صحيح", "موافق");
                     return;
                 }
 
-                loadingIndicator.IsVisible = true;
-                verifyButton.IsEnabled = false;
+             //   loadingIndicator.IsVisible = true;
+               // verifyButton.IsEnabled = false;
 
                 // إرسال البيانات إلى API
                 bool isSuccess = await UploadFarmerData(_farmer);
@@ -72,8 +72,8 @@ namespace MauiApp3.Pages.Farmers
             }
             finally
             {
-                loadingIndicator.IsVisible = false;
-                verifyButton.IsEnabled = true;
+                //loadingIndicator.IsVisible = false;
+                //verifyButton.IsEnabled = true;
             }
         }
 

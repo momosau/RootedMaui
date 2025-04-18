@@ -67,20 +67,14 @@ namespace RootedBack.Services
             await _context.SaveChangesAsync();
             return new ApiResponse() { Success = true, Message = "Product updated successfully." };
         }
-        public async Task<Product?> GetProductWithSpecificationsAsync(int id)
+        public async Task<Product> GetProductWithSpecificationsAsync(int id)
         {
             var product = await _context.Products
-                .Include(p => p.Specification) // Include related Specifications
+                .Include(p => p.Specification) // Ensure specs are included
                 .FirstOrDefaultAsync(p => p.ProductId == id);
 
-            if (product == null)
-            {
-                return null; // Return null if the product is not found
-            }
-
-            return product; // Return the full Product entity with Specifications
+            return product; // Returns product with specs
         }
-
 
 
     }
