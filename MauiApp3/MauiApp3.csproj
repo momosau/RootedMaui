@@ -129,7 +129,7 @@
 	  <MauiXaml Update="Pages\Farmers\EditProductsFarmer.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\FarmerDetailPage.xaml">
+	  <MauiXaml Update="Pages\Consumers\FarmerDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 		  <MauiXaml Update="Pages\Farmers\FarmerHome.xaml">
@@ -144,7 +144,7 @@
 	  <MauiXaml Update="Pages\Farmers\FarmerProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\FarmersListPage.xaml">
+	  <MauiXaml Update="Pages\Consumers\FarmersListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Farmers\SignUpFarmer2.xaml">

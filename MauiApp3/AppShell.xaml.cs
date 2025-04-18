@@ -48,8 +48,8 @@ public AppShell()
             Routing.RegisterRoute("ProductPage", typeof(Pages.Consumers.ProductPage));
             Routing.RegisterRoute("CategoriesPage", typeof(Pages.Consumers.CategoriesPage));
 
-            Routing.RegisterRoute("FarmersListPage", typeof(FarmersListPage));
-            Routing.RegisterRoute("FarmerDetailPage", typeof(FarmerDetailPage));
+            Routing.RegisterRoute("FarmersListPage", typeof(Pages.Consumers.FarmersListPage));
+            Routing.RegisterRoute("FarmerDetailPage", typeof(Pages.Consumers.FarmerDetailPage));
 
 
 

@@ -14,7 +14,7 @@
         <ShellContent 
 Title="Farmers" 
 Icon="farmers.png" 
-ContentTemplate="{DataTemplate local:CategoriesPage}" />
+ContentTemplate="{DataTemplate local:FarmersListPage}" />
         <ShellContent 
   Title="Category" 
   Icon="category.png" 
@@ -25,7 +25,7 @@ ContentTemplate="{DataTemplate local:CategoriesPage}" />
   Icon="cart.png" 
   ContentTemplate="{DataTemplate local:ShoppingCart}" />
         <ShellContent 
-Title="Acount" 
+Title="Account" 
 Icon="account.png" 
 ContentTemplate="{DataTemplate local:CategoriesPage}" />
 

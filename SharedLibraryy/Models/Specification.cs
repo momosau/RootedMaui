@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace SharedLibraryy.Models;
 
@@ -19,7 +20,6 @@ public partial class Specification
     public bool? IsLocal { get; set; }
 
     public bool? IsPesticideFree { get; set; }
-
 
     public virtual ICollection<Farmer> Farmers { get; set; } = new List<Farmer>();
 
