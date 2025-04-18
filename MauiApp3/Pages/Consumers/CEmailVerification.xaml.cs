@@ -20,7 +20,7 @@ public partial class CEmailVerification : ContentPage
     private const int SmtpPort = 587;
     private const string SmtpUsername = "reachout.rooted@gmail.com";
     private const string SmtpPassword = "xixw wprf fqdo tagy";
-    private const string ApiUrl = "http://localhost:5000/api/Consumers";
+    private const string ApiUrl = "http://localhost:7168/api/Consumers";
     private Consumer _consumer;
 
     public CEmailVerification(Consumer consumer)
