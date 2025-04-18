@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SharedLibraryy.Models;
 using SharedLibraryy.Services;
 
@@ -47,7 +46,7 @@ namespace RootedBack.Controllers
         public async Task<ActionResult<FarmerApplication>> SubmitApplication(FarmerApplication application)
         {
             var created = await _service.CreateAsync(application);
-            return CreatedAtAction(nameof(GetById), new { id = created.AppilicationId }, created);
+            return CreatedAtAction(nameof(GetById), new { id = created.ApplicationId }, created);
         }
 
 
@@ -99,6 +98,6 @@ namespace RootedBack.Controllers
             if (!rejected) return NotFound();
             return NoContent();
         }
-    
+
     }
 }

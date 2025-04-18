@@ -39,6 +39,10 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IApiServices, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IFarmerApplicationsService, FarmerApplicationsService>();
+builder.Services.AddControllers()
+    .AddJsonOptions(x =>
+        x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve);
+
 
 var app = builder.Build();
 

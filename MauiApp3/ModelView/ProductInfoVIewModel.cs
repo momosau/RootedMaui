@@ -1,11 +1,15 @@
 ﻿using MauiApp3.Services;
 using SharedLibraryy.Models;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace MauiApp3.ModelView
 {
     public class ProductInfoVIewModel : INotifyPropertyChanged
     {
+       
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Product _selectedProduct;
@@ -37,7 +41,7 @@ namespace MauiApp3.ModelView
             _productService = productService;
             SelectedProduct = product;
 
-     
+            _ = LoadReviewsAsync();
             LoadFarmName();
         }
 
@@ -48,7 +52,7 @@ namespace MauiApp3.ModelView
 
             var farmers = await _productService.GetFarmersAsync();
             var farmer = farmers.FirstOrDefault(f => f.FarmerId == SelectedProduct.FarmerId);
-         //   FarmName = farmer?.FarmName;
+          FarmName = farmer?.FarmName;
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -80,6 +84,16 @@ namespace MauiApp3.ModelView
             if (QuantityInCart > 1)
                 QuantityInCart--;
         }
+       
+        public ObservableCollection<Review> Reviews { get; set; } = new();
+
+        private async Task LoadReviewsAsync()
+        {
+            var reviewsFromService = await _productService.GetReviewsAsync(_selectedProduct.ProductId);
+            foreach (var review in reviewsFromService)
+                Reviews.Add(review);
+        }
+
     }
 
 }

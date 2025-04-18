@@ -22,8 +22,9 @@ namespace RootedBack.Controllers
         public async Task<ActionResult<IEnumerable<Farmer>>> GetFarmers()
         {
             return await _context.Farmers
-          .Include(f => f.Specification)
-          .ToListAsync();
+    .Include(f => f.Specification)
+    .ToListAsync();
+
         }
 
         // GET: api/Farmers/5
@@ -31,8 +32,9 @@ namespace RootedBack.Controllers
         public async Task<ActionResult<Farmer>> GetFarmer(int id)
         {
             var farmer = await _context.Farmers
-                .Include(f => f.Specifications)
-                .FirstOrDefaultAsync(f => f.FarmerId == id);
+     .Include(f => f.Specification)
+     .FirstOrDefaultAsync(f => f.FarmerId == id);
+
 
             if (farmer == null)
             {
@@ -41,6 +43,7 @@ namespace RootedBack.Controllers
 
             return farmer;
         }
+
 
 
         // PUT: api/Farmers/5
@@ -100,39 +103,8 @@ namespace RootedBack.Controllers
 
             return NoContent();
         }
-        [HttpGet("{id}/with-specifications")]
-        public async Task<ActionResult<FarmerDTO>> GetFarmerWithSpecs(int id)
-        {
-            var farmer = await _context.Farmers
-                .Include(f => f.Specifications)
-                .FirstOrDefaultAsync(f => f.FarmerId == id);
-
-            if (farmer == null)
-            {
-                return NotFound();
-            }
-
-            var dto = new FarmerDTO
-            {
-                FarmerId = farmer.FarmerId,
-                Name = farmer.Name,
-                Email = farmer.Email,
-                Specifications = farmer.Specifications
-                    .Select(s => new SpecificationDTO
-                    {
-                        IsOrganic = s.IsOrganic,
-                        IsGmofree = s.IsGmofree,
-                        IsHydroponicallyGrown = s.IsHydroponicallyGrown,
-                        IsLocal = s.IsLocal,
-                        IsPesticideFree = s.IsPesticideFree
-                    })
-                    .ToList()
-            };
-
-            return Ok(dto);
-        }
-
-
+        
+       
         private bool FarmerExists(int id)
         {
             return _context.Farmers.Any(e => e.FarmerId == id);
@@ -171,8 +143,6 @@ namespace RootedBack.Controllers
             return Ok(new { Message = "File uploaded successfully!", Path = relativePath });
         }
 
-
-
         [HttpPost("Login")]
         public async Task<ActionResult<Farmer>> SignInFarmer(FarmerLoginRequest request)
         {
@@ -198,22 +168,6 @@ namespace RootedBack.Controllers
             public string Password { get; set; }
 
         }
-        public class SpecificationDTO
-        {
-            public bool? IsOrganic { get; set; }
-            public bool? IsGmofree { get; set; }
-            public bool? IsHydroponicallyGrown { get; set; }
-            public bool? IsLocal { get; set; }
-            public bool? IsPesticideFree { get; set; }
-        }
-
-        public class FarmerDTO
-        {
-            public int FarmerId { get; set; }
-            public string Name { get; set; }
-            public string Email { get; set; }
-            public List<SpecificationDTO> Specifications { get; set; }
-        }
-
+        
     }
 }

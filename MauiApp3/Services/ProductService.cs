@@ -44,7 +44,12 @@ namespace MauiApp3.Services
             return response;
 
         }
-
+        public async Task<List<Review>>GetReviewsAsync(int id)
+        {
+            var reviews = await _httpClient.GetAsync($"{ApiUrl}api/Reviews/product/{id}");
+            var response = await reviews.Content.ReadFromJsonAsync<List<Review>>();
+            return response;
+        }
     }
 
 }

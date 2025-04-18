@@ -1,32 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿namespace SharedLibraryy.Models;
 
-namespace SharedLibraryy.Models;
-
-[Table("Specification")]
 public partial class Specification
 {
-    [Key]
-    [Column("SpecificationID")]
     public int SpecificationId { get; set; }
 
     public bool? IsOrganic { get; set; }
 
-    [Column("IsGMOFree")]
     public bool? IsGmofree { get; set; }
 
     public bool? IsHydroponicallyGrown { get; set; }
-    public bool? IsLocal { get; set; }
 
     public bool? IsPesticideFree { get; set; }
 
-    public virtual ICollection<Farmer> Farmers { get; set; } = new List<Farmer>();
+    public bool? IsLocal { get; set; }
 
-    public ICollection<FarmerApplication> FarmerApplications { get; set; } = new List<FarmerApplication>();
+    public int? FarmerId { get; set; }
 
+    public int? ProductId { get; set; }
 
-    [ForeignKey("SpecificationId")]
-    [InverseProperty("Specifications")]
-    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+    public int? FarmerApplicationId { get; set; }
+
+    public virtual Farmer? Farmer { get; set; }
+
+    public virtual FarmerApplication? FarmerApplication { get; set; }
+
+    public virtual Product? Product { get; set; }
 }

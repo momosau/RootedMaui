@@ -14,7 +14,7 @@ public AppShell()
             Routing.RegisterRoute("SignInFarmer", typeof(SignInFarmer));
             Routing.RegisterRoute("SplashFarmer", typeof(SplashFarmer));
             Routing.RegisterRoute("AddProductsFarmer", typeof(Pages.Farmers.AddProductsFarmer));
-            Routing.RegisterRoute("Chatbot", typeof(Chatbot));
+            Routing.RegisterRoute("Chatbot", typeof(Pages.Farmers.Chatbot));
             Routing.RegisterRoute("FarmerHome", typeof(FarmerHome));
             Routing.RegisterRoute("ConsumerMainPage", typeof(Pages.Consumers.ConsumerMainPage));
             Routing.RegisterRoute("ContactUsPage", typeof(ContactUsPage));

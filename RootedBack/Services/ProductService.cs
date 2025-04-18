@@ -18,16 +18,25 @@ namespace RootedBack.Services
         public async Task<ApiResponse> AddProductAsync(Product product)
         {
             if (product == null) { return new ApiResponse() { Success = false, Message = "Product is null." }; }
-            var check = await _context.Products.Where(p => p.Name.ToLower().Equals(product.Name.ToLower()) && p.FarmerId == product.FarmerId)
-    .FirstOrDefaultAsync();
+
+            var check = await _context.Products
+                .Where(p => p.Name.ToLower().Equals(product.Name.ToLower()) && p.FarmerId == product.FarmerId)
+                .FirstOrDefaultAsync();
+
             if (check == null)
             {
+                if (product.Specification != null)
+                {
+                    _context.Specifications.Add(product.Specification); // Add Specification if it's part of the product
+                }
+
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
                 return new ApiResponse() { Success = true, Message = "Product added successfully." };
             }
             return new ApiResponse() { Success = false, Message = "Product already exists for this farmer." };
         }
+
 
         public async Task<ApiResponse> DeleteProductAsync(int id)
         {
@@ -58,5 +67,21 @@ namespace RootedBack.Services
             await _context.SaveChangesAsync();
             return new ApiResponse() { Success = true, Message = "Product updated successfully." };
         }
+        public async Task<Product?> GetProductWithSpecificationsAsync(int id)
+        {
+            var product = await _context.Products
+                .Include(p => p.Specification) // Include related Specifications
+                .FirstOrDefaultAsync(p => p.ProductId == id);
+
+            if (product == null)
+            {
+                return null; // Return null if the product is not found
+            }
+
+            return product; // Return the full Product entity with Specifications
+        }
+
+
+
     }
 }

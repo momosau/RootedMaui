@@ -4,7 +4,7 @@ using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace MauiApp3
+namespace MauiApp3.Pages.Farmers
 {
     public partial class Chatbot : ContentPage
     {

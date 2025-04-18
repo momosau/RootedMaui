@@ -17,8 +17,10 @@ public partial class ProductInfo : ContentPage
 
         var viewModel = new ProductInfoVIewModel(selectedProduct, _productService);
         BindingContext = viewModel;
-    }
+      
 
+    }
+ 
     public int count = 1;
 
 
