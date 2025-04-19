@@ -1,23 +1,21 @@
+using MauiApp3.ModelView;
 using SharedLibraryy.Models;
+using Microsoft.Maui.Controls;
 
 namespace MauiApp3.Pages.Consumers;
 
-[QueryProperty(nameof(SelectedFarmer), "SelectedFarmer")]
 public partial class FarmerDetailPage : ContentPage
 {
-    public FarmerDetailPage()
+    public Farmer Farmer { get; set; }
+
+    public FarmerDetailPage(Farmer selectedFarmer)
     {
         InitializeComponent();
-    }
 
-    private Farmer _selectedFarmer;
-    public Farmer SelectedFarmer
-    {
-        get => _selectedFarmer;
-        set
-        {
-            _selectedFarmer = value;
-            BindingContext = value;
-        }
+        Farmer = selectedFarmer;
+
+        var view6 = new FarmerDetailViewModel(selectedFarmer);
+        view6.Farmer = selectedFarmer;
+        BindingContext = view6;
     }
 }

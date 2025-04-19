@@ -88,6 +88,22 @@ namespace RootedBack.Controllers
             return CreatedAtAction("GetFarmer", new { id = farmer.FarmerId }, farmer);
         }
 
+        [HttpGet("with-reviews/{farmerId}")]
+        public async Task<ActionResult<Farmer>> GetFarmerWithReviews(int farmerId)
+        {
+            var farmer = await _context.Farmers
+                .Include(f => f.Specification)  // Include the farmer's specification
+                .Include(f => f.Reviews)        // Include the farmer's reviews
+                .FirstOrDefaultAsync(f => f.FarmerId == farmerId);
+
+            if (farmer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(farmer);
+        }
+
         // DELETE: api/Farmers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFarmer(int id)
@@ -103,8 +119,8 @@ namespace RootedBack.Controllers
 
             return NoContent();
         }
-        
-       
+
+
         private bool FarmerExists(int id)
         {
             return _context.Farmers.Any(e => e.FarmerId == id);
@@ -160,7 +176,7 @@ namespace RootedBack.Controllers
             }
 
             return Ok(farmer);
-        }
+        } } }
 
         public class FarmerLoginRequest
         {
@@ -169,5 +185,4 @@ namespace RootedBack.Controllers
 
         }
         
-    }
-}
+    

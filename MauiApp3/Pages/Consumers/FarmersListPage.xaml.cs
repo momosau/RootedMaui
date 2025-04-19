@@ -14,15 +14,13 @@ public partial class FarmersListPage : ContentPage
 
     private async void OnFarmerSelected(object sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is Farmer selectedFarmer)
-        {
-            await Shell.Current.GoToAsync("PaFarmerDetailPage", new Dictionary<string, object>
-            {
-                ["SelectedFarmer"] = selectedFarmer
-            });
-        }
+        var selectedFarmer = e.CurrentSelection.FirstOrDefault() as Farmer;
+        if (selectedFarmer == null)
+            return;
 
-      ((CollectionView)sender).SelectedItem = null;
+        await Shell.Current.Navigation.PushAsync(new FarmerDetailPage(selectedFarmer));
     }
+
 }
-    
+
+

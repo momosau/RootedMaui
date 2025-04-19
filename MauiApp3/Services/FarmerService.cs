@@ -10,6 +10,7 @@ namespace MauiApp3.Services
     using System.Net.Http.Json;
     using SharedLibraryy.Models;
     using Microsoft.Maui.Devices; // Make sure to include this
+    using System.Text.Json;
 
     public class FarmerService
     {
@@ -27,19 +28,45 @@ namespace MauiApp3.Services
             };
         }
 
+        public async Task<List<Review>> GetFarmerReviewsAsync(int farmerId)
+        {
+            try
+            {
+                var response = await _httpClient.GetFromJsonAsync<List<Review>>($"api/reviews/farmer/{farmerId}");
+                return response ?? new List<Review>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching farmer reviews: {ex.Message}");
+                return new List<Review>();
+            }
+        }
+
         public async Task<List<Farmer>> GetFarmersAsync()
         {
             try
             {
-                var farmers = await _httpClient.GetFromJsonAsync<List<Farmer>>("api/farmers");
+                var response = await _httpClient.GetAsync($"{ApiUrl}api/Farmers");
+
+                var rawContent = await response.Content.ReadAsStringAsync();
+
+
+
+                response.EnsureSuccessStatusCode();
+
+                var farmers = JsonSerializer.Deserialize<List<Farmer>>(rawContent, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
                 return farmers ?? new List<Farmer>();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error fetching farmers: {ex.Message}");
+                Console.WriteLine($" Error fetching farmers: {ex.Message}");
                 return new List<Farmer>();
             }
         }
-    }
 
+    }
 }
