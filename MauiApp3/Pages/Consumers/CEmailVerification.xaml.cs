@@ -1,4 +1,4 @@
-using MailKit.Net.Smtp;
+ï»¿using MailKit.Net.Smtp;
 using MimeKit;
 using MimeKit.Utils;
 using Newtonsoft.Json;
@@ -24,43 +24,43 @@ public partial class CEmailVerification : ContentPage
     private Consumer _consumer;
 
     public CEmailVerification(Consumer consumer)
-	{
+    {
         InitializeComponent();
         _consumer = consumer;
-        emailLabel.Text = $"ÇáÈÑíÏ: {_consumer.Email}";
+        emailLabel.Text = $"Ø§Ù„Ø¨Ø±ÙŠØ¯: {_consumer.Email}";
         GenerateAndSendVerificationCode();
     }
 
 
-        private void GenerateAndSendVerificationCode()
+    private void GenerateAndSendVerificationCode()
+    {
+        _verificationCode = RandomNumberGenerator.GetInt32(1000, 9999).ToString();
+        Debug.WriteLine($"Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚: {_verificationCode}");
+        Task.Run(() => SendVerificationEmail(_consumer.Email, _verificationCode));
+    }
+
+    private async Task SendVerificationEmail(string email, string code)
+    {
+        try
         {
-            _verificationCode = RandomNumberGenerator.GetInt32(1000, 9999).ToString();
-            Debug.WriteLine($"ÑãÒ ÇáÊÍŞŞ: {_verificationCode}");
-            Task.Run(() => SendVerificationEmail(_consumer.Email, _verificationCode));
-        }
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Rooted", SmtpUsername));
+            message.To.Add(new MailboxAddress("", email));
+            message.Subject = "Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ - ØªØ·Ø¨ÙŠÙ‚ Rooted";
+            var imageUrl = "https://i.ibb.co/hRzTwb7j/rooted-logo.png";
+            var bodyBuilder = new BodyBuilder();
 
-        private async Task SendVerificationEmail(string email, string code)
-        {
-            try
-            {
-                var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("Rooted", SmtpUsername));
-                message.To.Add(new MailboxAddress("", email));
-                message.Subject = "ÑãÒ ÇáÊÍŞŞ - ÊØÈíŞ Rooted";
-                var imageUrl = "https://i.ibb.co/hRzTwb7j/rooted-logo.png";
-                var bodyBuilder = new BodyBuilder();
+            // Ø¥Ù†Ø´Ø§Ø¡ Ù…Ø¹Ø±Ù ÙØ±ÙŠØ¯ Ù„Ù„ØµÙˆØ±Ø© Ø§Ù„Ù…Ø¶Ù…Ù†Ø©
+            var imageId = MimeUtils.GenerateMessageId();
 
-                // ÅäÔÇÁ ãÚÑİ İÑíÏ ááÕæÑÉ ÇáãÖãäÉ
-                var imageId = MimeUtils.GenerateMessageId();
-
-                // HTML ãÚ ÊäÓíŞ ãÊÌÇæÈ
-                bodyBuilder.HtmlBody = $@"
+            // HTML Ù…Ø¹ ØªÙ†Ø³ÙŠÙ‚ Ù…ØªØ¬Ø§ÙˆØ¨
+            bodyBuilder.HtmlBody = $@"
                 <!DOCTYPE html>
                 <html dir='rtl'>
                 <head>
                     <meta charset='UTF-8'>
                     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                    <title>ÑãÒ ÇáÊÍŞŞ</title>
+                    <title>Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚</title>
                     <style>
                         body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; }}
                         .container {{ max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1); }}
@@ -82,168 +82,168 @@ public partial class CEmailVerification : ContentPage
                             <img class='logo' src='{imageUrl}' alt='Rooted Logo'>
                         </div>
                         <div class='content'>
-                            <h2 style='color: #0E3230;'>ãÑÍÈÇğ Èß İí ÊØÈíŞ Rooted</h2>
-                            <p>ÔßÑÇğ áÊÓÌíáß ãÚäÇ. íÑÌì ÇÓÊÎÏÇã ÑãÒ ÇáÊÍŞŞ ÇáÊÇáí áÅßãÇá ÚãáíÉ ÇáÊÓÌíá:</p>
+                            <h2 style='color: #0E3230;'>Ù…Ø±Ø­Ø¨Ø§Ù‹ Ø¨Ùƒ ÙÙŠ ØªØ·Ø¨ÙŠÙ‚ Rooted</h2>
+                            <p>Ø´ÙƒØ±Ø§Ù‹ Ù„ØªØ³Ø¬ÙŠÙ„Ùƒ Ù…Ø¹Ù†Ø§. ÙŠØ±Ø¬Ù‰ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ Ø§Ù„ØªØ§Ù„ÙŠ Ù„Ø¥ÙƒÙ…Ø§Ù„ Ø¹Ù…Ù„ÙŠØ© Ø§Ù„ØªØ³Ø¬ÙŠÙ„:</p>
                             
                             <div class='code'>{code}</div>
                             
-                            <p>åĞÇ ÇáÑãÒ ÕÇáÍ áãÏÉ 10 ÏŞÇÆŞ İŞØ.</p>
+                            <p>Ù‡Ø°Ø§ Ø§Ù„Ø±Ù…Ø² ØµØ§Ù„Ø­ Ù„Ù…Ø¯Ø© 10 Ø¯Ù‚Ø§Ø¦Ù‚ ÙÙ‚Ø·.</p>
                             
                          
                             
                             <p style='font-size: 14px; color: #0E3230; margin-top: 30px;'>
-                                ÅĞÇ áã ÊØáÈ åĞÇ ÇáÑãÒ¡ íÑÌì ÊÌÇåá åĞå ÇáÑÓÇáÉ Ãæ ÇáÊæÇÕá ãÚ İÑíŞ ÇáÏÚã.
+                                Ø¥Ø°Ø§ Ù„Ù… ØªØ·Ù„Ø¨ Ù‡Ø°Ø§ Ø§Ù„Ø±Ù…Ø²ØŒ ÙŠØ±Ø¬Ù‰ ØªØ¬Ø§Ù‡Ù„ Ù‡Ø°Ù‡ Ø§Ù„Ø±Ø³Ø§Ù„Ø© Ø£Ùˆ Ø§Ù„ØªÙˆØ§ØµÙ„ Ù…Ø¹ ÙØ±ÙŠÙ‚ Ø§Ù„Ø¯Ø¹Ù….
                             </p>
                         </div>
                         <div class='footer'>
-                            © {DateTime.Now.Year} Rooted. ÌãíÚ ÇáÍŞæŞ ãÍİæÙÉ.<br>
+                            Â© {DateTime.Now.Year} Rooted. Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ‚ Ù…Ø­ÙÙˆØ¸Ø©.<br>
                             support@rooted.com | +966 12 345 6789
                         </div>
                     </div>
                 </body>
                 </html>";
 
-                // ÈÏíá äÕí ááÚãáÇÁ ÇáĞíä áÇ íÏÚãæä HTML
-                bodyBuilder.TextBody = $"ÑãÒ ÇáÊÍŞŞ ÇáÎÇÕ Èß åæ: {code}\n\n" +
-                                      "ÇáÑÌÇÁ ÅÏÎÇá åĞÇ ÇáÑãÒ İí ÇáÊØÈíŞ áÅßãÇá ÚãáíÉ ÇáÊÓÌíá.\n\n" +
-                                      "åĞÇ ÇáÑãÒ ÕÇáÍ áãÏÉ 10 ÏŞÇÆŞ İŞØ.\n\n" +
-                                      "ÅĞÇ áã ÊØáÈ åĞÇ ÇáÑãÒ¡ íÑÌì ÊÌÇåá åĞå ÇáÑÓÇáÉ.";
+            // Ø¨Ø¯ÙŠÙ„ Ù†ØµÙŠ Ù„Ù„Ø¹Ù…Ù„Ø§Ø¡ Ø§Ù„Ø°ÙŠÙ† Ù„Ø§ ÙŠØ¯Ø¹Ù…ÙˆÙ† HTML
+            bodyBuilder.TextBody = $"Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ Ø§Ù„Ø®Ø§Øµ Ø¨Ùƒ Ù‡Ùˆ: {code}\n\n" +
+                                  "Ø§Ù„Ø±Ø¬Ø§Ø¡ Ø¥Ø¯Ø®Ø§Ù„ Ù‡Ø°Ø§ Ø§Ù„Ø±Ù…Ø² ÙÙŠ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ù„Ø¥ÙƒÙ…Ø§Ù„ Ø¹Ù…Ù„ÙŠØ© Ø§Ù„ØªØ³Ø¬ÙŠÙ„.\n\n" +
+                                  "Ù‡Ø°Ø§ Ø§Ù„Ø±Ù…Ø² ØµØ§Ù„Ø­ Ù„Ù…Ø¯Ø© 10 Ø¯Ù‚Ø§Ø¦Ù‚ ÙÙ‚Ø·.\n\n" +
+                                  "Ø¥Ø°Ø§ Ù„Ù… ØªØ·Ù„Ø¨ Ù‡Ø°Ø§ Ø§Ù„Ø±Ù…Ø²ØŒ ÙŠØ±Ø¬Ù‰ ØªØ¬Ø§Ù‡Ù„ Ù‡Ø°Ù‡ Ø§Ù„Ø±Ø³Ø§Ù„Ø©.";
 
-                // ÅÖÇİÉ ÕæÑÉ ÇáÔÚÇÑ ßãÑİŞ
-                var assembly = GetType().GetTypeInfo().Assembly;
-                using var stream = assembly.GetManifestResourceStream("MauiApp3.Resources.Images.rooted_logo.png");
-                if (stream != null)
-                {
-                    var image = bodyBuilder.LinkedResources.Add("logo.png", stream);
-                    image.ContentId = imageId;
-                }
-
-                message.Body = bodyBuilder.ToMessageBody();
-
-                using (var client = new SmtpClient())
-                {
-                    await client.ConnectAsync(SmtpHost, SmtpPort, false);
-                    await client.AuthenticateAsync(SmtpUsername, SmtpPassword);
-                    await client.SendAsync(message);
-                    await client.DisconnectAsync(true);
-                }
-
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    await DisplayAlert("Êã ÇáÅÑÓÇá", "Êã ÅÑÓÇá ÑãÒ ÇáÊÍŞŞ Åáì ÈÑíÏß ÇáÅáßÊÑæäí", "ãæÇİŞ");
-                });
-            }
-            catch (Exception ex)
+            // Ø¥Ø¶Ø§ÙØ© ØµÙˆØ±Ø© Ø§Ù„Ø´Ø¹Ø§Ø± ÙƒÙ…Ø±ÙÙ‚
+            var assembly = GetType().GetTypeInfo().Assembly;
+            using var stream = assembly.GetManifestResourceStream("MauiApp3.Resources.Images.rooted_logo.png");
+            if (stream != null)
             {
-                Debug.WriteLine($"İÔá ÅÑÓÇá ÇáÈÑíÏ: {ex}");
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    await DisplayAlert("ÎØÃ", "İÔá İí ÅÑÓÇá ÑãÒ ÇáÊÍŞŞ¡ íÑÌì ÇáãÍÇæáÉ áÇÍŞÇğ", "ãæÇİŞ");
-                });
+                var image = bodyBuilder.LinkedResources.Add("logo.png", stream);
+                image.ContentId = imageId;
             }
+
+            message.Body = bodyBuilder.ToMessageBody();
+
+            using (var client = new SmtpClient())
+            {
+                await client.ConnectAsync(SmtpHost, SmtpPort, false);
+                await client.AuthenticateAsync(SmtpUsername, SmtpPassword);
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
+            }
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await DisplayAlert("ØªÙ… Ø§Ù„Ø¥Ø±Ø³Ø§Ù„", "ØªÙ… Ø¥Ø±Ø³Ø§Ù„ Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ Ø¥Ù„Ù‰ Ø¨Ø±ÙŠØ¯Ùƒ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ", "Ù…ÙˆØ§ÙÙ‚");
+            });
         }
-
-        private void MoveText(object sender, TextChangedEventArgs e)
+        catch (Exception ex)
         {
-            if (sender is Entry currentEntry && !string.IsNullOrEmpty(e.NewTextValue))
+            Debug.WriteLine($"ÙØ´Ù„ Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„Ø¨Ø±ÙŠØ¯: {ex}");
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
-                if (currentEntry == pin1) pin2.Focus();
-                else if (currentEntry == pin2) pin3.Focus();
-                else if (currentEntry == pin3) pin4.Focus();
-            }
-        }
-
-        private async void VerifyCode(object sender, EventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(pin1.Text) || string.IsNullOrEmpty(pin2.Text) ||
-                    string.IsNullOrEmpty(pin3.Text) || string.IsNullOrEmpty(pin4.Text))
-                {
-                    await DisplayAlert("ÎØÃ", "ÇáÑÌÇÁ ÅÏÎÇá ÑãÒ ÇáÊÍŞŞ ÈÇáßÇãá", "ãæÇİŞ");
-                    return;
-                }
-
-                string enteredCode = $"{pin1.Text}{pin2.Text}{pin3.Text}{pin4.Text}";
-
-                if (enteredCode != _verificationCode)
-                {
-                    await DisplayAlert("ÎØÃ", "ßæÏ ÇáÊÍŞŞ ÛíÑ ÕÍíÍ", "ãæÇİŞ");
-                    return;
-                }
-
-                loadingIndicator.IsVisible = true;
-                verifyButton.IsEnabled = false;
-                resendButton.IsEnabled = false;
-
-                bool isSuccess = await UploadData(_consumer);
-
-                if (isSuccess)
-                {
-                    await DisplayAlert("äÌÇÍ", "Êã ÊÓÌíá ÇáãÒÇÑÚ ÈäÌÇÍ", "ãæÇİŞ");
-                    await Navigation.PushAsync(new ConsumerHomePage(_consumer));
-                }
-                else
-                {
-                    await DisplayAlert("ÎØÃ", "İÔá İí ÊÓÌíá ÇáãÒÇÑÚ", "ãæÇİŞ");
-                }
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("ÎØÃ", $"ÍÏË ÎØÃ ÛíÑ ãÊæŞÚ: {ex.Message}", "ãæÇİŞ");
-                Debug.WriteLine($"Error: {ex}");
-            }
-            finally
-            {
-                loadingIndicator.IsVisible = false;
-                verifyButton.IsEnabled = true;
-                resendButton.IsEnabled = true;
-            }
-        }
-
-        private async Task<bool> UploadData(Consumer consumer)
-        {
-            try
-            {
-                var json = JsonConvert.SerializeObject(consumer);
-                Debug.WriteLine($"JSON to API: {json}");
-
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync(ApiUrl, content);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    var errorContent = await response.Content.ReadAsStringAsync();
-                    Debug.WriteLine($"API Error: {errorContent}");
-                    return false;
-                }
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Upload Error: {ex}");
-                return false;
-            }
-        }
-
-        private async void OnResendClicked(object sender, EventArgs e)
-        {
-            try
-            {
-                resendButton.IsEnabled = false;
-                loadingIndicator.IsVisible = true;
-                GenerateAndSendVerificationCode();
-                await DisplayAlert("Êã", "Êã ÅÑÓÇá ÑãÒ ÊÍŞŞ ÌÏíÏ Åáì ÈÑíÏß ÇáÅáßÊÑæäí", "ãæÇİŞ");
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("ÎØÃ", $"İÔá İí ÅÚÇÏÉ ÇáÅÑÓÇá: {ex.Message}", "ãæÇİŞ");
-            }
-            finally
-            {
-                loadingIndicator.IsVisible = false;
-                resendButton.IsEnabled = true;
-            }
+                await DisplayAlert("Ø®Ø·Ø£", "ÙØ´Ù„ ÙÙŠ Ø¥Ø±Ø³Ø§Ù„ Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ØŒ ÙŠØ±Ø¬Ù‰ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù„Ø§Ø­Ù‚Ø§Ù‹", "Ù…ÙˆØ§ÙÙ‚");
+            });
         }
     }
+
+    private void MoveText(object sender, TextChangedEventArgs e)
+    {
+        if (sender is Entry currentEntry && !string.IsNullOrEmpty(e.NewTextValue))
+        {
+            if (currentEntry == pin1) pin2.Focus();
+            else if (currentEntry == pin2) pin3.Focus();
+            else if (currentEntry == pin3) pin4.Focus();
+        }
+    }
+
+    private async void VerifyCode(object sender, EventArgs e)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(pin1.Text) || string.IsNullOrEmpty(pin2.Text) ||
+                string.IsNullOrEmpty(pin3.Text) || string.IsNullOrEmpty(pin4.Text))
+            {
+                await DisplayAlert("Ø®Ø·Ø£", "Ø§Ù„Ø±Ø¬Ø§Ø¡ Ø¥Ø¯Ø®Ø§Ù„ Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ Ø¨Ø§Ù„ÙƒØ§Ù…Ù„", "Ù…ÙˆØ§ÙÙ‚");
+                return;
+            }
+
+            string enteredCode = $"{pin1.Text}{pin2.Text}{pin3.Text}{pin4.Text}";
+
+            if (enteredCode != _verificationCode)
+            {
+                await DisplayAlert("Ø®Ø·Ø£", "ÙƒÙˆØ¯ Ø§Ù„ØªØ­Ù‚Ù‚ ØºÙŠØ± ØµØ­ÙŠØ­", "Ù…ÙˆØ§ÙÙ‚");
+                return;
+            }
+
+            loadingIndicator.IsVisible = true;
+            verifyButton.IsEnabled = false;
+            resendButton.IsEnabled = false;
+
+            bool isSuccess = await UploadData(_consumer);
+
+            if (isSuccess)
+            {
+                await DisplayAlert("Ù†Ø¬Ø§Ø­", "ØªÙ… ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ù…Ø²Ø§Ø±Ø¹ Ø¨Ù†Ø¬Ø§Ø­", "Ù…ÙˆØ§ÙÙ‚");
+                await Navigation.PushAsync(new ConsumerHomePage(_consumer));
+            }
+            else
+            {
+                await DisplayAlert("Ø®Ø·Ø£", "ÙØ´Ù„ ÙÙŠ ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ù…Ø²Ø§Ø±Ø¹", "Ù…ÙˆØ§ÙÙ‚");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ø®Ø·Ø£", $"Ø­Ø¯Ø« Ø®Ø·Ø£ ØºÙŠØ± Ù…ØªÙˆÙ‚Ø¹: {ex.Message}", "Ù…ÙˆØ§ÙÙ‚");
+            Debug.WriteLine($"Error: {ex}");
+        }
+        finally
+        {
+            loadingIndicator.IsVisible = false;
+            verifyButton.IsEnabled = true;
+            resendButton.IsEnabled = true;
+        }
+    }
+
+    private async Task<bool> UploadData(Consumer consumer)
+    {
+        try
+        {
+            var json = JsonConvert.SerializeObject(consumer);
+            Debug.WriteLine($"JSON to API: {json}");
+
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(ApiUrl, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine($"API Error: {errorContent}");
+                return false;
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Upload Error: {ex}");
+            return false;
+        }
+    }
+
+    private async void OnResendClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            resendButton.IsEnabled = false;
+            loadingIndicator.IsVisible = true;
+            GenerateAndSendVerificationCode();
+            await DisplayAlert("ØªÙ…", "ØªÙ… Ø¥Ø±Ø³Ø§Ù„ Ø±Ù…Ø² ØªØ­Ù‚Ù‚ Ø¬Ø¯ÙŠØ¯ Ø¥Ù„Ù‰ Ø¨Ø±ÙŠØ¯Ùƒ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ", "Ù…ÙˆØ§ÙÙ‚");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ø®Ø·Ø£", $"ÙØ´Ù„ ÙÙŠ Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ø¥Ø±Ø³Ø§Ù„: {ex.Message}", "Ù…ÙˆØ§ÙÙ‚");
+        }
+        finally
+        {
+            loadingIndicator.IsVisible = false;
+            resendButton.IsEnabled = true;
+        }
+    }
+}

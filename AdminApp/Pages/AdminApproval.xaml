@@ -90,15 +90,14 @@ BackgroundColor="Green"
                                                                 CornerRadius="10" 
                                                                 WidthRequest="80" 
 Clicked="OnApproveButtonClicked"/>
-                                <Button Text="
- ا ﻟ ﻤ ﺰ ﯾ ﺪ ﻣ ﻦ ا ﻟ ﻤ ﻌ ﻠ ﻮ ﻣ ﺎ ت
- " 
-BackgroundColor="LightGray" 
-TextColor="Black" 
-FontSize="12" 
-FontAttributes="Bold" 
-CornerRadius="10" 
-/>
+                                <Button Text="ا ﻟ ﻤ ﺰ ﯾ ﺪ ﻣ ﻦ ا ﻟ ﻤ ﻌ ﻠ ﻮ ﻣ ﺎ ت"
+        BackgroundColor="LightGray"
+        TextColor="Black"
+        FontSize="12"
+        FontAttributes="Bold"
+        CornerRadius="10"
+        Clicked="OnMoreInfoClicked"/>
+
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>

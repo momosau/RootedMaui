@@ -69,8 +69,7 @@ namespace RootedBack.Controllers
         }
 
         // POST: api/FarmerApplications/5/accept
-        [HttpPost("{id}/accept")]
-
+        [HttpPost("accept/{id}")]
         public async Task<IActionResult> AcceptApplication(int id)
         {
             var acceptedFarmer = await _service.AcceptApplicationAsync(id);
@@ -91,7 +90,7 @@ namespace RootedBack.Controllers
 
 
         // DELETE: api/FarmerApplications/5/reject
-        [HttpDelete("{id}/reject")]
+        [HttpDelete("reject/{id}")]
         public async Task<IActionResult> RejectApplication(int id)
         {
             var rejected = await _service.RejectApplicationAsync(id);

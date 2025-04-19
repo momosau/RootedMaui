@@ -139,6 +139,7 @@ namespace RootedBack.Services
                 Neighborhood = application.Neighborhood,
                 Street = application.Street,
                 FarmNum = application.FarmNum,
+                VerificationStatus=true,
             };
 
             // If necessary, add Specification info to the Farmer

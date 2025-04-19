@@ -51,12 +51,11 @@ namespace AdminApp.Services
 
         public async Task ApproveApplicationAsync(int id)
         {
-            Console.WriteLine($"Calling approve for ID: {id}");
-            Console.WriteLine($"Full URL: {_baseUrl}/FarmerApplications/{id}/accept");
 
 
-            var response = await _httpClient.PostAsync($"{_baseUrl}/FarmerApplications/{id}/accept", null);
-           
+
+           var response= await _httpClient.PostAsync($"{_baseUrl}/FarmerApplications/accept/{id}", null);
+
             if (!response.IsSuccessStatusCode)
             {
                
@@ -68,7 +67,7 @@ namespace AdminApp.Services
 
         public async Task RejectApplicationAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync($"{_baseUrl}/FarmerApplications/{id}/reject");
+            var response = await _httpClient.DeleteAsync($"{_baseUrl}/FarmerApplications/reject/{id}");
             response.EnsureSuccessStatusCode();
         }
     }
