@@ -18,7 +18,7 @@ namespace MauiApp3.ModelView
             PickImageCommand = new Command(async () => await PickImage());
 
             // Initialize specifications
-          //  NewProduct.Specification.Add(new Specification());
+         //   NewProduct.Specification.Add(new Specification());
         }
         public void SetProduct(Product product)
         {

@@ -22,7 +22,7 @@ namespace MauiApp3
 
             await Navigation.PushAsync(new Pages.Farmers.Chatbot());
           
-           // Application.Current.MainPage = new FarmerShell();
+          Application.Current.MainPage = new FarmerShell();
 
 
         }
