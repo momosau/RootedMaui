@@ -26,7 +26,8 @@ public partial class SignInConsumer : ContentPage
         if (response.IsSuccessStatusCode)
         {
             var consumer = await response.Content.ReadFromJsonAsync<Consumer>();
-            await Navigation.PushAsync(new ConsumerHomePage(consumer));
+            await Shell.Current.Navigation.PushAsync(new ConsumerHomePage(consumer));
+
         }
         else
         {
