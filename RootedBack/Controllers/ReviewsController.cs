@@ -36,6 +36,19 @@ namespace RootedBack.Controllers
 
             return review;
         }
+        // In ReviewsController.cs
+        [HttpGet("farmer/{farmerId}")]
+        public async Task<ActionResult<IEnumerable<Review>>> GetReviewsByFarmer(int farmerId)
+        {
+            var reviews = await _context.Reviews
+                .Include(r => r.Consumer) // 👈 This loads the Consumer (customer)
+                .Where(r => r.Product.FarmerId == farmerId)
+                .ToListAsync();
+
+            return Ok(reviews);
+        }
+
+
 
         // PUT: api/Reviews/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

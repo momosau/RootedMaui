@@ -1,68 +1,139 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            
              x:Class="MauiApp3.Pages.Consumers.FarmerDetailPage"
+
              Title="FarmerDetailPage"
              FlowDirection="RightToLeft"
-        
-BackgroundColor="#EAE9E2">
+             BackgroundColor="#EAE9E2">
+
     <ScrollView>
-
-        
-
         <VerticalStackLayout Padding="5" Spacing="5">
-            <Frame
-                Margin="10"
-                Padding="8"
-                CornerRadius="30"
-                BorderColor="AntiqueWhite"
-                BackgroundColor="White"
-              
-                >
-                <HorizontalStackLayout Spacing="30" >
 
-                <Frame Padding="2"
-HeightRequest="120"
-WidthRequest="120"
-CornerRadius="60"
-IsClippedToBounds="True"
-HasShadow="False"
-BorderColor="DarkGreen"
-HorizontalOptions="Center">
-                    <Image Source="{Binding ImageUrl}"
-    Aspect="AspectFill"
-    HeightRequest="116"
-    WidthRequest="116"/>
-                </Frame>
+            <!-- Farmer Card -->
+            <Frame Margin="10" Padding="8" CornerRadius="30" BorderColor="AntiqueWhite" BackgroundColor="White">
+                <HorizontalStackLayout Spacing="30">
+                    <!-- Profile Image -->
+                    <Frame Padding="2"
+                           HeightRequest="120"
+                           WidthRequest="120"
+                           CornerRadius="60"
+                           IsClippedToBounds="True"
+                           HasShadow="False"
+                           BorderColor="DarkGreen"
+                           HorizontalOptions="Center">
+                        <Image Source="{Binding Farmer.ImageUrl}" Aspect="AspectFill" HeightRequest="116" WidthRequest="116"/>
+                    </Frame>
 
+                    
                     <VerticalStackLayout VerticalOptions="Center" Spacing="10">
-                        <Label Text="{Binding FarmName}" FontSize="24"  TextColor="Black" FontAttributes="Bold"  VerticalOptions="Center"   FontFamily="FontArabic" />
-
-                        <Label Text="{Binding Name}" FontSize="17"  TextColor="Black" FontAttributes="Bold"  VerticalOptions="Center"   FontFamily="FontArabic" />
+                        <Label Text="{Binding Farmer.FarmName}" FontSize="24" TextColor="Black" FontAttributes="Bold" FontFamily="FontArabic" />
+                        <Label Text="{Binding Farmer.Name}" FontSize="17" TextColor="Black" FontAttributes="Bold" FontFamily="FontArabic" />
                     </VerticalStackLayout>
-                   
+
+                    <HorizontalStackLayout Spacing="30" Margin="0,5,0,0" VerticalOptions="Center" HorizontalOptions="Start">
+                        <Label Text="عضوية" TextColor="Gold" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsOrganic}" />
+                        <Label Text="غير معدلة وراثياً" TextColor="Black" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsGmofree}" />
+                        <Label Text="مزروعة مائياً" TextColor="Blue" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsHydroponicallyGrown}" />
+                        <Label Text="محلية" TextColor="Green" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsLocal}" />
+                        <Label Text="خالية من المبيدات" TextColor="Red" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsPesticideFree}" />
+                    </HorizontalStackLayout>
                 </HorizontalStackLayout>
             </Frame>
-            <Grid ColumnDefinitions="*,*"
-                  RowDefinitions="*,*,*,*"
-                 HorizontalOptions="Start"
-                  ColumnSpacing="10"
-                  Margin="10"
-                  >
-                <Label Text=" البريد الإلكتروني :" FontSize="12" TextColor="Black"   FontFamily="FontArabic"  Grid.Column="0 "/>
-                <Label Text="{Binding Email}" TextColor="Black"   FontFamily="FontArabic" Grid.Column="1 " />
+            <Label Text="المعلومات" 
+TextColor="#333" 
+FontSize="18" 
+                   Padding="20"
+FontFamily="FontArabic" 
+FontAttributes="Bold" />
 
-            </Grid>
+            <!-- Farmer Info Grid -->
+            <Frame Margin="10" Padding="8" CornerRadius="30" BorderColor="AntiqueWhite" BackgroundColor="White">
+                <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*" HorizontalOptions="Start" ColumnSpacing="10" RowSpacing="15" Margin="10">
+                    <Label Text=" البريد الإلكتروني:" FontSize="12" TextColor="Black" FontFamily="FontArabic" Grid.Column="0" />
+                    <Label Text="{Binding Farmer.Email}" TextColor="Black" FontFamily="FontArabic" Grid.Column="1" />
 
-            <Label Text="{Binding PhoneNumber}" TextColor="Black"  FontSize="12" FontFamily="FontArabic" />
-            <Label Text="{Binding City}" TextColor="Black" FontSize="12"  FontFamily="FontArabic" />
-            <Label Text="{Binding Neighborhood}" TextColor="Black"  FontSize="12" FontFamily="FontArabic"  />
-            <Label Text="{Binding Street}" TextColor="Black" FontSize="12"  FontFamily="FontArabic"  />
-            <Label Text="Farm #"  TextColor="Black"  FontSize="12" FontFamily="FontArabic" />
-            <Label Text="{Binding FarmNum}" TextColor="Black"   FontSize="12" FontFamily="FontArabic" />
-            <Label Text=" Description:" FontAttributes="Bold" TextColor="Black"  FontSize="12"  FontFamily="FontArabic" />
-            <Label Text="{Binding Description}" TextColor="Black"  FontSize="12" FontFamily="FontArabic" />
-            </VerticalStackLayout> 
-      
+                    <Label Text=" رقم الجوال:" FontSize="12" TextColor="Black" FontFamily="FontArabic" Grid.Column="0" Grid.Row="1"/>
+                    <Label Text="{Binding Farmer.PhoneNumber}" TextColor="Black" FontSize="12" FontFamily="FontArabic" Grid.Column="1" Grid.Row="1"/>
+
+                    <Label Text="المدينة:" FontSize="12" TextColor="Black" FontFamily="FontArabic" Grid.Column="0" Grid.Row="2"/>
+                    <Label Text="{Binding Farmer.City}" TextColor="Black" FontSize="12" FontFamily="FontArabic" Grid.Column="1" Grid.Row="2"/>
+
+                    <Label Text="الحي:" FontSize="12" TextColor="Black" FontFamily="FontArabic" Grid.Column="0" Grid.Row="3"/>
+                    <Label Text="{Binding Farmer.Neighborhood}" TextColor="Black" FontSize="12" FontFamily="FontArabic" Grid.Column="1" Grid.Row="3" />
+
+                    <Label Text="الشارع:" FontSize="12" TextColor="Black" FontFamily="FontArabic" Grid.Column="0" Grid.Row="4"/>
+                    <Label Text="{Binding Farmer.Street}" TextColor="Black" FontSize="12" FontFamily="FontArabic" Grid.Column="1" Grid.Row="4" />
+
+                    <Label Text="رقم المزرعة:" FontSize="12" TextColor="Black" FontFamily="FontArabic" Grid.Column="0" Grid.Row="5"/>
+                    <Label Text="{Binding Farmer.FarmNum}" TextColor="Black" FontSize="12" FontFamily="FontArabic" Grid.Column="1" Grid.Row="5"/>
+
+                    <Label Text="وصف المزرعة:" FontAttributes="Bold" TextColor="Black" FontSize="12" FontFamily="FontArabic" Grid.Column="0" Grid.Row="6"/>
+                    <Label Text="{Binding Farmer.Description}" TextColor="Black" FontSize="12" FontFamily="FontArabic" Grid.Column="1" Grid.Row="6"/>
+                </Grid>
+            </Frame>
+
+               
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+    <Label Text="المراجعات" 
+           TextColor="#333" 
+           FontSize="18" 
+           FontFamily="FontArabic" 
+           FontAttributes="Bold" />
+
+    <CollectionView ItemsSource="{Binding Reviews}" 
+                    Margin="0,10,0,0" 
+                    SelectionMode="None">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame  Margin="10" Padding="12" CornerRadius="20" BorderColor="AntiqueWhite" BackgroundColor="White" HasShadow="True">
+                    <HorizontalStackLayout Spacing="12" VerticalOptions="CenterAndExpand">
+
+                        <!-- Left: Review Info -->
+                      
+
+                        <!-- Right: Profile Image -->
+                       
+                            <Image Source="profile.png"
+                             
+                                   HeightRequest="48"
+                                   WidthRequest="48" />
+                            
+                      
+                                    <VerticalStackLayout Spacing="6" HorizontalOptions="FillAndExpand">
+                                        <!-- Reviewer Name -->
+                                        <Label Text="{Binding Consumer.Name, StringFormat='العميل: {0}'}" 
+                                         FontSize="14" 
+                                         TextColor="#222" 
+                                         FontFamily="FontArabic" 
+                                         FontAttributes="Bold" />
+
+                                        <!-- Rating -->
+                                        <HorizontalStackLayout Spacing="5">
+                                            <Label Text="⭐" FontSize="14" />
+                                            <Label Text="{Binding Rating, StringFormat='{}{0} من 5 ⭐'}"
+                                             FontSize="14" 
+                                             FontAttributes="Bold" 
+                                             TextColor="#FF8C00" />
+                                        </HorizontalStackLayout>
+
+                                        <!-- Comment -->
+                                        <Label Text="{Binding Comment}" 
+                                             FontSize="14" 
+                                             TextColor="#444" 
+                                             FontFamily="FontArabic" 
+                                             LineBreakMode="WordWrap" />        
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+</VerticalStackLayout>
+
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
