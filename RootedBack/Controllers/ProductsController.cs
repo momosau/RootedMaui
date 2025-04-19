@@ -79,6 +79,13 @@ namespace RootedBack.Controllers
         
         public async Task<List<Category>> GetCategoriesAsync() => await categoryService.GetCategoriesAsync();
 
+        [HttpGet("farmer/{farmerId}")]
+        public async Task<IActionResult> GetProductsByFarmer(int farmerId)
+        {
+            var products = await apiServices.GetProductsByFarmerAsync(farmerId);
+            return Ok(products);
+        }
+
     }
 }
 

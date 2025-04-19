@@ -1,27 +1,44 @@
 ﻿using MauiApp3.Services;
 using SharedLibraryy.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace MauiApp3.ModelView
 {
     public class FarmerDetailViewModel
     {
         public Farmer Farmer { get; set; }
+        private readonly IProductService _productService;
+
+        public ObservableCollection<Product> Products { get; set; } = new();
 
         public ObservableCollection<Review> Reviews { get; set; } = new();
 
         private readonly FarmerService _farmerService = new();
 
-        public FarmerDetailViewModel(Farmer selectedFarmer)
+        public FarmerDetailViewModel(IProductService productService, Farmer selectedFarmer)
         {
+            _productService = productService;
             Farmer = selectedFarmer;
             LoadFarmerReviews(selectedFarmer.FarmerId);
+            LoadProductsAsync(selectedFarmer.FarmerId);
         }
+        public async Task LoadProductsAsync(int farmerId)
+        {
+            var products = await _productService.GetProductsByFarmer(farmerId);
+            Products.Clear();
+
+            foreach (var product in products)
+                Products.Add(product);
+
+            // Notify UI in case it needs to update binding
+            OnPropertyChanged(nameof(Products));
+        }
+
+        // INotifyPropertyChanged boilerplate
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         private async void LoadFarmerReviews(int farmerId)
         {

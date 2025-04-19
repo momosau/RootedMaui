@@ -12,6 +12,8 @@ namespace SharedLibraryy.Services {
         Task<List<Product>> GetProductsAsync();
         Task<Product?> GetProductWithSpecificationsAsync(int id);
 
+        Task<List<Product>> GetProductsByFarmerAsync(int farmerId);
+
     }
 
  

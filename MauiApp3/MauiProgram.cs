@@ -39,6 +39,8 @@ namespace MauiApp3
             builder.Services.AddSingleton<ProductInfoVIewModel>();
             builder.Services.AddTransient<Pages.Consumers.ProductInfo>();
             Ioc.Default.ConfigureServices(builder.Services.BuildServiceProvider());
+            builder.Services.AddTransient<FarmerDetailViewModel>();
+
 
 #if DEBUG
             builder.Logging.AddDebug();

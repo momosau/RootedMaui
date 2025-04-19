@@ -159,6 +159,7 @@ namespace RootedBack.Controllers
             return Ok(new { Message = "File uploaded successfully!", Path = relativePath });
         }
 
+
         [HttpPost("Login")]
         public async Task<ActionResult<Farmer>> SignInFarmer(FarmerLoginRequest request)
         {
@@ -176,7 +177,10 @@ namespace RootedBack.Controllers
             }
 
             return Ok(farmer);
-        } } }
+        }
+
+    } 
+}
 
         public class FarmerLoginRequest
         {

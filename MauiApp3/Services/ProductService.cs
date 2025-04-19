@@ -1,5 +1,6 @@
 ﻿using SharedLibraryy.Models;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 
 namespace MauiApp3.Services
@@ -47,7 +48,21 @@ namespace MauiApp3.Services
             var product = await _httpClient.GetFromJsonAsync<Product>($"{ApiUrl}api/Products/WithSpec/{id}");
             return product?.Specification;
         }
+        public async Task<List<Product>> GetProductsByFarmer(int farmerId)
+        {
+            var response = await _httpClient.GetAsync($"api/Products/farmer/{farmerId}");
 
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<List<Product>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+
+            return new List<Product>();
+        }
 
     }
 

@@ -14,5 +14,6 @@ namespace MauiApp3.Services
         Task<List<Farmer>> GetFarmersAsync();
         Task<List<Review>> GetReviewsAsync(int id);
         Task<Specification> GetProductSpecAsync(int id);
+        Task<List<Product>> GetProductsByFarmer(int farmerId);
     }
 }

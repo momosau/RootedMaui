@@ -6,6 +6,7 @@ namespace MauiApp3.Pages.Consumers;
 
 public partial class FarmersListPage : ContentPage
 {
+
     public FarmersListPage()
     {
         InitializeComponent();

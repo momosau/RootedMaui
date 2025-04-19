@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            
-             x:Class="MauiApp3.Pages.Consumers.FarmerDetailPage"
-
+            x:Class="MauiApp3.Pages.Consumers.FarmerDetailPage"
+     xmlns:Model="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
+             xmlns:ViewModel="clr-namespace:MauiApp3.ModelView"
+                  x:DataType="ViewModel:FarmerDetailViewModel"
              Title="FarmerDetailPage"
              FlowDirection="RightToLeft"
              BackgroundColor="#EAE9E2">
@@ -87,7 +88,7 @@ FontAttributes="Bold" />
                     Margin="0,10,0,0" 
                     SelectionMode="None">
         <CollectionView.ItemTemplate>
-            <DataTemplate>
+            <DataTemplate x:DataType="Model:Review">
                 <Frame  Margin="10" Padding="12" CornerRadius="20" BorderColor="AntiqueWhite" BackgroundColor="White" HasShadow="True">
                     <HorizontalStackLayout Spacing="12" VerticalOptions="CenterAndExpand">
 
@@ -133,6 +134,51 @@ FontAttributes="Bold" />
     </CollectionView>
 
 </VerticalStackLayout>
+            <Label Text="المنتجات" 
+       FontSize="18"
+       TextColor="#333" 
+       FontFamily="FontArabic" 
+       FontAttributes="Bold" 
+       Padding="20,0,0,0" />
+
+            <Grid>
+                <!-- No Products Label -->
+                <Label Text="لا توجد منتجات"
+           FontSize="16"
+           TextColor="Gray"
+           HorizontalOptions="Center"
+           VerticalOptions="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                         Binding="{Binding Products.Count}"
+                         Value="0">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label"
+                         Binding="{Binding Products.Count}"
+                         Value="1">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <!-- Product List -->
+                <CollectionView ItemsSource="{Binding Products}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="Model:Product">
+                            <Frame Padding="12" Margin="10" CornerRadius="20" BackgroundColor="White" BorderColor="AntiqueWhite">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16" />
+                                    <Label Text="{Binding Description}" FontSize="14" TextColor="#555" />
+                                    <Label Text="{Binding Price, StringFormat='السعر: {0} ريال'}" FontSize="14" TextColor="Green" />
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+
 
         </VerticalStackLayout>
     </ScrollView>
