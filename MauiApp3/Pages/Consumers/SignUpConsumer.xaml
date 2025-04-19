@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.Consumers.SignUpConsumer"
+             Title="SignUpConsumer"
+             BackgroundColor="#E7E9E4"
+             FlowDirection="RightToLeft">
+
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="20">
+            <ActivityIndicator x:Name="loadingIndicator" 
+                             IsVisible="False" 
+                             Color="#3E6F41"
+                             HorizontalOptions="Center"/>
+
+
+            <!-- Grid لعرض باقي المعلومات -->
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" 
+   ColumnDefinitions="*,*" RowSpacing="13" Padding="20, 0">
+
+                <!-- Full Name -->
+                <Label Grid.Row="0" Text="الاسم" TextColor="#0E3230" FontAttributes="Bold" />
+                <Border Grid.Row="1" Stroke="#71873F" StrokeThickness="1.5" StrokeShape="RoundRectangle 15" Background="White" HeightRequest="50">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Entry x:Name="fullNameEntry" Grid.Column="0" FontFamily="FontArabic" Placeholder="محمد" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <Image Grid.Column="1" Source="user_icon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
+                    </Grid>
+                </Border>
+
+                <!-- Username -->
+                <Label Grid.Row="2" Text="اسم المستخدم" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                <Border Grid.Row="3" Stroke="#71873F" StrokeThickness="1.5" StrokeShape="RoundRectangle 15" Background="White" HeightRequest="50">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Entry x:Name="usernameEntry" Grid.Column="0" Placeholder="اسم المستخدم" FontFamily="FontArabic" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <Image Grid.Column="1" Source="user_icon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
+                    </Grid>
+                </Border>
+
+                <!-- Phone Number -->
+                <Label Grid.Row="4" Text="رقم الجوال" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                <Border Grid.Row="5" Stroke="#71873F" StrokeShape="RoundRectangle 15" StrokeThickness="1.5" Background="White" HeightRequest="50">
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <Label Grid.Column="0" Text="+966" TextColor="Black" BackgroundColor="#E7E9E4" Padding="10"/>
+                        <Entry x:Name="phoneNumberEntry" Grid.Column="1" Placeholder="500000000" Keyboard="Telephone" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <Image Grid.Column="2" Source="phone_icon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
+                    </Grid>
+                </Border>
+
+                <!-- Email -->
+                <Label Grid.Row="6" Text="البريد الإلكتروني" TextColor="#0E3230" FontFamily="FontArabic" FontAttributes="Bold"/>
+                <Border Grid.Row="7" StrokeShape="RoundRectangle 15" Stroke="#71873F" StrokeThickness="1.5" Background="White" HeightRequest="50">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Entry x:Name="emailEntry" Grid.Column="0" Placeholder="Example@gmail.com" Keyboard="Email" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <Image Grid.Column="1" Source="envelope.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
+                    </Grid>
+                </Border>
+
+                <!-- Password -->
+                <Label Grid.Row="8" Text="كلمة السر" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
+                <Border Grid.Row="9" StrokeShape="RoundRectangle 15" Stroke="#71873F" StrokeThickness="1.5" Background="White" HeightRequest="50">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Entry x:Name="passwordEntry" Grid.Column="0" Placeholder="****" IsPassword="True" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <ImageButton x:Name="eyeButton" Grid.Column="1" Source="eyec.png" Aspect="AspectFit" WidthRequest="30" HeightRequest="30" Clicked="EyeClicked" VerticalOptions="Center" Margin="10"/>
+                    </Grid>
+                </Border>
+
+
+
+                <Label Grid.Row="10" Text="العنوان" TextColor="#0E3230" FontAttributes="Bold" />
+                <Border Grid.Row="11" Stroke="#71873F" StrokeThickness="1.5" StrokeShape="RoundRectangle 15" Background="White" HeightRequest="50">
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Entry x:Name="LocationEntry" Grid.Column="0" FontFamily="FontArabic" Placeholder="الرياض, حي الصحافه" TextColor="Black" PlaceholderColor="Gray" FontSize="14" Margin="10,0"/>
+                        <Image Grid.Column="1" Source="user_icon.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <!-- Next Button -->
+            <Button Grid.Row="13" 
+                        Text="التالي" 
+                        BackgroundColor="#3E6F41" 
+                        TextColor="White" 
+                        FontSize="15" 
+                        FontAttributes="Bold" 
+                        CornerRadius="15" 
+                        Clicked="NextClicked"
+                        HorizontalOptions="FillAndExpand"/>
+
+        </StackLayout>
+
+    </ScrollView>
+
+</ContentPage>
