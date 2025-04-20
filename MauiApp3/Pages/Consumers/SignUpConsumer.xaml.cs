@@ -44,9 +44,10 @@ public partial class SignUpConsumer : ContentPage
                 Name = fullNameEntry.Text,
                 PhoneNumber = phoneNumberEntry.Text,
                 Email = emailEntry.Text,
+                City = LocationEntry.Text,
                 Password = passwordEntry.Text,
                 UserNamer = usernameEntry.Text,
-                City = LocationEntry.Text,
+               
 
 
             };
