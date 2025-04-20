@@ -12,11 +12,16 @@
         <ShellContent 
      Title="Home" 
      Icon="category.png" 
-     ContentTemplate="{DataTemplate local:FarmerProducts}" />
+     ContentTemplate="{DataTemplate local:FarmerHome}" />
         <ShellContent 
 Title="cart" 
 Icon="cart.png" 
 ContentTemplate="{DataTemplate local:AddProductsFarmer}" />
+
+        <ShellContent 
+Title="chatbot" 
+Icon="chatbot.png" 
+ContentTemplate="{DataTemplate local:Chatbot}" />
     </TabBar>
 
 

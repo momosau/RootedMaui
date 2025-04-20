@@ -1,4 +1,4 @@
-using Microsoft.Maui.Controls;
+﻿using Microsoft.Maui.Controls;
 namespace MauiApp3;
 
 public partial class FarmerShell : Shell
@@ -6,5 +6,6 @@ public partial class FarmerShell : Shell
 	public FarmerShell()
 	{
 		InitializeComponent();
-	}
+        Routing.RegisterRoute("Chatbot", typeof(Pages.Farmers.Chatbot)); 
+    }
 }

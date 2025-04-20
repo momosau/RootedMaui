@@ -32,13 +32,41 @@
                         <Label Text="{Binding Farmer.Name}" FontSize="17" TextColor="Black" FontAttributes="Bold" FontFamily="FontArabic" HorizontalOptions="Center" />
                     </VerticalStackLayout>
 
-                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Start">
-                        <Label Text="عضوية" TextColor="Gold" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsOrganic}" />
-                        <Label Text="غير معدلة وراثياً" TextColor="Black" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsGmofree}" />
-                        <Label Text="مزروعة مائياً" TextColor="Blue" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsHydroponicallyGrown}" />
-                        <Label Text="محلية" TextColor="Green" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsLocal}" />
-                        <Label Text="خالية من المبيدات" TextColor="Red" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsPesticideFree}" />
-                    </HorizontalStackLayout>
+                    <ScrollView Orientation="Horizontal">
+                        <HorizontalStackLayout 
+        Spacing="10" 
+        VerticalOptions="Center" 
+        HorizontalOptions="Start"
+        Margin="0,5,0,0">
+
+                            <Image Source="organic.png"
+               WidthRequest="40"
+               HeightRequest="40"
+               IsVisible="{Binding Farmer.Specification.IsOrganic}" />
+
+                            <Image Source="gmofreel.png"
+               WidthRequest="40"
+               HeightRequest="40"
+               IsVisible="{Binding Farmer.Specification.IsGmofree}" />
+
+                            <Image Source="hydro.png"
+               WidthRequest="40"
+               HeightRequest="40"
+               IsVisible="{Binding Farmer.Specification.IsHydroponicallyGrown}" />
+
+                            <Image Source="locallogo.png"
+               WidthRequest="40"
+               HeightRequest="40"
+               IsVisible="{Binding Farmer.Specification.IsLocal}" />
+
+                            <Image Source="pestfreel.png"
+               WidthRequest="40"
+               HeightRequest="40"
+               IsVisible="{Binding Farmer.Specification.IsPesticideFree}" />
+
+                        </HorizontalStackLayout>
+                    </ScrollView>
+
                 </HorizontalStackLayout>
             </Frame>
 

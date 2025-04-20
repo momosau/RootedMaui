@@ -3,7 +3,6 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using RootedBack.Data;
 using SharedLibraryy.Models;
-
 namespace RootedBack.Controllers
 {
     [Route("api/[controller]")]
@@ -11,6 +10,7 @@ namespace RootedBack.Controllers
     public class FarmersController : ControllerBase
     {
         private readonly RootedDBContext _context;
+       
 
         public FarmersController(RootedDBContext context)
         {
@@ -28,21 +28,29 @@ namespace RootedBack.Controllers
         }
 
         // GET: api/Farmers/5
+        // GET: api/Farmers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Farmer>> GetFarmer(int id)
         {
-            var farmer = await _context.Farmers
-     .Include(f => f.Specification)
-     .FirstOrDefaultAsync(f => f.FarmerId == id);
-
-
-            if (farmer == null)
+            try
             {
-                return NotFound();
-            }
+                var farmer = await _context.Farmers
+                    .Include(f => f.Specification)
+                    .FirstOrDefaultAsync(f => f.FarmerId == id);
 
-            return farmer;
+                if (farmer == null)
+                {
+                    return NotFound($"Farmer with ID {id} not found.");
+                }
+
+                return Ok(farmer);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+
 
 
 

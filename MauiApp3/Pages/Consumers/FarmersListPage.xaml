@@ -37,44 +37,56 @@
                             <Label Text="{Binding FarmName}" FontFamily="FontArabic" FontSize="18" TextColor="Black"/>
                             <Label Text="{Binding Name}" TextColor="Black" FontAttributes="Bold" FontFamily="FontArabic"/>
                             <Label Text="{Binding City}" FontSize="14" FontFamily="FontArabic" TextColor="DarkGreen"/>
+                            <FlexLayout 
+    Direction="Row" 
+  
+    AlignItems="Center" 
+    JustifyContent="Start" 
+    Margin="0,5,5,10" 
+    Grid.Column="1"
+    BindableLayout.ItemsSource="{Binding SpecificationIcons}">
 
-                            <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Start" JustifyContent="Start" Margin="0,5,0,0" Grid.Column="1">
-                                <Label Text="عضوية"
-                                     TextColor="Gold"
-                                     FontAttributes="Bold"
-                                     FontSize="10"
-                                     FontFamily="FontArabic"
-                                     IsVisible="{Binding Specification.IsOrganic}" 
-                                     Margin="0,0,10,5" />
-                                <Label Text="غير معدلة وراثياً"
-                                     TextColor="Black"
-                                     FontAttributes="Bold"
-                                     FontSize="10"
-                                     FontFamily="FontArabic"
-                                     IsVisible="{Binding Specification.IsGmofree}" 
-                                     Margin="0,0,10,5" />
-                                <Label Text="مزروعة مائياً"
-                                     TextColor="Blue"
-                                     FontAttributes="Bold"
-                                     FontSize="10"
-                                     FontFamily="FontArabic"
-                                     IsVisible="{Binding Specification.IsHydroponicallyGrown}" 
-                                     Margin="0,0,10,5" />
-                                <Label Text="محلية"
-                                     TextColor="Black"
-                                     FontAttributes="Bold"
-                                     FontSize="10"
-                                     FontFamily="FontArabic"
-                                     IsVisible="{Binding Specification.IsLocal}" 
-                                     Margin="0,0,10,5" />
-                                <Label Text="خالية من المبيدات الحشرية"
-                                     TextColor="Red"
-                                     FontAttributes="Bold"
-                                     FontSize="10"
-                                     FontFamily="FontArabic"
-                                     IsVisible="{Binding Specification.IsPesticideFree}" 
-                                     Margin="0,0,10,5" />
+                              
+
+                                <!-- Local -->
+                                <Image 
+        Source="locallogo.png"
+        WidthRequest="40"
+        HeightRequest="40"
+        IsVisible="{Binding Specification.IsLocal}"
+        Margin="5" />
+
+                            
+                                <Image 
+        Source="organic.png"
+        WidthRequest="40"
+        HeightRequest="40"
+        IsVisible="{Binding Specification.IsOrganic}"
+        Margin="5" />
+
+                                <Image 
+        Source="gmofreel.png"
+        WidthRequest="40"
+        HeightRequest="40"
+        IsVisible="{Binding Specification.IsGmofree}"
+        Margin="5" />
+
+                                <Image 
+        Source="pestfreel.png"
+        WidthRequest="40"
+        HeightRequest="40"
+        IsVisible="{Binding Specification.IsPesticideFree}"
+        Margin="5" />
+
+                                <Image 
+        Source="hydro.png"
+        WidthRequest="40"
+        HeightRequest="40"
+        IsVisible="{Binding Specification.IsPesticideFree}"
+        Margin="5" />
+
                             </FlexLayout>
+
                         </StackLayout>
                     </Grid>
                 </Frame>

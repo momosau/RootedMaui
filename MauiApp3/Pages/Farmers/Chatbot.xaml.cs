@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 using System.Text;
-
+using MauiApp3.Pages.Consumers;
 namespace MauiApp3.Pages.Farmers
 {
     public partial class Chatbot : ContentPage
