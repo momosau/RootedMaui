@@ -12,7 +12,7 @@
     <StackLayout Padding="10">
         <Button Text="Add Product" Command="{Binding AddProductCommand}" />
 
-        <CollectionView ItemsSource="{Binding Products}" SelectionMode="None">
+        <!--<CollectionView ItemsSource="{Binding Products}" SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="5" BorderColor="Gray">
@@ -24,7 +24,7 @@
                             <Label Text="{Binding Weight} " FontSize="14"/>
                             <Label Text="{Binding Quantity}" FontSize="14"/>
 
-                            <!-- Display Specifications -->
+                            --><!-- Display Specifications --><!--
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Local:"/>
                                 <CheckBox IsChecked="{Binding Specifications.IsLocal}" IsEnabled="False"/>
@@ -44,6 +44,6 @@
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
+        </CollectionView>-->
     </StackLayout>
 </ContentPage>

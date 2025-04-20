@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApp3.ModelView"
              x:Class="MauiApp3.Pages.Farmers.AddProductsFarmer"
-             Title="AddProductsFarmer"
-              xmlns:vm="clr-namespace:MauiApp3.ModelView"
-           
-                     
-             BackgroundColor="#E7E9E4" 
-FlowDirection="RightToLeft">
+           x:DataType="vm:AddProductViewModel"
+
+             Title="Add Product"
+             BackgroundColor="#E7E9E4"
+             FlowDirection="RightToLeft">
 
     <ScrollView>
-        <StackLayout Padding="10">
-            <Entry Placeholder="Name" Text="{Binding NewProduct.Name}"/>
-            <Entry Placeholder="Description" Text="{Binding NewProduct.Description}"/>
-            <Entry Placeholder="Price" Text="{Binding NewProduct.Price}" Keyboard="Numeric"/>
-            <Entry Placeholder="Weight" Text="{Binding NewProduct.Weight}" Keyboard="Numeric"/>
-            <Entry Placeholder="Quantity" Text="{Binding NewProduct.Quantity}" Keyboard="Numeric"/>
-            <Entry Placeholder="Image URL" Text="{Binding NewProduct.ImageUrl}"/>
-            <Button Text="Pick Image" Command="{Binding PickImageCommand}" />
-            <Image Source="{Binding NewProduct.ImageUrl}" WidthRequest="100" HeightRequest="100" />
-        <Label Text="Product Specifications:" FontAttributes="Bold" />
+        <StackLayout Padding="10" Spacing="10">
 
-        <Grid
-            ColumnDefinitions="Auto,Auto"
-            RowDefinitions="*,*,*,*"
-    VerticalOptions="Center"
-            >
-             <CheckBox IsChecked="{Binding NewProduct.Specifications[0].IsLocal}" Grid.Column="0" Grid.Row="0"/>
-                <Label Text="Local" Grid.Column="1" Grid.Row="0" TextColor="Black" />
+            <Entry Placeholder="اسم المنتج" Text="{Binding NewProduct.Name}" />
 
-                <CheckBox IsChecked="{Binding NewProduct.Specifications[0].IsOrganic}" Grid.Column="0" Grid.Row="1" />
-                <Label Text="Organic" TextColor="Black"  Grid.Column="1" Grid.Row="1" />
-                <CheckBox IsChecked="{Binding NewProduct.Specifications[0].IsGmofree}" Grid.Column="0" Grid.Row="2" />
-                <Label Text="GMO-Free" TextColor="Black" Grid.Column="1" Grid.Row="2" />
-                <CheckBox IsChecked="{Binding NewProduct.Specifications[0].IsHydroponicallyGrown}" Grid.Column="0" Grid.Row="3" />
-                <Label Text="Hydroponic" TextColor="Black" Grid.Column="1" Grid.Row="3" />
-            </Grid>
+            <Entry Placeholder="الوصف" Text="{Binding NewProduct.Description}" />
+
+            <Entry Placeholder="السعر" Text="{Binding NewProduct.Price}" Keyboard="Numeric" />
+
+            <Entry Placeholder="الوزن" Text="{Binding NewProduct.Weight}" Keyboard="Numeric" />
+
+            <Entry Placeholder="الكمية" Text="{Binding NewProduct.Quantity}" Keyboard="Numeric" />
+
+            <!--<Entry Placeholder="رابط الصورة" Text="{Binding NewProduct.ImageUrl}" />-->
+
+            <!--<Button Text="اختر صورة" Command="{Binding PickImageCommand}" />
+            <Image Source="{Binding NewProduct.ImageUrl}" WidthRequest="100" HeightRequest="100" />-->
+
+            <Entry Placeholder="الفئة (مثال: فواكه)" Text="{Binding NewProduct.Category}" />
+
+            <Entry Placeholder="معرّف الفئة (CategoryId)" Text="{Binding NewProduct.CategoryId}" Keyboard="Numeric" />
+
+            <Entry Placeholder="معرّف المزارع (FarmerId)" Text="{Binding NewProduct.FarmerId}" Keyboard="Numeric" />
+
+            <Entry Placeholder="الوحدة (مثال: كجم، قطعة)" Text="{Binding NewProduct.Unit}" />
+
+            <Label Text="خصائص المنتج:" FontAttributes="Bold" TextColor="Black" />
+
             <!-- Specification Checkboxes -->
+            <!--<Grid ColumnDefinitions="Auto, *" RowSpacing="5" ColumnSpacing="10">
+                <CheckBox IsChecked="{Binding NewProduct.Specification.IsLocal}" />
+                <Label Text="محلي" Grid.Column="1" VerticalOptions="Center" />
 
-           
-          
+                <CheckBox IsChecked="{Binding NewProduct.Specification.IsOrganic}" Grid.Row="1" />
+                <Label Text="عضوي" Grid.Column="1" Grid.Row="1" VerticalOptions="Center" />
 
-            <Button Text="Save Product" Command="{Binding SaveProductCommand}" />
+                <CheckBox IsChecked="{Binding NewProduct.Specification.IsGmofree}" Grid.Row="2" />
+                <Label Text="خالٍ من التعديل الوراثي" Grid.Column="1" Grid.Row="2" VerticalOptions="Center" />
+
+                <CheckBox IsChecked="{Binding NewProduct.Specification.IsHydroponicallyGrown}" Grid.Row="3" />
+                <Label Text="مزروع مائيًا" Grid.Column="1" Grid.Row="3" VerticalOptions="Center" />
+            </Grid>-->
+
+            <Button Text="حفظ المنتج" Command="{Binding SaveProductCommand}" BackgroundColor="#4CAF50" TextColor="White" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

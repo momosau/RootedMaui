@@ -10,7 +10,7 @@
         <ShellContent 
  Title="Home" 
  Icon="home.png" 
- ContentTemplate="{DataTemplate local:CategoriesPage}" />
+ ContentTemplate="{DataTemplate local:ConsumerHomePage}" />
         <ShellContent 
 Title="Farmers" 
 Icon="farmers.png" 

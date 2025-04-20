@@ -19,8 +19,7 @@ namespace RootedBack.Controllers
         }
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProductsAsync() => Ok(await apiServices.GetProductsAsync());
-
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = "GetProductById")]
         public async Task<ActionResult<Product>> GetProductByIdAsync(int id)
         {
             var product = await apiServices.GetProductWithSpecificationsAsync(id);
@@ -29,6 +28,7 @@ namespace RootedBack.Controllers
 
             return Ok(product);
         }
+
         [HttpGet("WithSpec/{id}")]
         public async Task<ActionResult<Product>> GetProductWithSpecifications(int id)
         {
@@ -53,26 +53,38 @@ namespace RootedBack.Controllers
             return Ok(response);
         }
         [HttpPut]
-        public async Task<ActionResult<ApiResponse>> UpdateProductAsync(Product product)
+        public async Task<ActionResult<Product>> UpdateProductAsync(Product product)
         {
             var result = await apiServices.GetProductByIdAsync(product.ProductId);
             if (result is null)
-                return NotFound("product not found");
+                return NotFound("Product not found");
 
             var response = await apiServices.UpdateProductAsync(product);
-            return Ok(response);
+            if (!response.Success)
+                return BadRequest(response.Message);  // Handle the failure case
+
+            return Ok(await apiServices.GetProductByIdAsync(product.ProductId));  // Return updated product
         }
         [HttpPost]
-
         public async Task<ActionResult<ApiResponse>> AddProduct(Product product)
         {
             var response = await apiServices.AddProductAsync(product);
+
             if (response.Success)
             {
-                return CreatedAtAction(nameof(GetProductByIdAsync), new { id = product.ProductId }, response);
+                var newProductId = (int)response.Data; // Get the new product ID from the response
+                return CreatedAtAction("GetProductById", new { id = newProductId }, response);
+                // Correct the route parameters
             }
-            return BadRequest(response);
+
+            if (!response.Success && response.Message.Contains("Product already exists"))
+            {
+                return Conflict(response.Message);  // 409 Conflict
+            }
+
+            return BadRequest(response.Message);  // 400 Bad Request
         }
+
 
 
         [HttpGet("Categories")]

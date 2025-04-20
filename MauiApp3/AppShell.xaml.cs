@@ -13,6 +13,7 @@ namespace MauiApp3
             Routing.RegisterRoute("SignInFarmer", typeof(SignInFarmer));
             Routing.RegisterRoute("SplashFarmer", typeof(SplashFarmer));
             Routing.RegisterRoute("AddProductsFarmer", typeof(Pages.Farmers.AddProductsFarmer));
+
             Routing.RegisterRoute("Chatbot", typeof(Pages.Farmers.Chatbot));
             Routing.RegisterRoute("FarmerHome", typeof(Pages.Farmers.FarmerHome));
             Routing.RegisterRoute("ConsumerMainPage", typeof(Pages.Consumers.ConsumerMainPage));
@@ -25,6 +26,8 @@ namespace MauiApp3
             Routing.RegisterRoute("LocationPage", typeof(LocationPage));
 
             Routing.RegisterRoute("PaymentMethodPage", typeof(Pages.Consumers.PaymentMethodPage));
+            Routing.RegisterRoute("CEmailVerification", typeof(Pages.Consumers.CEmailVerification));
+            Routing.RegisterRoute("ConsumerHomePage", typeof(Pages.Consumers.ConsumerHomePage));
 
 
             Routing.RegisterRoute("PhoneVerification", typeof(Pages.Farmers.EmailVerification));
@@ -41,53 +44,12 @@ namespace MauiApp3
             Routing.RegisterRoute("MyLocationPage", typeof(MyLocationPage));
             Routing.RegisterRoute("Payment", typeof(Pages.Consumers.Payment));
             Routing.RegisterRoute("DeliveryPage", typeof(DeliveryPage));
-
-
             Routing.RegisterRoute("ShoppingCart", typeof(Pages.Consumers.ShoppingCart));
-
-
-            //   Routing.RegisterRoute("PhoneVerification", typeof(EmailVerification));
             Routing.RegisterRoute("ProductPage", typeof(Pages.Consumers.ProductPage));
             Routing.RegisterRoute("CategoriesPage", typeof(Pages.Consumers.CategoriesPage));
-
             Routing.RegisterRoute("FarmersListPage", typeof(Pages.Consumers.FarmersListPage));
             Routing.RegisterRoute("FarmerDetailPage", typeof(Pages.Consumers.FarmerDetailPage));
             Routing.RegisterRoute("MainPage", typeof(MainPage));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

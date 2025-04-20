@@ -1,28 +1,24 @@
-
 using MauiApp3.ModelView;
 using SharedLibraryy.Models;
 
-
-
-
-namespace MauiApp3.Pages.Farmers;
-
-[QueryProperty(nameof(Product), "Product")]
-public partial class AddProductsFarmer : ContentPage
+namespace MauiApp3.Pages.Farmers
 {
-
-    private readonly AddProductViewModel _viewModel;
-
-    public Product Product
+    [QueryProperty(nameof(Product), nameof(Product))]
+    public partial class AddProductsFarmer : ContentPage
     {
-        set => _viewModel.SetProduct(value);
+        private readonly AddProductViewModel _viewModel = new();
+
+        public AddProductsFarmer()
+        {
+            InitializeComponent();
+            BindingContext = new AddProductViewModel();
+        }
+
+        public Product Product
+        {
+            set => _viewModel.SetProduct(value);
+        }
     }
-    public AddProductsFarmer()
-    {
-        InitializeComponent();
-        BindingContext = _viewModel = new AddProductViewModel();
-    }
-  
+
+
 }
-
-   
