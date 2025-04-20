@@ -11,7 +11,29 @@
              x:DataType="ViewModel:CartViewModel">
 
     <VerticalStackLayout Padding="10">
+        <Border Padding="10" BackgroundColor="White" Stroke="#ccc" StrokeThickness="1" StrokeShape="RoundRectangle 5">
 
+            <HorizontalStackLayout VerticalOptions="Center" Spacing="10">
+            <Image Source="trash.png"
+       WidthRequest="24"
+       HeightRequest="24">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClearCartCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Label Text="سلة التسوق"
+                       FontSize="18"
+                       TextColor="Black"
+                       VerticalOptions="Center" />
+            <Label Text="X"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       VerticalOptions="Center"
+                       HorizontalOptions="EndAndExpand" />
+        </HorizontalStackLayout>
+        </Border>
         <!-- CART ITEMS -->
         <CollectionView ItemsSource="{Binding Cartitem}">
             <CollectionView.ItemsLayout>
@@ -20,21 +42,8 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="Model:Cart">
                     <VerticalStackLayout Spacing="10">
-                        <Border Padding="10" BackgroundColor="White" Stroke="#ccc" StrokeThickness="1" StrokeShape="RoundRectangle 5">
-                            <HorizontalStackLayout VerticalOptions="Center" Spacing="10">
-                                <Image Source="trash.png" WidthRequest="24" HeightRequest="24" />
-                                <Label Text="سلة التسوق"
-                       FontSize="18"
-                       TextColor="Black"
-                       VerticalOptions="Center" />
-                                <Label Text="X"
-                       FontSize="18"
-                       FontAttributes="Bold"
-                       TextColor="Black"
-                       VerticalOptions="Center"
-                       HorizontalOptions="EndAndExpand" />
-                            </HorizontalStackLayout>
-                        </Border>
+                         
+                      
 
                         <Border BackgroundColor="White"
                 StrokeShape="RoundRectangle 5"

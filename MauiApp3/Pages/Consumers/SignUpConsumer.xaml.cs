@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+ï»¿using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
 namespace MauiApp3.Pages.Consumers;
@@ -6,6 +6,7 @@ namespace MauiApp3.Pages.Consumers;
 public partial class SignUpConsumer : ContentPage
 {
     private bool PasswordVisible1 = false;
+
 
     public SignUpConsumer()
     {
@@ -24,7 +25,7 @@ public partial class SignUpConsumer : ContentPage
     {
         try
         {
-            // ÇáÊÍŞŞ ãä ÅÏÎÇá ÌãíÚ ÇáÍŞæá
+            // Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø¥Ø¯Ø®Ø§Ù„ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ„
             if (string.IsNullOrWhiteSpace(fullNameEntry.Text) ||
                 string.IsNullOrWhiteSpace(phoneNumberEntry.Text) ||
                 string.IsNullOrWhiteSpace(emailEntry.Text) ||
@@ -33,18 +34,20 @@ public partial class SignUpConsumer : ContentPage
                 string.IsNullOrWhiteSpace(usernameEntry.Text))
 
             {
-                await DisplayAlert("ÎØÃ", "íÑÌì ãáÁ ÌãíÚ ÇáÍŞæá æÑİÚ ÇáÕæÑÉ", "ãæÇİŞ");
+                await DisplayAlert("Ø®Ø·Ø£", "ÙŠØ±Ø¬Ù‰ Ù…Ù„Ø¡ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ„ ÙˆØ±ÙØ¹ Ø§Ù„ØµÙˆØ±Ø©", "Ù…ÙˆØ§ÙÙ‚");
                 return;
             }
 
             var consumer = new Consumer
             {
+                ConsumerId = 0,
                 Name = fullNameEntry.Text,
                 PhoneNumber = phoneNumberEntry.Text,
                 Email = emailEntry.Text,
+                City = LocationEntry.Text,
                 Password = passwordEntry.Text,
                 UserNamer = usernameEntry.Text,
-                City = LocationEntry.Text,
+               
 
 
             };
@@ -53,7 +56,7 @@ public partial class SignUpConsumer : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("ÎØÃ", $"ÍÏË ÎØÃ: {ex.Message}", "ãæÇİŞ");
+            await DisplayAlert("Ø®Ø·Ø£", $"Ø­Ø¯Ø« Ø®Ø·Ø£: {ex.Message}", "Ù…ÙˆØ§ÙÙ‚");
             Console.WriteLine($"Error: {ex}");
         }
     }
