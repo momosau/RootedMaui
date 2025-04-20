@@ -1,14 +1,14 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RootedBack.Data;
 using SharedLibraryy.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace RootedBack.Controllers
+namespace RootedD.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -104,6 +104,8 @@ namespace RootedBack.Controllers
         {
             return _context.Consumers.Any(e => e.ConsumerId == id);
         }
+
+
         [HttpPost("Login")]
         public async Task<ActionResult<Consumer>> SignInConsumer(ConsumerLoginRequest request)
         {
@@ -123,7 +125,7 @@ namespace RootedBack.Controllers
 
         public class ConsumerLoginRequest
         {
-            public int ConsumerId { get; set; }
+
             public string Email { get; set; }
             public string Password { get; set; }
         }

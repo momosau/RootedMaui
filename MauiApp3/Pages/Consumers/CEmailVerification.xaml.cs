@@ -27,6 +27,8 @@ public partial class CEmailVerification : ContentPage
     {
         InitializeComponent();
         _consumer = consumer;
+        Debug.WriteLine($"Consumer: {JsonConvert.SerializeObject(_consumer)}");
+
         emailLabel.Text = $"البريد: {_consumer.Email}";
         GenerateAndSendVerificationCode();
     }
@@ -180,13 +182,13 @@ public partial class CEmailVerification : ContentPage
 
             if (isSuccess)
             {
-                await DisplayAlert("نجاح", "تم تسجيل المزارع بنجاح", "موافق");
+                await DisplayAlert("نجاح", "تم تسجيل المستهلك بنجاح", "موافق");
                 await Shell.Current.Navigation.PushAsync(new ConsumerHomePage(_consumer));
             }
             
             else
             {
-                await DisplayAlert("خطأ", "فشل في تسجيل المزارع", "موافق");
+                await DisplayAlert("خطأ", "فشل في تسجيل المستهلك", "موافق");
             }
         }
         catch (Exception ex)

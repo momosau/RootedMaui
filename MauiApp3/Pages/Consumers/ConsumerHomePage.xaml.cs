@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 
 namespace MauiApp3.Pages.Consumers;
@@ -13,18 +14,14 @@ namespace MauiApp3.Pages.Consumers;
     public partial class ConsumerHomePage : ContentPage
     {
         private readonly HttpClient _httpClient = new HttpClient();
-         private const string BaseUrl = "https://localhost:7168/api/";// تعديل
+        private const string BaseUrl = "https://localhost:7168/api/";// تعديل
         private Consumer _consumer;
 
 
         public ObservableCollection<LFarm> Farmers { get; set; } = new ObservableCollection<LFarm>();
-         public ObservableCollection<LCategory> Categories { get; set; } = new ObservableCollection<LCategory>();
-    public ConsumerHomePage()
-    {
-        InitializeComponent();
-    }
+         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
 
-    public ConsumerHomePage(Consumer consumer)
+         public ConsumerHomePage(Consumer consumer)
          {
              InitializeComponent();
             _consumer = consumer;
@@ -48,8 +45,8 @@ namespace MauiApp3.Pages.Consumers;
          {
              try
              {
-                 string url = $"{BaseUrl}TopFarmer/top10";
-                 var response = await _httpClient.GetStringAsync(url);
+                 string url = "https://localhost:7168/api/TopFarmer/top10";
+            var response = await _httpClient.GetStringAsync(url);
                  var farmers = JsonSerializer.Deserialize<List<LFarm>>(response, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                  if (farmers != null)
@@ -92,9 +89,9 @@ namespace MauiApp3.Pages.Consumers;
          {
              try
              {
-                 string url = $"{BaseUrl}Categories";
+                 string url = "https://localhost:7168/api/Categories";
                  var response = await _httpClient.GetStringAsync(url);
-                 var categories = JsonSerializer.Deserialize<List<LCategory>>(response, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                 var categories = JsonSerializer.Deserialize<List<Category>>(response, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                  if (categories != null)
                  {
@@ -173,7 +170,7 @@ public class LFarm
          public double AvgRating { get; set; }
      }
 
-     public class LCategory
+     public class Category
      {
          public int CategoryId { get; set; }
          public string CategoryName { get; set; }

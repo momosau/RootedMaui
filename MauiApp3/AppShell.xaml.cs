@@ -15,7 +15,7 @@ namespace MauiApp3
             Routing.RegisterRoute("AddProductsFarmer", typeof(Pages.Farmers.AddProductsFarmer));
 
             Routing.RegisterRoute("Chatbot", typeof(Pages.Farmers.Chatbot));
-            Routing.RegisterRoute("FarmerHome", typeof(FarmerHome));
+            Routing.RegisterRoute("FarmerHome", typeof(Pages.Farmers.FarmerHome));
             Routing.RegisterRoute("ConsumerMainPage", typeof(Pages.Consumers.ConsumerMainPage));
             Routing.RegisterRoute("ContactUsPage", typeof(ContactUsPage));
             Routing.RegisterRoute("EditProductsFarmer", typeof(EditProductsFarmer));

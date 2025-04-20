@@ -16,6 +16,9 @@ foreach (var key in builder.Configuration.AsEnumerable())
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 Console.WriteLine($"Connection String: {connectionString}");
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddDbContext<RootedDBContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddControllers();

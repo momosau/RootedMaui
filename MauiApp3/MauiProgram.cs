@@ -40,7 +40,7 @@ namespace MauiApp3
             builder.Services.AddTransient<Pages.Consumers.ProductInfo>();
             Ioc.Default.ConfigureServices(builder.Services.BuildServiceProvider());
             builder.Services.AddTransient<FarmerDetailViewModel>();
-            builder.Services.AddSingleton<ProductViewModel>();
+            builder.Services.AddTransient<Pages.Farmers.Chatbot>();
 
 
 #if DEBUG

@@ -30,7 +30,7 @@ public partial class SignInFarmer : ContentPage
         if (response.IsSuccessStatusCode)
         {
             var farmer = await response.Content.ReadFromJsonAsync<Farmer>();
-            await Navigation.PushAsync(new FarmerHome());
+            await Navigation.PushAsync(new Pages.Farmers.FarmerHome());
         }
         else
         {
