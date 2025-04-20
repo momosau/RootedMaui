@@ -2,6 +2,8 @@
 using MauiApp3.ModelView;
 using MauiApp3.Services;
 
+namespace MauiApp3.Pages.Consumers;
+
 public partial class FarmerDetailPage : ContentPage
 {
     public Farmer Farmer { get; set; }
