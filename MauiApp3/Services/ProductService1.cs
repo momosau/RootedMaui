@@ -37,9 +37,23 @@ namespace MauiApp3.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"Error: {response.StatusCode}");
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error: {response.StatusCode} - {errorContent}");
+
+                // Show an alert with the error message
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    $"Failed to save product: {response.StatusCode} - {errorContent}",
+                    "OK");
+            }
+            else
+            {
+                // Optionally, show a success message if the product is saved successfully
+                await Application.Current.MainPage.DisplayAlert("Success", "Product saved successfully.", "OK");
             }
         }
+
+
 
         public async Task UpdateProduct(Product product)
         {

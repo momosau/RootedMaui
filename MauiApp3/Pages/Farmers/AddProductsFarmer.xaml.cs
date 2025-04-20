@@ -11,7 +11,7 @@ namespace MauiApp3.Pages.Farmers
         public AddProductsFarmer()
         {
             InitializeComponent();
-            BindingContext = _viewModel;
+            BindingContext = new AddProductViewModel();
         }
 
         public Product Product

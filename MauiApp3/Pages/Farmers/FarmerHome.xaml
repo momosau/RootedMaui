@@ -109,7 +109,7 @@ IsVisible="{Binding Farmer.Specification.IsPesticideFree}" />
                         <Label Grid.Row="0" Grid.Column="1" Text="{Binding Farmer.Products.Count}" FontSize="13" FontAttributes="Bold" TextColor="Black" FontFamily="FontArabic" HorizontalOptions="Center" />
 
                         <Label Grid.Row="1" Grid.Column="0" Text="العدد الكلي للطلبات:" FontSize="13" FontFamily="FontArabic" TextColor="#0E3230" />
-                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalOrders}" FontSize="13" FontAttributes="Bold" TextColor="Black" FontFamily="FontArabic" HorizontalOptions="Center" />
+                        <!--<Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalOrders}" FontSize="13" FontAttributes="Bold" TextColor="Black" FontFamily="FontArabic" HorizontalOptions="Center" />-->
 
                         <Label Grid.Row="2" Grid.Column="0" Text="صافي الربح:" FontSize="13" FontFamily="FontArabic" TextColor="#0E3230" />
                         <Label Grid.Row="2" Grid.Column="1" Text="ريال 490" FontSize="13" FontAttributes="Bold" TextColor="Green" FontFamily="FontArabic" HorizontalOptions="Center" />
