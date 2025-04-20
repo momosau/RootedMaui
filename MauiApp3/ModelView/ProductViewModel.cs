@@ -5,10 +5,8 @@ using SharedLibraryy.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-
 namespace MauiApp3.ModelView
 {
-
     public partial class ProductViewModel : ObservableObject
     {
         private readonly ProductService1 _productService;
@@ -18,15 +16,14 @@ namespace MauiApp3.ModelView
         public ICommand EditProductCommand { get; }
         public ICommand DeleteProductCommand { get; }
 
-
         public ProductViewModel()
         {
             _productService = new ProductService1();
             AddProductCommand = new Command(async () => await GoToAddProduct());
             EditProductCommand = new Command<Product>(async (product) => await GoToEditProduct(product));
             DeleteProductCommand = new Command<Product>(async (product) => await DeleteProduct(product));
-
         }
+
         public async Task LoadProducts()
         {
             Products.Clear();
@@ -39,12 +36,17 @@ namespace MauiApp3.ModelView
 
         private async Task GoToAddProduct()
         {
-            await Shell.Current.GoToAsync(nameof(AddProductsFarmer));
+            // Navigate to AddProductsFarmer without parameters
+            await Shell.Current.GoToAsync(nameof(Pages.Farmers.AddProductsFarmer));
         }
 
         private async Task GoToEditProduct(Product product)
         {
-            var parameters = new Dictionary<string, object> { { "Product", product } };
+            // Navigate to AddProductsFarmer with Product as a parameter
+            var parameters = new Dictionary<string, object>
+            {
+                { "Product", product }
+            };
             await Shell.Current.GoToAsync(nameof(AddProductsFarmer), parameters);
         }
 

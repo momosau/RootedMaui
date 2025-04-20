@@ -17,6 +17,7 @@
 Title="cart" 
 Icon="cart.png" 
 ContentTemplate="{DataTemplate local:AddProductsFarmer}" />
+        
     </TabBar>
 
 

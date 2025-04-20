@@ -1,62 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
 
-namespace SharedLibraryy.Models;
-
-public partial class Product
+namespace SharedLibraryy.Models
 {
-    public int ProductId { get; set; }
-
-    public string Name { get; set; } = null!;
-
-    public double Weight { get; set; }
-
-    public string Category { get; set; } = null!;
-
-    public int Quantity { get; set; }
-
-    public string? Description { get; set; }
-
-    public double Price { get; set; }
-
-    public string? ImageUrl { get; set; }
-
-    public int FarmerId { get; set; }
-
-    public int CategoryId { get; set; }
-
-    public string Unit { get; set; } = null!;
-
-    public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
-
-    public virtual Category CategoryNavigation { get; set; } = null!;
-
-    public virtual Farmer Farmer { get; set; } = null!;
-
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-
-    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
-
-    public virtual Specification? Specification { get; set; }
-    [NotMapped]
-    private bool _isInCart;
-    [NotMapped]
-    public bool IsInCart
+    public partial class Product : INotifyPropertyChanged
     {
-        get => _isInCart;
-        set
+        public int ProductId { get; set; }
+
+        [Required(ErrorMessage = "Name is required.")]
+        [StringLength(100, ErrorMessage = "Name can't be longer than 100 characters.")]
+        public string Name { get; set; } = null!;
+
+        [Range(0, double.MaxValue, ErrorMessage = "Weight must be a positive number.")]
+        public double Weight { get; set; }
+
+        [Required(ErrorMessage = "Category is required.")]
+        public string Category { get; set; } = null!;
+
+        [Range(0, int.MaxValue, ErrorMessage = "Quantity must be a positive number.")]
+        public int Quantity { get; set; }
+
+        public string? Description { get; set; }
+
+        [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive number.")]
+        public double Price { get; set; }
+
+        public string? ImageUrl { get; set; }
+
+        [Required(ErrorMessage = "FarmerId is required.")]
+        public int FarmerId { get; set; }
+
+        [Required(ErrorMessage = "CategoryId is required.")]
+        public int CategoryId { get; set; }
+
+        [Required(ErrorMessage = "Unit is required.")]
+        public string Unit { get; set; } = null!;
+       
+        public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
+
+        public Farmer? Farmer { get; set; }  // Make it nullable
+        public Category? CategoryNavigation { get; set; } // Nullable too
+
+
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+
+        public virtual Specification? Specification { get; set; }
+
+        [NotMapped]
+        private bool _isInCart;
+
+        [NotMapped]
+        public bool IsInCart
         {
-            if (_isInCart != value)
+            get => _isInCart;
+            set
             {
-                _isInCart = value;
-                OnPropertyChanged(nameof(IsInCart));
+                if (_isInCart != value)
+                {
+                    _isInCart = value;
+                    OnPropertyChanged(nameof(IsInCart));
+                }
             }
         }
-    }
 
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged(string propertyName) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }

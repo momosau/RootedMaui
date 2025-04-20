@@ -13,14 +13,18 @@ namespace MauiApp3.Pages.Consumers;
     public partial class ConsumerHomePage : ContentPage
     {
         private readonly HttpClient _httpClient = new HttpClient();
-         private const string BaseUrl = "http://localhost:7168/api/";// تعديل
+         private const string BaseUrl = "https://localhost:7168/api/";// تعديل
         private Consumer _consumer;
 
 
         public ObservableCollection<LFarm> Farmers { get; set; } = new ObservableCollection<LFarm>();
          public ObservableCollection<LCategory> Categories { get; set; } = new ObservableCollection<LCategory>();
+    public ConsumerHomePage()
+    {
+        InitializeComponent();
+    }
 
-         public ConsumerHomePage(Consumer consumer)
+    public ConsumerHomePage(Consumer consumer)
          {
              InitializeComponent();
             _consumer = consumer;
