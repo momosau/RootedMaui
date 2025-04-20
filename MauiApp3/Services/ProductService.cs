@@ -50,7 +50,7 @@ namespace MauiApp3.Services
         }
         public async Task<List<Product>> GetProductsByFarmer(int farmerId)
         {
-            var response = await _httpClient.GetAsync($"api/Products/farmer/{farmerId}");
+            var response = await _httpClient.GetAsync($"{ApiUrl}api/Products/farmer/{farmerId}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -63,6 +63,7 @@ namespace MauiApp3.Services
 
             return new List<Product>();
         }
+
 
     }
 

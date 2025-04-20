@@ -75,12 +75,16 @@ namespace RootedBack.Services
 
             return product; // Returns product with specs
         }
-        public async Task<List<Product>> GetProductsByFarmerAsync(int farmerId)
+       
+           public async Task<List<Product>> GetProductsByFarmerAsync(int farmerId)
         {
             return await _context.Products
+                .Include(p => p.CategoryNavigation)
                 .Where(p => p.FarmerId == farmerId)
                 .ToListAsync();
-        }
+        
 
     }
+
+}
 }
