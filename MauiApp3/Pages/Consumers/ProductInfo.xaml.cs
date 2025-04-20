@@ -9,6 +9,7 @@ namespace MauiApp3.Pages.Consumers;
 public partial class ProductInfo : ContentPage
 {
     private readonly IProductService _productService;
+    private readonly ICartService _cartService;
 
     public ProductInfo(Product selectedProduct, IProductService productService)
     {
@@ -34,8 +35,11 @@ public partial class ProductInfo : ContentPage
                 cartViewModel.AddToCartCommand.Execute(vm.SelectedProduct);
             }
 
+            await Navigation.PushAsync(new ShoppingCart(_cartService));
 
-            await Shell.Current.GoToAsync(nameof(Pages.Consumers.ShoppingCart));
+
+
+
         }
     }
 

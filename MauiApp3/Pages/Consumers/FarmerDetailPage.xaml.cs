@@ -9,7 +9,7 @@ public partial class FarmerDetailPage : ContentPage
 
     public FarmerDetailPage(Farmer selectedFarmer)
     {
-        InitializeComponent();
+     //   InitializeComponent();
 
         // Initialize HttpClient
         HttpClient httpClient = new HttpClient();

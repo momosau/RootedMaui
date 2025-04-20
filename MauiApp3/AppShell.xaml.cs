@@ -1,12 +1,11 @@
 ﻿using MauiApp3.Pages;
-using MauiApp3;
 
 namespace MauiApp3
 {
     public partial class AppShell : Shell
     {
 
-public AppShell()
+        public AppShell()
         {
             InitializeComponent();
             Routing.RegisterRoute("AboutUsPage", typeof(AboutUsPage));
@@ -26,7 +25,7 @@ public AppShell()
             Routing.RegisterRoute("LocationPage", typeof(LocationPage));
 
             Routing.RegisterRoute("PaymentMethodPage", typeof(Pages.Consumers.PaymentMethodPage));
-           
+
 
             Routing.RegisterRoute("PhoneVerification", typeof(Pages.Farmers.EmailVerification));
 
@@ -38,13 +37,16 @@ public AppShell()
             Routing.RegisterRoute("SplashConsumer", typeof(Pages.Consumers.SplashConsumer));
             Routing.RegisterRoute("SplashFarmerFinal", typeof(SplashFarmerFinal));
             Routing.RegisterRoute("VerificationCodePage", typeof(VerificationCodePage));
-            Routing.RegisterRoute("ProductPage", typeof(Pages.Consumers.ProductPage)); 
-                  Routing.RegisterRoute("MyLocationPage", typeof(MyLocationPage));
+            Routing.RegisterRoute("ProductPage", typeof(Pages.Consumers.ProductPage));
+            Routing.RegisterRoute("MyLocationPage", typeof(MyLocationPage));
             Routing.RegisterRoute("Payment", typeof(Pages.Consumers.Payment));
             Routing.RegisterRoute("DeliveryPage", typeof(DeliveryPage));
+
+
             Routing.RegisterRoute("ShoppingCart", typeof(Pages.Consumers.ShoppingCart));
 
-         //   Routing.RegisterRoute("PhoneVerification", typeof(EmailVerification));
+
+            //   Routing.RegisterRoute("PhoneVerification", typeof(EmailVerification));
             Routing.RegisterRoute("ProductPage", typeof(Pages.Consumers.ProductPage));
             Routing.RegisterRoute("CategoriesPage", typeof(Pages.Consumers.CategoriesPage));
 

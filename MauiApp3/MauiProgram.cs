@@ -33,8 +33,8 @@ namespace MauiApp3
             builder.Services.AddTransient<Pages.Consumers.ProductPage>();
             builder.Services.AddHttpClient<IProductService, ProductService>();
             builder.Services.AddSingleton<CartViewModel>();
-            builder.Services.AddTransient<Pages.Consumers.ShoppingCart>();
-
+            builder.Services.AddTransient<ShoppingCart>();
+            builder.Services.AddSingleton<CartViewModel>();
             builder.Services.AddHttpClient<ICartService, CartService>();
             builder.Services.AddSingleton<ProductInfoVIewModel>();
             builder.Services.AddTransient<Pages.Consumers.ProductInfo>();
