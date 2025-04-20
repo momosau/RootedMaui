@@ -27,13 +27,13 @@
                             <!-- Display Specifications -->
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Local:"/>
-                                <CheckBox IsChecked="{Binding Specifications[0].IsLocal}" IsEnabled="False"/>
+                                <CheckBox IsChecked="{Binding Specifications.IsLocal}" IsEnabled="False"/>
                                 <Label Text="Organic:"/>
-                                <CheckBox IsChecked="{Binding Specifications[0].IsOrganic}" IsEnabled="False"/>
+                                <CheckBox IsChecked="{Binding Specifications.IsOrganic}" IsEnabled="False"/>
                                 <Label Text="GMO-Free:"/>
-                                <CheckBox IsChecked="{Binding Specifications[0].IsGmofree}" IsEnabled="False"/>
+                                <CheckBox IsChecked="{Binding Specifications.IsGmofree}" IsEnabled="False"/>
                                 <Label Text="Hydroponic:"/>
-                                <CheckBox IsChecked="{Binding Specifications[0].IsHydroponicallyGrown}" IsEnabled="False"/>
+                                <CheckBox IsChecked="{Binding Specifications.IsHydroponicallyGrown}" IsEnabled="False"/>
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">

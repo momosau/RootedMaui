@@ -10,11 +10,14 @@
         <VerticalStackLayout Spacing="10" Padding="10">
 
             <!-- Farmer Info -->
-            <Grid ColumnDefinitions=".4*,.6*" RowDefinitions="Auto,Auto">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="100" Margin="10,10,10,10">
                 <Border Stroke="Gray"
+                        HorizontalOptions="End"
                         StrokeThickness="1"
                         WidthRequest="100"
                         HeightRequest="100"
+                        Grid.Row="0"
+                        Grid.Column="0"
                         StrokeShape="RoundRectangle 50,50,50,50">
                     <Image Source="{Binding Farmer.ImageUrl}" 
                            WidthRequest="96" 
@@ -22,17 +25,30 @@
                            Aspect="AspectFill" />
                 </Border>
 
-                
 
-                <Label Grid.Row="0"
-                       Grid.Column="1"
-                       TextColor="#0E3230"
-                       FontSize="19"
-                       FontFamily="FontArabic"
-                       FontAttributes="Bold"
-                       Text="{Binding Farmer.Name}"
-                       HorizontalOptions="StartAndExpand"
-                       VerticalOptions="Center" />
+                <VerticalStackLayout 
+                    Grid.Row="0"
+                    Grid.Column="1" 
+                    VerticalOptions="Center" HorizontalOptions="Start">
+                  
+                    <Label 
+                            TextColor="#0E3230"
+                            FontSize="21"
+                            FontFamily="FontArabic"
+                            FontAttributes="Bold"
+                            Text="{Binding Farmer.FarmName}"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="Center" />
+                                            <Label 
+                            TextColor="#0E3230"
+                            FontSize="17"
+                            FontFamily="FontArabic"
+                            FontAttributes="Bold"
+                            Text="{Binding Farmer.Name}"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="Center" />     
+                </VerticalStackLayout>
+               
             </Grid>
 
             <!-- Location and Specifications -->
@@ -51,34 +67,63 @@
                            FontFamily="FontArabic"
                            Text="{Binding Farmer.City}" />
 
-                    <Image Source="organic.png"
-                           WidthRequest="50"
-                           IsVisible="{Binding Farmer.Specification.IsOrganic}" />
+                    <ScrollView Orientation="Horizontal">
+                        <HorizontalStackLayout 
+Spacing="10" 
+VerticalOptions="Center" 
+HorizontalOptions="Start"
+Margin="0,5,0,0">
 
-                    <Image Source="gmofree.png"
-                           WidthRequest="50"
-                           IsVisible="{Binding Farmer.Specification.IsGmofree}" />
+                            <Image Source="organic.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding Farmer.Specification.IsOrganic}" />
 
-                    <Image Source="pestfree.png"
-        WidthRequest="50"
-        IsVisible="{Binding Farmer.Specification.IsPesticideFree}" />
-                    <Image Source="hydronic.png"
-WidthRequest="50"
-IsVisible="{Binding Farmer.Specification.IsPesticideFree}" />
+                            <Image Source="gmofreel.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding Farmer.Specification.IsGmofree}" />
+
+                            <Image Source="hydro.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding Farmer.Specification.IsHydroponicallyGrown}" />
+
+                            <Image Source="locallogo.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding Farmer.Specification.IsLocal}" />
+
+                            <Image Source="pestfreel.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding Farmer.Specification.IsPesticideFree}" />
+
+                        </HorizontalStackLayout>
+                    </ScrollView>
 
 
 
 
                 </HorizontalStackLayout>
             </Border>
+            <HorizontalStackLayout>
 
-            <!-- Rating -->
-            <Label Text="التقييم:"
-                   FontFamily="FontArabic"
-                   FontSize="15"
-                   TextColor="#0E3230"
-                   FontAttributes="Bold"
-                   HorizontalOptions="EndAndExpand" />
+                <!-- Rating -->
+                <Label Text="التقييم:"
+            FontFamily="FontArabic"
+            FontSize="20"
+            TextColor="#0E3230"
+            FontAttributes="Bold"
+            HorizontalOptions="EndAndExpand" />
+                <Label Text="{Binding Rating, StringFormat=' {0:F1} / 5'}"
+FontSize="20"
+TextColor="DarkGoldenrod"
+HorizontalOptions="Center"
+/>
+            </HorizontalStackLayout>
+           
+
 
             <!-- Buttons -->
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Padding="2">
@@ -106,7 +151,7 @@ IsVisible="{Binding Farmer.Specification.IsPesticideFree}" />
 
                     <Grid Padding="10" RowSpacing="30" RowDefinitions="*,*,*" ColumnDefinitions=".6*,.4*">
                         <Label Grid.Row="0" Grid.Column="0" Text="عدد المنتجات المتوفرة:" FontSize="13" FontFamily="FontArabic" TextColor="#0E3230" />
-                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Farmer.Products.Count}" FontSize="13" FontAttributes="Bold" TextColor="Black" FontFamily="FontArabic" HorizontalOptions="Center" />
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding ProductCount}" FontSize="13" FontAttributes="Bold" TextColor="Black" FontFamily="FontArabic" HorizontalOptions="Center" />
 
                         <Label Grid.Row="1" Grid.Column="0" Text="العدد الكلي للطلبات:" FontSize="13" FontFamily="FontArabic" TextColor="#0E3230" />
                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding TotalOrders}" FontSize="13" FontAttributes="Bold" TextColor="Black" FontFamily="FontArabic" HorizontalOptions="Center" />

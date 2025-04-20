@@ -69,13 +69,13 @@ namespace MauiApp3.Services
         }
 
 
-        public async Task<Farmer> GetFarmerByIdAsync(int id)
-        {
-            var response = await _httpClient.GetAsync($"api/farmers/{id}"); // Make sure route matches
-            if (!response.IsSuccessStatusCode) return null;
-            var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<Farmer>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        }
+       public async Task<Farmer> GetFarmerByIdAsync(int id)
+{
+    var response = await _httpClient.GetAsync($"api/farmers/{id}"); 
+    if (!response.IsSuccessStatusCode) return null;
+    var json = await response.Content.ReadAsStringAsync();
+    return JsonSerializer.Deserialize<Farmer>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+}
 
         public async Task<int> GetTotalOrdersAsync(int farmerId)
         {

@@ -14,9 +14,9 @@
      Icon="category.png" 
      ContentTemplate="{DataTemplate local:FarmerHome}" />
         <ShellContent 
-Title="cart" 
-Icon="cart.png" 
-ContentTemplate="{DataTemplate local:AddProductsFarmer}" />
+Title="Profile" 
+Icon="profile.png" 
+ContentTemplate="{DataTemplate local:AccountPageFarmer}" />
 
         <ShellContent 
 Title="chatbot" 

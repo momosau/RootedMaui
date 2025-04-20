@@ -30,9 +30,9 @@ namespace MauiApp3
         private async void Consumerclicked(object sender, EventArgs e)
         {
             App.UserType = "consumer";
-           await Navigation.PushAsync(new Pages.Consumers.SignUpConsumer());
+          
 
-           //Application.Current.MainPage = new ConsumerShell();
+           Application.Current.MainPage = new ConsumerShell();
 
 
         }

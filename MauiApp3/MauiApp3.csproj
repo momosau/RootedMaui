@@ -97,7 +97,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\ContactUsPage.xaml.cs">
+	  <Compile Update="Pages\Farmers\ContactUsPage.xaml.cs">
 	    <DependentUpon>ContactUsPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -109,7 +109,7 @@
 	  <MauiXaml Update="FarmerShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\AboutUsPage.xaml">
+	  <MauiXaml Update="Pages\Farmers\AboutUsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Consumers\CEmailVerification.xaml">
@@ -133,7 +133,7 @@
 	  <MauiXaml Update="Pages\Consumers\CategoriesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ContactUsPage.xaml">
+	  <MauiXaml Update="Pages\Farmers\ContactUsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\DeliveryPage.xaml">

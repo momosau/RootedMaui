@@ -64,6 +64,13 @@ namespace MauiApp3.Services
             return new List<Product>();
         }
 
+        public async Task<List<Product>> GetProductsByFarmerIdAsync(int farmerId)
+        {
+            var response = await _httpClient.GetAsync($"{ApiUrl}api/Products/farmer/{farmerId}");
+            if (!response.IsSuccessStatusCode) return new List<Product>();
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<List<Product>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
 
     }
 

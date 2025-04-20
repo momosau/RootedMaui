@@ -10,10 +10,11 @@ public partial class AccountPageFarmer : ContentPage
 	}
     private async void GoToProfile(object sender, EventArgs e)
     {
- 
+
         await Shell.Current.GoToAsync("FarmerProfilePage");
+
     }
-   
+
 
     private async void GoToContactUs(object sender, EventArgs e)
     {
@@ -53,7 +54,8 @@ public partial class AccountPageFarmer : ContentPage
         if (confirm)
         {
             //object value = await AuthenticationService.SignOutAsync();
-            await Shell.Current.GoToAsync("MainPage");
+            Application.Current.MainPage = new NavigationPage(new MainPage());
+
 
         }
     }
