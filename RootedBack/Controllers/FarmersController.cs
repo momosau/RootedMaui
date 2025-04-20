@@ -186,15 +186,15 @@ namespace RootedBack.Controllers
 
             return Ok(farmer);
         }
-
-    } 
-}
-
         public class FarmerLoginRequest
         {
             public string Email { get; set; }
             public string Password { get; set; }
 
         }
+    } 
+}
+
+      
         
     
