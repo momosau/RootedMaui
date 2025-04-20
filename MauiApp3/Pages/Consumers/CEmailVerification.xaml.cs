@@ -96,7 +96,7 @@ public partial class CEmailVerification : ContentPage
                             </p>
                         </div>
                         <div class='footer'>
-                            ©️ {DateTime.Now.Year} Rooted. جميع الحقوق محفوظة.<br>
+                            © {DateTime.Now.Year} Rooted. جميع الحقوق محفوظة.<br>
                             support@rooted.com | +966 12 345 6789
                         </div>
                     </div>
@@ -111,7 +111,7 @@ public partial class CEmailVerification : ContentPage
 
             // إضافة صورة الشعار كمرفق
             var assembly = GetType().GetTypeInfo().Assembly;
-            using var stream = assembly.GetManifestResourceStream("https://i.ibb.co/hRzTwb7j/rooted-logo.png");
+            using var stream = assembly.GetManifestResourceStream("MauiApp3.Resources.Images.rooted_logo.png");
             if (stream != null)
             {
                 var image = bodyBuilder.LinkedResources.Add("logo.png", stream);
@@ -180,12 +180,13 @@ public partial class CEmailVerification : ContentPage
 
             if (isSuccess)
             {
-                await DisplayAlert("نجاح", "تم تسجيل المستهلك بنجاح", "موافق");
-                await Navigation.PushAsync(new ConsumerHomePage(_consumer));
+                await DisplayAlert("نجاح", "تم تسجيل المزارع بنجاح", "موافق");
+                await Shell.Current.Navigation.PushAsync(new ConsumerHomePage(_consumer));
             }
+            
             else
             {
-                await DisplayAlert("خطأ", "فشل في تسجيل المستهلك", "موافق");
+                await DisplayAlert("خطأ", "فشل في تسجيل المزارع", "موافق");
             }
         }
         catch (Exception ex)

@@ -19,7 +19,7 @@ public partial class FarmersListPage : ContentPage
         if (selectedFarmer == null)
             return;
 
-       // await Shell.Current.Navigation.PushAsync(new FarmerDetailPage(selectedFarmer));
+        await Shell.Current.Navigation.PushAsync(new Pages.Consumers.FarmerDetailPage(selectedFarmer));
     }
 
 }

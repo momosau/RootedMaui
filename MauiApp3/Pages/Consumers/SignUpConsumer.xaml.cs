@@ -50,8 +50,8 @@ public partial class SignUpConsumer : ContentPage
 
 
             };
+            await Shell.Current.Navigation.PushAsync(new CEmailVerification(consumer));
 
-            await Navigation.PushAsync(new CEmailVerification(consumer));
         }
         catch (Exception ex)
         {
@@ -60,6 +60,7 @@ public partial class SignUpConsumer : ContentPage
         }
     }
 }
+
 
 
 

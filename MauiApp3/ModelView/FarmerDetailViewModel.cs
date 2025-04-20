@@ -25,6 +25,7 @@ namespace MauiApp3.ModelView
         }
         public async Task LoadProductsAsync(int farmerId)
         {
+        
             var products = await _productService.GetProductsByFarmer(farmerId);
             Products.Clear();
 
