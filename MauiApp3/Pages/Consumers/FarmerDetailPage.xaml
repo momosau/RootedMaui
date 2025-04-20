@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="MauiApp3.Pages.Consumers.FarmerDetailPage"
-     xmlns:Model="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
+             x:Class="MauiApp3.Pages.Consumers.FarmerDetailPage"
+             xmlns:Model="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
              xmlns:ViewModel="clr-namespace:MauiApp3.ModelView"
-                  x:DataType="ViewModel:FarmerDetailViewModel"
+             x:DataType="ViewModel:FarmerDetailViewModel"
              Title="FarmerDetailPage"
              FlowDirection="RightToLeft"
              BackgroundColor="#EAE9E2">
@@ -14,7 +14,7 @@
 
             <!-- Farmer Card -->
             <Frame Margin="10" Padding="8" CornerRadius="30" BorderColor="AntiqueWhite" BackgroundColor="White">
-                <HorizontalStackLayout Spacing="30">
+                <HorizontalStackLayout Spacing="30" HorizontalOptions="FillAndExpand">
                     <!-- Profile Image -->
                     <Frame Padding="2"
                            HeightRequest="120"
@@ -27,13 +27,12 @@
                         <Image Source="{Binding Farmer.ImageUrl}" Aspect="AspectFill" HeightRequest="116" WidthRequest="116"/>
                     </Frame>
 
-                    
                     <VerticalStackLayout VerticalOptions="Center" Spacing="10">
-                        <Label Text="{Binding Farmer.FarmName}" FontSize="24" TextColor="Black" FontAttributes="Bold" FontFamily="FontArabic" />
-                        <Label Text="{Binding Farmer.Name}" FontSize="17" TextColor="Black" FontAttributes="Bold" FontFamily="FontArabic" />
+                        <Label Text="{Binding Farmer.FarmName}" FontSize="24" TextColor="Black" FontAttributes="Bold" FontFamily="FontArabic" HorizontalOptions="Center" />
+                        <Label Text="{Binding Farmer.Name}" FontSize="17" TextColor="Black" FontAttributes="Bold" FontFamily="FontArabic" HorizontalOptions="Center" />
                     </VerticalStackLayout>
 
-                    <HorizontalStackLayout Spacing="30" Margin="0,5,0,0" VerticalOptions="Center" HorizontalOptions="Start">
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Start">
                         <Label Text="عضوية" TextColor="Gold" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsOrganic}" />
                         <Label Text="غير معدلة وراثياً" TextColor="Black" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsGmofree}" />
                         <Label Text="مزروعة مائياً" TextColor="Blue" FontSize="12" FontAttributes="Bold" FontFamily="FontArabic" IsVisible="{Binding Farmer.Specification.IsHydroponicallyGrown}" />
@@ -42,15 +41,17 @@
                     </HorizontalStackLayout>
                 </HorizontalStackLayout>
             </Frame>
+
+            <!-- Information Label -->
             <Label Text="المعلومات" 
-TextColor="#333" 
-FontSize="18" 
+                   TextColor="#333" 
+                   FontSize="18" 
                    Padding="20"
-FontFamily="FontArabic" 
-FontAttributes="Bold" />
+                   FontFamily="FontArabic" 
+                   FontAttributes="Bold" />
 
             <!-- Farmer Info Grid -->
-            <Frame Margin="10" Padding="8" CornerRadius="30" BorderColor="AntiqueWhite" BackgroundColor="White">
+            <Frame Margin="10,0,0,0" Padding="8" CornerRadius="30" BorderColor="AntiqueWhite" BackgroundColor="White">
                 <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*,*,*,*" HorizontalOptions="Start" ColumnSpacing="10" RowSpacing="15" Margin="10">
                     <Label Text=" البريد الإلكتروني:" FontSize="12" TextColor="Black" FontFamily="FontArabic" Grid.Column="0" />
                     <Label Text="{Binding Farmer.Email}" TextColor="Black" FontFamily="FontArabic" Grid.Column="1" />
@@ -75,111 +76,128 @@ FontAttributes="Bold" />
                 </Grid>
             </Frame>
 
-               
-        <VerticalStackLayout Padding="20" Spacing="10">
+            <!-- Reviews Section -->
+            <VerticalStackLayout Padding="20" Spacing="10">
+                <Label Text="المراجعات" 
+                       TextColor="#333" 
+                       FontSize="18" 
+                       FontFamily="FontArabic" 
+                       FontAttributes="Bold" />
 
-    <Label Text="المراجعات" 
-           TextColor="#333" 
-           FontSize="18" 
-           FontFamily="FontArabic" 
-           FontAttributes="Bold" />
-
-    <CollectionView ItemsSource="{Binding Reviews}" 
-                    Margin="0,10,0,0" 
-                    SelectionMode="None">
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="Model:Review">
-                <Frame  Margin="10" Padding="12" CornerRadius="20" BorderColor="AntiqueWhite" BackgroundColor="White" HasShadow="True">
-                    <HorizontalStackLayout Spacing="12" VerticalOptions="CenterAndExpand">
-
-                        <!-- Left: Review Info -->
-                      
-
-                        <!-- Right: Profile Image -->
-                       
-                            <Image Source="profile.png"
-                             
-                                   HeightRequest="48"
-                                   WidthRequest="48" />
-                            
-                      
+                <CollectionView ItemsSource="{Binding Reviews}" 
+                                SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="Model:Review">
+                            <Frame Margin="10,0,0,0" Padding="8" CornerRadius="20" BorderColor="AntiqueWhite" BackgroundColor="White" HasShadow="True">
+                                <HorizontalStackLayout Spacing="12" VerticalOptions="CenterAndExpand">
+                                    <Image Source="profile.png" HeightRequest="48" WidthRequest="48" />
                                     <VerticalStackLayout Spacing="6" HorizontalOptions="FillAndExpand">
-                                        <!-- Reviewer Name -->
-                                        <Label Text="{Binding Consumer.Name, StringFormat='العميل: {0}'}" 
-                                         FontSize="14" 
-                                         TextColor="#222" 
-                                         FontFamily="FontArabic" 
-                                         FontAttributes="Bold" />
-
-                                        <!-- Rating -->
+                                        <Label Text="{Binding Consumer.Name, StringFormat='العميل: {0}'}" FontSize="14" TextColor="#222" FontFamily="FontArabic" FontAttributes="Bold" />
                                         <HorizontalStackLayout Spacing="5">
                                             <Label Text="⭐" FontSize="14" />
-                                            <Label Text="{Binding Rating, StringFormat='{}{0} من 5 ⭐'}"
-                                             FontSize="14" 
-                                             FontAttributes="Bold" 
-                                             TextColor="#FF8C00" />
+                                            <Label Text="{Binding Rating, StringFormat='{}{0} من 5 ⭐'}" FontSize="14" FontAttributes="Bold" TextColor="#FF8C00" />
                                         </HorizontalStackLayout>
-
-                                        <!-- Comment -->
-                                        <Label Text="{Binding Comment}" 
-                                             FontSize="14" 
-                                             TextColor="#444" 
-                                             FontFamily="FontArabic" 
-                                             LineBreakMode="WordWrap" />        
+                                        <Label Text="{Binding Comment}" FontSize="14" TextColor="#444" FontFamily="FontArabic" LineBreakMode="WordWrap" />
                                     </VerticalStackLayout>
                                 </HorizontalStackLayout>
-                </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
-
-</VerticalStackLayout>
-            <Label Text="المنتجات" 
-       FontSize="18"
-       TextColor="#333" 
-       FontFamily="FontArabic" 
-       FontAttributes="Bold" 
-       Padding="20,0,0,0" />
-
-            <Grid>
-                <!-- No Products Label -->
-                <Label Text="لا توجد منتجات"
-           FontSize="16"
-           TextColor="Gray"
-           HorizontalOptions="Center"
-           VerticalOptions="Center">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label"
-                         Binding="{Binding Products.Count}"
-                         Value="0">
-                            <Setter Property="IsVisible" Value="True" />
-                        </DataTrigger>
-                        <DataTrigger TargetType="Label"
-                         Binding="{Binding Products.Count}"
-                         Value="1">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
-
-                <!-- Product List -->
-                <CollectionView ItemsSource="{Binding Products}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="Model:Product">
-                            <Frame Padding="12" Margin="10" CornerRadius="20" BackgroundColor="White" BorderColor="AntiqueWhite">
-                                <VerticalStackLayout>
-                                    <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16" />
-                                    <Label Text="{Binding Description}" FontSize="14" TextColor="#555" />
-                                    <Label Text="{Binding Price, StringFormat='السعر: {0} ريال'}" FontSize="14" TextColor="Green" />
-                                </VerticalStackLayout>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </Grid>
+            </VerticalStackLayout>
 
+            <!-- Products Section -->
+            <Label Text="المنتجات" 
+                   FontSize="18"
+                   TextColor="#333" 
+                   FontFamily="FontArabic" 
+                   FontAttributes="Bold" 
+                   Padding="20,0,0,0" />
 
+            <!-- No Products Label -->
+            <Label Text="لا توجد منتجات"
+                   FontSize="16"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontFamily="FontArabic" 
+                   IsVisible="False">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label"
+                                 Binding="{Binding Products.Count}"
+                                 Value="0">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
 
+            <CollectionView ItemsSource="{Binding Products}"
+                            ItemsLayout="HorizontalList"
+                            HorizontalScrollBarVisibility="Always"
+                            Margin="20,-30,0,0"
+                            HeightRequest="290">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="Model:Product">
+                        <Frame BorderColor="LightGray"
+                               CornerRadius="10"
+                               Padding="6"
+                               Margin="10"
+                               WidthRequest="180"
+                               HeightRequest="200"
+                               HasShadow="True"
+                               BackgroundColor="White">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="5">
+                                <Image Source="{Binding ImageUrl}"
+                                       HeightRequest="100"
+                                       WidthRequest="100"
+                                       Aspect="AspectFit"
+                                       HorizontalOptions="Center" />
+
+                                <Label Text="{Binding Name}"
+                                       FontSize="12"
+                                       FontFamily="FontArabic"             
+                                       FontAttributes="Bold"
+                                       TextColor="Black"
+                                       LineBreakMode="TailTruncation"
+                                       HorizontalTextAlignment="Center"
+                                       MaxLines="1" />
+
+                                <Label Text="{Binding Price, StringFormat='{0} ﷼'}"
+                                       FontSize="12"
+                                       FontFamily="FontArabic"     
+                                       TextColor="DarkGreen"
+                                       HorizontalTextAlignment="Center" />
+
+                                <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                                    <Label Text="{Binding Weight, StringFormat='{0}'}"
+                                           FontSize="12"   
+                                           FontFamily="FontArabic" 
+                                           TextColor="DarkGreen"
+                                           HorizontalTextAlignment="Center" />
+                                    <Label Text="{Binding Unit}"
+                                           FontSize="12"   
+                                           FontFamily="FontArabic" 
+                                           TextColor="DarkGreen"
+                                           HorizontalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+
+                                <Label Text="{Binding CategoryNavigation.CategoryName ,StringFormat='قسم : {0}'}"
+                                       FontSize="12"   
+                                       FontFamily="FontArabic" 
+                                       TextColor="Black"
+                                       HorizontalTextAlignment="Center"
+                                       MaxLines="1" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button
+                Text="جميع المنتجات" WidthRequest="400 " HeightRequest="40" BackgroundColor="ForestGreen" FontFamily="FontArabic" FontSize="20">
+                
+                
+                
+            </Button>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

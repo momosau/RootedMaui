@@ -1,26 +1,29 @@
 ﻿using SharedLibraryy.Models;
 using MauiApp3.ModelView;
 using MauiApp3.Services;
-
-public partial class FarmerDetailPage : ContentPage
+namespace MauiApp3.Pages.Consumers
 {
-    public Farmer Farmer { get; set; }
-    private readonly IProductService _productService;
 
-    public FarmerDetailPage(Farmer selectedFarmer)
+    public partial class FarmerDetailPage : ContentPage
     {
-        InitializeComponent();
+        public Farmer Farmer { get; set; }
+        private readonly IProductService _productService;
 
-        // Initialize HttpClient
-        HttpClient httpClient = new HttpClient();
+        public FarmerDetailPage(Farmer selectedFarmer)
+        {
+            InitializeComponent();
 
-        // Initialize the IProductService with the HttpClient
-        _productService = new ProductService(httpClient); // Make sure to use ProductService
+            // Initialize HttpClient
+            HttpClient httpClient = new HttpClient();
 
-        // Initialize ViewModel with the service and the selected farmer
-        var viewModel = new FarmerDetailViewModel(_productService, selectedFarmer);
+            // Initialize the IProductService with the HttpClient
+            _productService = new ProductService(httpClient); // Make sure to use ProductService
 
-        // Set the BindingContext for the page
-        BindingContext = viewModel;
+            // Initialize ViewModel with the service and the selected farmer
+            var viewModel = new FarmerDetailViewModel(_productService, selectedFarmer);
+
+            // Set the BindingContext for the page
+            BindingContext = viewModel;
+        }
     }
 }

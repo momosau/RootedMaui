@@ -83,8 +83,13 @@ namespace RootedBack.Controllers
         public async Task<IActionResult> GetProductsByFarmer(int farmerId)
         {
             var products = await apiServices.GetProductsByFarmerAsync(farmerId);
+
+            if (products == null || !products.Any())
+                return NotFound("No products found for this farmer");
+
             return Ok(products);
         }
+
 
     }
 }
