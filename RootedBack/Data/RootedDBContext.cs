@@ -281,6 +281,8 @@ public partial class RootedDBContext : DbContext
         modelBuilder.Entity<Review>(entity =>
         {
             entity.ToTable("Review");
+            entity.HasKey(e => e.ReviewId).HasName("PK__Review__74BC79AE83B59E21");
+
 
             entity.HasIndex(e => e.ConsumerId, "IX_Review_ConsumerID");
 
