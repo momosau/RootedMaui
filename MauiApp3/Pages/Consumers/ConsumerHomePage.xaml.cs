@@ -20,14 +20,20 @@ namespace MauiApp3.Pages.Consumers;
 
         public ObservableCollection<LFarm> Farmers { get; set; } = new ObservableCollection<LFarm>();
          public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
+    public ConsumerHomePage()
+    {
+        InitializeComponent();
+    }
 
-         public ConsumerHomePage(Consumer consumer)
+    public ConsumerHomePage(Consumer consumer)
          {
              InitializeComponent();
-            _consumer = consumer;
-            FarmersListView.ItemsSource = Farmers;
-             LoadData();
-         }
+        _consumer = consumer;
+        FarmersListView.ItemsSource = Farmers;
+        LoadData();
+
+    }
+
 
          private async void LoadData()
          {

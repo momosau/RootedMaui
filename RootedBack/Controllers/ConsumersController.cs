@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RootedD.Controllers
+namespace RootedBack.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -129,5 +129,54 @@ namespace RootedD.Controllers
             public string Email { get; set; }
             public string Password { get; set; }
         }
+
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.NewPassword))
+                return BadRequest("البريد الإلكتروني أو كلمة المرور غير صحيحة");
+
+            var Consumer = await _context.Consumers.FirstOrDefaultAsync(c => c.Email == request.Email);
+            if (Consumer == null)
+                return NotFound("لم يتم العثور على مستخدم بهذا البريد الإلكتروني");
+
+            // يفضل تشفير كلمة المرور قبل تخزينها
+            Consumer.Password = (request.NewPassword); // أو فقط: request.NewPassword إذا غير مشفر
+
+            await _context.SaveChangesAsync();
+
+            return Ok("تم تحديث كلمة المرور بنجاح");
+        }
+
+
+
+        public class ResetPasswordRequest
+        {
+            public string Email { get; set; }
+            public string NewPassword { get; set; }
+        }
+
+
+
+        [HttpPost("CheckEmail")]
+        public async Task<ActionResult> CheckEmailExists(EmailCheckRequest request)
+        {
+            var Consumer = await _context.Consumers.FirstOrDefaultAsync(C => C.Email == request.Email);
+
+            if (Consumer == null)
+            {
+                return NotFound("عذرًا، لم يتم العثور على بريد إلكتروني مطابق.");
+            }
+
+            return Ok("تم العثور على البريد الإلكتروني.");
+        }
+
+        public class EmailCheckRequest
+        {
+            public string Email { get; set; }
+        }
+
     }
 }
+
