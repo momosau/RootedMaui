@@ -12,6 +12,10 @@ public partial class FarmerShell : Shell
 
         Routing.RegisterRoute("ContactUsPage", typeof(Pages.Farmers.ContactUsPage));
         Routing.RegisterRoute("AboutUsPage", typeof(Pages.Farmers.AboutUsPage));
+        Routing.RegisterRoute("AddProductsFarmer", typeof(Pages.Farmers.AddProductsFarmer));
+
+        Routing.RegisterRoute("FarmerOrders", typeof(Pages.Farmers.FarmerOrders));
+
 
 
 

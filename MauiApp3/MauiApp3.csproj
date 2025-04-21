@@ -85,6 +85,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\Consumers\AboutUsPageC.xaml.cs">
+	    <DependentUpon>AboutUsPageC.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Consumers\AccountPageConsumer.xaml.cs">
+	    <DependentUpon>AccountPageConsumer.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Consumers\ConsumerProfilePage.xaml.cs">
+	    <DependentUpon>ConsumerProfilePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Consumers\ContactUsPageC.xaml.cs">
+	    <DependentUpon>ContactUsPageC.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Consumers\PrivacyPolicyPageC.xaml.cs">
+	    <DependentUpon>PrivacyPolicyPageC.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\SignInConsumer.xaml.cs">
 	    <DependentUpon>SignInConsumer.xaml</DependentUpon>
 	  </Compile>
@@ -107,6 +122,24 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="FarmerShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Consumers\AboutUsPageC.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Consumers\AccountPageConsumer.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Consumers\ConsumerProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Consumers\ContactUsPageC.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Consumers\MyLocationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Consumers\PrivacyPolicyPageC.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Farmers\AboutUsPage.xaml">
@@ -136,7 +169,7 @@
 	  <MauiXaml Update="Pages\Farmers\ContactUsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\DeliveryPage.xaml">
+	  <MauiXaml Update="Pages\Consumers\DeliveryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Farmers\EditProductsFarmer.xaml">
@@ -166,7 +199,7 @@
 	  <MauiXaml Update="Pages\ForgotPasswordEmail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\LocationPage.xaml">
+	  <MauiXaml Update="Pages\Consumers\LocationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MyLocationPage.xaml">

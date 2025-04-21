@@ -1,4 +1,4 @@
-namespace MauiApp3.Pages;
+namespace MauiApp3.Pages.Farmers;
 
 public partial class FarmerOrders : ContentPage
 {

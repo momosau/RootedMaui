@@ -162,35 +162,7 @@ HorizontalOptions="Center"
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Bottom Nav -->
-            <Grid BackgroundColor="White" Padding="10">
-                <Grid ColumnDefinitions="*, *, *">
-                    <StackLayout Grid.Column="0" HorizontalOptions="Center">
-                        <Image Source="account_green.png" HeightRequest="30">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="GoToProfile" />
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </StackLayout>
-
-                    <StackLayout Grid.Column="1" HorizontalOptions="Center">
-                        <Image Source="home.png" HeightRequest="30">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="GoToHome" />
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </StackLayout>
-
-                    <StackLayout Grid.Column="2" HorizontalOptions="Center">
-                        <Image Source="chatbot.png" HeightRequest="30">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="GoToChatbot" />
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </StackLayout>
-                </Grid>
-            </Grid>
-
+       
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -55,6 +55,7 @@ public partial class SignInFarmer : ContentPage
     private void EyeClicked(object sender, EventArgs e)
     {
         PasswordVisible = !PasswordVisible;
+        
         PasswordEntry.IsPassword = !PasswordVisible;
         eyeButton.Source = PasswordVisible ? "eyeo.png" : "eyec.png";
     }

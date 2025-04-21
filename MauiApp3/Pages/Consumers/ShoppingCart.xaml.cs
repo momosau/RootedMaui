@@ -27,6 +27,12 @@ public partial class ShoppingCart : ContentPage
             (BindingContext as CartViewModel)?.RecalculateTotal();
         }
     }
+    private async void NextPageLoc(object sender, EventArgs e)
+    {
+
+
+        await Shell.Current.GoToAsync("MyLocationPage");
+    }
 
     private async void OnDecreaseClicked(object sender, EventArgs e)
     {

@@ -1,15 +1,15 @@
-﻿namespace MauiApp3.Pages.Farmers;
+﻿namespace MauiApp3.Pages.Consumers;
 
-public partial class AccountPageFarmer : ContentPage
+public partial class AccountPageConsumer : ContentPage
 {
-    public AccountPageFarmer()
+    public AccountPageConsumer()
     {
         InitializeComponent();
     }
     private async void GoToProfile(object sender, EventArgs e)
     {
 
-        await Shell.Current.GoToAsync("FarmerProfilePage");
+       await Shell.Current.GoToAsync(nameof(Pages.Consumers.ConsumerProfilePage));
 
     }
 
@@ -17,13 +17,13 @@ public partial class AccountPageFarmer : ContentPage
     private async void GoToContactUs(object sender, EventArgs e)
     {
 
-        await Shell.Current.GoToAsync("ContactUsPage");
+        await Shell.Current.GoToAsync("ContactUsPageC");
     }
 
     private async void GoToAboutRooted(object sender, EventArgs e)
     {
 
-        await Shell.Current.GoToAsync("AboutUsPage");
+        await Shell.Current.GoToAsync("AboutUsPageC");
     }
 
 
@@ -31,7 +31,7 @@ public partial class AccountPageFarmer : ContentPage
     private async void GoToPrivacyPolicy(object sender, EventArgs e)
     {
 
-        await Shell.Current.GoToAsync("PrivacyPolicyPage");
+        await Shell.Current.GoToAsync("PrivacyPolicyPageC");
     }
 
     

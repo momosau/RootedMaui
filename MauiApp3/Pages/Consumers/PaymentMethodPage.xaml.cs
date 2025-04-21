@@ -34,17 +34,17 @@ public partial class PaymentMethodPage : ContentPage
     */
     private async void NextPaymnet_Clicked(object sender, EventArgs e)
     {
-        //if (!CashRadioButton.IsChecked && !CardRadioButton.IsChecked)
-        //{
-        //    await DisplayAlert("Error", "الرجاء اختيار طريقة دفع", "OK");
-        //    return;
-        //}
-        //if (CashRadioButton.IsChecked)
-        //{
-        //    // Navigate to the normal confirmation page
-
-        //    await Shell.Current.GoToAsync("LocationPage");
-        //}
-        //else { await Shell.Current.GoToAsync("Payment"); }
+        if (!CashRadioButton.IsChecked && !CardRadioButton.IsChecked)
+        {
+           await DisplayAlert("Error", "الرجاء اختيار طريقة دفع", "OK");
+           return;
+       }
+       if (CashRadioButton.IsChecked)
+       {
+           
+   
+           await Shell.Current.GoToAsync("DeliveryPage");
+        }
+       else { await Shell.Current.GoToAsync("Payment"); }
     }
 }

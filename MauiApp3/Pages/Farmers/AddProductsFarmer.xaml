@@ -12,15 +12,15 @@
     <ScrollView>
         <StackLayout Padding="10" Spacing="10">
 
-            <Entry Placeholder="اسم المنتج" Text="{Binding NewProduct.Name}" />
+            <Entry Placeholder="اسم المنتج" Text="{Binding NewProduct.Name}" TextColor="Black" />
 
-            <Entry Placeholder="الوصف" Text="{Binding NewProduct.Description}" />
+            <Entry Placeholder="الوصف" Text="{Binding NewProduct.Description}" TextColor="Black" />
 
-            <Entry Placeholder="السعر" Text="{Binding NewProduct.Price}" Keyboard="Numeric" />
+            <Entry Placeholder="السعر" Text="{Binding NewProduct.Price}" Keyboard="Numeric" TextColor="Black" />
 
-            <Entry Placeholder="الوزن" Text="{Binding NewProduct.Weight}" Keyboard="Numeric" />
+            <Entry Placeholder="الوزن" Text="{Binding NewProduct.Weight}" Keyboard="Numeric" TextColor="Black"  />
 
-            <Entry Placeholder="الكمية" Text="{Binding NewProduct.Quantity}" Keyboard="Numeric" />
+            <Entry Placeholder="الكمية" Text="{Binding NewProduct.Quantity}" Keyboard="Numeric" TextColor="Black"  />
 
             <!--<Entry Placeholder="رابط الصورة" Text="{Binding NewProduct.ImageUrl}" />-->
 

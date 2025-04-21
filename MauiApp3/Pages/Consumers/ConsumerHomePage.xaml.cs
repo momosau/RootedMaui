@@ -28,8 +28,12 @@ namespace MauiApp3.Pages.Consumers;
             FarmersListView.ItemsSource = Farmers;
              LoadData();
          }
+    public ConsumerHomePage() : this(new Consumer())
+    {
+    }
 
-         private async void LoadData()
+
+    private async void LoadData()
          {
              await LoadTopFarmers();
              await LoadCategories();

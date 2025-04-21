@@ -99,7 +99,7 @@
            HorizontalOptions="End" />
             </HorizontalStackLayout>
 
-            <Button Text="التالي" BackgroundColor="Green" TextColor="White"/>
+            <Button Text="التالي" BackgroundColor="Green" TextColor="White" Clicked="NextPageLoc"/>
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
