@@ -6,53 +6,86 @@
              xmlns:ViewModel="clr-namespace:MauiApp3.ModelView" 
              x:DataType="ViewModel:ProductInfoVIewModel"
              xmlns:Model="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
-              xmlns:local="clr-namespace:MauiApp3.Converter"
              BackgroundColor="#E7E9E4" 
              FlowDirection="RightToLeft" 
              Shell.NavBarIsVisible="False">
-  
-        <ContentPage.Resources>
-        <ResourceDictionary>
-            <local:SpecConverter x:Key="SpecConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
+
     <ScrollView>
-
         <VerticalStackLayout Padding="10">
-
-        <!-- Product Details -->
-        <Frame Background="White">
-            <VerticalStackLayout>
-                <Image Source="{Binding SelectedProduct.ImageUrl}" WidthRequest="250" HeightRequest="250" Background="White"/>
-                <Label Text="{Binding SelectedProduct.Name}" FontSize="Large" TextColor="Black"/>
-                <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black"/>
-                <HorizontalStackLayout>
-                    <Label Text="زيارة" FontSize="Medium" TextColor="Black"/>
+            <!-- Product Details -->
+            <Frame Background="White">
+                <VerticalStackLayout>
+                    <Image Source="{Binding SelectedProduct.ImageUrl}" WidthRequest="250" HeightRequest="250" Background="White"/>
+                    <Label Text="{Binding SelectedProduct.Name}" FontSize="Large" TextColor="Black"/>
                     <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout HorizontalOptions="End">
-                    <Label Text="{Binding SelectedProduct.Weight}" FontSize="Medium" TextColor="Black"/>
-                    <Label Text="{Binding SelectedProduct.Unit}" FontSize="Medium" TextColor="Black"/>
-                    <Label Text="/" TextColor="Black" FontSize="Medium"></Label>
-                    <Label Text="{Binding SelectedProduct.Price, StringFormat='{0} ريال'}" FontSize="Medium" TextColor="Black"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                 <!--  <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding Organic, Converter={StaticResource SpecConverter}, ConverterParameter}" />
 
-                    <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding PesticideFree, Converter={StaticResource SpecConverter}, ConverterParameter=" />
+                    <HorizontalStackLayout>
+                        <Label
+    Text="{Binding FarmName}"
+    TextColor="Blue"
+    FontAttributes="Bold">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer
+            Command="{Binding NavigateToFarmerDetailsCommand}"
+            CommandParameter="{Binding Farmer}" />
+                            </Label.GestureRecognizers>
+                        </Label>
 
-                    <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding FairTrade, Converter={StaticResource SpecConverter}, ConverterParameter=fair_trade}" />
 
-                    <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding LocallyGrown, Converter={StaticResource SpecConverter}, ConverterParameter=local}" />
+                    </HorizontalStackLayout>
 
-                    <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding NonGMO, Converter={StaticResource SpecConverter}, ConverterParameter=non_gmo}" />
-               --> </HorizontalStackLayout>
-            </VerticalStackLayout>
+                    <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="10">
+                        <Label Text="{Binding SelectedProduct.Weight}" FontSize="Medium" TextColor="Black"/>
+                        <Label Text="{Binding SelectedProduct.Unit}" FontSize="Medium" TextColor="Black"/>
+                        <Label Text="/" TextColor="Black" FontSize="Medium"/>
+                        <Label Text="{Binding SelectedProduct.Price, StringFormat='{0} ريال'}" FontSize="Medium" TextColor="Black"/>
+                    </HorizontalStackLayout>
+                    <CollectionView ItemsSource="{Binding ProductsSpec}" Margin="10"  >
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="Model:Specification">
+                                <Frame Padding="10" Margin="5"  BackgroundColor="White" BorderColor="White">
+                                    <StackLayout>
+
+                                        <!-- Scrollable icons row -->
+                                        <ScrollView Orientation="Horizontal" >
+                                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,5,0,0">
+
+                                                <Image Source="organic.png"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   IsVisible="{Binding IsOrganic}" />
+
+                                                <Image Source="gmofreel.png"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   IsVisible="{Binding IsGmofree}" />
+
+                                                <Image Source="hydro.png"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   IsVisible="{Binding IsHydroponicallyGrown}" />
+
+                                                <Image Source="locallogo.png"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   IsVisible="{Binding IsLocal}" />
+
+                                                <Image Source="pestfreel.png"
+                                   WidthRequest="30"
+                                   HeightRequest="30"
+                                   IsVisible="{Binding IsPesticideFree}" />
+
+                                            </HorizontalStackLayout>
+                                        </ScrollView>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+
+                </VerticalStackLayout>
         </Frame>
         <Label Text="التقييمات" FontSize="18" FontAttributes="Bold" Margin="10,20,10,10" />
         <CollectionView ItemsSource="{Binding Reviews}" Margin="10">
@@ -71,25 +104,6 @@
         </CollectionView>
 
         <Label Text="Specification" FontSize="18" FontAttributes="Bold" Margin="10,20,10,10" />
-
-<CollectionView ItemsSource="{Binding ProductsSpec}" Margin="10">
-    <CollectionView.ItemTemplate>
-        <DataTemplate x:DataType="Model:Specification">
-            <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5">
-                <StackLayout>
-                            <Label Text="{Binding IsGmofree, StringFormat='Is GMO-Free: {0}'}" />
-                            <Label Text="{Binding IsHydroponicallyGrown, StringFormat='Is Hydroponically Grown: {0}'}" />
-                            <Label Text="{Binding IsPesticideFree, StringFormat='Is Pesticide Free: {0}'}" />
-                            <Label Text="{Binding IsLocal, StringFormat='Is Local: {0}'}" />
-
-                        </StackLayout>
-            </Frame>
-        </DataTemplate>
-    </CollectionView.ItemTemplate>
-</CollectionView>
-
-
-
         <!-- Quantity Control -->
         <HorizontalStackLayout>
             <Border StrokeThickness="0" BackgroundColor="White">

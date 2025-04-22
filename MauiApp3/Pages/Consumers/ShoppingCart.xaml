@@ -10,10 +10,10 @@
              Padding="0" 
              x:DataType="ViewModel:CartViewModel">
 
-    <VerticalStackLayout Padding="10">
+    <VerticalStackLayout Padding="10" >
         <Border Padding="10" BackgroundColor="White" Stroke="#ccc" StrokeThickness="1" StrokeShape="RoundRectangle 5">
 
-            <HorizontalStackLayout VerticalOptions="Center" Spacing="10">
+            <HorizontalStackLayout VerticalOptions="Start" Spacing="200">
             <Image Source="trash.png"
        WidthRequest="24"
        HeightRequest="24">
@@ -26,13 +26,18 @@
                        FontSize="18"
                        TextColor="Black"
                        VerticalOptions="Center" />
-            <Label Text="X"
-                       FontSize="18"
-                       FontAttributes="Bold"
-                       TextColor="Black"
-                       VerticalOptions="Center"
-                       HorizontalOptions="EndAndExpand" />
-        </HorizontalStackLayout>
+                <Label Text="X"
+       FontSize="18"
+       FontAttributes="Bold"
+       TextColor="Black"
+       VerticalOptions="End"
+       HorizontalOptions="EndAndExpand">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </HorizontalStackLayout>
         </Border>
         <!-- CART ITEMS -->
         <CollectionView ItemsSource="{Binding Cartitem}">

@@ -21,9 +21,7 @@ namespace MauiApp3.Pages.Consumers
             InitializeComponent();
             var httpClient = new HttpClient();
             _cartService = new CartService(httpClient);
-            BindingContext = new ProductPageViewModel( selectedCategoryId,  new ProductService(httpClient),
-         _cartService,
-         navigation);
+            this.BindingContext = new ProductPageViewModel(selectedCategoryId,new ProductService(httpClient), _cartService, Navigation);
         }
     
       

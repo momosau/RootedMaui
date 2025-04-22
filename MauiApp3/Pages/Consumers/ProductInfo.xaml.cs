@@ -15,13 +15,12 @@ public partial class ProductInfo : ContentPage
     {
         InitializeComponent();
         _productService = productService ?? throw new ArgumentNullException(nameof(productService));
-
-        var viewModel = new ProductInfoVIewModel(selectedProduct, _productService);
-        BindingContext = viewModel;
       
 
+        BindingContext = new ProductInfoVIewModel(selectedProduct, productService);
     }
- 
+
+
     public int count = 1;
 
 
