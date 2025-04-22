@@ -21,9 +21,16 @@ public partial class ProductInfo : ContentPage
       
 
     }
- 
-    public int count = 1;
 
+    public ProductInfo(ProductModel selectedProduct, ProductService productService)
+    {
+        this.selectedProduct = selectedProduct;
+        this.productService = productService;
+    }
+
+    public int count = 1;
+    private ProductModel selectedProduct;
+    private ProductService productService;
 
     private async void AddToCartCLicked(object sender, EventArgs e)
     {

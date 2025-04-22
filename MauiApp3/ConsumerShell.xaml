@@ -27,7 +27,7 @@ ContentTemplate="{DataTemplate local:FarmersListPage}" />
         <ShellContent 
 Title="Account" 
 Icon="account.png" 
-ContentTemplate="{DataTemplate local:AccountPageConsumer}" />
+ContentTemplate="{DataTemplate local:Search}" />
 
 
     </TabBar>
