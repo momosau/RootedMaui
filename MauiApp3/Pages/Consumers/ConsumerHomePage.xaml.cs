@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
@@ -20,10 +21,10 @@ namespace MauiApp3.Pages.Consumers;
 
         public ObservableCollection<LFarm> Farmers { get; set; } = new ObservableCollection<LFarm>();
          public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
-    public ConsumerHomePage()
+    public ConsumerHomePage(): this (new Consumer())
     {
-        InitializeComponent();
     }
+
 
     public ConsumerHomePage(Consumer consumer)
          {
@@ -184,5 +185,8 @@ public class LFarm
 
       
     }
+
+
+
 
 
