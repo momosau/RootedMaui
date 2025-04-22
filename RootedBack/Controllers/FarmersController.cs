@@ -186,15 +186,46 @@ namespace RootedBack.Controllers
 
             return Ok(farmer);
         }
+    
 
-    } 
-}
-
-        public class FarmerLoginRequest
+public class FarmerLoginRequest
         {
             public string Email { get; set; }
             public string Password { get; set; }
 
         }
+//[HttpPost("ResetPassword")]
+//public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+//{
+//    if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.NewPassword))
+//        return BadRequest("البريد الإلكتروني أو كلمة المرور غير صحيحة");
+
+//    var farmer = await _context.Farmers.FirstOrDefaultAsync(f => f.Email == request.Email);
+//    if (farmer == null)
+//        return NotFound("لم يتم العثور على مستخدم بهذا البريد الإلكتروني");
+
+//    // يفضل تشفير كلمة المرور قبل تخزينها
+//    farmer.Password = (request.NewPassword); // أو فقط: request.NewPassword إذا غير مشفر
+
+//    await _context.SaveChangesAsync();
+
+//    return Ok("تم تحديث كلمة المرور بنجاح");
+//}
+
+
+
+public class ResetPasswordRequest
+{
+    public string Email { get; set; }
+    public string NewPassword { get; set; }
+}
+
+
+
+    }
+}
+
+
+      
         
     

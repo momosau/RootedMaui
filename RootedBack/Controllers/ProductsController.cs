@@ -85,7 +85,16 @@ namespace RootedBack.Controllers
             return BadRequest(response.Message);  // 400 Bad Request
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<List<Product>>> SearchProducts([FromQuery] string query)
+        {
+            var products = await apiServices.GetProductsAsync();
+            var results = products
+                .Where(p => !string.IsNullOrEmpty(p.Name) && p.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
+                .ToList();
 
+            return Ok(results);
+        }
 
         [HttpGet("Categories")]
         

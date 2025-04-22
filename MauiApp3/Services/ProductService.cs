@@ -16,6 +16,7 @@ namespace MauiApp3.Services
         {
             _httpClient = httpClient;
         }
+
         public async Task<List<Category>> GetCategoriesAsync()
         {
             var categories = await _httpClient.GetAsync($"{ApiUrl}api/Products/Categories");
