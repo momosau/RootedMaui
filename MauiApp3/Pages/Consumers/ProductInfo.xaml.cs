@@ -15,22 +15,14 @@ public partial class ProductInfo : ContentPage
     {
         InitializeComponent();
         _productService = productService ?? throw new ArgumentNullException(nameof(productService));
-
-        var viewModel = new ProductInfoVIewModel(selectedProduct, _productService);
-        BindingContext = viewModel;
       
 
+        BindingContext = new ProductInfoVIewModel(selectedProduct, productService);
     }
 
-    public ProductInfo(ProductModel selectedProduct, ProductService productService)
-    {
-        this.selectedProduct = selectedProduct;
-        this.productService = productService;
-    }
 
     public int count = 1;
-    private ProductModel selectedProduct;
-    private ProductService productService;
+
 
     private async void AddToCartCLicked(object sender, EventArgs e)
     {

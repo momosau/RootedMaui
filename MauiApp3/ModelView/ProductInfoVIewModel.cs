@@ -2,6 +2,7 @@
 using SharedLibraryy.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace MauiApp3.ModelView
 {
@@ -21,6 +22,17 @@ namespace MauiApp3.ModelView
                 OnPropertyChanged(nameof(FarmName));
             }
         }
+        private Farmer _farmer;
+        public Farmer Farmer
+        {
+            get => _farmer;
+            set
+            {
+                _farmer = value;
+                OnPropertyChanged(nameof(Farmer));
+            }
+        }
+
 
         private readonly IProductService _productService;
         private string _farmName;
@@ -42,6 +54,10 @@ namespace MauiApp3.ModelView
             _ = LoadReviewsAsync();
             LoadFarmName();
             getProductspec();
+            NavigateToFarmerDetailsCommand = new Command<Farmer>(OnNavigateToFarmerDetails);
+
+
+
         }
 
         private async void LoadFarmName()
@@ -50,9 +66,10 @@ namespace MauiApp3.ModelView
                 return;
 
             var farmers = await _productService.GetFarmersAsync();
-            var farmer = farmers.FirstOrDefault(f => f.FarmerId == SelectedProduct.FarmerId);
-            FarmName = farmer?.FarmName;
+            Farmer = farmers.FirstOrDefault(f => f.FarmerId == SelectedProduct.FarmerId);
+            FarmName = Farmer?.FarmName;
         }
+
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -110,6 +127,20 @@ namespace MauiApp3.ModelView
                 Console.WriteLine("No spec found.");
             }
         }
+        public ICommand NavigateToFarmerDetailsCommand { get; }
+        private async void OnNavigateToFarmerDetails(Farmer farmer)
+        {
+            if (farmer == null)
+            {
+                Console.WriteLine("Farmer is null, navigation aborted.");
+                return;
+            }
+
+            Console.WriteLine($"Navigating to farmer: {farmer.FarmName}");
+            await Shell.Current.Navigation.PushAsync(new Pages.Consumers.FarmerDetailPage(farmer));
+        }
+
+
 
 
 

@@ -48,10 +48,9 @@ namespace MauiApp3.ModelView
             _selectedCategoryId = categoryId;
             OnPropertyChanged(nameof(SelectedCategoryId));
 
+            // After setting the category, filter products based on the new category
             FilterProducts();
         }
-
-
 
         private async void GetCategories()
         {
@@ -187,7 +186,7 @@ namespace MauiApp3.ModelView
             }
             await _navigation.PushAsync(new Pages.Consumers.ProductInfo(product, productService));
         }
-        private void AddToCart(Product product)
+        private async void AddToCart(Product product)
         {
             if (product == null)
                 return;
@@ -207,8 +206,8 @@ namespace MauiApp3.ModelView
                     Amount = (decimal)product.Price * 1 // Amount is price * quantity
                 };
 
-                _cartService.AddProductToCart(cartItem.Product,cartItem.Quantity);
-                product.IsInCart = true; // Assuming this is a property that marks the product as in the cart
+                _cartService.AddProductToCart(cartItem.Product, cartItem.Quantity);
+                product.IsInCart = true; // Mark as added to cart
             }
             else
             {
@@ -216,6 +215,9 @@ namespace MauiApp3.ModelView
                 existingCartItem.Quantity++;
                 existingCartItem.Amount = existingCartItem.Price * existingCartItem.Quantity;
             }
+
+            // Navigate to the CartPage after adding the product to the cart
+            await _navigation.PushAsync(new Pages.Consumers.ShoppingCart(_cartService));
         }
 
 
