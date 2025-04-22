@@ -9,13 +9,13 @@
 
     <Grid VerticalOptions="Center" Padding="20">
         <VerticalStackLayout Spacing="45" 
-                           HorizontalOptions="Center" 
-                           VerticalOptions="Center">
+                             HorizontalOptions="Center" 
+                             VerticalOptions="Center">
 
             <ActivityIndicator x:Name="loadingIndicator" 
-                             IsVisible="False" 
-                             Color="#3E6F41"
-                             HorizontalOptions="Center"/>
+                               IsVisible="False" 
+                               Color="#3E6F41"
+                               HorizontalOptions="Center"/>
 
             <Image Aspect="AspectFit" 
                    HeightRequest="100" 
@@ -27,7 +27,7 @@
                    FontAttributes="Bold" 
                    HorizontalOptions="Center"/>
 
-            <Label Text="تم إرسال رمز التحقق إلى البريد الالكتروني المدخل" 
+            <Label Text="تم إرسال رمز التحقق إلى البريد الالكتروني المدخل" 
                    FontSize="16" 
                    TextColor="#6D3D24" 
                    HorizontalOptions="Center" 
@@ -35,10 +35,19 @@
                    FontAttributes="Bold" 
                    HorizontalTextAlignment="Center"/>
 
+            <!-- Label to show the actual email -->
+            <Label x:Name="emailLabel"
+                   FontSize="14"
+                   TextColor="#3E6F41"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   LineBreakMode="WordWrap"
+                   HorizontalTextAlignment="Center"/>
+
             <StackLayout Orientation="Horizontal"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        Spacing="10">
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Spacing="10">
 
                 <Border Stroke="#71873F" 
                         StrokeThickness="2" 
@@ -117,12 +126,14 @@
                     WidthRequest="250" 
                     Clicked="VerifyCode"/>
 
-            <Label Text="إذا لم تصلك الرسالة، أعد الإرسال"  
-                   TextColor="#6D3D24"
-                   TextDecorations="Underline"
-                   HorizontalOptions="Center" 
-                   FontSize="10"
-                   FontAttributes="Bold"/>
+            <Button x:Name="resendButton"
+                    Text="إعادة إرسال الرمز"  
+                    TextColor="#6D3D24"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Center" 
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    Clicked="OnResendClicked"/>
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

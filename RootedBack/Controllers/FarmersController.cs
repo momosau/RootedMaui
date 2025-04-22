@@ -10,7 +10,7 @@ namespace RootedBack.Controllers
     public class FarmersController : ControllerBase
     {
         private readonly RootedDBContext _context;
-       
+
 
         public FarmersController(RootedDBContext context)
         {
@@ -186,46 +186,76 @@ namespace RootedBack.Controllers
 
             return Ok(farmer);
         }
-    
 
-public class FarmerLoginRequest
+
+        public class FarmerLoginRequest
         {
             public string Email { get; set; }
             public string Password { get; set; }
 
         }
-//[HttpPost("ResetPassword")]
-//public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
-//{
-//    if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.NewPassword))
-//        return BadRequest("البريد الإلكتروني أو كلمة المرور غير صحيحة");
+        //[HttpPost("ResetPassword")]
+        //public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        //{
+        //    if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.NewPassword))
+        //        return BadRequest("البريد الإلكتروني أو كلمة المرور غير صحيحة");
 
-//    var farmer = await _context.Farmers.FirstOrDefaultAsync(f => f.Email == request.Email);
-//    if (farmer == null)
-//        return NotFound("لم يتم العثور على مستخدم بهذا البريد الإلكتروني");
+        //    var farmer = await _context.Farmers.FirstOrDefaultAsync(f => f.Email == request.Email);
+        //    if (farmer == null)
+        //        return NotFound("لم يتم العثور على مستخدم بهذا البريد الإلكتروني");
 
-//    // يفضل تشفير كلمة المرور قبل تخزينها
-//    farmer.Password = (request.NewPassword); // أو فقط: request.NewPassword إذا غير مشفر
+        //    // يفضل تشفير كلمة المرور قبل تخزينها
+        //    farmer.Password = (request.NewPassword); // أو فقط: request.NewPassword إذا غير مشفر
 
-//    await _context.SaveChangesAsync();
+        //    await _context.SaveChangesAsync();
 
-//    return Ok("تم تحديث كلمة المرور بنجاح");
-//}
+        //    return Ok("تم تحديث كلمة المرور بنجاح");
+        //}
 
 
 
-public class ResetPasswordRequest
-{
-    public string Email { get; set; }
-    public string NewPassword { get; set; }
-}
+        public class ResetPasswordRequest
+        {
+            public string Email { get; set; }
+            public string NewPassword { get; set; }
+        }
 
+        [HttpPut("UpdateProfile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.PhoneNumber) || string.IsNullOrWhiteSpace(request.ImageUrl))
+                return BadRequest("رقم الجوال أو رابط الصورة غير صحيح");
+
+            // استخدام البريد من التوكن
+            var email = User.Identity?.Name;
+            if (string.IsNullOrEmpty(email))
+                return Unauthorized("لم يتم تحديد هوية المستخدم");
+
+            var farmer = await _context.Farmers.FirstOrDefaultAsync(f => f.Email == email);
+            if (farmer == null)
+                return NotFound("لم يتم العثور على المزارع");
+
+            // التحديث
+            farmer.PhoneNumber = request.PhoneNumber;
+            farmer.ImageUrl = request.ImageUrl;
+
+            await _context.SaveChangesAsync();
+
+            return Ok("تم تحديث البيانات بنجاح");
+        }
 
 
     }
 }
+    public class UpdateProfileRequest
+    {
+        public string PhoneNumber { get; set; }
+        public string ImageUrl { get; set; }
+    }
 
 
-      
-        
-    
+
+
+
+
+
