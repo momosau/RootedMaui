@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SharedLibraryy.Models;
 
+[Table("Admin")]
 public partial class Admin
 {
     public int AdminId { get; set; }
