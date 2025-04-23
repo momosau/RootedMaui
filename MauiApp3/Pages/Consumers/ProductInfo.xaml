@@ -87,7 +87,10 @@
 
                 </VerticalStackLayout>
         </Frame>
-        <Label Text="التقييمات" FontSize="18" FontAttributes="Bold" Margin="10,20,10,10" />
+            <Label Text="التقييمات" TextColor="#333" 
+FontSize="18" 
+FontFamily="FontArabic" 
+FontAttributes="Bold" Margin="10,20,10,10"  />
         <CollectionView ItemsSource="{Binding Reviews}" Margin="10">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="Model:Review">
@@ -103,7 +106,10 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Label Text="Specification" FontSize="18" FontAttributes="Bold" Margin="10,20,10,10" />
+            <Label Text="الخصائص" TextColor="#333" 
+FontSize="18" 
+FontFamily="FontArabic" 
+FontAttributes="Bold" Margin="10,20,10,10" />
         <!-- Quantity Control -->
         <HorizontalStackLayout>
             <Border StrokeThickness="0" BackgroundColor="White">

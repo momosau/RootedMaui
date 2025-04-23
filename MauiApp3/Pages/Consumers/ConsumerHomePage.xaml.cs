@@ -124,7 +124,7 @@ namespace MauiApp3.Pages.Consumers;
                                  VerticalOptions = LayoutOptions.Center,
                                  Children =
                          {
-                             // إضافة صورة الفئة (إذا كان لديك URL للصورة)
+                          
                              new Image
                              {
                                  Source =string.IsNullOrEmpty(category.ImagesUrl) ? "default_image.png" : category.ImagesUrl,
@@ -134,7 +134,7 @@ namespace MauiApp3.Pages.Consumers;
 
                              },
 
-                             // إضافة اسم الفئة
+                         
                              new Label
                              {
                                  Text = category.CategoryName,
@@ -147,7 +147,7 @@ namespace MauiApp3.Pages.Consumers;
                              }
                          };
 
-                         // إضافة البطاقة إلى الواجهة
+                      
                          CategoriesStack.Children.Add(categoryFrame);
                      }
                  }
@@ -158,9 +158,14 @@ namespace MauiApp3.Pages.Consumers;
              }
          }
 
+    private async void OnSearchTapped(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("Search");
+    }
 
 
-     }
+}
+
 
 
 
