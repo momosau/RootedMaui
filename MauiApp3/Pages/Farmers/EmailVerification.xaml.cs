@@ -31,9 +31,9 @@ namespace MauiApp3.Pages.Farmers
 
         // private const string ApiUrl = "https://10.0.2.2:7168/api/Consumers";
 #if ANDROID
-  private const string ApiUrl = "https://10.0.2.2:7168/api/FarmerApplication";
+        private const string ApiUrl = "https://10.0.2.2:7168/api/FarmerApplications";
 #else
-        private const string ApiUrl = "https://localhost:7168/api/FarmerApplication";
+        private const string ApiUrl = "https://localhost:7168/api/FarmerApplications";
 #endif
         private FarmerApplication _farmer;
         public EmailVerification(FarmerApplication farmer)

@@ -1,5 +1,8 @@
-﻿namespace SharedLibraryy.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace SharedLibraryy.Models;
+
+[Table("Specification")]
 public partial class Specification
 {
     public int SpecificationId { get; set; }
