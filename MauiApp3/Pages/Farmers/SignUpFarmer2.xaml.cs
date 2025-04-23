@@ -58,12 +58,17 @@ namespace MauiApp3.Pages.Farmers
             try
             {
                 // التحقق من إدخال جميع الحقول في الصفحة الثانية
-               
-
-                  
-                {
-                  
-                }
+                //if (string.IsNullOrWhiteSpace(FarmNameEntry.Text) ||
+                //    string.IsNullOrWhiteSpace(FarmNumberEntry.Text) ||
+                //    string.IsNullOrWhiteSpace(CityEntry.Text) ||
+                //    string.IsNullOrWhiteSpace(DistrictEntry.Text) ||
+                //    string.IsNullOrWhiteSpace(StreetEntry.Text) ||
+                //    string.IsNullOrWhiteSpace(FarmDescriptionEntry.Text) ||
+                //    string.IsNullOrEmpty(_farmer.Certificate)) // التحقق من رفع الصورة
+                //{
+                //    await DisplayAlert("خطأ", "يرجى ملء جميع الحقول ورفع الصورة", "موافق");
+                //    return;
+                //}
 
                 // دمج البيانات من الصفحة الأولى والصفحة الثانية
                 _farmer.FarmName = FarmNameEntry.Text;

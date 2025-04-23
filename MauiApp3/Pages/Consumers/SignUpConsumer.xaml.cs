@@ -21,12 +21,7 @@ public partial class SignUpConsumer : ContentPage
         passwordEntry.IsPassword = !PasswordVisible1;
         eyeButton.Source = PasswordVisible1 ? "eyeo.png" : "eyec.png";
 
-        fullNameEntry.Text = "Irwanto";
-        phoneNumberEntry.Text = "0123456789";
-        emailEntry.Text = "dummymail.general@gmail.com";
-        passwordEntry.Text = "dummymail";
-        LocationEntry.Text = "Indonesia";
-        usernameEntry.Text = "dummymail";
+        
     }
 
 
