@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using SharedLibraryy.Models;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Security;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,7 +27,12 @@ public partial class CEmailVerification : ContentPage
     private const int SmtpPort = 587;
     private const string SmtpUsername = "reachout.rooted@gmail.com";
     private const string SmtpPassword = "xixw wprf fqdo tagy";
-    private const string ApiUrl = "https://10.0.2.2:7168/api/Consumers";
+    // private const string ApiUrl = "https://10.0.2.2:7168/api/Consumers";
+#if ANDROID
+  private const string ApiUrl = "https://10.0.2.2:7168/api/Consumers";
+#else
+    private const string ApiUrl = "https://localhost:7168/api/Consumers";
+#endif
     private Consumer _consumer;
 
     public CEmailVerification(Consumer consumer)

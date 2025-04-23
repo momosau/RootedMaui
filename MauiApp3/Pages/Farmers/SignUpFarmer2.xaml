@@ -23,7 +23,7 @@
                        HorizontalOptions="Center" />
 
                 <!-- Grid لعرض معلومات المزرعة -->
-                <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto,Auto, Auto,Auto, Auto, Auto,Auto, Auto,Auto, Auto, Auto,Auto, Auto,Auto"
                       ColumnDefinitions="*,*"
                       RowSpacing="10"
                       ColumnSpacing="10"
@@ -63,12 +63,12 @@
                     <Border Grid.Row="7" Grid.ColumnSpan="2" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="100">
                         <Entry x:Name="FarmDescriptionEntry" Placeholder="اكتب وصفاً موجزاً عن المزرعة" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White" VerticalOptions="Start" MaxLength="300"/>
                     </Border>
-                    <Label Grid.Row="11" 
+                    <Label Grid.Row="8" 
        Text="أرفق شهادة توثيق المنتجات العضوية" 
        FontFamily="FontArabic" 
        TextColor="#0E3230" 
        FontAttributes="Bold"/>
-                    <Border Grid.Row="12" 
+                    <Border Grid.Row="9" 
         Stroke="Gray" 
         StrokeDashArray="5"
         StrokeThickness="1.5" 
