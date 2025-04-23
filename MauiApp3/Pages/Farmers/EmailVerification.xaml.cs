@@ -1,15 +1,11 @@
 ﻿using MailKit.Net.Smtp;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MimeKit;
 using MimeKit.Utils;
 using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MauiApp3.Pages.Farmers
 {
