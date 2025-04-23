@@ -55,39 +55,39 @@ namespace MauiApp3.Pages.Farmers
         }
         private async void NextClicked(object sender, EventArgs e)
         {
-            try
-            {
-                // التحقق من إدخال جميع الحقول في الصفحة الثانية
-                if (string.IsNullOrWhiteSpace(FarmNameEntry.Text) ||
-                    string.IsNullOrWhiteSpace(FarmNumberEntry.Text) ||
-                    string.IsNullOrWhiteSpace(CityEntry.Text) ||
-                    string.IsNullOrWhiteSpace(DistrictEntry.Text) ||
-                    string.IsNullOrWhiteSpace(StreetEntry.Text) ||
-                    string.IsNullOrWhiteSpace(FarmDescriptionEntry.Text) ||
-                    string.IsNullOrEmpty(_farmer.Certificate)) // التحقق من رفع الصورة
-                {
-                    await DisplayAlert("خطأ", "يرجى ملء جميع الحقول ورفع الصورة", "موافق");
-                    return;
-                }
+        //    try
+        //    {
+        //        // التحقق من إدخال جميع الحقول في الصفحة الثانية
+        //        if (string.IsNullOrWhiteSpace(FarmNameEntry.Text) ||
+        //            string.IsNullOrWhiteSpace(FarmNumberEntry.Text) ||
+        //            string.IsNullOrWhiteSpace(CityEntry.Text) ||
+        //            string.IsNullOrWhiteSpace(DistrictEntry.Text) ||
+        //            string.IsNullOrWhiteSpace(StreetEntry.Text) ||
+        //            string.IsNullOrWhiteSpace(FarmDescriptionEntry.Text) ||
+        //            string.IsNullOrEmpty(_farmer.Certificate)) // التحقق من رفع الصورة
+        //        {
+        //            await DisplayAlert("خطأ", "يرجى ملء جميع الحقول ورفع الصورة", "موافق");
+        //            return;
+        //        }
 
-                // دمج البيانات من الصفحة الأولى والصفحة الثانية
-                _farmer.FarmName = FarmNameEntry.Text;
-                _farmer.FarmNum = string.IsNullOrWhiteSpace(FarmNumberEntry.Text) ? (int?)null : int.Parse(FarmNumberEntry.Text);
-                _farmer.City = CityEntry.Text;
-                _farmer.Neighborhood = DistrictEntry.Text;
-                _farmer.Street = StreetEntry.Text;
-                _farmer.Description = FarmDescriptionEntry.Text;
-                _farmer.Certificate = CertificateUrl;
-                _farmer.VerificationStatus = "pending";
+                //// دمج البيانات من الصفحة الأولى والصفحة الثانية
+                //_farmer.FarmName = FarmNameEntry.Text;
+                //_farmer.FarmNum = string.IsNullOrWhiteSpace(FarmNumberEntry.Text) ? (int?)null : int.Parse(FarmNumberEntry.Text);
+                //_farmer.City = CityEntry.Text;
+                //_farmer.Neighborhood = DistrictEntry.Text;
+                //_farmer.Street = StreetEntry.Text;
+                //_farmer.Description = FarmDescriptionEntry.Text;
+                //_farmer.Certificate = CertificateUrl;
+                //_farmer.VerificationStatus = "pending";
 
                 // تمرير farmer إلى صفحة التحقق من البريد الإلكتروني
                 await Navigation.PushAsync(new EmailVerification(_farmer));
             }
-            catch (Exception ex)
-            {
-                await DisplayAlert("خطأ", $"حدث خطأ: {ex.Message}", "موافق");
-                Console.WriteLine($"Error: {ex}");
-            }
+            //catch (Exception ex)
+            //{
+            //    await DisplayAlert("خطأ", $"حدث خطأ: {ex.Message}", "موافق");
+            //    Console.WriteLine($"Error: {ex}");
+           // }
         }
     }
-}
+
