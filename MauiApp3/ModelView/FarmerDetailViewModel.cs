@@ -18,11 +18,16 @@ namespace MauiApp3.ModelView
 
         public FarmerDetailViewModel(IProductService productService, Farmer selectedFarmer)
         {
-            _productService = productService;
+            if (selectedFarmer == null)
+                throw new ArgumentNullException(nameof(selectedFarmer), "Selected farmer is null");
+
+            _productService = productService ?? throw new ArgumentNullException(nameof(productService));
             Farmer = selectedFarmer;
-            LoadFarmerReviews(selectedFarmer.FarmerId);
-            LoadProductsAsync(selectedFarmer.FarmerId);
+
+            LoadFarmerReviews(Farmer.FarmerId);
+            LoadProductsAsync(Farmer.FarmerId);
         }
+
         public async Task LoadProductsAsync(int farmerId)
         {
         

@@ -4,12 +4,14 @@ using MauiApp3.Services;
 using SharedLibraryy.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace MauiApp3.ModelView
 {
     public partial class CartViewModel : ObservableObject
     {
         private readonly ICartService _cartService;
+        public ICommand CloseCommand { get; }
 
         public decimal Amount => Cartitem.Sum(c => c.Price * c.Quantity); 
 
@@ -28,6 +30,7 @@ namespace MauiApp3.ModelView
         public CartViewModel(ICartService cartService)
         {
             _cartService = cartService;
+            CloseCommand = new Command(OnClose);
         }
 
         [RelayCommand]
@@ -74,6 +77,11 @@ namespace MauiApp3.ModelView
                 }
                 OnPropertyChanged(nameof(Amount));
             }
+        }
+
+        private async void OnClose()
+        {
+            await Shell.Current.Navigation.PopAsync();
         }
 
         [RelayCommand]

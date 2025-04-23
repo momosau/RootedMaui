@@ -30,12 +30,13 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="Models:Category">
-                        <Button Text="{Binding CategoryName}" 
-                            Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ChangeCategoryCommand}"
-                            CommandParameter="{Binding CategoryId}"
-                            BackgroundColor="{Binding CategoryId, 
-                                             Converter={StaticResource CategoryToColorConverter}, 
-                                             ConverterParameter={Binding Source={x:Reference ProductPageView}, Path=BindingContext.SelectedCategoryId}}"/>
+                   <Button Text="{Binding CategoryName}" 
+        Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ChangeCategoryCommand}" 
+        CommandParameter="{Binding CategoryId}" 
+        BackgroundColor="{Binding CategoryId, 
+                               Converter={StaticResource CategoryToColorConverter}, 
+                               ConverterParameter={Binding Source={x:Reference ProductPageView}, Path=BindingContext.SelectedCategoryId}}"/>
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -69,10 +70,8 @@
                                     <Button 
     Text="Add to Cart"
     Command="{Binding Source={RelativeSource AncestorType={x:Type ModelView:ProductPageViewModel}}, Path=AddToCartCommand}"
-    CommandParameter="{Binding .}" >
-
-
-                                    <Button.Triggers>
+    CommandParameter="{Binding .}">
+                                        <Button.Triggers>
                                             <!-- When already in cart -->
                                             <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="True">
                                                 <Setter Property="Text" Value="✔ تمت الإضافة" />
@@ -88,6 +87,7 @@
                                             </DataTrigger>
                                         </Button.Triggers>
                                     </Button>
+
 
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>

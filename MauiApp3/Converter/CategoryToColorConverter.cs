@@ -15,25 +15,18 @@ namespace MauiApp3.Converter
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int categoryId)
+            if (value is int categoryId && parameter is int selectedCategoryId)
             {
-                var categoriesPage = Application.Current.MainPage.Navigation.NavigationStack
-                    .OfType<CategoriesPage>().FirstOrDefault();
+                // Debug log to check if the values are being passed correctly
+                Console.WriteLine($"CategoryId: {categoryId}, SelectedCategoryId: {selectedCategoryId}");
 
-                if (categoriesPage == null)
-                {
-                    Console.WriteLine("Converter: CategoriesPage not found");
-                    return Colors.White;
-                }
-
-                Console.WriteLine($"Converter: CategoryId={categoryId}, SelectedCategoryId={categoriesPage.SelectedCategoryId}");
-
-                return categoryId == categoriesPage.SelectedCategoryId ? Colors.DarkGreen : Colors.White;
+                // Return the color based on the comparison
+                return categoryId == selectedCategoryId ? Colors.DarkGreen : Colors.White;
             }
 
+            // If any issue with the input values, return default color
             return Colors.White;
         }
-
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
