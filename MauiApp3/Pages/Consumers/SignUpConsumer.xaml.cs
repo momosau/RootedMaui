@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace MauiApp3.Pages.Consumers;
 
@@ -55,6 +56,11 @@ public partial class SignUpConsumer : ContentPage
                 City = LocationEntry.Text,
                 Password = passwordEntry.Text,
                 UserNamer = usernameEntry.Text,
+                Neighborhood = NHEntry.Text,
+                Street= StreetEntry.Text,
+                HouseNum= housenumberentry.Text,
+
+
             };
 
             await Navigation.PushAsync(new CEmailVerification(consumer));
