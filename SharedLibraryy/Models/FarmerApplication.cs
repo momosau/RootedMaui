@@ -39,7 +39,7 @@ public partial class FarmerApplication
 
     public int? FarmNum { get; set; }
 
-    public virtual Admin Admin { get; set; } = null!;
+    public virtual Admin? Admin { get; set; } = null!;
 
     public virtual Specification? Specification { get; set; }
 }
