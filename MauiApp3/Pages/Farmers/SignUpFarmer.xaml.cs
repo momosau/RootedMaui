@@ -114,7 +114,7 @@ public class FarmerApplication
     public string Certificate { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
-    public string VerificationStatus { get; set; }
+    public bool VerificationStatus { get; set; }
 
 
 }
