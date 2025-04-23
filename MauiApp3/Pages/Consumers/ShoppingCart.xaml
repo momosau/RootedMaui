@@ -51,7 +51,7 @@
                 StrokeThickness="1"
                 Stroke="#ccc">
                             <HorizontalStackLayout Spacing="50">
-                                <Image Source="{Binding Product.ImageUrl}" />
+                                <Image Source="{Binding Product.ImageUrl}"  Aspect="AspectFill"/>
                                 <VerticalStackLayout>
                                     <HorizontalStackLayout Spacing="5">
                                         <Label Text="{Binding Product.Name}"
