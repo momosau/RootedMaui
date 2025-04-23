@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MauiApp3.Pages.Consumers;
 
@@ -18,6 +19,13 @@ public partial class SignUpConsumer : ContentPage
         PasswordVisible1 = !PasswordVisible1;
         passwordEntry.IsPassword = !PasswordVisible1;
         eyeButton.Source = PasswordVisible1 ? "eyeo.png" : "eyec.png";
+
+        fullNameEntry.Text = "Irwanto";
+        phoneNumberEntry.Text = "0123456789";
+        emailEntry.Text = "dummymail.general@gmail.com";
+        passwordEntry.Text = "dummymail";
+        LocationEntry.Text = "Indonesia";
+        usernameEntry.Text = "dummymail";
     }
 
 
@@ -47,12 +55,9 @@ public partial class SignUpConsumer : ContentPage
                 City = LocationEntry.Text,
                 Password = passwordEntry.Text,
                 UserNamer = usernameEntry.Text,
-               
-
-
             };
-            await Navigation.PushAsync(new CEmailVerification(consumer));
 
+            await Navigation.PushAsync(new CEmailVerification(consumer));
         }
         catch (Exception ex)
         {
@@ -79,6 +84,11 @@ public partial class Consumer
 
     public string Password { get; set; } = null!;
 
-    public string UserNamer { get; set; } = null!;
+    public string UserNamer { get; set; } = string.Empty;
 
+    public string Neighborhood { get; set; } = string.Empty;
+
+    public string Street { get; set; } = string.Empty;
+
+    public string HouseNum { get; set; } = string.Empty;
 }

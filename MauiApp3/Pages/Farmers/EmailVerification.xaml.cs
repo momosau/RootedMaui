@@ -16,13 +16,19 @@ namespace MauiApp3.Pages.Farmers
     public partial class EmailVerification : ContentPage
     {
         private string _verificationCode;
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient = new HttpClient(new HttpClientHandler
+        {
+            // needed when we're using IP address as the url, e.g. 10.0.2.2
+#if DEBUG
+            ServerCertificateCustomValidationCallback = (_, _, _, _) => true
+#endif // DEBUG
+        });
 
         private const string SmtpHost = "smtp.gmail.com";
         private const int SmtpPort = 587;
         private const string SmtpUsername = "reachout.rooted@gmail.com";
         private const string SmtpPassword = "xixw wprf fqdo tagy";
-        private const string ApiUrl = "https://localhost:7168/api/Consumers";
+        private const string ApiUrl = "https://10.0.2.2:7168/api/Farmers";
         private FarmerApplication _farmer;
         public EmailVerification(FarmerApplication farmer)
         {
