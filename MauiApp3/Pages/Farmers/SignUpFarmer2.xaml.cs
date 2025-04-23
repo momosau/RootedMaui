@@ -73,7 +73,7 @@ namespace MauiApp3.Pages.Farmers
                 _farmer.Street = StreetEntry.Text;
                 _farmer.Description = FarmDescriptionEntry.Text;
                 _farmer.Certificate = CertificateUrl;
-                _farmer.VerificationStatus = "pending";
+                _farmer.VerificationStatus = false;
 
                 // تمرير farmer إلى صفحة التحقق من البريد الإلكتروني
                 await Navigation.PushAsync(new EmailVerification(_farmer));
