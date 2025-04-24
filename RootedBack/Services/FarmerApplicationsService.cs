@@ -37,20 +37,14 @@ namespace RootedBack.Services
 
         public async Task<FarmerApplication> CreateAsync(FarmerApplication app)
         {
-            //int appSpec = app.Specification?.SpecificationId ?? -1;
+            var admin = await _context.Admins.FindAsync(app.AdminId);
+            if (admin == null)
+            {
+                admin = await _context.Admins.FirstOrDefaultAsync();
+                app.AdminId = admin?.AdminId ?? throw new Exception("No admin has been assigned in the database");
+            }
 
-            //// Check if the specification ID provided in the application is valid
-            //var spec = await _context.Specifications
-            //                          .FirstOrDefaultAsync(s => s.SpecificationId == appSpec);
-
-            //if (spec == null)
-            //    throw new Exception("Invalid specification ID");
-
-            //// Associate the Specification with the FarmerApplication
-            //app.Specification = spec;
-
-            // Add the new FarmerApplication to the context
-            _context.FarmerApplications.Add(app);
+            await _context.FarmerApplications.AddAsync(app);
 
             // Save changes to the database
             await _context.SaveChangesAsync();

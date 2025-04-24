@@ -321,7 +321,6 @@ public partial class RootedDBContext : DbContext
             entity.HasIndex(e => e.ProductId, "IX_Product").IsUnique();
 
             entity.Property(e => e.SpecificationId)
-                .ValueGeneratedNever()
                 .HasColumnName("SpecificationID");
             entity.Property(e => e.IsGmofree).HasColumnName("IsGMOFree");
 

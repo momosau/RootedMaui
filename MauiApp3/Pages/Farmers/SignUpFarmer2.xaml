@@ -1,106 +1,235 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage x:Class="MauiApp3.Pages.Farmers.SignUpFarmer2"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp3.Pages.Farmers.SignUpFarmer2"
              Title="تسجيل المزارع"
              BackgroundColor="#E7E9E4"
              FlowDirection="RightToLeft">
 
     <ScrollView>
-        <StackLayout Spacing="20" Padding="20">
-            <ActivityIndicator x:Name="loadingIndicator" 
-                               IsVisible="False" 
-                               Color="#3E6F41"
-                               HorizontalOptions="Center"/>
+        <StackLayout Padding="20" Spacing="20">
+            <ActivityIndicator x:Name="loadingIndicator"
+                               HorizontalOptions="Center"
+                               IsVisible="False"
+                               Color="#3E6F41" />
 
-            <VerticalStackLayout Spacing="20" Padding="20, 30, 20, 20">
+            <VerticalStackLayout Padding="20,30,20,20" Spacing="20">
 
                 <!-- عنوان معلومات المزرعة -->
-                <Label Text="معلومات المزرعة"
+                <Label FontAttributes="Bold"
                        FontFamily="FontArabic"
                        FontSize="22"
-                       FontAttributes="Bold"
-                       TextColor="#0E3230"
-                       HorizontalOptions="Center" />
+                       HorizontalOptions="Center"
+                       Text="معلومات المزرعة"
+                       TextColor="#0E3230" />
 
                 <!-- Grid لعرض معلومات المزرعة -->
-                <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto,Auto, Auto,Auto, Auto, Auto,Auto, Auto,Auto, Auto, Auto,Auto, Auto,Auto"
+                <Grid Padding="0"
                       ColumnDefinitions="*,*"
-                      RowSpacing="10"
                       ColumnSpacing="10"
-                      Padding="0">
+                      RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto,Auto, Auto,Auto, Auto, Auto,Auto, Auto,Auto, Auto, Auto,Auto, Auto,Auto"
+                      RowSpacing="10">
 
                     <!-- اسم المزرعة -->
-                    <Label Grid.Row="0" Grid.ColumnSpan="2" Text="اسم المزرعة" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
-                    <Border Grid.Row="1" Grid.ColumnSpan="2" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                    <Label Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           FontAttributes="Bold"
+                           FontFamily="FontArabic"
+                           Text="اسم المزرعة"
+                           TextColor="#0E3230" />
+                    <Border Grid.Row="1"
+                            Grid.ColumnSpan="2"
+                            Background="White"
+                            HeightRequest="50"
+                            Stroke="#71873F"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1.5">
                         <Grid ColumnDefinitions="Auto,*">
-                            <Image Source="field.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Margin="10"/>
-                            <Entry x:Name="FarmNameEntry" Placeholder="مزرعة" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                            <Image Margin="10"
+                                   HeightRequest="20"
+                                   Source="field.png"
+                                   VerticalOptions="Center"
+                                   WidthRequest="20" />
+                            <Entry x:Name="FarmNameEntry"
+                                   BackgroundColor="White"
+                                   FontSize="14"
+                                   Placeholder="مزرعة"
+                                   PlaceholderColor="Gray"
+                                   TextColor="Black" />
                         </Grid>
                     </Border>
 
                     <!-- المدينة و الحي -->
-                    <Label Grid.Row="2" Grid.Column="0" Text="المدينة" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
-                    <Label Grid.Row="2" Grid.Column="1" Text="الحي" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
-                    <Border Grid.Row="3" Grid.Column="0" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                        <Entry x:Name="CityEntry" Placeholder="الرياض" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                    <Label Grid.Row="2"
+                           Grid.Column="0"
+                           FontAttributes="Bold"
+                           FontFamily="FontArabic"
+                           Text="المدينة"
+                           TextColor="#0E3230" />
+                    <Label Grid.Row="2"
+                           Grid.Column="1"
+                           FontAttributes="Bold"
+                           FontFamily="FontArabic"
+                           Text="الحي"
+                           TextColor="#0E3230" />
+                    <Border Grid.Row="3"
+                            Grid.Column="0"
+                            Background="White"
+                            HeightRequest="50"
+                            Stroke="#71873F"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1.5">
+                        <Entry x:Name="CityEntry"
+                               BackgroundColor="White"
+                               FontSize="14"
+                               Placeholder="الرياض"
+                               PlaceholderColor="Gray"
+                               TextColor="Black" />
                     </Border>
-                    <Border Grid.Row="3" Grid.Column="1" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                        <Entry x:Name="DistrictEntry" Placeholder="حي الشفا" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                    <Border Grid.Row="3"
+                            Grid.Column="1"
+                            Background="White"
+                            HeightRequest="50"
+                            Stroke="#71873F"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1.5">
+                        <Entry x:Name="DistrictEntry"
+                               BackgroundColor="White"
+                               FontSize="14"
+                               Placeholder="حي الشفا"
+                               PlaceholderColor="Gray"
+                               TextColor="Black" />
                     </Border>
 
                     <!-- الشارع و رقم المزرعة -->
-                    <Label Grid.Row="4" Grid.Column="0" Text="الشارع" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
-                    <Label Grid.Row="4" Grid.Column="1" Text="رقم المزرعة" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
-                    <Border Grid.Row="5" Grid.Column="0" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                        <Entry x:Name="StreetEntry" Placeholder="شارع الأمير محمد" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                    <Label Grid.Row="4"
+                           Grid.Column="0"
+                           FontAttributes="Bold"
+                           FontFamily="FontArabic"
+                           Text="الشارع"
+                           TextColor="#0E3230" />
+                    <Label Grid.Row="4"
+                           Grid.Column="1"
+                           FontAttributes="Bold"
+                           FontFamily="FontArabic"
+                           Text="رقم المزرعة"
+                           TextColor="#0E3230" />
+                    <Border Grid.Row="5"
+                            Grid.Column="0"
+                            Background="White"
+                            HeightRequest="50"
+                            Stroke="#71873F"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1.5">
+                        <Entry x:Name="StreetEntry"
+                               BackgroundColor="White"
+                               FontSize="14"
+                               Placeholder="شارع الأمير محمد"
+                               PlaceholderColor="Gray"
+                               TextColor="Black" />
                     </Border>
-                    <Border Grid.Row="5" Grid.Column="1" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                        <Entry x:Name="FarmNumberEntry" Placeholder="1234" Keyboard="Numeric" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White"/>
+                    <Border Grid.Row="5"
+                            Grid.Column="1"
+                            Background="White"
+                            HeightRequest="50"
+                            Stroke="#71873F"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1.5">
+                        <Entry x:Name="FarmNumberEntry"
+                               BackgroundColor="White"
+                               FontSize="14"
+                               Keyboard="Numeric"
+                               Placeholder="1234"
+                               PlaceholderColor="Gray"
+                               TextColor="Black" />
                     </Border>
 
                     <!-- وصف المزرعة -->
-                    <Label Grid.Row="6" Grid.ColumnSpan="2" Text="وصف المزرعة" FontFamily="FontArabic" TextColor="#0E3230" FontAttributes="Bold"/>
-                    <Border Grid.Row="7" Grid.ColumnSpan="2" Stroke="#71873F" StrokeThickness="1.5" Background="White" StrokeShape="RoundRectangle 10" HeightRequest="100">
-                        <Entry x:Name="FarmDescriptionEntry" Placeholder="اكتب وصفاً موجزاً عن المزرعة" TextColor="Black" PlaceholderColor="Gray" FontSize="14" BackgroundColor="White" VerticalOptions="Start" MaxLength="300"/>
+                    <Label Grid.Row="6"
+                           Grid.ColumnSpan="2"
+                           FontAttributes="Bold"
+                           FontFamily="FontArabic"
+                           Text="وصف المزرعة"
+                           TextColor="#0E3230" />
+                    <Border Grid.Row="7"
+                            Grid.ColumnSpan="2"
+                            Background="White"
+                            HeightRequest="100"
+                            Stroke="#71873F"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1.5">
+                        <Entry x:Name="FarmDescriptionEntry"
+                               BackgroundColor="White"
+                               FontSize="14"
+                               MaxLength="300"
+                               Placeholder="اكتب وصفاً موجزاً عن المزرعة"
+                               PlaceholderColor="Gray"
+                               TextColor="Black"
+                               VerticalOptions="Start" />
                     </Border>
-                    <Label Grid.Row="8" 
-       Text="أرفق شهادة توثيق المنتجات العضوية" 
-       FontFamily="FontArabic" 
-       TextColor="#0E3230" 
-       FontAttributes="Bold"/>
-                    <Border Grid.Row="9" 
-        Stroke="Gray" 
-        StrokeDashArray="5"
-        StrokeThickness="1.5" 
-        Background="White" 
-        StrokeShape="RoundRectangle 10"
-        HeightRequest="50">
+
+                    <VerticalStackLayout Grid.Row="8"
+                                         Grid.ColumnSpan="2"
+                                         HorizontalOptions="Fill">
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding IsLocal}"/>
+                            <Label Text="Is Local?" VerticalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding IsOrganic}"/>
+                            <Label Text="Is Organic?" VerticalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding IsGmoFree}"/>
+                            <Label Text="Is GMO Free?" VerticalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding IsHydroponicallyGrown}"/>
+                            <Label Text="Is Hydroponically Grown?" VerticalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding IsPesticideFree}"/>
+                            <Label Text="Is Pesticide Free?" VerticalTextAlignment="Center"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    
+                    <Label Grid.Row="9"
+                           FontAttributes="Bold"
+                           FontFamily="FontArabic"
+                           Text="أرفق شهادة توثيق المنتجات العضوية"
+                           TextColor="#0E3230" />
+                    <Border Grid.Row="10"
+                            Background="White"
+                            HeightRequest="50"
+                            Stroke="Gray"
+                            StrokeDashArray="5"
+                            StrokeShape="RoundRectangle 10"
+                            StrokeThickness="1.5">
                         <Grid ColumnDefinitions="Auto, *">
                             <Image Grid.Column="0"
-               Source="pdfa.png" 
-               WidthRequest="30" 
-               HeightRequest="30" 
-               VerticalOptions="Center"/>
+                                   HeightRequest="30"
+                                   Source="pdfa.png"
+                                   VerticalOptions="Center"
+                                   WidthRequest="30" />
                             <Button Grid.Column="1"
-                Text="إرفاق ملف" 
-                BackgroundColor="#71873F" 
-                TextColor="White" 
-                FontSize="14" 
-                Clicked="PickAndUploadImage"/>
+                                    BackgroundColor="#71873F"
+                                    Clicked="PickAndUploadImage"
+                                    FontSize="14"
+                                    Text="إرفاق ملف"
+                                    TextColor="White" />
                         </Grid>
                     </Border>
 
                 </Grid>
 
                 <!-- زر التالي -->
-                <Button Text="التالي" 
-                        BackgroundColor="#3E6F41" 
-                        TextColor="White" 
-                        FontSize="15" 
-                        FontAttributes="Bold" 
-                        CornerRadius="15" 
+                <Button BackgroundColor="#3E6F41"
                         Clicked="NextClicked"
-                        HorizontalOptions="FillAndExpand"/>
+                        CornerRadius="15"
+                        FontAttributes="Bold"
+                        FontSize="15"
+                        HorizontalOptions="FillAndExpand"
+                        Text="التالي"
+                        TextColor="White" />
             </VerticalStackLayout>
         </StackLayout>
     </ScrollView>

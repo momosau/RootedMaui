@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SharedLibraryy.Models;
 
 namespace MauiApp3.Pages.Farmers
 {
@@ -113,8 +114,8 @@ public class FarmerApplication
     public int? FarmNum { get; set; }
     public string Certificate { get; set; }
     public string ImageUrl { get; set; }
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
     public bool VerificationStatus { get; set; }
 
-
+    public Specification Specification { get; set; } = default!;
 }

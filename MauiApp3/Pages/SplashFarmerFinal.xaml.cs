@@ -9,11 +9,9 @@ public partial class SplashFarmerFinal : ContentPage
 
         Task.Delay(4000).ContinueWith(async _ =>
         {
-
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-
-                await Shell.Current.GoToAsync("MainPage");
+                await Navigation.PopToRootAsync();
             });
         });
     }
