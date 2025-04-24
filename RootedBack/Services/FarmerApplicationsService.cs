@@ -37,17 +37,17 @@ namespace RootedBack.Services
 
         public async Task<FarmerApplication> CreateAsync(FarmerApplication app)
         {
-            int appSpec = app.Specification?.SpecificationId ?? -1;
+            //int appSpec = app.Specification?.SpecificationId ?? -1;
 
-            // Check if the specification ID provided in the application is valid
-            var spec = await _context.Specifications
-                                      .FirstOrDefaultAsync(s => s.SpecificationId == appSpec);
+            //// Check if the specification ID provided in the application is valid
+            //var spec = await _context.Specifications
+            //                          .FirstOrDefaultAsync(s => s.SpecificationId == appSpec);
 
-            if (spec == null)
-                throw new Exception("Invalid specification ID");
+            //if (spec == null)
+            //    throw new Exception("Invalid specification ID");
 
-            // Associate the Specification with the FarmerApplication
-            app.Specification = spec;
+            //// Associate the Specification with the FarmerApplication
+            //app.Specification = spec;
 
             // Add the new FarmerApplication to the context
             _context.FarmerApplications.Add(app);
