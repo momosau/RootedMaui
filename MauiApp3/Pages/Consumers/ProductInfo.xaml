@@ -12,77 +12,29 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="10">
-            <!-- Product Details -->
-            <Frame Background="White">
-                <VerticalStackLayout>
-                    <Image Source="{Binding SelectedProduct.ImageUrl}" WidthRequest="250" HeightRequest="250" Background="White"/>
-                    <Label Text="{Binding SelectedProduct.Name}" FontSize="Large" TextColor="Black"/>
+
+        <!-- Product Details -->
+        <Frame Background="White">
+            <VerticalStackLayout>
+                <Image Source="{Binding SelectedProduct.ImageUrl}" WidthRequest="250" HeightRequest="250" Background="White"/>
+                <Label Text="{Binding SelectedProduct.Name}" FontSize="Large" TextColor="Black"/>
+                <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black"/>
+                <HorizontalStackLayout>
+                    <Label Text="زيارة" FontSize="Medium" TextColor="Black"/>
                     <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="End">
+                    <Label Text="{Binding SelectedProduct.Weight}" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="{Binding SelectedProduct.Unit}" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="/" TextColor="Black" FontSize="Medium"></Label>
+                    <Label Text="{Binding SelectedProduct.Price, StringFormat='{0} ريال'}" FontSize="Medium" TextColor="Black"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                 <!--  <Image WidthRequest="32" HeightRequest="32"
+         Source="{Binding Organic, Converter={StaticResource SpecConverter}, ConverterParameter}" />
 
-                    <HorizontalStackLayout>
-                        <Label Text="زيارة "/>
-                        <Label
-    Text="{Binding FarmName}"
-    TextColor="Blue"
-    FontAttributes="Bold">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer
-            Command="{Binding NavigateToFarmerDetailsCommand}"
-            CommandParameter="{Binding Farmer}" />
-                            </Label.GestureRecognizers>
-                        </Label>
-
-
-                    </HorizontalStackLayout>
-
-                    <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="10">
-                        <Label Text="{Binding SelectedProduct.Weight}" FontSize="Medium" TextColor="Black"/>
-                        <Label Text="{Binding SelectedProduct.Unit}" FontSize="Medium" TextColor="Black"/>
-                        <Label Text="/" TextColor="Black" FontSize="Medium"/>
-                        <Label Text="{Binding SelectedProduct.Price, StringFormat='{0} ريال'}" FontSize="Medium" TextColor="Black"/>
-                    </HorizontalStackLayout>
-                    <CollectionView ItemsSource="{Binding ProductsSpec}" Margin="10"  >
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="Model:Specification">
-                                <Frame Padding="10" Margin="5"  BackgroundColor="White" BorderColor="White">
-                                    <StackLayout>
-
-                                        <!-- Scrollable icons row -->
-                                        <ScrollView Orientation="Horizontal" >
-                                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center" HorizontalOptions="Start" Margin="0,5,0,0">
-
-                                                <Image Source="organic.png"
-                                   WidthRequest="30"
-                                   HeightRequest="30"
-                                   IsVisible="{Binding IsOrganic}" />
-
-                                                <Image Source="gmofreel.png"
-                                   WidthRequest="30"
-                                   HeightRequest="30"
-                                   IsVisible="{Binding IsGmofree}" />
-
-                                                <Image Source="hydro.png"
-                                   WidthRequest="30"
-                                   HeightRequest="30"
-                                   IsVisible="{Binding IsHydroponicallyGrown}" />
-
-                                                <Image Source="locallogo.png"
-                                   WidthRequest="30"
-                                   HeightRequest="30"
-                                   IsVisible="{Binding IsLocal}" />
-
-                                                <Image Source="pestfreel.png"
-                                   WidthRequest="30"
-                                   HeightRequest="30"
-                                   IsVisible="{Binding IsPesticideFree}" />
-
-                                            </HorizontalStackLayout>
-                                        </ScrollView>
-                                    </StackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    <Image WidthRequest="32" HeightRequest="32"
+         Source="{Binding PesticideFree, Converter={StaticResource SpecConverter}, ConverterParameter=" />
 
 
 

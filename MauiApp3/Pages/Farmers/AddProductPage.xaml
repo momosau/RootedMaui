@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.Farmers.AddProductPage"
+             Title="AddProductPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+
+            <!-- IMAGE -->
+            <Image x:Name="SelectedImage" HeightRequest="150" Aspect="AspectFill" />
+            <Button Text="Pick Image" Clicked="OnPickImageClicked" />
+
+            <!-- TEXT FIELDS -->
+            <Entry x:Name="NameEntry" Placeholder="Name" />
+            <Entry x:Name="PriceEntry" Placeholder="Price" Keyboard="Numeric" />
+            <Entry x:Name="QuantityEntry" Placeholder="Quantity" Keyboard="Numeric" />
+            <Entry x:Name="WeightEntry" Placeholder="Weight" Keyboard="Numeric" />
+            <Entry x:Name="UnitEntry" Placeholder="Unit" />
+            <Editor x:Name="DescriptionEditor" Placeholder="Description" HeightRequest="80" />
+
+            <!-- DROPDOWNS -->
+            <Picker x:Name="CategoryPicker" Title="Select Category" />
+            <Picker x:Name="FarmerPicker" Title="Select Farmer" />
+
+            <!-- CHECKBOXES -->
+            <Label Text="Specifications:" FontAttributes="Bold" />
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="IsOrganicCheckbox" />
+                <Label Text="Is Organic" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="IsGmofreeCheckbox" />
+                <Label Text="Is GMO-free" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="IsHydroponicallyGrownCheckbox" />
+                <Label Text="Is Hydroponically Grown" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="IsPesticideFreeCheckbox" />
+                <Label Text="Is Pesticide Free" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox x:Name="IsLocalCheckbox" />
+                <Label Text="Is Local" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+
+            <Button Text="Add Product" Clicked="OnAddProductClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
