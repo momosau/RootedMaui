@@ -20,6 +20,7 @@
                     <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black"/>
 
                     <HorizontalStackLayout>
+                        <Label Text="زيارة "/>
                         <Label
     Text="{Binding FarmName}"
     TextColor="Blue"

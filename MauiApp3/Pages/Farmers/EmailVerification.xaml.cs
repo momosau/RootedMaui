@@ -1,15 +1,11 @@
 ﻿using MailKit.Net.Smtp;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MimeKit;
 using MimeKit.Utils;
 using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MauiApp3.Pages.Farmers
 {
@@ -31,7 +27,7 @@ namespace MauiApp3.Pages.Farmers
 
         // private const string ApiUrl = "https://10.0.2.2:7168/api/Consumers";
 #if ANDROID
-        private const string ApiUrl = "https://10.0.2.2:7168/api/FarmerApplications";
+        private const string ApiUrl = "http://10.0.2.2:5140/api/FarmerApplications";
 #else
         private const string ApiUrl = "https://localhost:7168/api/FarmerApplications";
 #endif
@@ -195,7 +191,7 @@ namespace MauiApp3.Pages.Farmers
                 if (isSuccess)
                 {
                     await DisplayAlert("نجاح", "تم تسجيل المزارع بنجاح", "موافق");
-                    await Shell.Current.Navigation.PushAsync(new SplashFarmerFinal());
+                    await Navigation.PushAsync(new SplashFarmerFinal());
                 }
 
                 else

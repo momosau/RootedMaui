@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SharedLibraryy.Models
 {
+    [Table("Product")]
     public partial class Product : INotifyPropertyChanged
     {
         public int ProductId { get; set; }

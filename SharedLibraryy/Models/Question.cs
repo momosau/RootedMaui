@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SharedLibraryy.Models;
 
+[Table("Question")]
 public partial class Question
 {
     [Key]

@@ -9,101 +9,97 @@
              xmlns:viewmodels="clr-namespace:AdminApp.ViewModel">
 
 
-    <VerticalStackLayout Padding="10" 
-                     Spacing="10">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
 
-        <Grid ColumnDefinitions="Auto, *, Auto, Auto" 
-                            Padding="5">
-            <ImageButton Source="Vector.png" 
-                                  WidthRequest="25" 
-                                  HeightRequest="25" 
-                                  VerticalOptions="Center"/>
-            <Label Text=" ﻟ ﻮ ﺣ ﺔ ا ﻟ ﺘ ﺤ ﻜ ﻢ " 
-                            TextColor="Black" 
-                            FontSize="22" 
-                            FontAttributes="Bold" 
-                            FontFamily="FontArabic" 
-                            HorizontalOptions="Center"/>
-            <ImageButton Source="ic_baseline-home.png" 
-                                  WidthRequest="25" 
-                                  HeightRequest="25" 
-                                  VerticalOptions="Center"/>
-            <ImageButton Source="hugeicons:question.png" 
-                                  WidthRequest="25" 
-                                  HeightRequest="25" 
-                                  VerticalOptions="Center"/>
-        </Grid>
+            <Grid ColumnDefinitions="Auto, *, Auto, Auto" Padding="5">
+                <ImageButton Source="Vector.png"
+                             WidthRequest="25"
+                             HeightRequest="25"
+                             VerticalOptions="Center"/>
+                <Label Text=" ﻟ ﻮ ﺣ ﺔ ا ﻟ ﺘ ﺤ ﻜ ﻢ "
+                       TextColor="Black"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       FontFamily="FontArabic"
+                       HorizontalOptions="Center"/>
+                <ImageButton Source="ic_baseline-home.png"
+                             WidthRequest="25"
+                             HeightRequest="25"
+                             VerticalOptions="Center"/>
+                <ImageButton Source="hugeicons:question.png"
+                             WidthRequest="25"
+                             HeightRequest="25"
+                             VerticalOptions="Center"/>
+            </Grid>
 
-        <Entry Placeholder=" ا ﺑ ﺤ ﺚ ﻋ ﻦ ﻣ ﺰ ا ر ﻋ ﯿ ﻦ " 
-       BackgroundColor="White" 
-       TextColor="Black" 
-       FontSize="14" 
-       HeightRequest="40" 
-       Margin="10,0,10,10"
-       ClearButtonVisibility="WhileEditing" />
+            <Entry Placeholder=" ا ﺑ ﺤ ﺚ ﻋ ﻦ ﻣ ﺰ ا ر ﻋ ﯿ ﻦ "
+                   BackgroundColor="White"
+                   TextColor="Black"
+                   FontSize="14"
+                   HeightRequest="40"
+                   Margin="10,0,10,10"
+                   ClearButtonVisibility="WhileEditing" />
 
+            <Label Text=" ا ﻟ ﻤ ﻮ ا ﻓ ﻘ ﺎ ت ﻗ ﯿ ﺪ ا ﻻ ﻧ ﺘ ﻈ ﺎ ر "
+                   TextColor="Black"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   FontFamily="FontArabic"
+                   Margin="0,10"/>
 
-        <Label Text=" ا ﻟ ﻤ ﻮ ا ﻓ ﻘ ﺎ ت ﻗ ﯿ ﺪ ا ﻻ ﻧ ﺘ ﻈ ﺎ ر " 
-                     TextColor="Black" 
-                     FontSize="18" 
-                     FontAttributes="Bold" 
-                     FontFamily="FontArabic" 
-                     Margin="0,10"/>
+            <CollectionView ItemsSource="{Binding PendingApplications}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Gray"
+                               CornerRadius="15"
+                               Padding="15"
+                               BackgroundColor="White">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                       FontFamily="FontArabic"/>
+                                <Label Text="{Binding City}"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                       FontFamily="FontArabic"/>
+                                <Label Text="{Binding Description}"
+                                       TextColor="Black"
+                                       FontSize="16"
+                                       FontFamily="FontArabic"/>
+                                <HorizontalStackLayout Spacing="10"
+                                                       Margin="0,10">
+                                    <Button Text=" ر ﻓ ﺾ"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                            FontSize="14"
+                                            FontAttributes="Bold"
+                                            CornerRadius="10"
+                                            WidthRequest="80"
+                                            Clicked="OnRejectButtonClicked"/>
+                                    <Button Text=" ﻣ ﻮ ا ﻓ ﻘ ﺔ "
+                                            BackgroundColor="Green"
+                                            TextColor="White"
+                                            FontSize="14"
+                                            FontAttributes="Bold"
+                                            CornerRadius="10"
+                                            WidthRequest="80"
+                                            Clicked="OnApproveButtonClicked"/>
+                                    <Button Text="ا ﻟ ﻤ ﺰ ﯾ ﺪ ﻣ ﻦ ا ﻟ ﻤ ﻌ ﻠ ﻮ ﻣ ﺎ ت"
+                                            BackgroundColor="LightGray"
+                                            TextColor="Black"
+                                            FontSize="12"
+                                            FontAttributes="Bold"
+                                            CornerRadius="10"
+                                            Clicked="OnMoreInfoClicked"/>
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <CollectionView ItemsSource="{Binding PendingApplications}"
-                            HeightRequest="600">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="Gray" 
-                                          CornerRadius="15" 
-                                          Padding="15" 
-                                          BackgroundColor="White">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}" 
-                                                        TextColor="Black" 
-                                                        FontSize="16" 
-                                                        FontFamily="FontArabic"/>
-                            <Label Text="{Binding City}" 
-                                                        TextColor="Black" 
-                                                        FontSize="16" 
-                                                        FontFamily="FontArabic"/>
-                            <Label Text="{Binding Description}" 
-                                                        TextColor="Black" 
-                                                        FontSize="16" 
-                                                        FontFamily="FontArabic"/>
-                            <HorizontalStackLayout Spacing="10" 
-                                                               Margin="0,10">
-                                <Button Text=" ر ﻓ ﺾ" 
-                                                                BackgroundColor="Red" 
-                                                                TextColor="White" 
-                                                                FontSize="14" 
-                                                                FontAttributes="Bold" 
-                                                                CornerRadius="10" 
-                                                                WidthRequest="80" 
-                                                               Clicked="OnRejectButtonClicked"/>
-                                <Button Text=" ﻣ ﻮ ا ﻓ ﻘ ﺔ " 
-                                                                
-BackgroundColor="Green" 
-                                                                TextColor="White" 
-                                                                FontSize="14" 
-                                                                FontAttributes="Bold" 
-                                                                CornerRadius="10" 
-                                                                WidthRequest="80" 
-Clicked="OnApproveButtonClicked"/>
-                                <Button Text="ا ﻟ ﻤ ﺰ ﯾ ﺪ ﻣ ﻦ ا ﻟ ﻤ ﻌ ﻠ ﻮ ﻣ ﺎ ت"
-        BackgroundColor="LightGray"
-        TextColor="Black"
-        FontSize="12"
-        FontAttributes="Bold"
-        CornerRadius="10"
-        Clicked="OnMoreInfoClicked"/>
-
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
-             

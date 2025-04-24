@@ -61,7 +61,8 @@ public partial class CEmailVerification : ContentPage
             message.From.Add(new MailboxAddress("Rooted", SmtpUsername));
             message.To.Add(new MailboxAddress("", email));
             message.Subject = "رمز التحقق - تطبيق Rooted";
-            var imageUrl = "https://i.ibb.co/hRzTwb7j/rooted-logo.png";
+            var imageUrl = "https://i.ibb.co/ynCBKT1R/rooted-logo.png";
+
             var bodyBuilder = new BodyBuilder();
 
             // إنشاء معرف فريد للصورة المضمنة

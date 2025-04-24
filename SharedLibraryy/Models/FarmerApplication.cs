@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SharedLibraryy.Models;
 
+[Table("FarmerApplication")]
 public partial class FarmerApplication
 {
     public int ApplicationId { get; set; }
 
-    public int AdminId { get; set; }
+    public int? AdminId { get; set; }
 
     public DateOnly SubmitDate { get; set; }
 

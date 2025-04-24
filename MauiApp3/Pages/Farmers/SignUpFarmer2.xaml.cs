@@ -1,4 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using MauiApp3.ModelView;
+using Newtonsoft.Json;
+using SharedLibraryy.Models;
 
 namespace MauiApp3.Pages.Farmers
 {
@@ -8,12 +12,16 @@ namespace MauiApp3.Pages.Farmers
         private string CertificateUrl = "";
         private string apiUrl = "8a055776c7d5188e7a86f1c50a071a56";
         private readonly HttpClient _httpClient = new HttpClient();
+        private readonly SignUpFarmer2ViewModel _viewModel;
 
         public SignUpFarmer2(FarmerApplication farmer)
         {
             _farmer = farmer;
+            _viewModel = Ioc.Default.GetRequiredService<SignUpFarmer2ViewModel>();
 
             InitializeComponent();
+
+            BindingContext = _viewModel;
         }
 
         private async void PickAndUploadImage(object sender, EventArgs e)
@@ -79,6 +87,14 @@ namespace MauiApp3.Pages.Farmers
                 _farmer.Description = FarmDescriptionEntry.Text;
                 _farmer.Certificate = CertificateUrl;
                 _farmer.VerificationStatus = false;
+                _farmer.Specification = new Specification()
+                {
+                    IsGmofree = _viewModel.IsGmoFree,
+                    IsHydroponicallyGrown = _viewModel.IsHydroponicallyGrown,
+                    IsLocal = _viewModel.IsLocal,
+                    IsOrganic = _viewModel.IsOrganic,
+                    IsPesticideFree = _viewModel.IsPesticideFree,
+                };
 
                 // تمرير farmer إلى صفحة التحقق من البريد الإلكتروني
                 await Navigation.PushAsync(new EmailVerification(_farmer));

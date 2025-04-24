@@ -1,7 +1,13 @@
-﻿namespace SharedLibraryy.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace SharedLibraryy.Models;
+
+[Table("Specification")]
 public partial class Specification
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int SpecificationId { get; set; }
 
     public bool? IsOrganic { get; set; }

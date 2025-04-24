@@ -38,14 +38,16 @@ namespace MauiApp3
             builder.Services.AddHttpClient<ICartService, CartService>();
             builder.Services.AddSingleton<ProductInfoVIewModel>();
             builder.Services.AddTransient<Pages.Consumers.ProductInfo>();
-            Ioc.Default.ConfigureServices(builder.Services.BuildServiceProvider());
             builder.Services.AddTransient<FarmerDetailViewModel>();
             builder.Services.AddTransient<Pages.Farmers.Chatbot>();
-
+            builder.Services.AddTransient<SignUpFarmer2ViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+
+            // configure IOC after all dependencies injected
+            Ioc.Default.ConfigureServices(builder.Services.BuildServiceProvider());
 
             return builder.Build();
         }
