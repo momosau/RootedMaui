@@ -52,10 +52,10 @@ namespace RootedBack.Controllers
             var response = await apiServices.DeleteProductAsync(product.ProductId);
             return Ok(response);
         }
-        [HttpPut]
-        public async Task<ActionResult<Product>> UpdateProductAsync(Product product)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Product>> UpdateProductAsync([FromBody] Product product, int id)
         {
-            var result = await apiServices.GetProductByIdAsync(product.ProductId);
+            var result = await apiServices.GetProductByIdAsync(id);
             if (result is null)
                 return NotFound("Product not found");
 
@@ -66,13 +66,13 @@ namespace RootedBack.Controllers
             return Ok(await apiServices.GetProductByIdAsync(product.ProductId));  // Return updated product
         }
         [HttpPost]
-        public async Task<ActionResult<ApiResponse>> AddProduct(Product product)
+        public async Task<ActionResult<ApiResponse>> AddProduct([FromBody] Product product)
         {
             var response = await apiServices.AddProductAsync(product);
 
             if (response.Success)
             {
-                var newProductId = (int)response.Data; // Get the new product ID from the response
+                var newProductId = response.Data is null ? 0 : (int)response.Data; // Get the new product ID from the response
                 return CreatedAtAction("GetProductById", new { id = newProductId }, response);
                 // Correct the route parameters
             }
@@ -82,7 +82,7 @@ namespace RootedBack.Controllers
                 return Conflict(response.Message);  // 409 Conflict
             }
 
-            return BadRequest(response.Message);  // 400 Bad Request
+            return BadRequest(response.Message);  
         }
 
         [HttpGet("search")]

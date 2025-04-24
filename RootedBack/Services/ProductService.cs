@@ -3,6 +3,7 @@ using RootedBack.Data;
 using SharedLibraryy.Models;
 using SharedLibraryy.Response;
 using SharedLibraryy.Services;
+using System;
 
 namespace RootedBack.Services
 {
@@ -28,14 +29,25 @@ namespace RootedBack.Services
                 if (exists != null)
                     return new ApiResponse { Success = false, Message = "Product already exists for this farmer." };
 
-                if (product.Specification != null)
-                    _context.Specifications.Add(product.Specification);
-
-                _context.Products.Add(product);
-                await _context.SaveChangesAsync();
+                await _context.Products.AddAsync(product);
                 try
                 {
-                    await _context.SaveChangesAsync();
+                    if (product.Specification != null)
+                    {
+                        await _context.Database.OpenConnectionAsync();
+
+                        await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.Specification ON");
+
+                        product.Specification.SpecificationId = _context.Specifications.Max(m => m.SpecificationId) + 1;
+
+                        await _context.SaveChangesAsync();
+
+                        await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.Specification OFF");
+                    }
+                    else
+                    {
+                        await _context.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateException ex)
                 {
@@ -47,6 +59,10 @@ namespace RootedBack.Services
                     }
 
                     throw; // You can comment this out if you just want to debug
+                }
+                finally
+                {
+                    await _context.Database.CloseConnectionAsync();
                 }
 
 
@@ -67,11 +83,28 @@ namespace RootedBack.Services
 
         public async Task<ApiResponse> DeleteProductAsync(int id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.Include(i => i.Specification).FirstOrDefaultAsync(f => f.ProductId == id);
             if (product == null)
                 return new ApiResponse { Success = false, Message = "Product not found." };
 
+            // Delete image if it exists
+            if (!string.IsNullOrEmpty(product.ImageUrl))
+            {
+                // Extract relative path starting from "images/"
+                var uri = new Uri(product.ImageUrl);
+                var relativePath = uri.AbsolutePath.TrimStart('/'); // e.g., "images/filename.png"
+
+                var wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+                var imagePath = Path.Combine(wwwRootPath, relativePath);
+
+                if (File.Exists(imagePath))
+                {
+                    File.Delete(imagePath);
+                }
+            }
+
             _context.Products.Remove(product);
+
             await _context.SaveChangesAsync();
 
             return new ApiResponse { Success = true, Message = "Product deleted successfully." };

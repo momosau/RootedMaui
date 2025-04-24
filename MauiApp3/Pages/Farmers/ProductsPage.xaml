@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.Farmers.ProductsPage"
+             Title="Products" BackgroundColor="WhiteSmoke">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="HasShadow" Value="True" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="Margin" Value="10,5" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="BackgroundColor" Value="#2E8B57" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <Label Text="Your Products"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" TextColor="Black" />
+
+        <!-- Product Collection -->
+        <CollectionView x:Name="ProductsView"
+                        SelectionMode="Single"
+                        HeightRequest="500"
+                        SelectionChanged="OnProductSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="White" BorderColor="#D3D3D3">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal" />
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#D0EFFF" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <HorizontalStackLayout Spacing="15">
+                            <Image Source="{Binding ImageUrl}"
+                                   HeightRequest="100"
+                                   WidthRequest="100"
+                                   Aspect="AspectFill"
+                                   BackgroundColor="#F0F0F0" />
+
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="Black" />
+                                <Label Text="{Binding Category}" TextColor="Gray" />
+                                <Label Text="{Binding Price, StringFormat='Price: {0:C}'}"
+                                       FontSize="14"
+                                       TextColor="#4CAF50" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Action Buttons -->
+        <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+            <Button Text="Add" Clicked="OnAddClicked" BackgroundColor="#2196F3" />
+            <Button Text="Update" Clicked="OnUpdateClicked" BackgroundColor="#FFC107" />
+            <Button Text="Delete" Clicked="OnDeleteClicked" BackgroundColor="#F44336" />
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>
