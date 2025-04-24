@@ -20,9 +20,9 @@ namespace MauiApp3
         {
             App.UserType = "farmer";
 
-            await Navigation.PushAsync(new Pages.Farmers.Chatbot());
+           await Navigation.PushAsync(new Pages.Farmers.SignUpFarmer());
           
-          Application.Current.MainPage = new FarmerShell();
+       //  Application.Current.MainPage = new FarmerShell();
 
 
         }
@@ -30,9 +30,9 @@ namespace MauiApp3
         private async void Consumerclicked(object sender, EventArgs e)
         {
             App.UserType = "consumer";
-          
 
-           Application.Current.MainPage = new ConsumerShell();
+          //  await Navigation.PushAsync(new Pages.Consumers.SignUpConsumer());
+            Application.Current.MainPage = new ConsumerShell();
 
 
         }

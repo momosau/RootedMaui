@@ -71,6 +71,7 @@ public partial class CategoriesPage : ContentPage
             await DisplayAlert("Error", "Failed to load categories: " + ex.Message, "OK");
         }
     }
+ 
 }
 
 

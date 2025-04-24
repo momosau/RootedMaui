@@ -7,7 +7,8 @@
              Shell.NavBarIsVisible="False"
              FlowDirection="RightToLeft">
 
-    <Grid VerticalOptions="Center" Padding="20">
+    <ScrollView>
+        <Grid VerticalOptions="Center" Padding="20">
         <VerticalStackLayout Spacing="45" 
                              HorizontalOptions="Center" 
                              VerticalOptions="Center">
@@ -136,4 +137,5 @@
                     Clicked="OnResendClicked"/>
         </VerticalStackLayout>
     </Grid>
+    </ScrollView>
 </ContentPage>

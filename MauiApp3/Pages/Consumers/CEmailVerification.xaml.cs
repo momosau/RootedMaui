@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using SharedLibraryy.Models;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Security;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -14,13 +15,24 @@ namespace MauiApp3.Pages.Consumers;
 public partial class CEmailVerification : ContentPage
 {
     private string _verificationCode;
-    private readonly HttpClient _httpClient = new HttpClient();
+    private readonly HttpClient _httpClient = new HttpClient(new HttpClientHandler
+    {
+        // needed when we're using IP address as the url, e.g. 10.0.2.2
+#if DEBUG
+        ServerCertificateCustomValidationCallback = (_, _, _, _) => true
+#endif // DEBUG
+    });
 
     private const string SmtpHost = "smtp.gmail.com";
     private const int SmtpPort = 587;
     private const string SmtpUsername = "reachout.rooted@gmail.com";
     private const string SmtpPassword = "xixw wprf fqdo tagy";
+    // private const string ApiUrl = "https://10.0.2.2:7168/api/Consumers";
+#if ANDROID
+  private const string ApiUrl = "https://10.0.2.2:7168/api/Consumers";
+#else
     private const string ApiUrl = "https://localhost:7168/api/Consumers";
+#endif
     private Consumer _consumer;
 
     public CEmailVerification(Consumer consumer)
@@ -49,7 +61,8 @@ public partial class CEmailVerification : ContentPage
             message.From.Add(new MailboxAddress("Rooted", SmtpUsername));
             message.To.Add(new MailboxAddress("", email));
             message.Subject = "رمز التحقق - تطبيق Rooted";
-            var imageUrl = "https://i.ibb.co/hRzTwb7j/rooted-logo.png";
+            var imageUrl = "https://i.ibb.co/ynCBKT1R/rooted-logo.png";
+
             var bodyBuilder = new BodyBuilder();
 
             // إنشاء معرف فريد للصورة المضمنة
@@ -183,7 +196,7 @@ public partial class CEmailVerification : ContentPage
             if (isSuccess)
             {
                 await DisplayAlert("نجاح", "تم تسجيل المستهلك بنجاح", "موافق");
-                await Shell.Current.Navigation.PushAsync(new ConsumerHomePage(_consumer));
+                await Shell.Current.Navigation.PushAsync(new SignInConsumer());
             }
             
             else

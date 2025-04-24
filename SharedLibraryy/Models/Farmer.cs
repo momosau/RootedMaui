@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SharedLibraryy.Models;
 
+[Table("Farmer")]
 public partial class Farmer
 {
     public int FarmerId { get; set; }
