@@ -8,9 +8,15 @@ namespace MauiApp3.Pages.Farmers;
 
 public partial class SignInFarmer : ContentPage
 {
+ 
 
     private bool PasswordVisible = false;
+#if ANDROID
+        private const string apiKey = "http://10.0.2.2:5140/api/Farmers/Login";
+#else
     private const string apiKey = "http://localhost:7168/api/Farmers/Login";
+#endif
+
     private readonly HttpClient _httpClient = new HttpClient();
 
     public SignInFarmer()
@@ -65,7 +71,7 @@ public partial class SignInFarmer : ContentPage
 public class FarmerLoginRequest
 {
 
-    public int FarmerId { get; set; }
+
     public string Email { get; set; }
     public string Password { get; set; }
 }

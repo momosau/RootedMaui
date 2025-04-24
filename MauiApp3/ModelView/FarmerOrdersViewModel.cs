@@ -22,25 +22,10 @@ namespace MauiApp3.ModelView;
                     OrderNumber = "123",
                     OrderDate = "2025-02-26",
                     TotalAmount = "150 SAR",
-                    Status = "Pending",
+                    Status = "منتهي",
                     StatusColor = Microsoft.Maui.Graphics.Colors.Orange
                 },
-                new Order
-                {
-                    OrderNumber = "124",
-                    OrderDate = "2025-02-25",
-                    TotalAmount = "200 SAR",
-                    Status = "Delivered",
-                    StatusColor = Microsoft.Maui.Graphics.Colors.Green
-                },
-                new Order
-                {
-                    OrderNumber = "125",
-                    OrderDate = "2025-02-24",
-                    TotalAmount = "50 SAR",
-                    Status = "Cancelled",
-                    StatusColor = Microsoft.Maui.Graphics.Colors.Red
-                }
+               
             };
         }
     }

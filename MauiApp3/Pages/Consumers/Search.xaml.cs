@@ -56,9 +56,7 @@ public partial class Search : ContentPage
         {
             _searchResults.Clear();
             return;
-        }
-
-        try
+        } try
         {
             var response = await _httpClient.GetStringAsync($"{ApiUrl}/api/Products/search?query={query}");
             var products = JsonConvert.DeserializeObject<List<ProductModel>>(response);
