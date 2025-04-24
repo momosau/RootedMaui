@@ -110,7 +110,7 @@ namespace RootedBack.Controllers
         public async Task<ActionResult<Consumer>> SignInConsumer(ConsumerLoginRequest request)
         {
             var consumer = await _context.Consumers
-            .FirstOrDefaultAsync(C => C.Email == request.Email && C.Password == request.Password);
+                .FirstOrDefaultAsync(c => c.Email == request.Email && c.Password == request.Password);
 
             if (consumer == null)
             {
@@ -118,10 +118,11 @@ namespace RootedBack.Controllers
             }
 
 
+
             return Ok(consumer);
         }
 
-
+      
 
         public class ConsumerLoginRequest
         {

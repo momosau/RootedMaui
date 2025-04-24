@@ -195,7 +195,7 @@ public partial class CEmailVerification : ContentPage
             if (isSuccess)
             {
                 await DisplayAlert("نجاح", "تم تسجيل المستهلك بنجاح", "موافق");
-                await Shell.Current.Navigation.PushAsync(new ConsumerHomePage(_consumer));
+                await Shell.Current.Navigation.PushAsync(new SignInConsumer());
             }
             
             else
