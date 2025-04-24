@@ -31,7 +31,7 @@ public partial class ProductsPage : ContentPage
         {
             var response = await _httpClient.GetStringAsync("https://localhost:7168/api/products");
             var products = JsonConvert.DeserializeObject<List<Product>>(response);
-            ProductsView.ItemsSource = products;
+            ProductsView.ItemsSource = products.Where(w => w.FarmerId==2).ToList();
         }
         catch (Exception ex)
         {
