@@ -20,7 +20,7 @@ namespace MauiApp3
         {
             App.UserType = "farmer";
 
-          // await Navigation.PushAsync(new Pages.Consumers.CForgotPassEmail()); 
+          // await Navigation.PushAsync(new Pages.Farmers.SignUpFarmer());
           
         Application.Current.MainPage = new FarmerShell();
 

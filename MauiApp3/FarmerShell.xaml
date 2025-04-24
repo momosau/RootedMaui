@@ -16,12 +16,12 @@
         <ShellContent 
 Title="Profile" 
 Icon="profile.png" 
-ContentTemplate="{DataTemplate local:FarmerOrders}" />
+ContentTemplate="{DataTemplate local:AccountPageFarmer}" />
 
         <ShellContent 
 Title="chatbot" 
 Icon="chatbot.png" 
-ContentTemplate="{DataTemplate local:AccountPageFarmer}" />
+ContentTemplate="{DataTemplate local:ProductsPage}" />
     </TabBar>
 
 

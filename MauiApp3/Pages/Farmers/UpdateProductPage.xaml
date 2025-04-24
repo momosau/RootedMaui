@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp3.Pages.Farmers.UpdateProductPage"
+             Title="Update Product">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Product Name -->
+            <Label Text="اسم المنتج" />
+            <Entry x:Name="NameEntry" Placeholder="Enter name" />
+
+            <!-- Price -->
+            <Label Text="سعر المنتج"/>
+            <Entry x:Name="PriceEntry" Placeholder="Enter price" Keyboard="Numeric" />
+
+            <!-- Quantity -->
+            <Label Text="الكمية" />
+            <Entry x:Name="QuantityEntry" Placeholder="Enter quantity" Keyboard="Numeric" />
+
+            <!-- Weight -->
+            <Label Text="الوزن" />
+            <Entry x:Name="WeightEntry" Placeholder="Enter weight" Keyboard="Numeric" />
+
+            <!-- Unit -->
+            <Label Text="الوحدة" />
+            <Entry x:Name="UnitEntry" Placeholder="Enter unit (e.g. kg, g, box)" />
+
+            <!-- Category Picker -->
+            <Label Text="التصنيف" />
+            <Picker x:Name="CategoryPicker" Title="Select category" ItemDisplayBinding="{Binding CategoryName}" />
+
+            <!-- Farmer Picker -->
+            <Label Text=" اسم المزارع " />
+            <Picker x:Name="FarmerPicker" Title="Select farmer" ItemDisplayBinding="{Binding FarmerName}" />
+
+            <!-- Description -->
+            <Label Text="الوصف" />
+            <Editor x:Name="DescriptionEditor" HeightRequest="100" Placeholder="Enter description" />
+
+            <!-- Specifications -->
+            <Label Text="الخصائص" FontAttributes="Bold" />
+
+            <!-- Organic Specification -->
+            <HorizontalStackLayout>
+                <CheckBox x:Name="IsOrganicCheckbox" />
+                <Label Text="عضوي" VerticalOptions="Center" />
+               
+            </HorizontalStackLayout>
+
+            <!-- GMO-Free Specification -->
+            <HorizontalStackLayout>
+                <CheckBox x:Name="IsGmofreeCheckbox" />
+                <Label Text="غير معدل وراثيا" VerticalOptions="Center" />
+              
+            </HorizontalStackLayout>
+
+            <!-- Hydroponic Specification -->
+            <HorizontalStackLayout>
+                <CheckBox x:Name="IsHydroponicallyGrownCheckbox" />
+                <Label Text="مزروع مائيا" VerticalOptions="Center" />
+           
+            </HorizontalStackLayout>
+
+            <!-- Pesticide-Free Specification -->
+            <HorizontalStackLayout>
+                <CheckBox x:Name="IsPesticideFreeCheckbox" />
+                <Label Text="خالي من المبيدات الحشرية" VerticalOptions="Center" />
+        
+            </HorizontalStackLayout>
+
+            <!-- Local Specification -->
+            <HorizontalStackLayout>
+                <CheckBox x:Name="IsLocalCheckbox" />
+                <Label Text="محلي" VerticalOptions="Center" />
+             
+            </HorizontalStackLayout>
+
+            <!-- Update Product Button -->
+            <Button Text="تعديل المنتج" Clicked="OnUpdateProductClicked" BackgroundColor="DarkGreen" TextColor="White" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
