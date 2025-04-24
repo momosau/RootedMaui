@@ -21,7 +21,7 @@ ContentTemplate="{DataTemplate local:AccountPageFarmer}" />
         <ShellContent 
 Title="chatbot" 
 Icon="chatbot.png" 
-ContentTemplate="{DataTemplate local:AddProductsFarmer}" />
+ContentTemplate="{DataTemplate local:ProductsPage}" />
     </TabBar>
 
 

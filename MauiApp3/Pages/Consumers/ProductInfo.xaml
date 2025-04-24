@@ -36,23 +36,45 @@
                     <Label Text="/" TextColor="Black" FontSize="Medium"></Label>
                     <Label Text="{Binding SelectedProduct.Price, StringFormat='{0} ريال'}" FontSize="Medium" TextColor="Black"/>
                 </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                 <!--  <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding Organic, Converter={StaticResource SpecConverter}, ConverterParameter}" />
 
-                    <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding PesticideFree, Converter={StaticResource SpecConverter}, ConverterParameter=" />
+                    <ScrollView Orientation="Horizontal">
+                        <HorizontalStackLayout 
+Spacing="10" 
+VerticalOptions="Center" 
+HorizontalOptions="Start"
+Margin="0,5,0,0">
 
-                    <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding FairTrade, Converter={StaticResource SpecConverter}, ConverterParameter=fair_trade}" />
+                            <Image Source="organic.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding SelectedProduct.Specification.IsOrganic}" />
 
-                    <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding LocallyGrown, Converter={StaticResource SpecConverter}, ConverterParameter=local}" />
+                            <Image Source="gmofreel.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding SelectedProduct.Specification.IsGmofree}" />
 
-                    <Image WidthRequest="32" HeightRequest="32"
-         Source="{Binding NonGMO, Converter={StaticResource SpecConverter}, ConverterParameter=non_gmo}" />
-               --> </HorizontalStackLayout>
-            </VerticalStackLayout>
+                            <Image Source="hydro.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding SelectedProduct.Specification.IsHydroponicallyGrown}" />
+
+                            <Image Source="locallogo.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding SelectedProduct.Specification.IsLocal}" />
+
+                            <Image Source="pestfreel.png"
+       WidthRequest="30"
+       HeightRequest="30"
+       IsVisible="{Binding SelectedProduct.Specification.IsPesticideFree}" />
+
+                        </HorizontalStackLayout>
+                    </ScrollView>
+
+
+
+                </VerticalStackLayout>
         </Frame>
         <Label Text="التقييمات" FontSize="18" FontAttributes="Bold" Margin="10,20,10,10" />
         <CollectionView ItemsSource="{Binding Reviews}" Margin="10">
