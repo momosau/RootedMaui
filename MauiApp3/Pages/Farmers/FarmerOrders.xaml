@@ -5,7 +5,8 @@
              Title="الطلبات" 
              FlowDirection="RightToLeft"
          
-             BackgroundColor="#EAE9E2">
+             BackgroundColor="#E7E9E4" 
+  >
 
     <VerticalStackLayout Padding="20">
 
@@ -29,32 +30,44 @@
                            BackgroundColor="#CCD3C4">
 
                         <VerticalStackLayout Spacing="5">
-                           
+
+                            <Label Text="رقم الطلب:" 
+                                   FontAttributes="Bold" 
+                                   FontSize="12"
+                                   TextColor="Black"/>
+
+
                             <Label Text="{Binding OrderNumber}" 
                                    FontAttributes="Bold" 
-                                   FontSize="16"
+                                   FontSize="12"
                                    TextColor="#0E3230"/>
 
-                            
+                            <Label Text="التاريخ:" 
+       FontAttributes="Bold" 
+       FontSize="12"
+         TextColor="Black"/>
                             <Label Text="{Binding OrderDate}" 
-                                   FontSize="14" 
-                                 
-                                   TextColor="#0E3230"/>
+                                   FontSize="12" 
+                                  TextColor="#0E3230"
+                                     />
 
-                            
+                            <Label Text="الاجمالي:" 
+       FontAttributes="Bold" 
+       FontSize="12"
+       TextColor="Black"/>
                             <Label Text="{Binding TotalAmount}" 
                                    FontSize="14"
                                     TextColor="#0E3230"/>
 
                             <!-- Order Status with Background Color -->
-                            <Frame CornerRadius="10" 
-                                   BackgroundColor="{Binding StatusColor}" 
-                                   Padding="5" 
-                                   HorizontalOptions="Start">
-                                <Label Text="{Binding Status}" 
+                            <Label Text="الحالة:" 
+                            FontAttributes="Bold" 
+                            FontSize="12"
+                            TextColor="Black"/>
+                                    <Label Text="{Binding Status}" 
                                        FontSize="12"
                                          TextColor="#0E3230"/>
-                            </Frame>
+                           
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>

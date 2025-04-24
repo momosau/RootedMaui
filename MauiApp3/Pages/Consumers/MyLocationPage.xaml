@@ -25,22 +25,7 @@
 
         <HorizontalStackLayout HorizontalOptions="Center" 
                                Spacing="15">
-            <Button Text=" استلام من المزرعة" 
-                    BackgroundColor="White" 
-                    TextColor="Black" 
-                    FontSize="14" 
-                    FontAttributes="Bold" 
-                    FontFamily="FontArabic" 
-                    CornerRadius="10" 
-                    WidthRequest="200"
-                    HeightRequest="50"
-                    Padding="10,5">
-                <Button.ImageSource
-                    >
-                    <FileImageSource File="farm.png" />
-                    
-                </Button.ImageSource>
-            </Button>
+          
 
             <Button Text=" توصيل للمنزل " 
                     BackgroundColor="White" 
@@ -91,15 +76,7 @@ HeightRequest="50"
             </Grid>
         </Frame>
 
-        <Button Text="+ إضافة موقع جديد " 
-                BackgroundColor="White" 
-                TextColor="Black" 
-                FontSize="16" 
-                FontAttributes="Bold" 
-                FontFamily="FontArabic" 
-                CornerRadius="10" 
-                Clicked="addLoc" 
-                HeightRequest="50"/>
+       
         <Button Text="التالي
  " 
 BackgroundColor="#3E6F41" 

@@ -7,7 +7,11 @@ namespace MauiApp3.Pages.Consumers;
 public partial class SignInConsumer : ContentPage
 {
     private bool PasswordVisible = false;
-    private const string apiKey = "https://localhost:7168/api/Consumer/Login";
+#if ANDROID
+        private const string apiKey = "http://10.0.2.2:5140/api/Consumers/Login";
+#else
+    private const string apiKey = "http://localhost:7168/api/Consumers/Login";
+#endif
     private readonly HttpClient _httpClient = new HttpClient();
     public ObservableCollection<Consumers> Consumer { get; set; } = new ObservableCollection<Consumers>();
 
