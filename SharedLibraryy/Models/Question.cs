@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace SharedLibraryy.Models;
 
-[Table("Question")]
+[Table("Questions")]
 public partial class Question
 {
     [Key]
@@ -25,4 +22,11 @@ public partial class Question
 
     [StringLength(250)]
     public string Email { get; set; } = null!;
+
+    [NotMapped]
+    public string Sender =>
+    FarmerId.HasValue ? $"مزارع #{FarmerId}" :
+    ConsumerId.HasValue ? $"مستهلك #{ConsumerId}" :
+    "غير معروف";
+
 }

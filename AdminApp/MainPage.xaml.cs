@@ -31,7 +31,7 @@ namespace AdminApp
         {
             var httpClient = new HttpClient();
             var viewModel = new AdminApprovalViewModel(new FarmerApilicationService(httpClient)); 
-            await Navigation.PushAsync(new AdminApproval(viewModel));
+            await Navigation.PushAsync(new QuestionPage());
 
 
         }

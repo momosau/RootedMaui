@@ -7,6 +7,9 @@ namespace AdminApp
         {
             InitializeComponent();
             Routing.RegisterRoute("AdminApproval", typeof(AdminApproval));
+            Routing.RegisterRoute("FarmerInfo", typeof(FarmerInfo));
+            Routing.RegisterRoute("QuestionPage", typeof(QuestionPage));
+
 
         }
     }

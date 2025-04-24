@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AdminApp.Pages.QuestionPage"
+             xmlns:Models="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
+                xmlns:ViewModel="clr-namespace:AdminApp.ViewModel"
+             x:DataType="ViewModel:QuestionViewModel"
              FlowDirection="RightToLeft"
              Title="QuestionPage">
     <VerticalStackLayout Padding="10">
@@ -12,14 +15,14 @@
 
         <CollectionView ItemsSource="{Binding Questions}">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="SharedLibraryy.Models.Question">
+                <DataTemplate x:DataType="Models:Question">
                     <Frame Margin="5" Padding="10" BorderColor="Gray" CornerRadius="10">
                         <VerticalStackLayout>
                             <Label Text="رقم السؤال:" FontAttributes="Bold" />
-                            <Label Text="{Binding QuestionID}" />
+                            <Label Text="{Binding QuestionId}" />
 
                             <Label Text="السؤال:" FontAttributes="Bold" />
-                            <Label Text="{Binding QuestionText}" />
+                            <Label Text="{Binding Question1}" />
 
                             <Label Text="البريد الإلكتروني:" FontAttributes="Bold" />
                             <Label Text="{Binding Email}" />
