@@ -29,10 +29,10 @@ public partial class Search : ContentPage
         if (selectedProduct == null)
             return;
 
-        // Optional: Clear the selection so tapping again works
+
         SearchResultsCollectionView.SelectedItem = null;
 
-        // Convert ProductModel to your full Product class or fetch full data
+        // Converting the temporary model to the actual Product Model used
         var product = new Product
         {
             ProductId = selectedProduct.productId,
@@ -41,13 +41,11 @@ public partial class Search : ContentPage
             Price = selectedProduct.price,
             Unit = selectedProduct.Unit,
             Weight=selectedProduct.Weight,
-        Quantity=selectedProduct.Quantity,
-          FarmerId = selectedProduct.FarmerId,
-            Farmer = selectedProduct.Farmer
-            // add other properties if needed
-        };
+            Quantity=selectedProduct.Quantity,
+            FarmerId = selectedProduct.FarmerId,
+            Farmer = selectedProduct.Farmer};
 
-
+        // open the product info for that selected searched item
         await Navigation.PushAsync(new ProductInfo(product, new ProductService(_httpClient)));
     }
 

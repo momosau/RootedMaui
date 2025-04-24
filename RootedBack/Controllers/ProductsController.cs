@@ -82,7 +82,7 @@ namespace RootedBack.Controllers
                 return Conflict(response.Message);  // 409 Conflict
             }
 
-            return BadRequest(response.Message);  // 400 Bad Request
+            return BadRequest(response.Message);  
         }
 
         [HttpGet("search")]

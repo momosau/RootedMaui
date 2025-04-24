@@ -10,7 +10,7 @@ namespace MauiApp3
             InitializeComponent();
             Routing.RegisterRoute("AboutUsPage", typeof(Pages.Farmers.AboutUsPage));
             Routing.RegisterRoute("AccountPageFarmer", typeof(Pages.Farmers.AccountPageFarmer));
-            Routing.RegisterRoute("SignInFarmer", typeof(SignInFarmer));
+            Routing.RegisterRoute("SignInFarmer", typeof(Pages.Farmers.SignInFarmer));
             Routing.RegisterRoute("SplashFarmer", typeof(SplashFarmer));
             Routing.RegisterRoute("AddProductsFarmer", typeof(Pages.Farmers.AddProductsFarmer));
 
