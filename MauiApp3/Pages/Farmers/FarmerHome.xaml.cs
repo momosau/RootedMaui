@@ -121,7 +121,7 @@ namespace MauiApp3.Pages.Farmers
         private async void EditProductsButton(object sender, EventArgs e)
         {
 
-            await Shell.Current.GoToAsync(nameof(Pages.Farmers.AddProductsFarmer));
+            await Shell.Current.GoToAsync(nameof(Pages.Farmers.ProductsPage));
         }
 
     }

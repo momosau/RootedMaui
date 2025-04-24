@@ -9,7 +9,7 @@
 
             <!-- IMAGE -->
             <Image x:Name="SelectedImage" HeightRequest="150" Aspect="AspectFill" />
-            <Button Text="اختر صورة" Clicked="OnPickImageClicked" />
+            <Button Text="اختر صورة" Clicked="OnPickImageClicked" BackgroundColor="Green"/>
 
             <!-- TEXT FIELDS -->
             <Label Text="اسم المنتج" FontAttributes="Bold" />

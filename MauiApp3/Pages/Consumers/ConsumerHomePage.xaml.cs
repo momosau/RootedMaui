@@ -15,8 +15,10 @@ namespace MauiApp3.Pages.Consumers;
     public partial class ConsumerHomePage : ContentPage
     {
         private readonly HttpClient _httpClient = new HttpClient();
-        private const string BaseUrl = "https://localhost:7168/api/";// تعديل
-        private Consumer _consumer;
+        private readonly string BaseUrl = DeviceInfo.Platform == DevicePlatform.Android
+? "http://10.0.2.2:5140/"
+: "https://localhost:7168/";
+    private Consumer _consumer;
 
 
         public ObservableCollection<LFarm> Farmers { get; set; } = new ObservableCollection<LFarm>();
@@ -52,7 +54,7 @@ namespace MauiApp3.Pages.Consumers;
          {
              try
              {
-                 string url = "https://localhost:7168/api/TopFarmer/top10";
+                 string url = $"{BaseUrl}api/TopFarmer/top10";
             var response = await _httpClient.GetStringAsync(url);
                  var farmers = JsonSerializer.Deserialize<List<LFarm>>(response, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
@@ -96,7 +98,7 @@ namespace MauiApp3.Pages.Consumers;
          {
              try
              {
-                 string url = "https://localhost:7168/api/Categories";
+                 string url = $"{BaseUrl}api/Categories";
                  var response = await _httpClient.GetStringAsync(url);
                  var categories = JsonSerializer.Deserialize<List<Category>>(response, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 

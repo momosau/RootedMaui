@@ -11,7 +11,7 @@
     <TabBar>
         <ShellContent 
      Title="Home" 
-     Icon="category.png" 
+     Icon="home.png" 
      ContentTemplate="{DataTemplate local:FarmerHome}" />
         <ShellContent 
 Title="Profile" 

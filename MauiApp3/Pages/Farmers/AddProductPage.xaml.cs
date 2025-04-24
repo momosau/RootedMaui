@@ -9,6 +9,9 @@ public partial class AddProductPage : ContentPage
 {
     private readonly HttpClient _httpClient = new();
     private FileResult? _pickedImage;
+    private readonly string ApiUrl = DeviceInfo.Platform == DevicePlatform.Android
+     ? "http://10.0.2.2:5140/"
+     : "https://localhost:7168/";
 
     public AddProductPage()
     {
@@ -18,11 +21,11 @@ public partial class AddProductPage : ContentPage
 
     private async void LoadDropdowns()
     {
-        var categories = await _httpClient.GetFromJsonAsync<List<Category>>("https://localhost:7168/api/categories");
+        var categories = await _httpClient.GetFromJsonAsync<List<Category>>($"{ApiUrl}api/categories");
         CategoryPicker.ItemsSource = categories;
         CategoryPicker.ItemDisplayBinding = new Binding("CategoryName");
 
-        var farmers = await _httpClient.GetFromJsonAsync<List<Farmer>>("https://localhost:7168/api/farmers");
+        var farmers = await _httpClient.GetFromJsonAsync<List<Farmer>>($"{ApiUrl}api/farmers");
         FarmerPicker.ItemsSource = farmers;
         FarmerPicker.ItemDisplayBinding = new Binding("Name");
     }
@@ -72,7 +75,7 @@ public partial class AddProductPage : ContentPage
         var json = JsonConvert.SerializeObject(product);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        var response = await _httpClient.PostAsync("https://localhost:7168/api/products", content);
+        var response = await _httpClient.PostAsync($"{ApiUrl}api/products", content);
 
         if (response.IsSuccessStatusCode)
         {
@@ -94,7 +97,7 @@ public partial class AddProductPage : ContentPage
         var content = new MultipartFormDataContent();
         content.Add(new StreamContent(stream), "file", pickedImage.FileName);
 
-        var response = await _httpClient.PostAsync("https://localhost:7168/api/upload/image", content);
+        var response = await _httpClient.PostAsync($"{ApiUrl}api/upload/image", content);
 
         if (response.IsSuccessStatusCode)
         {

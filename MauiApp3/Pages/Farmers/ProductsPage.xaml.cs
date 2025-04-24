@@ -8,6 +8,9 @@ public partial class ProductsPage : ContentPage
 {
     private readonly HttpClient _httpClient = new();
     private Product _selectedProduct = new();
+    private readonly string ApiUrl = DeviceInfo.Platform == DevicePlatform.Android
+? "http://10.0.2.2:5140/"
+: "https://localhost:7168/";
 
     public ProductsPage()
     {
@@ -29,7 +32,7 @@ public partial class ProductsPage : ContentPage
     {
         try
         {
-            var response = await _httpClient.GetStringAsync("https://localhost:7168/api/products");
+            var response = await _httpClient.GetStringAsync($"{ApiUrl}api/products");
             var products = JsonConvert.DeserializeObject<List<Product>>(response);
             ProductsView.ItemsSource = products.Where(w => w.FarmerId==2).ToList();
         }
@@ -72,7 +75,7 @@ public partial class ProductsPage : ContentPage
 
         try
         {
-            var response = await _httpClient.DeleteAsync($"https://localhost:7168/api/products/{_selectedProduct.ProductId}");
+            var response = await _httpClient.DeleteAsync($"{ApiUrl}api/products/{_selectedProduct.ProductId}");
             if (response.IsSuccessStatusCode)
             {
                 await DisplayAlert("تم حذف المنتج", "تم حذف المنتج بنجاح", "حسنا");

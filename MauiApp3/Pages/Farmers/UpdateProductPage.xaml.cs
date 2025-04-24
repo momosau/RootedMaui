@@ -13,7 +13,9 @@ namespace MauiApp3.Pages.Farmers
         private readonly HttpClient _httpClient = new();
         private Product _product = new();
         private FileResult? _pickedImage;
-
+        private readonly string ApiUrl = DeviceInfo.Platform == DevicePlatform.Android
+? "http://10.0.2.2:5140/"
+: "https://localhost:7168/";
         public UpdateProductPage()
         {
             InitializeComponent();
@@ -27,11 +29,11 @@ namespace MauiApp3.Pages.Farmers
 
         private async Task LoadDropdowns()
         {
-            var categories = await _httpClient.GetFromJsonAsync<List<Category>>("https://localhost:7168/api/categories");
+            var categories = await _httpClient.GetFromJsonAsync<List<Category>>($"{ApiUrl}api/categories");
             CategoryPicker.ItemsSource = categories;
             CategoryPicker.ItemDisplayBinding = new Binding("CategoryName");
 
-            var farmers = await _httpClient.GetFromJsonAsync<List<Farmer>>("https://localhost:7168/api/farmers");
+            var farmers = await _httpClient.GetFromJsonAsync<List<Farmer>>($"{ApiUrl}api/farmers");
             FarmerPicker.ItemsSource = farmers;
             FarmerPicker.ItemDisplayBinding = new Binding("Name");
         }
@@ -40,7 +42,7 @@ namespace MauiApp3.Pages.Farmers
         {
             try
             {
-                var json = await _httpClient.GetStringAsync($"https://localhost:7168/api/products/{id}");
+                var json = await _httpClient.GetStringAsync($"{ApiUrl}api/products/{id}");
                 _product = JsonConvert.DeserializeObject<Product>(json)!;
 
                 // Load dropdowns first so ItemsSource is ready before setting SelectedItem
