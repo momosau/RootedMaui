@@ -2,56 +2,66 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp3.Pages.Farmers.AddProductPage"
-             Title="AddProductPage">
+             Title="AddProductPage"
+             FlowDirection="RightToLeft">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="10">
 
             <!-- IMAGE -->
             <Image x:Name="SelectedImage" HeightRequest="150" Aspect="AspectFill" />
-            <Button Text="Pick Image" Clicked="OnPickImageClicked" />
+            <Button Text="اختر صورة" Clicked="OnPickImageClicked" />
 
             <!-- TEXT FIELDS -->
+            <Label Text="اسم المنتج" FontAttributes="Bold" />
             <Entry x:Name="NameEntry" Placeholder="Name" />
+            <Label Text=" سعرالمنتج" FontAttributes="Bold" />
             <Entry x:Name="PriceEntry" Placeholder="Price" Keyboard="Numeric" />
+            <Label Text="الكمية" FontAttributes="Bold" />
             <Entry x:Name="QuantityEntry" Placeholder="Quantity" Keyboard="Numeric" />
+            <Label Text="الوزن" FontAttributes="Bold" />
             <Entry x:Name="WeightEntry" Placeholder="Weight" Keyboard="Numeric" />
+            <Label Text="الوحدة" FontAttributes="Bold" />
             <Entry x:Name="UnitEntry" Placeholder="Unit" />
+            <Label Text="الوصف" FontAttributes="Bold" />
             <Editor x:Name="DescriptionEditor" Placeholder="Description" HeightRequest="80" />
 
             <!-- DROPDOWNS -->
+            <Label Text="الفئة" FontAttributes="Bold" />
             <Picker x:Name="CategoryPicker" Title="Select Category" />
+            <Label Text="المزارع" FontAttributes="Bold" />
             <Picker x:Name="FarmerPicker" Title="Select Farmer" />
 
             <!-- CHECKBOXES -->
-            <Label Text="Specifications:" FontAttributes="Bold" />
+            
+            <Label Text="الخصائص" FontAttributes="Bold" />
 
             <HorizontalStackLayout Spacing="10">
                 <CheckBox x:Name="IsOrganicCheckbox" />
-                <Label Text="Is Organic" VerticalOptions="Center" />
+                <Label Text="عضوي" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Spacing="10">
                 <CheckBox x:Name="IsGmofreeCheckbox" />
-                <Label Text="Is GMO-free" VerticalOptions="Center" />
+                <Label Text="خالي من التعديل الوراثي" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Spacing="10">
                 <CheckBox x:Name="IsHydroponicallyGrownCheckbox" />
-                <Label Text="Is Hydroponically Grown" VerticalOptions="Center" />
+                <Label Text="مزوع مائيا" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Spacing="10">
                 <CheckBox x:Name="IsPesticideFreeCheckbox" />
-                <Label Text="Is Pesticide Free" VerticalOptions="Center" />
+                <Label Text="خالي من المبيدات الحشرية" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Spacing="10">
                 <CheckBox x:Name="IsLocalCheckbox" />
-                <Label Text="Is Local" VerticalOptions="Center" />
+                <Label Text="محلي" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
 
-            <Button Text="Add Product" Clicked="OnAddProductClicked" />
+            <Button Text="حفظ المنتج" Clicked="OnAddProductClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

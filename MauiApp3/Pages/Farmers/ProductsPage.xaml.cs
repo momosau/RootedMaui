@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SharedLibraryy.Models;
 using System.Diagnostics;
 
@@ -67,7 +67,7 @@ public partial class ProductsPage : ContentPage
     {
         if (_selectedProduct == null) return;
 
-        var confirm = await DisplayAlert("Confirm", "Delete this product?", "Yes", "No");
+        var confirm = await DisplayAlert("تأكيد", "هل تريد حذف المنتج", "نعم", "لا");
         if (!confirm) return;
 
         try
@@ -75,17 +75,17 @@ public partial class ProductsPage : ContentPage
             var response = await _httpClient.DeleteAsync($"https://localhost:7168/api/products/{_selectedProduct.ProductId}");
             if (response.IsSuccessStatusCode)
             {
-                await DisplayAlert("Deleted", "Product deleted successfully.", "OK");
+                await DisplayAlert("تم حذف المنتج", "تم حذف المنتج بنجاح", "حسنا");
                 LoadProducts();
             }
             else
             {
-                await DisplayAlert("Error", "Failed to delete product.", "OK");
+                await DisplayAlert("خطأ", "لم يتم حذف المنتج", "حسنا");
             }
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", ex.Message, "OK");
+            await DisplayAlert("خطأ", ex.Message, "حسنا");
         }
     }
 }

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp3.Pages.Farmers.ProductsPage"
-             Title="Products" BackgroundColor="WhiteSmoke">
+             Title="Products" BackgroundColor="WhiteSmoke"
+             FlowDirection="RightToLeft">
 
     <ContentPage.Resources>
         <Style TargetType="Frame">
@@ -22,7 +23,7 @@
 
     <VerticalStackLayout Padding="20" Spacing="20">
 
-        <Label Text="Your Products"
+        <Label Text="منتجاتك"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalOptions="Center" TextColor="Black" />
@@ -68,9 +69,9 @@
 
         <!-- Action Buttons -->
         <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
-            <Button Text="Add" Clicked="OnAddClicked" BackgroundColor="#2196F3" />
-            <Button Text="Update" Clicked="OnUpdateClicked" BackgroundColor="#FFC107" />
-            <Button Text="Delete" Clicked="OnDeleteClicked" BackgroundColor="#F44336" />
+            <Button Text="اضافة منتج" Clicked="OnAddClicked" BackgroundColor="#2196F3" />
+            <Button Text="تعديل منتج" Clicked="OnUpdateClicked" BackgroundColor="#FFC107" />
+            <Button Text="حذف منتج" Clicked="OnDeleteClicked" BackgroundColor="#F44336" />
         </HorizontalStackLayout>
 
     </VerticalStackLayout>
