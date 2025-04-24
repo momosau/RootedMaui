@@ -195,7 +195,7 @@ namespace MauiApp3.Pages.Farmers
                 if (isSuccess)
                 {
                     await DisplayAlert("نجاح", "تم تسجيل المزارع بنجاح", "موافق");
-                    await Shell.Current.Navigation.PushAsync(new SplashFarmerFinal());
+                    await Navigation.PushAsync(new SplashFarmerFinal());
                 }
 
                 else
