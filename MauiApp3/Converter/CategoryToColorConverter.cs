@@ -1,33 +1,25 @@
-﻿using SharedLibraryy.Models;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MauiApp3.ModelView;
+﻿using MauiApp3.ModelView;
 using MauiApp3.Pages.Consumers;
+using SharedLibraryy.Models;
+using System.Globalization;
 
 namespace MauiApp3.Converter
 {
     public class CategoryToColorConverter : IValueConverter
     {
 
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int categoryId && parameter is int selectedCategoryId)
-            {
-                // Debug log to check if the values are being passed correctly
-                Console.WriteLine($"CategoryId: {categoryId}, SelectedCategoryId: {selectedCategoryId}");
+            var categoryId = (int)value;
+            var productPage = parameter as ContentPage;
+            var viewModel = productPage?.BindingContext as MauiApp3.ModelView.ProductPageViewModel;
 
-                // Return the color based on the comparison
-                return categoryId == selectedCategoryId ? Colors.DarkGreen : Colors.White;
-            }
+            if (viewModel == null)
+                return Colors.White; // default color
 
-            // If any issue with the input values, return default color
-            return Colors.White;
+            return categoryId == viewModel.SelectedCategoryId ? Colors.LightGreen : Colors.White;
         }
-
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
@@ -35,4 +27,4 @@ namespace MauiApp3.Converter
     }
 }
 
-    
+

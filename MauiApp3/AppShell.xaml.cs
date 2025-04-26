@@ -59,6 +59,9 @@ namespace MauiApp3
             Routing.RegisterRoute("ContactUsPageC", typeof(Pages.Consumers.ContactUsPageC));
             Routing.RegisterRoute("PrivacyPolicyPageC", typeof(Pages.Consumers.PrivacyPolicyPageC));
             Routing.RegisterRoute("Search", typeof(Pages.Consumers.Search));
+            Routing.RegisterRoute("ProductsPage", typeof(Pages.Farmers.ProductsPage));
+            Routing.RegisterRoute("AddProductPage", typeof(Pages.Farmers.AddProductPage));
+            Routing.RegisterRoute("UpdateProductPage", typeof(Pages.Farmers.UpdateProductPage));
 
 
 

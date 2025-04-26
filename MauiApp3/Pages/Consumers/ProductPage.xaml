@@ -26,17 +26,18 @@
             <!-- Category CollectionView -->
             <CollectionView ItemsSource="{Binding Categories}">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal" Span="2"/>
+                    <GridItemsLayout Orientation="Horizontal" Span="1"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="Models:Category">
-                   <Button Text="{Binding CategoryName}" 
-        Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ChangeCategoryCommand}" 
-        CommandParameter="{Binding CategoryId}" 
-        BackgroundColor="{Binding CategoryId, 
-                               Converter={StaticResource CategoryToColorConverter}, 
-                               ConverterParameter={Binding Source={x:Reference ProductPageView}, Path=BindingContext.SelectedCategoryId}}"/>
-
+                        <Button  
+                TextColor="Black" 
+                Text="{Binding CategoryName}" 
+                Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ChangeCategoryCommand}" 
+                CommandParameter="{Binding CategoryId}" 
+                BackgroundColor="{Binding CategoryId, 
+                    Converter={StaticResource CategoryToColorConverter}, 
+                    ConverterParameter={x:Reference ProductPageView}}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -48,20 +49,23 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="Models:Product">
-                        <Frame CornerRadius="12" Padding="15" Margin="10" BackgroundColor="White">
+                        <Frame CornerRadius="12" Padding="20" Margin="20" BackgroundColor="White">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference ProductPageView}, Path=BindingContext.ViewProductCommand}"
                               CommandParameter="{Binding}"/>
                             </Frame.GestureRecognizers>
                             <VerticalStackLayout Spacing="10">
-                                <Image WidthRequest="250" HeightRequest="250" Source="{Binding ImageUrl}" 
+                                <Image WidthRequest="120" HeightRequest="120" Source="{Binding ImageUrl}" 
                Aspect="AspectFill" HorizontalOptions="Center" BackgroundColor="LightGray"/>
                                 <HorizontalStackLayout Spacing="5" HorizontalOptions="FillAndExpand">
                                     <Label Text="{Binding Name}" FontSize="Medium" TextColor="Black"/>
+                                   
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
                                     <Label Text="{Binding Weight}" FontSize="20" TextColor="#34495e"/>
                                     <Label Text="{Binding Unit}" FontSize="20" TextColor="#34495e"/>
                                 </HorizontalStackLayout>
-                                <HorizontalStackLayout Spacing="300" VerticalOptions="Center" HorizontalOptions="Start">
+                                <HorizontalStackLayout Spacing="5" VerticalOptions="Center" HorizontalOptions="Start">
                                     <VerticalStackLayout>
                                         <Label Text="{Binding Price, StringFormat='{0} ريال'}" FontSize="22" 
                    HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
@@ -70,19 +74,23 @@
                                     <Button 
     Text="Add to Cart"
     Command="{Binding Source={RelativeSource AncestorType={x:Type ModelView:ProductPageViewModel}}, Path=AddToCartCommand}"
-    CommandParameter="{Binding .}">
+    CommandParameter="{Binding .}" TextColor="White" WidthRequest="40" HeightRequest="40" CornerRadius="50" >
                                         <Button.Triggers>
                                             <!-- When already in cart -->
                                             <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="True">
-                                                <Setter Property="Text" Value="✔ تمت الإضافة" />
+                                                <Setter Property="Text" Value="✓" />
                                                 <Setter Property="BackgroundColor" Value="LightGreen" />
+                                                <Setter Property="TextColor" Value="White"/>
                                                 <Setter Property="IsEnabled" Value="False" />
                                             </DataTrigger>
 
                                             <!-- When not in cart -->
                                             <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="False">
-                                                <Setter Property="Text" Value="➕ أضف إلى السلة" />
-                                                <Setter Property="BackgroundColor" Value="LightGray" />
+                                                <Setter Property="Text" Value="+"  />
+                                                <Setter Property="BackgroundColor" Value="LightGreen" />
+                                                <Setter Property="TextColor" Value="White"/>
+                                                <Setter Property="FontSize" Value="Medium"/>
+                                                <Setter Property="FontAttributes" Value="Bold"/>
                                                 <Setter Property="IsEnabled" Value="True" />
                                             </DataTrigger>
                                         </Button.Triggers>

@@ -182,7 +182,9 @@ public class LFarm
          public string ImageUrl { get; set; }
          public string review { get; set; }
          public double AvgRating { get; set; }
-     }
+ 
+   
+}
 
      public class Category
      {

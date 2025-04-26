@@ -15,7 +15,9 @@ public partial class FarmerShell : Shell
         Routing.RegisterRoute("AddProductsFarmer", typeof(Pages.Farmers.AddProductsFarmer));
 
         Routing.RegisterRoute("FarmerOrders", typeof(Pages.Farmers.FarmerOrders));
-
+        Routing.RegisterRoute("ProductsPage", typeof(Pages.Farmers.ProductsPage));
+        Routing.RegisterRoute("AddProductPage", typeof(Pages.Farmers.AddProductPage));
+        Routing.RegisterRoute("UpdateProductPage", typeof(Pages.Farmers.UpdateProductPage));
 
 
 

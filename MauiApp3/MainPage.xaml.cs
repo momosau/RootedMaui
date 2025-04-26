@@ -20,9 +20,9 @@ namespace MauiApp3
         {
             App.UserType = "farmer";
 
-           await Navigation.PushAsync(new Pages.Farmers.SignUpFarmer());
+         //  await Navigation.PushAsync(new Pages.Farmers.SignUpFarmer());
           
-       // Application.Current.MainPage = new FarmerShell();
+       Application.Current.MainPage = new FarmerShell();
 
 
         }

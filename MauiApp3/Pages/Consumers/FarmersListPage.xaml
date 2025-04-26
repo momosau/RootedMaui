@@ -51,37 +51,37 @@
                                 <!-- Local -->
                                 <Image 
         Source="locallogo.png"
-        WidthRequest="40"
-        HeightRequest="40"
+        WidthRequest="30"
+        HeightRequest="30"
         IsVisible="{Binding Specification.IsLocal}"
         Margin="5" />
 
                             
                                 <Image 
         Source="organic.png"
-        WidthRequest="40"
-        HeightRequest="40"
+        WidthRequest="30"
+        HeightRequest="30"
         IsVisible="{Binding Specification.IsOrganic}"
         Margin="5" />
 
                                 <Image 
         Source="gmofreel.png"
-        WidthRequest="40"
-        HeightRequest="40"
+        WidthRequest="30"
+        HeightRequest="30"
         IsVisible="{Binding Specification.IsGmofree}"
         Margin="5" />
 
                                 <Image 
         Source="pestfreel.png"
-        WidthRequest="40"
-        HeightRequest="40"
+        WidthRequest="30"
+        HeightRequest="30"
         IsVisible="{Binding Specification.IsPesticideFree}"
         Margin="5" />
 
                                 <Image 
         Source="hydro.png"
-        WidthRequest="40"
-        HeightRequest="40"
+        WidthRequest="30"
+        HeightRequest="30"
         IsVisible="{Binding Specification.IsPesticideFree}"
         Margin="5" />
 

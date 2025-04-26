@@ -41,7 +41,7 @@ public partial class ProductInfo : ContentPage
 
         }
     }
-
+   
 
     private void OnIncreaseClicked(object sender, EventArgs e)
     {

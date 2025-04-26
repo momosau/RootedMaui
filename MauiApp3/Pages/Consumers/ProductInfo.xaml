@@ -27,17 +27,23 @@
                 <Label Text="{Binding SelectedProduct.Name}" FontSize="Large" TextColor="Black"/>
                 <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black"/>
                 <HorizontalStackLayout>
-                    <Label Text="زيارة" FontSize="Medium" TextColor="Black"/>
-                    <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout HorizontalOptions="End">
+                    <Label Text="زيارة " FontSize="Medium" TextColor="Black"/>
+                        <Label Text="{Binding FarmName}" FontSize="Medium" TextColor="Black">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer 
+            Command="{Binding NavigateToFarmerDetailsCommand}" 
+            CommandParameter="{Binding Farmer}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </HorizontalStackLayout>
+                <HorizontalStackLayout HorizontalOptions="Start">
                     <Label Text="{Binding SelectedProduct.Weight}" FontSize="Medium" TextColor="Black"/>
                     <Label Text="{Binding SelectedProduct.Unit}" FontSize="Medium" TextColor="Black"/>
                     <Label Text="/" TextColor="Black" FontSize="Medium"></Label>
                     <Label Text="{Binding SelectedProduct.Price, StringFormat='{0} ريال'}" FontSize="Medium" TextColor="Black"/>
                 </HorizontalStackLayout>
 
-                    <ScrollView Orientation="Horizontal">
+                    <ScrollView Orientation="Horizontal" HorizontalOptions="End">
                         <HorizontalStackLayout 
 Spacing="10" 
 VerticalOptions="Center" 
@@ -92,24 +98,6 @@ Margin="0,5,0,0">
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Label Text="Specification" FontSize="18" FontAttributes="Bold" Margin="10,20,10,10" />
-
-<CollectionView ItemsSource="{Binding ProductsSpec}" Margin="10">
-    <CollectionView.ItemTemplate>
-        <DataTemplate x:DataType="Model:Specification">
-            <Frame BorderColor="Gray" CornerRadius="10" Padding="10" Margin="5">
-                <StackLayout>
-                            <Label Text="{Binding IsGmofree, StringFormat='Is GMO-Free: {0}'}" />
-                            <Label Text="{Binding IsHydroponicallyGrown, StringFormat='Is Hydroponically Grown: {0}'}" />
-                            <Label Text="{Binding IsPesticideFree, StringFormat='Is Pesticide Free: {0}'}" />
-                            <Label Text="{Binding IsLocal, StringFormat='Is Local: {0}'}" />
-
-                        </StackLayout>
-            </Frame>
-        </DataTemplate>
-    </CollectionView.ItemTemplate>
-</CollectionView>
-
 
 
         <!-- Quantity Control -->
@@ -119,13 +107,13 @@ Margin="0,5,0,0">
                     <RoundRectangle CornerRadius="20"/>
                 </Border.StrokeShape>
                 <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="White" HorizontalOptions="Start" WidthRequest="100">
-                    <Button Clicked="OnIncreaseClicked" Text="+" BackgroundColor="White" CornerRadius="50" WidthRequest="30" HeightRequest="30" TextColor="Grey"/>
+                    <Button Clicked="OnIncreaseClicked" Text="+" BackgroundColor="White"  TextColor="Black"/>
                     <Label Text="{Binding QuantityInCart}" FontSize="20" VerticalOptions="Center" BackgroundColor="White" TextColor="Black"/>
-                    <Button Text="-"  Clicked="OnDecreaseClicked" BackgroundColor="White" CornerRadius="50" WidthRequest="30" HeightRequest="30" TextColor="Black"/>
+                    <Button Text="-"  Clicked="OnDecreaseClicked" BackgroundColor="White" TextColor="Black"/>
                 </StackLayout>
             </Border>
 
-            <Button Text="اضف بالسلة" Background="Green" TextColor="White" Clicked="AddToCartCLicked" ></Button>
+            <Button Text="اضف بالسلة" Background="Green" TextColor="White" Clicked="AddToCartCLicked" WidthRequest="300" CornerRadius="10" ></Button>
 
         </HorizontalStackLayout >
 
