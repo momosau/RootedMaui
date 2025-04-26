@@ -14,7 +14,7 @@ public partial class SignInFarmer : ContentPage
 #if ANDROID
         private const string apiKey = "http://10.0.2.2:5140/api/Farmers/Login";
 #else
-    private const string apiKey = "http://localhost:7168/api/Farmers/Login";
+    private const string apiKey = "https://localhost:7168/api/Farmers/Login";
 #endif
 
     private readonly HttpClient _httpClient = new HttpClient();

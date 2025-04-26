@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RootedBack.Data;
 using SharedLibraryy.Models;
@@ -70,14 +71,21 @@ namespace RootedBack.Controllers
 
         // POST: api/Questions
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    
         [HttpPost]
         public async Task<ActionResult<Question>> PostQuestion(Question question)
         {
+            if (string.IsNullOrWhiteSpace(question.Email) || string.IsNullOrWhiteSpace(question.Question1))
+            {
+                return BadRequest("Email and Question are required.");
+            }
+
             _context.Questions.Add(question);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetQuestion", new { id = question.QuestionId }, question);
         }
+
 
         // DELETE: api/Questions/5
         [HttpDelete("{id}")]
@@ -99,5 +107,8 @@ namespace RootedBack.Controllers
         {
             return _context.Questions.Any(e => e.QuestionId == id);
         }
+
+     
+
     }
 }

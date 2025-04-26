@@ -64,69 +64,51 @@
                     FontAttributes="Bold" 
                    HorizontalTextAlignment="Center"/>
 
-            <Label Text="البريد الإلكتروني" 
-                   FontSize="14" 
-                  TextColor="#0E3230" 
-                   FontFamily="FontArabic" 
-                    FontAttributes="Bold" 
-                   HorizontalTextAlignment="Start" 
-                   WidthRequest="300"/>
+                <Label Text="البريد الإلكتروني" 
+       FontAttributes="Bold" 
+       FontSize="14" 
+       TextColor="#0E3230" 
+       FontFamily="FontArabic" 
+       HorizontalTextAlignment="Start" 
+       WidthRequest="300"/>
 
-            <Border StrokeThickness="1"  BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 15" Stroke="#71873F">
-            
+                <Border StrokeThickness="1" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 15" Stroke="#71873F">
+                    <Entry x:Name="EmailEntry"
+           Placeholder="example@email.com"
+           Keyboard="Email"
+           TextColor="#0E3230"
+           BackgroundColor="White"
+           FontFamily="FontArabic"
+           WidthRequest="300"/>
+                </Border>
 
-            <Entry BackgroundColor="White" 
-                   TextColor="#0E3230" 
-                   FontFamily="FontArabic" 
-                   WidthRequest="300"
-                   HeightRequest="50" 
-                  Keyboard="Email"
-                  
-                   HorizontalTextAlignment="Start"/>
-            </Border>
-            <Label Text="العنوان" 
-                    FontAttributes="Bold" 
-                   FontSize="14" 
-                  TextColor="#0E3230" 
-                   FontFamily="FontArabic" 
-                   HorizontalTextAlignment="Start" 
-                   WidthRequest="300"/>
-            <Border StrokeThickness="1"  BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 15" Stroke="#71873F">
-                <Entry BackgroundColor="White" 
-                  TextColor="#0E3230" 
-                   FontFamily="FontArabic" 
-                   WidthRequest="300" 
-                   HeightRequest="50" 
-                   HorizontalTextAlignment="Start"/>
-</Border>
-            <Label Text="الموضوع" 
-                    FontAttributes="Bold" 
-                   FontSize="14" 
-                  TextColor="#0E3230" 
-                   FontFamily="FontArabic" 
-                   HorizontalTextAlignment="Start" 
-                   WidthRequest="300"/>
-                <Border StrokeThickness="1"  BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 15" Stroke="#71873F">
+                <Label Text="رسالتك" 
+       FontAttributes="Bold" 
+       FontSize="14" 
+       TextColor="#0E3230" 
+       FontFamily="FontArabic" 
+       HorizontalTextAlignment="Start" 
+       WidthRequest="300"/>
 
-                    <Editor BackgroundColor="White" 
-TextColor="#0E3230" 
-FontFamily="FontArabic" 
-WidthRequest="300" 
-HeightRequest="100" 
+                <Border StrokeThickness="1" BackgroundColor="White" Padding="5" StrokeShape="RoundRectangle 15" Stroke="#71873F">
+                    <Editor x:Name="MessageEditor"
+            BackgroundColor="White" 
+            TextColor="#0E3230" 
+            FontFamily="FontArabic" 
+            WidthRequest="300" 
+            HeightRequest="100"
+            HorizontalTextAlignment="Start"/>
+                </Border>
 
-HorizontalTextAlignment="Start"/>
-                    </Border>
-            <Button Text="إرسال"
-BackgroundColor="#3E6F41" 
-TextColor="White" 
-FontFamily="FontArabic" 
-FontSize="16" 
-CornerRadius="10" 
-WidthRequest="300" 
-Padding="10" 
-HorizontalOptions="Center"/>
-        </VerticalStackLayout>
-    </Grid>
+                <Button Text="إرسال"
+        BackgroundColor="#71873F"
+        TextColor="White"
+        FontAttributes="Bold"
+        FontFamily="FontArabic"
+        WidthRequest="300"
+        Clicked="SendButton_Clicked"/>
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage> 
 
