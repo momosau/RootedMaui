@@ -30,7 +30,7 @@ public partial class SignInConsumer : ContentPage
                 Password = PasswordEntry.Text?.Trim()
             };
 
-            var response = await _httpClient.PostAsJsonAsync("http://localhost:5140/api/Consumers/Login", loginRequest);
+            var response = await _httpClient.PostAsJsonAsync("http://10.0.2.2:5140/api/Consumers/Login", loginRequest);
 
             if (response.IsSuccessStatusCode)
             {
