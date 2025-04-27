@@ -172,23 +172,23 @@
                                          HorizontalOptions="Fill">
                         <HorizontalStackLayout>
                             <CheckBox IsChecked="{Binding IsLocal}"/>
-                            <Label Text="Is Local?" VerticalTextAlignment="Center"/>
+                            <Label Text="محلي" VerticalTextAlignment="Center"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <CheckBox IsChecked="{Binding IsOrganic}"/>
-                            <Label Text="Is Organic?" VerticalTextAlignment="Center"/>
+                            <Label Text="عضوي" VerticalTextAlignment="Center"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <CheckBox IsChecked="{Binding IsGmoFree}"/>
-                            <Label Text="Is GMO Free?" VerticalTextAlignment="Center"/>
+                            <Label Text="خالي من التعديل الوراثي" VerticalTextAlignment="Center"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <CheckBox IsChecked="{Binding IsHydroponicallyGrown}"/>
-                            <Label Text="Is Hydroponically Grown?" VerticalTextAlignment="Center"/>
+                            <Label Text="مزروعة مائيا" VerticalTextAlignment="Center"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <CheckBox IsChecked="{Binding IsPesticideFree}"/>
-                            <Label Text="Is Pesticide Free?" VerticalTextAlignment="Center"/>
+                            <Label Text="خالي من المبيدات الحشرية" VerticalTextAlignment="Center"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                     

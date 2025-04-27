@@ -6,6 +6,7 @@
             x:DataType="Model:FarmerApplication"
              xmlns:Model="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
              FlowDirection="RightToLeft" 
+               BackgroundColor="#E7E9E4" 
              Title="FarmerInfo">
 
     <VerticalStackLayout>

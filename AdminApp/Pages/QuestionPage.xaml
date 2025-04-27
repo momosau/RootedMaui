@@ -6,30 +6,38 @@
                 xmlns:ViewModel="clr-namespace:AdminApp.ViewModel"
              x:DataType="ViewModel:QuestionViewModel"
              FlowDirection="RightToLeft"
-             Title="QuestionPage">
+             Title="QuestionPage"
+               BackgroundColor="#E7E9E4" >
+    <ScrollView>
     <VerticalStackLayout Padding="10">
         <Label Text="أسئلة المزارعين والمستهلكين"
                FontSize="24"
                FontAttributes="Bold"
                HorizontalOptions="Center" />
-
-        <CollectionView ItemsSource="{Binding Questions}">
+        
+        <CollectionView ItemsSource="{Binding Questions}" BackgroundColor="#E7E9E4" >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="Models:Question">
-                    <Frame Margin="5" Padding="10" BorderColor="Gray" CornerRadius="10">
+                    <Frame Margin="5" Padding="10" BorderColor="Gray" CornerRadius="10"   BackgroundColor="#E7E9E4" > 
                         <VerticalStackLayout>
-                            <Label Text="رقم السؤال:" FontAttributes="Bold" />
-                            <Label Text="{Binding QuestionId}" />
-
-                            <Label Text="السؤال:" FontAttributes="Bold" />
-                            <Label Text="{Binding Question1}" />
-
-                            <Label Text="البريد الإلكتروني:" FontAttributes="Bold" />
-                            <Label Text="{Binding Email}" />
+                            <HorizontalStackLayout>
+                            <Label Text="رقم السؤال:" FontAttributes="Bold" TextColor="Black" />
+                            <Label Text="{Binding QuestionId}" TextColor="Black" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout>
+                            <Label Text="السؤال:" FontAttributes="Bold" TextColor="Black" />
+                            <Label Text="{Binding Question1}" TextColor="Black"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout>
+                                <Label Text="البريد الإلكتروني:" FontAttributes="Bold" TextColor="Black" />
+                            <Label Text="{Binding Email}" TextColor="Black" />
+                            </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
