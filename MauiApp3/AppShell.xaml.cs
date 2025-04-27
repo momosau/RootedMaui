@@ -8,6 +8,8 @@ namespace MauiApp3
         public AppShell()
         {
             InitializeComponent();
+
+      
             Routing.RegisterRoute("AboutUsPage", typeof(Pages.Farmers.AboutUsPage));
             Routing.RegisterRoute("AccountPageFarmer", typeof(Pages.Farmers.AccountPageFarmer));
             Routing.RegisterRoute("SignInFarmer", typeof(Pages.Farmers.SignInFarmer));
@@ -63,6 +65,9 @@ namespace MauiApp3
             Routing.RegisterRoute("AddProductPage", typeof(Pages.Farmers.AddProductPage));
             Routing.RegisterRoute("UpdateProductPage", typeof(Pages.Farmers.UpdateProductPage));
 
+            Routing.RegisterRoute("CForgotPassEmail", typeof(Pages.Consumers.CForgotPassEmail));
+
+            Routing.RegisterRoute("CResetPasswordPage", typeof(Pages.Consumers.CResetPasswordPage));
 
 
 

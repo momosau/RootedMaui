@@ -28,8 +28,9 @@ public partial class CEmailVerification : ContentPage
     private const string SmtpUsername = "reachout.rooted@gmail.com";
     private const string SmtpPassword = "xixw wprf fqdo tagy";
     // private const string ApiUrl = "https://10.0.2.2:7168/api/Consumers";
+
 #if ANDROID
-  private const string ApiUrl = "https://10.0.2.2:7168/api/Consumers";
+        private const string ApiUrl = "http://10.0.2.2:5140/api/Consumers";
 #else
     private const string ApiUrl = "https://localhost:7168/api/Consumers";
 #endif

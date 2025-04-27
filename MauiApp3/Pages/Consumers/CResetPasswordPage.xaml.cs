@@ -1,4 +1,4 @@
-using System.Net.Http.Json;
+ï»¿using System.Net.Http.Json;
 
 namespace MauiApp3.Pages.Consumers;
 
@@ -6,11 +6,16 @@ public partial class CResetPasswordPage : ContentPage
 {
     private bool PasswordVisible = false;
     private string _email;
-    private const string apiUrl = "http://localhost:7168/api/Consumer/ResetPassword";
+ //   private const string apiUrl = "https://localhost:7168/api/Consumers/ResetPassword";
+#if ANDROID
+        private const string apiUrl = "http://10.0.2.2:5140/api/Consumers/ResetPassword";
+#else
+    private const string apiUrl = "https://localhost:7168/api/Consumers/ResetPassword";
+#endif
     private readonly HttpClient _httpClient = new HttpClient();
     public CResetPasswordPage(string email)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         _email = email;
 
     }
@@ -32,45 +37,50 @@ public partial class CResetPasswordPage : ContentPage
 
     private async void ResetPasswordClicked(object sender, EventArgs e)
     {
-        var newPassword = passwordEntryNew.Text;
+        var Password = passwordEntryNew.Text;
         var confirmPassword = passwordEntryConf.Text;
 
-        if (string.IsNullOrWhiteSpace(newPassword) || string.IsNullOrWhiteSpace(confirmPassword))
+        if (string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(confirmPassword))
         {
-            await DisplayAlert("ÎØÃ", "íÑÌì ÊÚÈÆÉ ßáÇ ÇáÍŞáíä", "ãæÇİŞ");
+            await DisplayAlert("Ø®Ø·Ø£", "ÙŠØ±Ø¬Ù‰ ØªØ¹Ø¨Ø¦Ø© ÙƒÙ„Ø§ Ø§Ù„Ø­Ù‚Ù„ÙŠÙ†", "Ù…ÙˆØ§ÙÙ‚");
             return;
         }
 
-        if (newPassword != confirmPassword)
+        if (Password != confirmPassword)
         {
-            await DisplayAlert("ÎØÃ", "ßáãÉ ÇáãÑæÑ ÛíÑ ãÊØÇÈŞÉ", "ãæÇİŞ");
+            await DisplayAlert("Ø®Ø·Ø£", "ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± ØºÙŠØ± Ù…ØªØ·Ø§Ø¨Ù‚Ø©", "Ù…ÙˆØ§ÙÙ‚");
             return;
         }
 
-        var resetRequest = new ResetPasswordRequest
+        var ResetPassword = new ResetPasswordRequest
         {
             Email = _email,
-            NewPassword = newPassword
+            Password = Password
         };
 
-        var response = await _httpClient.PostAsJsonAsync(apiUrl, resetRequest);
+        var response = await _httpClient.PostAsJsonAsync(apiUrl, ResetPassword);
         if (response.IsSuccessStatusCode)
         {
-            await DisplayAlert("Êã", "Êã ÊÛííÑ ßáãÉ ÇáãÑæÑ ÈäÌÇÍ", "ãæÇİŞ");
-            await Navigation.PopToRootAsync(); // íÑÌÚ áÕİÍÉ ÇáÏÎæá
+            await DisplayAlert("ØªÙ…", "ØªÙ… ØªØºÙŠÙŠØ± ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± Ø¨Ù†Ø¬Ø§Ø­", "Ù…ÙˆØ§ÙÙ‚");
+            await Navigation.PopToRootAsync(); // ÙŠØ±Ø¬Ø¹ Ù„ØµÙØ­Ø© Ø§Ù„Ø¯Ø®ÙˆÙ„
         }
         else
         {
             var error = await response.Content.ReadAsStringAsync();
-            await DisplayAlert("ÎØÃ", error, "ãæÇİŞ");
+            await DisplayAlert("Ø®Ø·Ø£", error, "Ù…ÙˆØ§ÙÙ‚");
         }
+    }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
+
     }
 }
 
 public class ResetPasswordRequest
 {
-    public string Email { get; set; }
-    public string NewPassword { get; set; }
+    public string Email { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
 }
-
 

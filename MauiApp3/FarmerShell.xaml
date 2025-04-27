@@ -11,7 +11,7 @@
     <TabBar>
         <ShellContent 
      Title="Home" 
-     Icon="home.png" 
+     Icon="category.png" 
      ContentTemplate="{DataTemplate local:FarmerHome}" />
         <ShellContent 
 Title="Profile" 
@@ -21,7 +21,7 @@ ContentTemplate="{DataTemplate local:AccountPageFarmer}" />
         <ShellContent 
 Title="chatbot" 
 Icon="chatbot.png" 
-ContentTemplate="{DataTemplate local:Chatbot}" />
+ContentTemplate="{DataTemplate local:ProductsPage}" />
     </TabBar>
 
 

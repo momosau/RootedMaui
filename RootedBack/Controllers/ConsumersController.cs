@@ -73,6 +73,57 @@ namespace RootedBack.Controllers
             return NoContent();
         }
 
+        [Route("ForgotPassword")]
+        [HttpPost]
+        public async Task<ActionResult<Consumer>> ForgotPassEmail(RequestForgotPassword request)
+        {
+            var consumer = await _context.Consumers.FirstOrDefaultAsync(C => C.Email == request.Email);
+
+            if (consumer == null)
+            {
+                return BadRequest("Invalid payload");
+            }
+            return Ok(consumer);
+        }
+
+
+        public class RequestForgotPassword
+        {
+            public string Email { get; set; } = string.Empty;
+        }
+
+
+
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid payload");
+
+            var consumer = await _context.Consumers.FirstOrDefaultAsync(c => c.Email == request.Email);
+            if (consumer == null)
+                return BadRequest("Invalid request");
+
+
+            consumer.Password = request.Password;
+            await _context.SaveChangesAsync();
+
+            return Ok("Password reset is successful");
+        }
+
+        public class ResetPasswordRequest
+        {
+
+            public string Email { get; set; } = string.Empty;
+            public string Password { get; set; } = string.Empty;
+
+
+        }
+
+
+
+
         // POST: api/Consumers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -152,12 +203,7 @@ namespace RootedBack.Controllers
 
 
 
-        public class ResetPasswordRequest
-        {
-            public string Email { get; set; }
-            public string NewPassword { get; set; }
-        }
-
+   
 
 
         [HttpPost("CheckEmail")]

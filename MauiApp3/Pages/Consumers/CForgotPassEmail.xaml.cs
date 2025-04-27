@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using Microsoft.Maui.Controls;
@@ -7,39 +7,47 @@ namespace MauiApp3.Pages.Consumers;
 
 public partial class CForgotPassEmail : ContentPage
 {
-    private const string apiUrl = "http://localhost:7168/api/Consumer/ResetPassword";
+
+
+#if ANDROID
+        private const string apiUrl = "http://10.0.2.2:5140/api/Consumers/ForgotPassword";
+#else
+    private const string apiUrl = "https://localhost:7168/api/Consumers/ForgotPassword";
+#endif
     private readonly HttpClient _httpClient = new HttpClient();
     public CForgotPassEmail()
-	{
-		InitializeComponent();
-	}
+    {
+        InitializeComponent();
+    }
 
 
     private async void CheckEmailClicked(object sender, EventArgs e)
     {
-        var emailRequest = new EmailCheckRequest
+        var ForgotPassword = new RequestForgotPassword
         {
-            Email = EmailEntry.Text
+            Email = EmailEntry.Text,
         };
 
-        var response = await _httpClient.PostAsJsonAsync(apiUrl, emailRequest);
+        var response = await _httpClient.PostAsJsonAsync(apiUrl, ForgotPassword);
         if (response.IsSuccessStatusCode)
         {
-            await DisplayAlert(" „", "«·»—Ìœ «·≈·ﬂ —Ê‰Ì „”Ã· ÊÌ„ﬂ‰ «·„ «»⁄….", "„Ê«›ﬁ");
-            //  ﬁœ—  ﬂ„· Â‰« »«· ‰ﬁ· ·’›Õ… ≈œŒ«· —„“ «· Õﬁﬁ √Ê  €ÌÌ— ﬂ·„… «·„—Ê—
-            await Navigation.PushAsync(new CVerificationCodePage(EmailEntry.Text));
+            var consumer = await response.Content.ReadFromJsonAsync<Consumer>();
+            await Shell.Current.Navigation.PushAsync(new CVerificationCodePage(EmailEntry.Text));
 
         }
         else
         {
             var errorMessage = await response.Content.ReadAsStringAsync();
-            await DisplayAlert("Œÿ√", errorMessage, "„Ê«›ﬁ");
+            await DisplayAlert("ÿÆÿ∑ÿ£", errorMessage, "ŸÖŸàÿßŸÅŸÇ");
         }
     }
+
 }
 
-public class EmailCheckRequest
+public class RequestForgotPassword
 {
-    public string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
 }
+
+
 

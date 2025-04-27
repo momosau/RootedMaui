@@ -1,4 +1,4 @@
-using MimeKit.Utils;
+ï»¿using MimeKit.Utils;
 using MimeKit;
 using System.Diagnostics;
 using System.Reflection.Metadata;
@@ -17,18 +17,19 @@ public partial class CVerificationCodePage : ContentPage
     private const string SmtpUsername = "reachout.rooted@gmail.com";
     private const string SmtpPassword = "xixw wprf fqdo tagy";
     public CVerificationCodePage(string email)
-	{
+    {
         InitializeComponent();
         _email = email;
-        emailLabel.Text = $"ÇáÈÑíÏ: {_email}";
+        emailLabel.Text = $"Ø§Ù„Ø¨Ø±ÙŠØ¯: {_email}";
         GenerateAndSendVerificationCode();
+
     }
 
 
     private void GenerateAndSendVerificationCode()
     {
         _verificationCode = RandomNumberGenerator.GetInt32(1000, 9999).ToString();
-        Debug.WriteLine($"ÑãÒ ÇáÊÍŞŞ: {_verificationCode}");
+        Debug.WriteLine($"Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚: {_verificationCode}");
         Task.Run(() => SendVerificationEmail(_email, _verificationCode));
     }
 
@@ -39,9 +40,9 @@ public partial class CVerificationCodePage : ContentPage
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Rooted", SmtpUsername));
             message.To.Add(new MailboxAddress("", email));
-            message.Subject = "ÑãÒ ÅÚÇÏÉ ÊÚííä ßáãÉ ÇáãÑæÑ - ÊØÈíŞ Rooted";
+            message.Subject = "Ø±Ù…Ø² Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± - ØªØ·Ø¨ÙŠÙ‚ Rooted";
 
-            var imageUrl = "https://i.ibb.co/hRzTwb7j/rooted-logo.png";
+            var imageUrl = "https://i.ibb.co/ynCBKT1R/rooted-logo.png";
             var bodyBuilder = new BodyBuilder();
             var imageId = MimeUtils.GenerateMessageId();
 
@@ -50,7 +51,7 @@ public partial class CVerificationCodePage : ContentPage
             <html dir='rtl'>
             <head>
                 <meta charset='UTF-8'>
-                <title>ÅÚÇÏÉ ÊÚííä ßáãÉ ÇáãÑæÑ</title>
+                <title>Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±</title>
                 <style>
                     body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5; }}
                     .container {{ max-width: 600px; margin: 20px auto; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }}
@@ -67,23 +68,23 @@ public partial class CVerificationCodePage : ContentPage
                         <img class='logo' src='{imageUrl}' alt='Rooted Logo'>
                     </div>
                     <div class='content'>
-                        <h2 style='color: #0E3230;'>ÅÚÇÏÉ ÊÚííä ßáãÉ ÇáãÑæÑ</h2>
-                        <p>áŞÏ ÇÓÊáãäÇ ØáÈğÇ áÅÚÇÏÉ ÊÚííä ßáãÉ ÇáãÑæÑ ÇáÎÇÕÉ Èß.</p>
+                        <h2 style='color: #0E3230;'>Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±</h2>
+                        <p>Ù„Ù‚Ø¯ Ø§Ø³ØªÙ„Ù…Ù†Ø§ Ø·Ù„Ø¨Ù‹Ø§ Ù„Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± Ø§Ù„Ø®Ø§ØµØ© Ø¨Ùƒ.</p>
                         <div class='code'>{code}</div>
-                        <p>íÑÌì ÅÏÎÇá ÇáÑãÒ İí ÇáÊØÈíŞ áÅÊãÇã ÇáÚãáíÉ. åĞÇ ÇáÑãÒ ÕÇáÍ áãÏÉ 10 ÏŞÇÆŞ.</p>
-                        <p style='font-size: 14px; color: #0E3230;'>ÅĞÇ áã ÊØáÈ åĞÇ ÇáÑãÒ¡ íÑÌì ÊÌÇåá åĞå ÇáÑÓÇáÉ.</p>
+                        <p>ÙŠØ±Ø¬Ù‰ Ø¥Ø¯Ø®Ø§Ù„ Ø§Ù„Ø±Ù…Ø² ÙÙŠ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ù„Ø¥ØªÙ…Ø§Ù… Ø§Ù„Ø¹Ù…Ù„ÙŠØ©. Ù‡Ø°Ø§ Ø§Ù„Ø±Ù…Ø² ØµØ§Ù„Ø­ Ù„Ù…Ø¯Ø© 10 Ø¯Ù‚Ø§Ø¦Ù‚.</p>
+                        <p style='font-size: 14px; color: #0E3230;'>Ø¥Ø°Ø§ Ù„Ù… ØªØ·Ù„Ø¨ Ù‡Ø°Ø§ Ø§Ù„Ø±Ù…Ø²ØŒ ÙŠØ±Ø¬Ù‰ ØªØ¬Ø§Ù‡Ù„ Ù‡Ø°Ù‡ Ø§Ù„Ø±Ø³Ø§Ù„Ø©.</p>
                     </div>
                     <div class='footer'>
-                        © {DateTime.Now.Year} Rooted. ÌãíÚ ÇáÍŞæŞ ãÍİæÙÉ.<br>
+                        Â© {DateTime.Now.Year} Rooted. Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø­Ù‚ÙˆÙ‚ Ù…Ø­ÙÙˆØ¸Ø©.<br>
                         support@rooted.com | +966 12 345 6789
                     </div>
                 </div>
             </body>
             </html>";
 
-            bodyBuilder.TextBody = $"ÑãÒ ÅÚÇÏÉ ÊÚííä ßáãÉ ÇáãÑæÑ åæ: {code}\n\n" +
-                                   "ÃÏÎá åĞÇ ÇáÑãÒ İí ÇáÊØÈíŞ áÅÚÇÏÉ ÊÚííä ßáãÉ ÇáãÑæÑ.\n\n" +
-                                   "ÅĞÇ áã ÊØáÈ åĞÇ ÇáÑãÒ¡ íãßäß ÊÌÇåá åĞå ÇáÑÓÇáÉ.";
+            bodyBuilder.TextBody = $"Ø±Ù…Ø² Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± Ù‡Ùˆ: {code}\n\n" +
+                                   "Ø£Ø¯Ø®Ù„ Ù‡Ø°Ø§ Ø§Ù„Ø±Ù…Ø² ÙÙŠ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ù„Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±.\n\n" +
+                                   "Ø¥Ø°Ø§ Ù„Ù… ØªØ·Ù„Ø¨ Ù‡Ø°Ø§ Ø§Ù„Ø±Ù…Ø²ØŒ ÙŠÙ…ÙƒÙ†Ùƒ ØªØ¬Ø§Ù‡Ù„ Ù‡Ø°Ù‡ Ø§Ù„Ø±Ø³Ø§Ù„Ø©.";
 
             message.Body = bodyBuilder.ToMessageBody();
 
@@ -97,15 +98,15 @@ public partial class CVerificationCodePage : ContentPage
 
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                await DisplayAlert("Êã ÇáÅÑÓÇá", "Êã ÅÑÓÇá ÑãÒ ÇáÊÍŞŞ Åáì ÈÑíÏß ÇáÅáßÊÑæäí", "ãæÇİŞ");
+                await DisplayAlert("ØªÙ… Ø§Ù„Ø¥Ø±Ø³Ø§Ù„", "ØªÙ… Ø¥Ø±Ø³Ø§Ù„ Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ Ø¥Ù„Ù‰ Ø¨Ø±ÙŠØ¯Ùƒ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ", "Ù…ÙˆØ§ÙÙ‚");
             });
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"İÔá ÅÑÓÇá ÇáÈÑíÏ: {ex}");
+            Debug.WriteLine($"ÙØ´Ù„ Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„Ø¨Ø±ÙŠØ¯: {ex}");
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                await DisplayAlert("ÎØÃ", "İÔá İí ÅÑÓÇá ÑãÒ ÇáÊÍŞŞ¡ íÑÌì ÇáãÍÇæáÉ áÇÍŞÇğ", "ãæÇİŞ");
+                await DisplayAlert("Ø®Ø·Ø£", "ÙØ´Ù„ ÙÙŠ Ø¥Ø±Ø³Ø§Ù„ Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ØŒ ÙŠØ±Ø¬Ù‰ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù„Ø§Ø­Ù‚Ø§Ù‹", "Ù…ÙˆØ§ÙÙ‚");
             });
         }
     }
@@ -126,15 +127,15 @@ public partial class CVerificationCodePage : ContentPage
 
         if (enteredCode != _verificationCode)
         {
-            await DisplayAlert("ÎØÃ", "ÑãÒ ÇáÊÍŞŞ ÛíÑ ÕÍíÍ", "ãæÇİŞ");
+            await DisplayAlert("Ø®Ø·Ø£", "Ø±Ù…Ø² Ø§Ù„ØªØ­Ù‚Ù‚ ØºÙŠØ± ØµØ­ÙŠØ­", "Ù…ÙˆØ§ÙÙ‚");
             return;
         }
 
-        await DisplayAlert("Êã ÇáÊÍŞŞ", "Êã ÇáÊÍŞŞ ãä ÇáÑãÒ ÈäÌÇÍ¡ íãßäß ÇáÂä ÊÚííä ßáãÉ ãÑæÑ ÌÏíÏÉ", "ãæÇİŞ");
+        await DisplayAlert("ØªÙ… Ø§Ù„ØªØ­Ù‚Ù‚", "ØªÙ… Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø§Ù„Ø±Ù…Ø² Ø¨Ù†Ø¬Ø§Ø­ØŒ ÙŠÙ…ÙƒÙ†Ùƒ Ø§Ù„Ø¢Ù† ØªØ¹ÙŠÙŠÙ† ÙƒÙ„Ù…Ø© Ù…Ø±ÙˆØ± Ø¬Ø¯ÙŠØ¯Ø©", "Ù…ÙˆØ§ÙÙ‚");
 
-        //ÇáÊäŞá áÕİÍÉ ÊÚííä ßáãÉ ÇáãÑæÑ ÇáÌÏíÏÉ
+        //Ø§Ù„ØªÙ†Ù‚Ù„ Ù„ØµÙØ­Ø© ØªØ¹ÙŠÙŠÙ† ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ± Ø§Ù„Ø¬Ø¯ÙŠØ¯Ø©
         await Navigation.PushAsync(new CResetPasswordPage(_email));
+
 
     }
 }
-

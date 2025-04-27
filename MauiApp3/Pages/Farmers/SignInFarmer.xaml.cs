@@ -14,7 +14,7 @@ public partial class SignInFarmer : ContentPage
 #if ANDROID
         private const string apiKey = "http://10.0.2.2:5140/api/Farmers/Login";
 #else
-    private const string apiKey = "http://localhost:7168/api/Farmers/Login";
+    private const string apiKey = "https://localhost:7168/api/Farmers/Login";
 #endif
 
     private readonly HttpClient _httpClient = new HttpClient();
@@ -36,7 +36,10 @@ public partial class SignInFarmer : ContentPage
         if (response.IsSuccessStatusCode)
         {
             var farmer = await response.Content.ReadFromJsonAsync<Farmer>();
-            await Navigation.PushAsync(new Pages.Farmers.FarmerHome());
+          //  await Navigation.PushAsync(new Pages.Farmers.FarmerHome());
+         //   await Shell.Current.GoToAsync(nameof(Pages.Farmers.FarmerHome));
+
+             Application.Current.MainPage = new FarmerShell();
         }
         else
         {

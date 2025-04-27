@@ -10,7 +10,7 @@ public partial class SignInConsumer : ContentPage
 #if ANDROID
         private const string apiKey = "http://10.0.2.2:5140/api/Consumers/Login";
 #else
-    private const string apiKey = "http://localhost:7168/api/Consumers/Login";
+    private const string apiKey = "https://localhost:7168/api/Consumers/Login";
 #endif
     private readonly HttpClient _httpClient = new HttpClient();
     public ObservableCollection<Consumers> Consumer { get; set; } = new ObservableCollection<Consumers>();
@@ -54,8 +54,16 @@ public partial class SignInConsumer : ContentPage
 
     private async void ForgotTapped(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("CForgotPassEmail");
+        if (Shell.Current != null)
+        {
+            await Shell.Current.GoToAsync(nameof(CForgotPassEmail));
+        }
+        else
+        {
+            await DisplayAlert("Navigation Error", "Shell is not ready.", "OK");
+        }
     }
+
 
     private async void RegisterNew(object sender, EventArgs e)
     {

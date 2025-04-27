@@ -20,10 +20,10 @@ namespace MauiApp3
         {
             App.UserType = "farmer";
 
-         //  await Navigation.PushAsync(new Pages.Farmers.SignUpFarmer());
-          
-       Application.Current.MainPage = new FarmerShell();
+          //await Navigation.PushAsync(new Pages.Farmers.SignUpFarmer());
 
+            //    Application.Current.MainPage = new FarmerShell();
+            await Shell.Current.GoToAsync(nameof(Pages.Farmers.SignInFarmer));
 
         }
 
@@ -31,8 +31,10 @@ namespace MauiApp3
         {
             App.UserType = "consumer";
 
-         //  await Navigation.PushAsync(new Pages.Consumers.SignInConsumer());
-            Application.Current.MainPage = new ConsumerShell();
+            //  await Navigation.PushAsync(new Pages.Consumers.SignUpConsumer());
+            await Shell.Current.GoToAsync(nameof(Pages.Consumers.SignInConsumer));
+
+            //Application.Current.MainPage = new ConsumerShell();
 
 
         }

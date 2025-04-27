@@ -16,6 +16,9 @@ public partial class ConsumerShell : Shell
         Routing.RegisterRoute("Payment", typeof(Pages.Consumers.Payment));
         Routing.RegisterRoute("DeliveryPage", typeof(Pages.Consumers.DeliveryPage));
         Routing.RegisterRoute("Search", typeof(Pages.Consumers.Search));
+        Routing.RegisterRoute("CForgotPassEmail", typeof(Pages.Consumers.CForgotPassEmail));
+
+        Routing.RegisterRoute("CResetPasswordPage", typeof(Pages.Consumers.CResetPasswordPage));
 
     }
 }

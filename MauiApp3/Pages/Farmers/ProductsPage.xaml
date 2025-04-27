@@ -20,8 +20,9 @@
             <Setter Property="TextColor" Value="White" />
         </Style>
     </ContentPage.Resources>
+    <ScrollView>
 
-    <VerticalStackLayout Padding="20" Spacing="20">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
         <Label Text="منتجاتك"
                FontSize="24"
@@ -75,4 +76,5 @@
         </HorizontalStackLayout>
 
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

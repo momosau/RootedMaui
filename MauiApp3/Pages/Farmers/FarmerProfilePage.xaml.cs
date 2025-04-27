@@ -23,11 +23,12 @@ public partial class FarmerProfilePage : ContentPage
     }
 
 
+ 
     private async void LoadProfile()
     {
         try
         {
-            var response = await httpClient.GetStringAsync("https://your-api.com/api/Farmer");
+            var response = await httpClient.GetStringAsync("https://localhost:7168/api/Farmers");
             var farmer = JsonConvert.DeserializeObject<Farmer>(response);
 
             if (farmer != null)
@@ -83,7 +84,7 @@ public partial class FarmerProfilePage : ContentPage
             var json = JsonConvert.SerializeObject(updateRequest);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PutAsync("https://your-api.com/api/Farmer/UpdateProfile", content);
+            var response = await httpClient.PutAsync("https://localhost:7168/api/Farmers/UpdateProfile", content);
 
             if (response.IsSuccessStatusCode)
                 await DisplayAlert("تم", "تم حفظ التعديلات بنجاح", "موافق");

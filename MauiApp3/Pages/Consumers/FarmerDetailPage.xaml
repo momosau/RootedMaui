@@ -220,12 +220,10 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Button
-                Text="جميع المنتجات" WidthRequest="400 " HeightRequest="40" BackgroundColor="ForestGreen" FontFamily="FontArabic" FontSize="20">
+           
                 
                 
-                
-            </Button>
+       
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
