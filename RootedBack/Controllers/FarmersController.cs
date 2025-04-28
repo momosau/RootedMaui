@@ -226,16 +226,11 @@ namespace RootedBack.Controllers
             if (string.IsNullOrWhiteSpace(request.PhoneNumber) || string.IsNullOrWhiteSpace(request.ImageUrl))
                 return BadRequest("رقم الجوال أو رابط الصورة غير صحيح");
 
-            // استخدام البريد من التوكن
-            var email = User.Identity?.Name;
-            if (string.IsNullOrEmpty(email))
-                return Unauthorized("لم يتم تحديد هوية المستخدم");
-
-            var farmer = await _context.Farmers.FirstOrDefaultAsync(f => f.Email == email);
+            // Find farmer directly by FarmerId
+            var farmer = await _context.Farmers.FirstOrDefaultAsync(f => f.FarmerId == request.FarmerId);
             if (farmer == null)
                 return NotFound("لم يتم العثور على المزارع");
 
-            // التحديث
             farmer.PhoneNumber = request.PhoneNumber;
             farmer.ImageUrl = request.ImageUrl;
 
@@ -249,9 +244,10 @@ namespace RootedBack.Controllers
 }
     public class UpdateProfileRequest
     {
-        public string PhoneNumber { get; set; }
-        public string ImageUrl { get; set; }
-    }
+    public int FarmerId { get; set; }
+    public string PhoneNumber { get; set; }
+    public string ImageUrl { get; set; }
+}
 
 
 

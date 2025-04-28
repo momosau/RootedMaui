@@ -29,7 +29,8 @@
             <Label Text="الفئة" FontAttributes="Bold" />
             <Picker x:Name="CategoryPicker" Title="Select Category" />
             <Label Text="المزارع" FontAttributes="Bold" />
-            <Picker x:Name="FarmerPicker" Title="Select Farmer" />
+            <Entry x:Name="FarmerNameEntry" IsReadOnly="True" Placeholder="المزارع" />
+
 
             <!-- CHECKBOXES -->
             

@@ -10,60 +10,79 @@
             <VerticalStackLayout Padding="20" Spacing="25">
 
                 <!-- صورة البروفايل -->
-                <Image x:Name="selectedImage"
-                   WidthRequest="100"
-                   HeightRequest="100"
-                   Aspect="AspectFill"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   BackgroundColor="#e0e0e0"
-                   Clip="100,100,100"
-                   />
-
-                <!-- زر تعديل الصورة -->
-                <Button Text="تعديل صورة البروفايل"
+                
+            <Border Stroke="Gray" WidthRequest="100" HeightRequest="100" StrokeShape="RoundRectangle 50,50,50,50">
+                <Image  x:Name="selectedImage" WidthRequest="96" HeightRequest="96" Aspect="AspectFill" />
+            </Border>
+            <!-- زر تعديل الصورة -->
+                <Button Text="تعديل صورة"
                     Clicked="PickAndUploadImage"
                     FontSize="14"
                     HorizontalOptions="Center"
-                    TextColor="DarkGreen" />
+                    TextColor="White"
+                        BackgroundColor="DarkGreen"/>
 
-                <!-- العنوان -->
-                <Label Text="التفاصيل الشخصية:"
-                   FontAttributes="Bold"
-                   FontSize="16"
-                   TextColor="Black" />
 
-                <!-- اسم المستخدم (ثابت) -->
-                <Label Text="اسم المستخدم"
-                   FontSize="14"
-                   TextColor="Gray"/>
-                <Label x:Name="nameLabel"
-                   FontSize="16"
-                   TextColor="Black"
-                   Margin="0,0,0,10"/>
 
-                <!-- البريد الإلكتروني (ثابت) -->
-                <Label Text="البريد الإلكتروني"
-                   FontSize="14"
-                   TextColor="Gray"/>
-                <Label x:Name="emailLabel"
-                   FontSize="16"
-                   TextColor="Black"
-                   Margin="0,0,0,10"/>
+            <Label Text="التفاصيل الشخصية :" 
+       FontSize="18"
+       TextColor="#0E3230"
+       FontFamily="FontArabic"
+       FontAttributes="Bold" />
 
-                <!-- رقم الهاتف (قابل للتعديل) -->
-                <Label Text="رقم الهاتف"
-                   FontSize="14"
-                   TextColor="Gray"/>
+            <Label Text="اسم المستخدم" 
+       TextColor="#0E3230"
+       FontFamily="FontArabic"
+       FontAttributes="Bold"
+       FontSize="14"/>
+            <Entry x:Name="nameLabel"
+       FontSize="16"
+       BackgroundColor="LightGrey"
+       IsReadOnly="True"
+                   
+         TextColor="#0E3230"
+      />
+
+
+            <Label Text="البريد الإلكتروني" 
+         TextColor="#0E3230"
+         FontAttributes="Bold"
+         FontFamily="FontArabic"
+         FontSize="14"/>
+            <Entry x:Name="emailLabel"
+         FontSize="16"
+           TextColor="#0E3230"
+     BackgroundColor="LightGrey"
+     
+         IsReadOnly="True"
+         
+         Keyboard="Email"
+       />
+
+            <Label Text="رقم الهاتف" 
+        TextColor="#0E3230"
+        FontFamily="FontArabic"
+        FontAttributes="Bold"
+        FontSize="14"/>
+          
                 <Entry x:Name="phoneEntry"
-                   FontSize="16"
-                   Placeholder="+966"
-                   Keyboard="Telephone"
-                   Margin="0,0,0,10"/>
+                  
+            FontSize="16"
+                        Placeholder="+966"
+    Grid.Column="1"
+              TextColor="#0E3230"
+            BackgroundColor="White"
+           
+            Keyboard="Telephone"
+           />
+        
 
+         
+              
                 <!-- زر تعديل البيانات -->
                 <Button Text="تعديل البيانات"
                     BackgroundColor="DarkGreen"
+                        FontFamily="FontArabic"
                     TextColor="White"
                     FontSize="16"
                     Clicked="SaveChanges"

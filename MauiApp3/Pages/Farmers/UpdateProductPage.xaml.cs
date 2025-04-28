@@ -33,9 +33,7 @@ namespace MauiApp3.Pages.Farmers
             CategoryPicker.ItemsSource = categories;
             CategoryPicker.ItemDisplayBinding = new Binding("CategoryName");
 
-            var farmers = await _httpClient.GetFromJsonAsync<List<Farmer>>($"{ApiUrl}api/farmers");
-            FarmerPicker.ItemsSource = farmers;
-            FarmerPicker.ItemDisplayBinding = new Binding("Name");
+          
         }
 
         private async Task LoadProductAsync(int id)
@@ -56,14 +54,13 @@ namespace MauiApp3.Pages.Farmers
                 UnitEntry.Text = _product.Unit;
                 DescriptionEditor.Text = _product.Description;
 
-                // Set checkboxes
+             
                 IsOrganicCheckbox.IsChecked = _product.Specification?.IsOrganic ?? false;
                 IsGmofreeCheckbox.IsChecked = _product.Specification?.IsGmofree ?? false;
                 IsHydroponicallyGrownCheckbox.IsChecked = _product.Specification?.IsHydroponicallyGrown ?? false;
                 IsPesticideFreeCheckbox.IsChecked = _product.Specification?.IsPesticideFree ?? false;
                 IsLocalCheckbox.IsChecked = _product.Specification?.IsLocal ?? false;
 
-                // Now that ItemsSource is loaded, we can safely set SelectedItem
                 CategoryPicker.SelectedItem = CategoryPicker.ItemsSource?.Cast<Category>().FirstOrDefault(c => c.CategoryId == _product.CategoryId);
                 FarmerPicker.SelectedItem = FarmerPicker.ItemsSource?.Cast<Farmer>().FirstOrDefault(f => f.FarmerId == _product.FarmerId);
             }

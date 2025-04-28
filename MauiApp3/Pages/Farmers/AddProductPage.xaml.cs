@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using SharedLibraryy.Models;
 using System.Net.Http.Json;
 using System.Text;
-
+using MauiApp3.Helpers;
 namespace MauiApp3.Pages.Farmers;
 
 public partial class AddProductPage : ContentPage
@@ -25,9 +25,11 @@ public partial class AddProductPage : ContentPage
         CategoryPicker.ItemsSource = categories;
         CategoryPicker.ItemDisplayBinding = new Binding("CategoryName");
 
-        var farmers = await _httpClient.GetFromJsonAsync<List<Farmer>>($"{ApiUrl}api/farmers");
-        FarmerPicker.ItemsSource = farmers;
-        FarmerPicker.ItemDisplayBinding = new Binding("Name");
+        // Set Farmer Name
+        if (UserSession.LoggedInFarmer != null)
+        {
+            FarmerNameEntry.Text = UserSession.LoggedInFarmer.Name;
+        }
     }
 
     private async void OnPickImageClicked(object sender, EventArgs e)
@@ -50,10 +52,10 @@ public partial class AddProductPage : ContentPage
             IsHydroponicallyGrown = IsHydroponicallyGrownCheckbox.IsChecked,
             IsPesticideFree = IsPesticideFreeCheckbox.IsChecked,
             IsLocal = IsLocalCheckbox.IsChecked,
-            FarmerId = (FarmerPicker.SelectedItem as Farmer)?.FarmerId ?? null
+            FarmerId = UserSession.LoggedInFarmer?.FarmerId
         };
 
-        // Make sure SpecificationId is not sent with default 0
+       
         typeof(Specification).GetProperty("SpecificationId")?.SetValue(specification, null);
 
         var product = new Product
@@ -64,7 +66,7 @@ public partial class AddProductPage : ContentPage
             Quantity = int.TryParse(QuantityEntry.Text, out var qty) ? qty : 0,
             Weight = double.TryParse(WeightEntry.Text, out var weight) ? weight : 0,
             Unit = UnitEntry.Text,
-            FarmerId = (FarmerPicker.SelectedItem as Farmer)?.FarmerId ?? 0,
+           FarmerId = UserSession.LoggedInFarmer?.FarmerId ?? 1,
             CategoryId = (CategoryPicker.SelectedItem as Category)?.CategoryId ?? 0,
             ImageUrl = _pickedImage != null ? await UploadImageToServer(_pickedImage) : "No Image",
             Description = DescriptionEditor.Text,

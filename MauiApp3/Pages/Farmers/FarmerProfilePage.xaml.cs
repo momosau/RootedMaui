@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Xml;
+using MauiApp3.Helpers;
 
 namespace MauiApp3.Pages.Farmers;
 
@@ -15,20 +16,23 @@ public partial class FarmerProfilePage : ContentPage
     private string apiKey = "8a055776c7d5188e7a86f1c50a071a56";
     private Farmer _farmer;
 
-    public FarmerProfilePage(Farmer farmer)
+    public FarmerProfilePage()
     {
         InitializeComponent();
         LoadProfile();
-        _farmer = farmer;
     }
 
 
- 
+
     private async void LoadProfile()
     {
         try
         {
-            var response = await httpClient.GetStringAsync("https://localhost:7168/api/Farmers");
+            // ✅ Get the FarmerId from the logged-in farmer
+            var farmerId = UserSession.LoggedInFarmer.FarmerId;
+
+            // ✅ Now request this farmer's profile by ID
+            var response = await httpClient.GetStringAsync($"https://localhost:7168/api/Farmers/{farmerId}");
             var farmer = JsonConvert.DeserializeObject<Farmer>(response);
 
             if (farmer != null)
@@ -75,8 +79,11 @@ public partial class FarmerProfilePage : ContentPage
     {
         try
         {
+            var farmerId = UserSession.LoggedInFarmer.FarmerId;
+
             var updateRequest = new UpdateProfileRequest
             {
+                FarmerId = farmerId,
                 PhoneNumber = phoneEntry.Text,
                 ImageUrl = imageUrl
             };
@@ -84,6 +91,7 @@ public partial class FarmerProfilePage : ContentPage
             var json = JsonConvert.SerializeObject(updateRequest);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
+            // ❗ No token needed
             var response = await httpClient.PutAsync("https://localhost:7168/api/Farmers/UpdateProfile", content);
 
             if (response.IsSuccessStatusCode)
@@ -97,6 +105,7 @@ public partial class FarmerProfilePage : ContentPage
         }
     }
 }
+
 
 
         public class UpdateProfileRequest

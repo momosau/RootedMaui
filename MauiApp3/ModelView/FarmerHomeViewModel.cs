@@ -3,7 +3,7 @@ using SharedLibraryy.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-
+using MauiApp3.Helpers;
 namespace MauiApp3.ModelView
 {
     public class FarmerHomeViewModel : INotifyPropertyChanged
@@ -50,18 +50,27 @@ namespace MauiApp3.ModelView
         }
 
         private async void LoadFarmer()
-        {
-            var farmerId = Preferences.Get("FarmerId", 0);
-            if (farmerId == 0)
-                farmerId = 1; // fallback
 
-            Farmer = await _farmerService.GetFarmerByIdAsync(farmerId);
+        {
+
+        
+            var farmer = UserSession.LoggedInFarmer;
+
+            if (farmer == null)
+            {
+              
+                return;
+            }
+            Farmer = farmer;
+
             Console.WriteLine("Farmer loaded: " + Farmer?.Name);
 
-            var reviews = await _farmerService.GetFarmerReviewsAsync(farmerId);
+            // Fetch farmer's reviews and calculate average rating
+            var reviews = await _farmerService.GetFarmerReviewsAsync(farmer.FarmerId);
             Rating = reviews.Any() ? reviews.Average(r => (double)r.Rating) : 0;
 
-            var products = await _productService.GetProductsByFarmerIdAsync(farmerId);
+            // Fetch the farmer's products count
+            var products = await _productService.GetProductsByFarmerIdAsync(farmer.FarmerId);
             ProductCount = products.Count;
             Console.WriteLine("Farmer has " + ProductCount + " products");
         }

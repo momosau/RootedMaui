@@ -58,7 +58,7 @@
                             <VerticalStackLayout>
                                 <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="Black" />
                                 <Label Text="{Binding Category}" TextColor="Gray" />
-                                <Label Text="{Binding Price, StringFormat='Price: {0:C}'}"
+                                    <Label Text="{Binding Price,StringFormat='{0} ريال'}" 
                                        FontSize="14"
                                        TextColor="#4CAF50" />
                             </VerticalStackLayout>
