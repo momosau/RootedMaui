@@ -8,9 +8,9 @@ public partial class CResetPasswordPage : ContentPage
     private string _email;
  //   private const string apiUrl = "https://localhost:7168/api/Consumers/ResetPassword";
 #if ANDROID
-        private const string apiUrl = "http://10.0.2.2:5140/api/Consumers/ResetPassword";
+        private const string apiUrl = "http://10.0.2.2:5140/api/Consumers/FResetPassword";
 #else
-    private const string apiUrl = "https://localhost:7168/api/Consumers/ResetPassword";
+    private const string apiUrl = "https://localhost:7168/api/Consumers/FResetPassword";
 #endif
     private readonly HttpClient _httpClient = new HttpClient();
     public CResetPasswordPage(string email)

@@ -10,9 +10,9 @@ public partial class CForgotPassEmail : ContentPage
 
 
 #if ANDROID
-        private const string apiUrl = "http://10.0.2.2:5140/api/Consumers/ForgotPassword";
+        private const string apiUrl = "http://10.0.2.2:5140/api/Consumers/FForgotPassword";
 #else
-    private const string apiUrl = "https://localhost:7168/api/Consumers/ForgotPassword";
+    private const string apiUrl = "https://localhost:7168/api/Consumers/FForgotPassword";
 #endif
     private readonly HttpClient _httpClient = new HttpClient();
     public CForgotPassEmail()

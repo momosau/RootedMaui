@@ -74,7 +74,7 @@ namespace RootedBack.Controllers
         }
         [Route("FForgotPassword")]
         [HttpPost]
-        public async Task<ActionResult<Consumer>> FForgotPassEmail(RRequestForgotPassword request)
+        public async Task<ActionResult<Consumer>> FForgotPassEmail(ConsumerForgotPasswordRequest request)
         {
             var con = await _context.Consumers.FirstOrDefaultAsync(C => C.Email == request.Email);
 
@@ -85,8 +85,7 @@ namespace RootedBack.Controllers
             return Ok(con);
         }
 
-
-        public class RRequestForgotPassword
+        public class ConsumerForgotPasswordRequest
         {
             public string Email { get; set; } = string.Empty;
         }
@@ -94,8 +93,9 @@ namespace RootedBack.Controllers
 
 
 
+
         [HttpPost("FResetPassword")]
-        public async Task<IActionResult> FResetPassword(RResetPasswordRequest request)
+        public async Task<IActionResult> FResetPassword(ConsumerResetPasswordRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid payload");
@@ -111,14 +111,12 @@ namespace RootedBack.Controllers
             return Ok("Password reset is successful");
         }
 
-        public class RResetPasswordRequest
+        public class ConsumerResetPasswordRequest
         {
-
             public string Email { get; set; } = string.Empty;
             public string Password { get; set; } = string.Empty;
-
-
         }
+
 
 
 
