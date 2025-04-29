@@ -35,7 +35,7 @@ FlowDirection="RightToLeft" >
 
             <!-- Farmer Picker -->
             <Label Text=" اسم المزارع " />
-            <Picker x:Name="FarmerPicker" Title="Select farmer" ItemDisplayBinding="{Binding FarmerName}" />
+            <Entry x:Name="FarmerNameEntry" IsReadOnly="True" Placeholder="المزارع" />
 
             <!-- Description -->
             <Label Text="الوصف" />

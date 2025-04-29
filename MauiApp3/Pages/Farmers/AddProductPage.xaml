@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp3.Pages.Farmers.AddProductPage"
-             Title="AddProductPage"
+             Title="إضافة منتجات"
              FlowDirection="RightToLeft">
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="10">
@@ -48,7 +48,7 @@
 
             <HorizontalStackLayout Spacing="10">
                 <CheckBox x:Name="IsHydroponicallyGrownCheckbox" />
-                <Label Text="مزوع مائيا" VerticalOptions="Center" />
+                <Label Text="مزروع مائيا" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
             <HorizontalStackLayout Spacing="10">

@@ -15,7 +15,12 @@ public partial class FarmerProfilePage : ContentPage
     private string imageUrl = "";
     private string apiKey = "8a055776c7d5188e7a86f1c50a071a56";
     private Farmer _farmer;
-
+    private static readonly string _baseUrl =
+#if ANDROID
+       "http://10.0.2.2:5140/api";
+#else
+       "https://localhost:7168/api";
+#endif
     public FarmerProfilePage()
     {
         InitializeComponent();
@@ -28,11 +33,11 @@ public partial class FarmerProfilePage : ContentPage
     {
         try
         {
-            // ✅ Get the FarmerId from the logged-in farmer
             var farmerId = UserSession.LoggedInFarmer.FarmerId;
 
-            // ✅ Now request this farmer's profile by ID
-            var response = await httpClient.GetStringAsync($"https://localhost:7168/api/Farmers/{farmerId}");
+        
+         
+            var response = await httpClient.GetStringAsync($"{_baseUrl}/Farmers/{farmerId}");
             var farmer = JsonConvert.DeserializeObject<Farmer>(response);
 
             if (farmer != null)
@@ -92,7 +97,8 @@ public partial class FarmerProfilePage : ContentPage
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
             // ❗ No token needed
-            var response = await httpClient.PutAsync("https://localhost:7168/api/Farmers/UpdateProfile", content);
+            var response = await httpClient.PutAsync($"{_baseUrl}/Farmers/UpdateProfile", content);
+
 
             if (response.IsSuccessStatusCode)
                 await DisplayAlert("تم", "تم حفظ التعديلات بنجاح", "موافق");

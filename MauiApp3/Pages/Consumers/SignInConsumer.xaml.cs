@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 using MauiApp3.Helpers;
-using SharedLibraryy.Models;
+
 namespace MauiApp3.Pages.Consumers;
 
 public partial class SignInConsumer : ContentPage
@@ -27,8 +27,10 @@ public partial class SignInConsumer : ContentPage
         {
             var loginRequest = new ConsumerLoginRequest
             {
+
+                //  Email = EmailEntry.Text?.Trim(),
                 Email = EmailEntry.Text?.Trim(),
-                Password = PasswordEntry.Text?.Trim()
+                Password = PasswordEntry.Text?.Trim(),
             };
 
             var response = await _httpClient.PostAsJsonAsync(apiKey, loginRequest);
@@ -38,7 +40,7 @@ public partial class SignInConsumer : ContentPage
                 var consumer = await response.Content.ReadFromJsonAsync<SharedLibraryy.Models.Consumer>();
 
                 UserSession.LoggedInConsumer = consumer;
-                await DisplayAlert("نجاح", $"مرحبًا {consumer?.Name}!", "موافق");
+             //   await DisplayAlert("نجاح", $"مرحبًا {consumer?.Name}!", "موافق");
                 // توجيه المستخدم للصفحة الرئيسية
                 //     await Navigation.PushAsync(new ConsumerHomePage(consumer));
              

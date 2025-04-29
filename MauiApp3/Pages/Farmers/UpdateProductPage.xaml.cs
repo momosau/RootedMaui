@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using SharedLibraryy.Models;
 using System.Net.Http.Json;
 using System.Text;
+using MauiApp3.Helpers;
 
 namespace MauiApp3.Pages.Farmers
 {
@@ -62,7 +63,10 @@ namespace MauiApp3.Pages.Farmers
                 IsLocalCheckbox.IsChecked = _product.Specification?.IsLocal ?? false;
 
                 CategoryPicker.SelectedItem = CategoryPicker.ItemsSource?.Cast<Category>().FirstOrDefault(c => c.CategoryId == _product.CategoryId);
-                FarmerPicker.SelectedItem = FarmerPicker.ItemsSource?.Cast<Farmer>().FirstOrDefault(f => f.FarmerId == _product.FarmerId);
+                if (UserSession.LoggedInFarmer != null)
+                {
+                    FarmerNameEntry.Text = UserSession.LoggedInFarmer.Name;
+                }
             }
             catch (Exception ex)
             {
@@ -83,7 +87,7 @@ namespace MauiApp3.Pages.Farmers
             _product.Unit = UnitEntry.Text;
             _product.Description = DescriptionEditor.Text;
             _product.CategoryId = (CategoryPicker.SelectedItem as Category)?.CategoryId ?? _product.CategoryId;
-            _product.FarmerId = (FarmerPicker.SelectedItem as Farmer)?.FarmerId ?? _product.FarmerId;
+            _product.FarmerId = UserSession.LoggedInFarmer?.FarmerId ?? _product.FarmerId;
 
             _product.Specification ??= new Specification();
             _product.Specification.IsOrganic = IsOrganicCheckbox.IsChecked;

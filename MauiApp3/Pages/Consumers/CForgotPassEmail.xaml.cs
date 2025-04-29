@@ -23,7 +23,7 @@ public partial class CForgotPassEmail : ContentPage
 
     private async void CheckEmailClicked(object sender, EventArgs e)
     {
-        var ForgotPassword = new RequestForgotPassword
+        var ForgotPassword = new RRequestForgotPassword
         {
             Email = EmailEntry.Text,
         };
@@ -44,7 +44,7 @@ public partial class CForgotPassEmail : ContentPage
 
 }
 
-public class RequestForgotPassword
+public class RRequestForgotPassword
 {
     public string Email { get; set; } = string.Empty;
 }
