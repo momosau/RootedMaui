@@ -3,6 +3,7 @@ using MauiApp3.Services;
 using SharedLibraryy.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 namespace MauiApp3.ModelView
 {
     public partial class ProductPageViewModel : INotifyPropertyChanged
@@ -14,11 +15,20 @@ namespace MauiApp3.ModelView
         public ObservableCollection<Product> products { get; set; } = new();
         public ObservableCollection<Category> Categories { get; set; } = new();
         public ObservableCollection<Product> FilteredProducts { get; set; } = new ObservableCollection<Product>();
-
+        public ICommand AddToCartCommand { get; }
         public Command<int> ChangeCategoryCommand { get; }
         private readonly ICartService _cartService;
+        public int QuantityInCart
+        {
+            get => _quantityInCart;
+            set
+            {
+                _quantityInCart = value;
+                OnPropertyChanged(nameof(QuantityInCart));
+            }
+        }
 
-        public Command<Product> AddToCartCommand { get; }
+        public Product SelectedProduct { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public ProductPageViewModel(int selectedCategoryId, IProductService productService , ICartService cartService, INavigation navigation)
@@ -32,14 +42,26 @@ namespace MauiApp3.ModelView
             ChangeCategoryCommand = new Command<int>(categoryId => SetCategory(categoryId));
             ViewProductCommand = new Command<Product>(OnProductSelected);
             this._cartService = cartService;
-            AddToCartCommand = new Command<Product>(AddToCart);
-
+            AddToCartCommand = new Command(async () => await AddToCartAsync());
 
             GetCategories();
             GetProduct();
         }
 
 
+        private async Task AddToCartAsync()
+        {
+            if (SelectedProduct == null) return;
+
+            // Add product to the cart
+            _cartService.AddProductToCart(SelectedProduct,1);
+
+            // Update the IsInCart status
+           SelectedProduct.IsInCart= true;
+
+            // Optionally, navigate to the cart page
+            await _navigation.PushAsync(new Pages.Consumers.ShoppingCart(_cartService));
+        }
 
         private void SetCategory(int categoryId)
         {
@@ -132,6 +154,8 @@ namespace MauiApp3.ModelView
         }
 
         private int _selectedFarmerId;
+        private int _quantityInCart;
+
         public int SelectedFarmerId
         {
             get => _selectedFarmerId;
@@ -186,43 +210,7 @@ namespace MauiApp3.ModelView
             }
             await _navigation.PushAsync(new Pages.Consumers.ProductInfo(product, productService));
         }
-        private async void AddToCart(Product product)
-        {
-            if (product == null)
-                return;
-
-            // Check if the product is already in the cart
-            var existingCartItem = _cartService.GetCart().FirstOrDefault(c => c.ProductId == product.ProductId);
-
-            if (existingCartItem == null)
-            {
-                // Create a new Cart item with the required properties (e.g., Quantity, Amount)
-                var cartItem = new Cart
-                {
-                    ProductId = product.ProductId,
-                    Product = product,
-                    Quantity = 1, // Default quantity when adding for the first time
-                    Price = (decimal)product.Price,
-                    Amount = (decimal)product.Price * 1 // Amount is price * quantity
-                };
-
-                _cartService.AddProductToCart(cartItem.Product, cartItem.Quantity);
-                product.IsInCart = true; // Mark as added to cart
-            }
-            else
-            {
-                // If the product is already in the cart, you can just update the quantity or do any other logic you need
-                existingCartItem.Quantity++;
-                existingCartItem.Amount = existingCartItem.Price * existingCartItem.Quantity;
-            }
-
-            // Navigate to the CartPage after adding the product to the cart
-            await _navigation.PushAsync(new Pages.Consumers.ShoppingCart(_cartService));
-        }
-
-
-
-
+       
     }
 
 }

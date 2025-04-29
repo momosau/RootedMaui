@@ -15,10 +15,19 @@ public partial class ShoppingCart : ContentPage
     {
         InitializeComponent();
 
-        _cartViewModel = new CartViewModel(cartService);
+        // Get CartViewModel from Dependency Injection container
+        _cartViewModel = Ioc.Default.GetRequiredService<CartViewModel>();
 
-        BindingContext = Ioc.Default.GetRequiredService<CartViewModel>();
+        // Check if _cartViewModel is null
+        if (_cartViewModel == null)
+        {
+            Console.WriteLine("CartViewModel is null");
+            // Handle the null case, maybe set a default value or log an error
+        }
+
+        BindingContext = _cartViewModel;
     }
+
     private void OnIncreaseClicked(object sender, EventArgs e)
     {
         if (sender is Button button && button.BindingContext is Cart cartItem)
@@ -40,23 +49,29 @@ public partial class ShoppingCart : ContentPage
         {
             if (cartItem.Quantity > 1)
             {
+                // Decrease quantity
                 cartItem.Quantity -= 1;
-                (BindingContext as CartViewModel)?.RecalculateTotal();
             }
             else
             {
+                // Confirm removal
                 var confirm = await DisplayAlert("تأكيد", "هل تريد إزالة هذا المنتج من السلة؟", "نعم", "لا");
                 if (confirm)
                 {
+                    // Remove item from Cart
                     _cartViewModel.Cartitem.Remove(cartItem);
-                    _cartViewModel.RecalculateTotal();
                 }
-
             }
 
+            // Recalculate total after the update
+            _cartViewModel.RecalculateTotal();
+            // Optionally, notify UI explicitly about changes
+            OnPropertyChanged(nameof(_cartViewModel.Cartitem)); // Notify UI if needed
         }
     }
+
 }
+
 
 
 

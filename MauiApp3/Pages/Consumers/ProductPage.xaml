@@ -71,32 +71,7 @@
                    HorizontalOptions="Center" TextColor="Black" FontAttributes="Bold"/>
                                         <Label Text="{Binding Farmer.FarmName}" FontSize="20" TextColor="#34495e"/>
                                     </VerticalStackLayout>
-                                    <Button 
-    Text="Add to Cart"
-    Command="{Binding Source={RelativeSource AncestorType={x:Type ModelView:ProductPageViewModel}}, Path=AddToCartCommand}"
-    CommandParameter="{Binding .}" TextColor="White" WidthRequest="40" HeightRequest="40" CornerRadius="50" >
-                                        <Button.Triggers>
-                                            <!-- When already in cart -->
-                                            <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="True">
-                                                <Setter Property="Text" Value="✓" />
-                                                <Setter Property="BackgroundColor" Value="LightGreen" />
-                                                <Setter Property="TextColor" Value="White"/>
-                                                <Setter Property="IsEnabled" Value="False" />
-                                            </DataTrigger>
-
-                                            <!-- When not in cart -->
-                                            <DataTrigger TargetType="Button" Binding="{Binding IsInCart}" Value="False">
-                                                <Setter Property="Text" Value="+"  />
-                                                <Setter Property="BackgroundColor" Value="LightGreen" />
-                                                <Setter Property="TextColor" Value="White"/>
-                                                <Setter Property="FontSize" Value="Medium"/>
-                                                <Setter Property="FontAttributes" Value="Bold"/>
-                                                <Setter Property="IsEnabled" Value="True" />
-                                            </DataTrigger>
-                                        </Button.Triggers>
-                                    </Button>
-
-
+                                  
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </Frame>

@@ -32,9 +32,9 @@ namespace MauiApp3
             App.UserType = "consumer";
 
             //  await Navigation.PushAsync(new Pages.Consumers.SignUpConsumer());
-            await Shell.Current.GoToAsync(nameof(Pages.Consumers.SignInConsumer));
+            //await Shell.Current.GoToAsync(nameof(Pages.Consumers.SignInConsumer));
 
-            //Application.Current.MainPage = new ConsumerShell();
+           Application.Current.MainPage = new ConsumerShell();
 
 
         }
