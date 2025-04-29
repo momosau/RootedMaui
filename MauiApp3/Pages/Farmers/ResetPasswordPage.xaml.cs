@@ -1,19 +1,19 @@
 ﻿using System.Net.Http.Json;
+using SharedLibraryy.Models;
 
-namespace MauiApp3.Pages.Consumers;
+namespace MauiApp3.Pages.Farmers;
 
-public partial class CResetPasswordPage : ContentPage
+public partial class ResetPasswordPage : ContentPage
 {
     private bool PasswordVisible = false;
     private string _email;
- //   private const string apiUrl = "https://localhost:7168/api/Consumers/ResetPassword";
 #if ANDROID
-        private const string apiUrl = "http://10.0.2.2:5140/api/Consumers/FResetPassword";
+        private const string apiUrl = "http://10.0.2.2:5140/api/Farmers/ResetPassword";
 #else
-    private const string apiUrl = "https://localhost:7168/api/Consumers/FResetPassword";
+    private const string apiUrl = "https://localhost:7168/api/Farmers/ResetPassword";
 #endif
     private readonly HttpClient _httpClient = new HttpClient();
-    public CResetPasswordPage(string email)
+    public ResetPasswordPage(string email)
     {
         InitializeComponent();
         _email = email;
@@ -50,6 +50,7 @@ public partial class CResetPasswordPage : ContentPage
         {
             await DisplayAlert("خطأ", "كلمة المرور غير متطابقة", "موافق");
             return;
+
         }
 
         var ResetPassword = new ResetPasswordRequest
@@ -73,7 +74,6 @@ public partial class CResetPasswordPage : ContentPage
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-
 
     }
 }

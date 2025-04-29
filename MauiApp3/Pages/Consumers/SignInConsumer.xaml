@@ -7,8 +7,9 @@
              Shell.NavBarIsVisible="False"
              FlowDirection="RightToLeft"
              >
+    <ScrollView>
 
-    <VerticalStackLayout Padding="10"
+        <VerticalStackLayout Padding="10"
                          Spacing="20">
         <Image
           Source="rooted_logo.png" 
@@ -150,4 +151,5 @@ TextColor="#6D3D24"
         </VerticalStackLayout>
 
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

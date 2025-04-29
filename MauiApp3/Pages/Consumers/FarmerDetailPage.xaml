@@ -5,7 +5,7 @@
              xmlns:Model="clr-namespace:SharedLibraryy.Models;assembly=SharedLibraryy"
              xmlns:ViewModel="clr-namespace:MauiApp3.ModelView"
              x:DataType="ViewModel:FarmerDetailViewModel"
-             Title="FarmerDetailPage"
+             Title="معلومات المزارع"
              FlowDirection="RightToLeft"
              BackgroundColor="#EAE9E2">
 

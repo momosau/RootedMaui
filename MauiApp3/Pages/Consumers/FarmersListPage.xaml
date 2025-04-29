@@ -4,7 +4,7 @@
               xmlns:viewModel="clr-namespace:MauiApp3.ModelView"
              x:Class="MauiApp3.Pages.Consumers.FarmersListPage"
              
-             Title="FarmersListPage"
+             Title="المزارعين"
              
  FlowDirection="RightToLeft"
          

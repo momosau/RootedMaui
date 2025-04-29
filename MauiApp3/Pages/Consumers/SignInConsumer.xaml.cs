@@ -1,6 +1,7 @@
 ﻿using SharedLibraryy.Models;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
+using MauiApp3.Helpers;
 
 namespace MauiApp3.Pages.Consumers;
 
@@ -26,18 +27,23 @@ public partial class SignInConsumer : ContentPage
         {
             var loginRequest = new ConsumerLoginRequest
             {
+
+                //  Email = EmailEntry.Text?.Trim(),
                 Email = EmailEntry.Text?.Trim(),
-                Password = PasswordEntry.Text?.Trim()
+                Password = PasswordEntry.Text?.Trim(),
             };
 
-            var response = await _httpClient.PostAsJsonAsync("http://10.0.2.2:5140/api/Consumers/Login", loginRequest);
+            var response = await _httpClient.PostAsJsonAsync(apiKey, loginRequest);
 
             if (response.IsSuccessStatusCode)
             {
-                var consumer = await response.Content.ReadFromJsonAsync<Consumer>();
-                await DisplayAlert("نجاح", $"مرحبًا {consumer?.Name}!", "موافق");
+                var consumer = await response.Content.ReadFromJsonAsync<SharedLibraryy.Models.Consumer>();
+
+                UserSession.LoggedInConsumer = consumer;
+             //   await DisplayAlert("نجاح", $"مرحبًا {consumer?.Name}!", "موافق");
                 // توجيه المستخدم للصفحة الرئيسية
-           //     await Navigation.PushAsync(new ConsumerHomePage(consumer));
+                //     await Navigation.PushAsync(new ConsumerHomePage(consumer));
+             
                 Application.Current.MainPage = new ConsumerShell();
             }
             else

@@ -1,67 +1,84 @@
-﻿using Newtonsoft.Json;
-using SharedLibraryy.Models; // Assuming your Consumer model is here
+﻿using Microsoft.Maui.Controls;
+using Newtonsoft.Json;
+using SharedLibraryy.Models;
 using System.Net.Http;
+using System.Text;
+using MauiApp3.Helpers;
+using System.Xml;
 
 namespace MauiApp3.Pages.Consumers
 {
     public partial class ConsumerProfilePage : ContentPage
     {
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient httpClient = new HttpClient();
+        private Consumer _consumer;
+        private static readonly string _baseUrl =
 #if ANDROID
-        private const string ApiUrl = "http://10.0.2.2:5140/api/Consumers";
+       "http://10.0.2.2:5140/api";
 #else
-        private const string ApiUrl = "https://localhost:7168/api/Consumers";
+   "https://localhost:7168/api";
 #endif
-
         public ConsumerProfilePage()
         {
             InitializeComponent();
-            LoadConsumerProfile();
+            LoadProfile();
         }
 
-        private async void LoadConsumerProfile()
+        private async void LoadProfile()
         {
             try
             {
-                var consumerId = Preferences.Get("ConsumerId", 1); // Assuming consumerId is stored in preferences
-                Console.WriteLine($"Consumer ID: {consumerId}");
+                var consumerId = UserSession.LoggedInConsumer.ConsumerId;
 
-                if (consumerId == 0)
-                {
-                    await DisplayAlert("خطأ", "لم يتم العثور على معلومات المستهلك", "موافق");
-                    return;
-                }
+                var response = await httpClient.GetStringAsync($"{_baseUrl}/Consumers/{consumerId}");
 
-                var response = await _httpClient.GetAsync($"{ApiUrl}/{consumerId}");
-                Console.WriteLine($"API Response Status: {response.StatusCode}");
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    await DisplayAlert("خطأ", "فشل في تحميل البيانات", "موافق");
-                    return;
-                }
-
-                var json = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"API Response: {json}");
-
-                var consumer = JsonConvert.DeserializeObject<Consumer>(json);
+                var consumer = JsonConvert.DeserializeObject<Consumer>(response);
 
                 if (consumer != null)
                 {
-                    BindingContext = consumer; // Bind the consumer data to the page
-                    Console.WriteLine($"Consumer Loaded: {consumer.Name}");
-                }
-                else
-                {
-                    await DisplayAlert("خطأ", "لم يتم العثور على بيانات المستهلك", "موافق");
+                    nameLabel.Text = consumer.Name;
+                    emailLabel.Text = consumer.Email;
+                    phoneEntry.Text = consumer.PhoneNumber;
                 }
             }
             catch (Exception ex)
             {
-                await DisplayAlert("خطأ", $"حدث خطأ: {ex.Message}", "موافق");
-                Console.WriteLine($"Exception: {ex.Message}");
+                await DisplayAlert("خطأ", $"فشل تحميل البيانات: {ex.Message}", "موافق");
             }
         }
 
+        private async void SaveChanges(object sender, EventArgs e)
+        {
+            try
+            {
+                var consumerId = UserSession.LoggedInConsumer.ConsumerId;
+
+                var updateRequest = new UpdateConsumerProfileRequest
+                {
+                    ConsumerId = consumerId,
+                    PhoneNumber = phoneEntry.Text
+                };
+
+                var json = JsonConvert.SerializeObject(updateRequest);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await httpClient.PutAsync($"{_baseUrl}/Consumers/UpdateConsumerProfile", content);
+
+                if (response.IsSuccessStatusCode)
+                    await DisplayAlert("تم", "تم حفظ التعديلات بنجاح", "موافق");
+                else
+                    await DisplayAlert("خطأ", "فشل حفظ التعديلات", "موافق");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("خطأ", $"حدث خطأ أثناء حفظ التعديلات: {ex.Message}", "موافق");
+            }
+        }
+    }
+
+    public class UpdateConsumerProfileRequest
+    {
+        public int ConsumerId { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

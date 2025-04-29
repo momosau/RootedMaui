@@ -72,22 +72,20 @@ namespace RootedBack.Controllers
 
             return NoContent();
         }
-
-        [Route("ForgotPassword")]
+        [Route("FForgotPassword")]
         [HttpPost]
-        public async Task<ActionResult<Consumer>> ForgotPassEmail(RequestForgotPassword request)
+        public async Task<ActionResult<Consumer>> FForgotPassEmail(ConsumerForgotPasswordRequest request)
         {
-            var consumer = await _context.Consumers.FirstOrDefaultAsync(C => C.Email == request.Email);
+            var con = await _context.Consumers.FirstOrDefaultAsync(C => C.Email == request.Email);
 
-            if (consumer == null)
+            if (con == null)
             {
                 return BadRequest("Invalid payload");
             }
-            return Ok(consumer);
+            return Ok(con);
         }
 
-
-        public class RequestForgotPassword
+        public class ConsumerForgotPasswordRequest
         {
             public string Email { get; set; } = string.Empty;
         }
@@ -95,30 +93,28 @@ namespace RootedBack.Controllers
 
 
 
-        [HttpPost("ResetPassword")]
-        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+
+        [HttpPost("FResetPassword")]
+        public async Task<IActionResult> FResetPassword(ConsumerResetPasswordRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid payload");
 
-            var consumer = await _context.Consumers.FirstOrDefaultAsync(c => c.Email == request.Email);
-            if (consumer == null)
+            var con = await _context.Consumers.FirstOrDefaultAsync(c => c.Email == request.Email);
+            if (con == null)
                 return BadRequest("Invalid request");
 
 
-            consumer.Password = request.Password;
+            con.Password = request.Password;
             await _context.SaveChangesAsync();
 
             return Ok("Password reset is successful");
         }
 
-        public class ResetPasswordRequest
+        public class ConsumerResetPasswordRequest
         {
-
             public string Email { get; set; } = string.Empty;
             public string Password { get; set; } = string.Empty;
-
-
         }
 
 
@@ -217,6 +213,27 @@ namespace RootedBack.Controllers
             }
 
             return Ok("تم العثور على البريد الإلكتروني.");
+        }
+        [HttpPut("UpdateConsumerProfile")]
+        public async Task<IActionResult> UpdateConsumerProfile([FromBody] UpdateConsumerProfileRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.PhoneNumber))
+                return BadRequest("رقم الجوال غير صحيح");
+
+            var consumer = await _context.Consumers.FirstOrDefaultAsync(c => c.ConsumerId == request.ConsumerId);
+            if (consumer == null)
+                return NotFound("لم يتم العثور على المستهلك");
+
+            consumer.PhoneNumber = request.PhoneNumber;
+
+            await _context.SaveChangesAsync();
+
+            return Ok("تم تحديث رقم الجوال بنجاح");
+        }
+        public class UpdateConsumerProfileRequest
+        {
+            public int ConsumerId { get; set; }
+            public string PhoneNumber { get; set; }
         }
 
         public class EmailCheckRequest

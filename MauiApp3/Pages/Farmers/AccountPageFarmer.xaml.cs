@@ -1,4 +1,9 @@
-﻿namespace MauiApp3.Pages.Farmers;
+﻿
+
+using MauiApp3.Helpers;
+namespace MauiApp3.Pages.Farmers;
+
+
 
 public partial class AccountPageFarmer : ContentPage
 {
@@ -42,7 +47,9 @@ public partial class AccountPageFarmer : ContentPage
         if (confirm)
         {
             //object value = await AuthenticationService.SignOutAsync();
-            Application.Current.MainPage = new NavigationPage(new MainPage());
+            SessionManager.SignOut();
+            Application.Current.MainPage = new AppShell(); // or FarmerShell / ConsumerShell
+
 
 
         }

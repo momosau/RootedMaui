@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp3.Pages.Farmers.ProductsPage"
-             Title="Products" BackgroundColor="WhiteSmoke"
+            BackgroundColor="WhiteSmoke"
+             Title="المنتجات"
              FlowDirection="RightToLeft">
 
     <ContentPage.Resources>
@@ -58,7 +59,7 @@
                             <VerticalStackLayout>
                                 <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="Black" />
                                 <Label Text="{Binding Category}" TextColor="Gray" />
-                                <Label Text="{Binding Price, StringFormat='Price: {0:C}'}"
+                                    <Label Text="{Binding Price,StringFormat='{0} ريال'}" 
                                        FontSize="14"
                                        TextColor="#4CAF50" />
                             </VerticalStackLayout>

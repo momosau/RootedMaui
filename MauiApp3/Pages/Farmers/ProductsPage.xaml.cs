@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MauiApp3.Helpers;
+using Newtonsoft.Json;
 using SharedLibraryy.Models;
 using System.Diagnostics;
 
@@ -32,16 +33,28 @@ public partial class ProductsPage : ContentPage
     {
         try
         {
+            var farmerId = UserSession.LoggedInFarmer?.FarmerId ?? 1; 
+
+            if (farmerId == 0)
+            {
+                await DisplayAlert("Error", "No logged-in farmer found.", "OK");
+                return;
+            }
+
             var response = await _httpClient.GetStringAsync($"{ApiUrl}api/products");
             var products = JsonConvert.DeserializeObject<List<Product>>(response);
-            ProductsView.ItemsSource = products.Where(w => w.FarmerId==2).ToList();
+
+     
+            var farmerProducts = products?.Where(p => p.FarmerId == farmerId).ToList();
+
+           
+            ProductsView.ItemsSource = farmerProducts;
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"Failed to load products: {ex.Message}", "OK");
+            await DisplayAlert("Error", $"خطأ في تحميل المنتجات: {ex.Message}", "OK");
         }
     }
-
     private void OnProductSelected(object sender, SelectionChangedEventArgs e)
     {
         _selectedProduct = (Product)e.CurrentSelection.FirstOrDefault()!;

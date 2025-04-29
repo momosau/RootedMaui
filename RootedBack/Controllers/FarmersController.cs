@@ -53,6 +53,56 @@ namespace RootedBack.Controllers
 
 
 
+        [Route("ForgotPassword")]
+        [HttpPost]
+        public async Task<ActionResult<Farmer>> ForgotPassEmail(RequestForgotPassword request)
+        {
+            var Far = await _context.Farmers.FirstOrDefaultAsync(C => C.Email == request.Email);
+
+            if (Far == null)
+            {
+                return BadRequest("Invalid payload");
+            }
+            return Ok(Far);
+        }
+
+
+        public class RequestForgotPassword
+        {
+            public string Email { get; set; } = string.Empty;
+        }
+
+
+
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid payload");
+
+            var Far = await _context.Farmers.FirstOrDefaultAsync(c => c.Email == request.Email);
+            if (Far == null)
+                return BadRequest("Invalid request");
+
+
+            Far.Password = request.Password;
+            await _context.SaveChangesAsync();
+
+            return Ok("Password reset is successful");
+        }
+
+        public class ResetPasswordRequest
+        {
+
+            public string Email { get; set; } = string.Empty;
+            public string Password { get; set; } = string.Empty;
+
+
+        }
+
+
+
 
         // PUT: api/Farmers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -188,6 +238,7 @@ namespace RootedBack.Controllers
         }
 
 
+
         public class FarmerLoginRequest
         {
             public string Email { get; set; }
@@ -214,11 +265,7 @@ namespace RootedBack.Controllers
 
 
 
-        public class ResetPasswordRequest
-        {
-            public string Email { get; set; }
-            public string NewPassword { get; set; }
-        }
+       
 
         [HttpPut("UpdateProfile")]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequest request)
@@ -226,16 +273,11 @@ namespace RootedBack.Controllers
             if (string.IsNullOrWhiteSpace(request.PhoneNumber) || string.IsNullOrWhiteSpace(request.ImageUrl))
                 return BadRequest("رقم الجوال أو رابط الصورة غير صحيح");
 
-            // استخدام البريد من التوكن
-            var email = User.Identity?.Name;
-            if (string.IsNullOrEmpty(email))
-                return Unauthorized("لم يتم تحديد هوية المستخدم");
-
-            var farmer = await _context.Farmers.FirstOrDefaultAsync(f => f.Email == email);
+            // Find farmer directly by FarmerId
+            var farmer = await _context.Farmers.FirstOrDefaultAsync(f => f.FarmerId == request.FarmerId);
             if (farmer == null)
                 return NotFound("لم يتم العثور على المزارع");
 
-            // التحديث
             farmer.PhoneNumber = request.PhoneNumber;
             farmer.ImageUrl = request.ImageUrl;
 
@@ -243,15 +285,19 @@ namespace RootedBack.Controllers
 
             return Ok("تم تحديث البيانات بنجاح");
         }
+       
 
 
     }
 }
+
+
     public class UpdateProfileRequest
     {
-        public string PhoneNumber { get; set; }
-        public string ImageUrl { get; set; }
-    }
+    public int FarmerId { get; set; }
+    public string PhoneNumber { get; set; }
+    public string ImageUrl { get; set; }
+}
 
 
 

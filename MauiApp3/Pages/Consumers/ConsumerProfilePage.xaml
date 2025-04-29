@@ -13,66 +13,73 @@
                 <Image Source="profile.png" x:Name="ProfileImage" WidthRequest="96" HeightRequest="96" Aspect="AspectFill" />
             </Border>
 
-           
+
 
             <Label Text="التفاصيل الشخصية :" 
-                   FontSize="18"
-                   TextColor="#0E3230"
-                   FontFamily="FontArabic"
-                   FontAttributes="Bold" />
+   FontSize="18"
+   TextColor="#0E3230"
+   FontFamily="FontArabic"
+   FontAttributes="Bold" />
 
             <Label Text="اسم المستخدم" 
-                   TextColor="#0E3230"
-                   FontFamily="FontArabic"
-                   FontAttributes="Bold"
-                   FontSize="14"/>
-            <Entry x:Name="NameEntry"
-                   FontSize="16"
-                   BackgroundColor="White"
-                   Placeholder="جاري التحميل..."
-                     TextColor="#0E3230"
-                   Text="{Binding Name}"/>
+   TextColor="#0E3230"
+   FontFamily="FontArabic"
+   FontAttributes="Bold"
+   FontSize="14"/>
+            <Entry x:Name="nameLabel"
+   FontSize="16"
+   BackgroundColor="LightGrey"
+   IsReadOnly="True"
+               
+     TextColor="#0E3230"
+  />
+
 
             <Label Text="البريد الإلكتروني" 
-                   TextColor="#0E3230"
-                   FontAttributes="Bold"
-                   FontFamily="FontArabic"
-                   FontSize="14"/>
-            <Entry x:Name="Email"
-                   FontSize="16"
-                     TextColor="#0E3230"
-                   BackgroundColor="White"
-                   Placeholder="جاري التحميل..." 
-                   IsReadOnly="True"
-                   
-                   Keyboard="Email"
-                   Text="{Binding Email}"/>
+     TextColor="#0E3230"
+     FontAttributes="Bold"
+     FontFamily="FontArabic"
+     FontSize="14"/>
+            <Entry x:Name="emailLabel"
+     FontSize="16"
+       TextColor="#0E3230"
+ BackgroundColor="LightGrey"
+ 
+     IsReadOnly="True"
+     
+     Keyboard="Email"
+   />
 
             <Label Text="رقم الهاتف" 
-                   TextColor="#0E3230"
-                   FontFamily="FontArabic"
-                   FontAttributes="Bold"
-                   FontSize="14"/>
-            <Grid ColumnDefinitions="Auto, *">
-                <Label Text="+966 |" 
-                       FontSize="16" 
-                       VerticalTextAlignment="Center"/>
-                <Entry x:Name="PhoneEntry"
-                       FontSize="16"
-                         TextColor="#0E3230"
-                       BackgroundColor="White"
-                       Placeholder="جاري التحميل..."
-                       Keyboard="Telephone"
-                       Text="{Binding PhoneNumber}"/>
-            </Grid>
+    TextColor="#0E3230"
+    FontFamily="FontArabic"
+    FontAttributes="Bold"
+    FontSize="14"/>
 
+            <Entry x:Name="phoneEntry"
+              
+        FontSize="16"
+                    Placeholder="+966"
+Grid.Column="1"
+          TextColor="#0E3230"
+        BackgroundColor="White"
+       
+        Keyboard="Telephone"
+       />
+
+
+
+
+            <!-- زر تعديل البيانات -->
             <Button Text="تعديل البيانات"
-                    BackgroundColor="#3E6F41"
-                    TextColor="White"
+                BackgroundColor="DarkGreen"
                     FontFamily="FontArabic"
-                    FontSize="18"
-                    CornerRadius="10"
-                    FontAttributes="Bold"/>
+                TextColor="White"
+                FontSize="16"
+                Clicked="SaveChanges"
+                CornerRadius="8"
+                HeightRequest="50" />
+
         </VerticalStackLayout>
     </ScrollView>
 

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="MauiApp3.Pages.Consumers.CategoriesPage"
              xmlns:coverters="clr-namespace:MauiApp3.Converter"
-             Title="CategoriesPage"
+             Title="التصنيفات"
              BackgroundColor="#E7E9E4" 
           
          >

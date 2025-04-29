@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Xml;
+using MauiApp3.Helpers;
 
 namespace MauiApp3.Pages.Farmers;
 
@@ -14,21 +15,29 @@ public partial class FarmerProfilePage : ContentPage
     private string imageUrl = "";
     private string apiKey = "8a055776c7d5188e7a86f1c50a071a56";
     private Farmer _farmer;
-
-    public FarmerProfilePage(Farmer farmer)
+    private static readonly string _baseUrl =
+#if ANDROID
+       "http://10.0.2.2:5140/api";
+#else
+       "https://localhost:7168/api";
+#endif
+    public FarmerProfilePage()
     {
         InitializeComponent();
         LoadProfile();
-        _farmer = farmer;
     }
 
 
- 
+
     private async void LoadProfile()
     {
         try
         {
-            var response = await httpClient.GetStringAsync("https://localhost:7168/api/Farmers");
+            var farmerId = UserSession.LoggedInFarmer.FarmerId;
+
+        
+         
+            var response = await httpClient.GetStringAsync($"{_baseUrl}/Farmers/{farmerId}");
             var farmer = JsonConvert.DeserializeObject<Farmer>(response);
 
             if (farmer != null)
@@ -75,8 +84,11 @@ public partial class FarmerProfilePage : ContentPage
     {
         try
         {
+            var farmerId = UserSession.LoggedInFarmer.FarmerId;
+
             var updateRequest = new UpdateProfileRequest
             {
+                FarmerId = farmerId,
                 PhoneNumber = phoneEntry.Text,
                 ImageUrl = imageUrl
             };
@@ -84,7 +96,9 @@ public partial class FarmerProfilePage : ContentPage
             var json = JsonConvert.SerializeObject(updateRequest);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PutAsync("https://localhost:7168/api/Farmers/UpdateProfile", content);
+            // ❗ No token needed
+            var response = await httpClient.PutAsync($"{_baseUrl}/Farmers/UpdateProfile", content);
+
 
             if (response.IsSuccessStatusCode)
                 await DisplayAlert("تم", "تم حفظ التعديلات بنجاح", "موافق");
@@ -97,6 +111,7 @@ public partial class FarmerProfilePage : ContentPage
         }
     }
 }
+
 
 
         public class UpdateProfileRequest

@@ -1,9 +1,9 @@
-using System;
+Ôªøusing System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using Microsoft.Maui.Controls;
 using SharedLibraryy.Models;
-
+using MauiApp3.Helpers;
 namespace MauiApp3.Pages.Farmers;
 
 public partial class SignInFarmer : ContentPage
@@ -36,15 +36,18 @@ public partial class SignInFarmer : ContentPage
         if (response.IsSuccessStatusCode)
         {
             var farmer = await response.Content.ReadFromJsonAsync<Farmer>();
-          //  await Navigation.PushAsync(new Pages.Farmers.FarmerHome());
-         //   await Shell.Current.GoToAsync(nameof(Pages.Farmers.FarmerHome));
+            //  await Navigation.PushAsync(new Pages.Farmers.FarmerHome());
+            //   await Shell.Current.GoToAsync(nameof(Pages.Farmers.FarmerHome));
+            UserSession.LoggedInFarmer = farmer;
 
-             Application.Current.MainPage = new FarmerShell();
+            // Navigate to FarmerShell
+           
+            Application.Current.MainPage = new FarmerShell();
         }
         else
         {
             var errorMessage = await response.Content.ReadAsStringAsync();
-            await DisplayAlert("Œÿ√", errorMessage, "„Ê«›ﬁ");
+            await DisplayAlert("ÿÆÿ∑ÿ£", errorMessage, "ŸÖŸàÿßŸÅŸÇ");
         }
     }
 
