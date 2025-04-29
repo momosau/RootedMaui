@@ -99,5 +99,27 @@ namespace RootedBack.Controllers
         {
             return _context.Admins.Any(e => e.AdminId == id);
         }
+        
+        [HttpPost("Login")]
+        public async Task<ActionResult<Admin>> SignInConsumer(AdminLoginRequest request)
+        {
+            var admin = await _context.Admins
+                .FirstOrDefaultAsync(c => c.Email == request.Email && c.Password == request.Password);
+
+            if (admin == null)
+            {
+                return BadRequest("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
+            }
+
+
+
+            return Ok(admin);
+        }
+
+        public class AdminLoginRequest
+        {
+            public string Email { get; set; }
+            public string Password { get; set; }
+        }
     }
 }

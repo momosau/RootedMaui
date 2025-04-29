@@ -65,6 +65,31 @@ namespace MauiApp3.Services
                 await _httpClient.PostAsJsonAsync($"{ApiUrl}api/Carts", cartToSend);
             }
         }
+        public async Task SubmitCartAsOrdersAsync(int consumerId, string neighborhood, string city, string street, string houseNum)
+        {
+            foreach (var cartItem in _cart)
+            {
+                var order = new Order
+                {
+                    ConsumerId = consumerId,
+                    FarmerId = cartItem.Product.FarmerId,
+                    ProductId = cartItem.ProductId,
+                    TotalPrice = cartItem.Amount,
+                    PaymentMethod = "CashOnDelivery", 
+                    Status = "Pending",
+                    OrderDate = DateTime.Now,
+                    Neighborhood = neighborhood,
+                    City = city,
+                    Street = street,
+                    HouseNum = houseNum
+                };
+
+                await _httpClient.PostAsJsonAsync($"{ApiUrl}api/Orders", order);
+            }
+
+            _cart.Clear(); // Empty the cart after submitting
+        }
+
 
     }
 }

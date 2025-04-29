@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RootedBack.Data;
 using SharedLibraryy.Models;
@@ -118,5 +113,21 @@ namespace RootedBack.Controllers
         {
             return _context.Orders.Any(e => e.OrderId == id);
         }
+        [HttpPost("SubmitCart")]
+        public async Task<IActionResult> SubmitCart([FromBody] List<Order> orders)
+        {
+            if (orders == null || orders.Count == 0)
+                return BadRequest("Order list is empty.");
+
+            foreach (var order in orders)
+            {
+                _context.Orders.Add(order);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Orders submitted successfully.");
+        }
+
     }
 }
