@@ -1,4 +1,5 @@
-﻿namespace MauiApp3.Pages.Consumers;
+﻿using MauiApp3.Helpers;
+namespace MauiApp3.Pages.Consumers;
 
 public partial class AccountPageConsumer : ContentPage
 {
@@ -41,8 +42,10 @@ public partial class AccountPageConsumer : ContentPage
         bool confirm = await DisplayAlert("تسجيل الخروج", "هل أنت متأكد أنك تريد تسجيل الخروج؟", "نعم", "لا");
         if (confirm)
         {
+            SessionManager.SignOut();
             //object value = await AuthenticationService.SignOutAsync();
-            Application.Current.MainPage = new NavigationPage(new MainPage());
+            Application.Current.MainPage = new AppShell(); // or FarmerShell / ConsumerShell
+
 
 
         }
