@@ -1,4 +1,6 @@
-﻿namespace AdminApp
+﻿using AdminApp.Pages;
+
+namespace AdminApp
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new SignInAdmin();
         }
     }
 }

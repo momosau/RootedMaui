@@ -130,20 +130,7 @@ TextColor="#6D3D24"
       CornerRadius="15"
        Clicked="SignInClicked"   
        />
-
-            <Label Text="مستهلك جديد؟ سجل الأن !"  
-        TextColor="#6D3D24"
-        TextDecorations="Underline"
-              
-        FontSize="14"
-        HorizontalTextAlignment="Center"
-        FontFamily="FontArabic"
-        FontAttributes="Bold">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="RegisterNew" />
-                </Label.GestureRecognizers>
-
-            </Label>
+           
 
 
 

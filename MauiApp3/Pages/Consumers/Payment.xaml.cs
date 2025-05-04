@@ -39,7 +39,9 @@ namespace MauiApp3.Pages.Consumers
                 return;
             }
 
-            await Shell.Current.GoToAsync("DeliveryPage");
+
+            await DisplayAlert("تأكيد", "تم تاكيد,الطلب سيتم التواصل معك قريبا", "حسنا");
+
         }
     }
 }

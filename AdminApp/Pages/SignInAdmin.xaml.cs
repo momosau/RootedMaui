@@ -9,12 +9,12 @@ public partial class SignInAdmin : ContentPage
 {
     private bool PasswordVisible = false;
 #if ANDROID
-        private const string apiKey = "http://10.0.2.2:5140/api/Consumers/Login";
+        private const string apiKey = "http://10.0.2.2:5140/api/Admins/Login";
 #else
-    private const string apiKey = "https://localhost:7168/api/Consumers/Login";
+    private const string apiKey = "https://localhost:7168/api/Admins/Login";
 #endif
     private readonly HttpClient _httpClient = new HttpClient();
-    public ObservableCollection<Consumers> Consumer { get; set; } = new ObservableCollection<Consumers>();
+    public ObservableCollection<Admin> admins { get; set; } = new ObservableCollection<Admin>();
 
     public SignInAdmin()
     {
@@ -25,7 +25,7 @@ public partial class SignInAdmin : ContentPage
     {
         try
         {
-            var loginRequest = new ConsumerLoginRequest
+            var loginRequest = new AdminLoginRequest
             {
 
                 //  Email = EmailEntry.Text?.Trim(),
@@ -37,14 +37,14 @@ public partial class SignInAdmin : ContentPage
 
             if (response.IsSuccessStatusCode)
             {
-                var consumer = await response.Content.ReadFromJsonAsync<SharedLibraryy.Models.Consumer>();
+                var consumer = await response.Content.ReadFromJsonAsync<SharedLibraryy.Models.Admin>();
 
               //  UserSession.LoggedInConsumer = consumer;
              //   await DisplayAlert("نجاح", $"مرحبًا {consumer?.Name}!", "موافق");
                 // توجيه المستخدم للصفحة الرئيسية
                 //     await Navigation.PushAsync(new ConsumerHomePage(consumer));
              
-               // Application.Current.MainPage = new ConsumerShell();
+               Application.Current.MainPage = new AppShell();
             }
             else
             {
@@ -71,10 +71,7 @@ public partial class SignInAdmin : ContentPage
     }
 
 
-    private async void RegisterNew(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("SignUpConsumer");
-    }
+  
 
     private void EyeClicked(object sender, EventArgs e)
     {
@@ -84,22 +81,15 @@ public partial class SignInAdmin : ContentPage
     }
 }
 
-public class ConsumerLoginRequest
+public class AdminLoginRequest
 {
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
 }
 
-public class Consumers
+public class Admin
 {
-    public int ConsumerId { get; set; }
+    public int AdminId { get; set; }
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
-    public string UserNamer { get; set; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
-    public string PhoneNumber { get; set; } = string.Empty;
-    public string City { get; set; } = string.Empty;
-    public string Neighborhood { get; set; } = string.Empty;
-    public string Street { get; set; } = string.Empty;
-    public string HouseNum { get; set; } = string.Empty;
 }

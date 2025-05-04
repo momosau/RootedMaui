@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using MauiApp3.Helpers;
 
 namespace MauiApp3.Pages.Consumers;
 
@@ -21,7 +22,7 @@ public partial class MyLocationPage : ContentPage
     {
         try
         {
-            var consumerId = Preferences.Get("ConsumerId", 1);
+            var consumerId = UserSession.LoggedInConsumer.ConsumerId;
             if (consumerId == 0)
             {
                 await DisplayAlert("خطأ", "لم يتم العثور على معلومات المستهلك", "موافق");

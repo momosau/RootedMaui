@@ -42,7 +42,7 @@ public partial class SignInConsumer : ContentPage
                 UserSession.LoggedInConsumer = consumer;
              //   await DisplayAlert("نجاح", $"مرحبًا {consumer?.Name}!", "موافق");
                 // توجيه المستخدم للصفحة الرئيسية
-                //     await Navigation.PushAsync(new ConsumerHomePage(consumer));
+                //   await Navigation.PushAsync(new ConsumerHomePage(consumer));
              
                 Application.Current.MainPage = new ConsumerShell();
             }
@@ -73,7 +73,7 @@ public partial class SignInConsumer : ContentPage
 
     private async void RegisterNew(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("SignUpConsumer");
+        await Navigation.PushAsync(new SignUpConsumer());
     }
 
     private void EyeClicked(object sender, EventArgs e)

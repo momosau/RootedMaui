@@ -15,7 +15,7 @@ public partial class CVerificationCodePage : ContentPage
     private const string SmtpHost = "smtp.gmail.com";
     private const int SmtpPort = 587;
     private const string SmtpUsername = "reachout.rooted@gmail.com";
-    private const string SmtpPassword = "xixw wprf fqdo tagy";
+    private const string SmtpPassword = "zkwj qngb hknm rovg";
     public CVerificationCodePage(string email)
     {
         InitializeComponent();

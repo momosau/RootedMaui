@@ -23,7 +23,7 @@ namespace MauiApp3.Pages.Farmers
         private const string SmtpHost = "smtp.gmail.com";
         private const int SmtpPort = 587;
         private const string SmtpUsername = "reachout.rooted@gmail.com";
-        private const string SmtpPassword = "xixw wprf fqdo tagy";
+        private const string SmtpPassword = "zkwj qngb hknm rovg";
 
 #if ANDROID
         private const string ApiUrl = "http://10.0.2.2:5140/api/FarmerApplications";

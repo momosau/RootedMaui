@@ -41,10 +41,11 @@ public partial class PaymentMethodPage : ContentPage
        }
        if (CashRadioButton.IsChecked)
        {
-           
-   
-           await Shell.Current.GoToAsync("DeliveryPage");
+
+
+            await DisplayAlert("تأكيد", "تم تاكيد,الطلب سيتم التواصل معك قريبا", "حسنا");
+
         }
-       else { await Shell.Current.GoToAsync("Payment"); }
+        else { await Shell.Current.GoToAsync("Payment"); }
     }
 }

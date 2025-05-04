@@ -9,6 +9,7 @@ namespace AdminApp
             Routing.RegisterRoute("AdminApproval", typeof(AdminApproval));
             Routing.RegisterRoute("FarmerInfo", typeof(FarmerInfo));
             Routing.RegisterRoute("QuestionPage", typeof(QuestionPage));
+            Routing.RegisterRoute("SignInAdmin", typeof(SignInAdmin));
 
 
         }
